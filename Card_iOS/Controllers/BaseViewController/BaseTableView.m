@@ -20,8 +20,9 @@
     int page;
     int pageCount;
     int pageSize;
-    
+
 }
+@property(nonatomic,strong) UIRefreshControl *refreshControl;
 @end
 @implementation BaseTableView
 
@@ -31,7 +32,7 @@
     parameters =[[NSMutableDictionary alloc]initWithDictionary:self.parameters];
     page=1;
     pageCount=1;
-    pageSize=20;
+    pageSize=10;
 
     NSString *userId = @"18";
     [parameters setObject:userId forKey:@"user_id"];
@@ -40,16 +41,30 @@
     self.tabbleView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tabbleView.dataSource=self;
     [self.view addSubview: self.tabbleView];
+    
+    self.refreshControl =[[UIRefreshControl alloc]init];
+    NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
+    self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
+    [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
+    [self.tabbleView addSubview:self.refreshControl];
     //请求数据
     [self requestData];
+}
+-(void)RefreshViewControlEventValueChanged
+{
+    page=1;
+    if (self.dataAraray.count>0) {
+        [self.dataAraray removeAllObjects];
+    }
+    [self requestData];
+    
 }
 -(void)requestData
 {
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
-    NSString *url =[NSString stringWithFormat:@"%@%@",kApiBaseUrl,self.urlString];
+    NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
     [parameters setObject:apitoken forKey:KURLTOKEN];
-
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject objectForKey:@"code"]) {
             pageCount =[[responseObject objectForKey:@"pageCount"] intValue];
@@ -83,6 +98,7 @@
                     }
                  }
               [self.tabbleView reloadData];
+              [self.refreshControl endRefreshing];
             }else
             {
                 //数据为空
@@ -94,11 +110,15 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
+    if (self.dataAraray.count>indexPath.row) {
+        //CommonCell *model =[self.dataAraray objectAtIndex:indexPath.row];
+        return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
+    }
+    return 0;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataAraray.count;
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "Constant.h"
 #import "ZCControl.h"
+#import "UIImage+Color.h"
 @implementation RootViewController
 -(void)loadView
 {
@@ -16,6 +17,8 @@
 }
 -(void)viewDidLoad
 {
+
     self.view.backgroundColor = View_BackGround;
+    [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
 }
 @end

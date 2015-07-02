@@ -7,6 +7,8 @@
 //
 
 #import "MainViewController.h"
+#import "ZCControl.h"
+#import "Constant.h"
 
 @implementation MainViewController
 
@@ -21,5 +23,6 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar);
 }
 @end
