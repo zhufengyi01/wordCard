@@ -14,4 +14,11 @@
 
 @property(nonatomic,strong)NSMutableArray  *dataAraray;
 
+
+@property(nonatomic,strong)NSString *urlString;
+//-(void)requestData;
+
+@property(nonatomic,strong)NSDictionary  *parameters;
+
+
 @end

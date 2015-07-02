@@ -10,4 +10,16 @@
 
 @implementation MainViewController
 
+-(instancetype)init
+{
+    if (self =  [super init]) {
+        self.urlString = @"text/list-by-status";
+        self.parameters=@{@"status":@"5"};
+    }
+    return self;
+}
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+}
 @end
