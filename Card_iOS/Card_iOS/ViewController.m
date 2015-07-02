@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UIImage  *img =[UIImage imageNamed:@"me_tab_butten_normal"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
