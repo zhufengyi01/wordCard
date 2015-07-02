@@ -127,6 +127,8 @@
 		38D303F71B45407D00484AC8 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303F61B45407D00484AC8 /* UserModel.m */; };
 		38D303FA1B45414B00484AC8 /* TagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303F91B45414B00484AC8 /* TagModel.m */; };
 		38D303FD1B45473900484AC8 /* UserDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303FC1B45473900484AC8 /* UserDataCenter.m */; };
+		38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */; };
+		38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,8 +158,6 @@
 		38D302951B451B3B00484AC8 /* ZCControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCControl.h; sourceTree = "<group>"; };
 		38D302961B451B3B00484AC8 /* ZCControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCControl.m; sourceTree = "<group>"; };
 		38D302981B451E6C00484AC8 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		38D3029A1B45274300484AC8 /* NotoSansHans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Medium.otf"; sourceTree = "<group>"; };
-		38D3029B1B45274300484AC8 /* NotoSansHans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Regular.otf"; sourceTree = "<group>"; };
 		38D3029C1B4528ED00484AC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		38D3029E1B4528F800484AC8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		38D302A01B4528FF00484AC8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -375,6 +375,8 @@
 		38D303F91B45414B00484AC8 /* TagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagModel.m; sourceTree = "<group>"; };
 		38D303FB1B45473900484AC8 /* UserDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataCenter.h; sourceTree = "<group>"; };
 		38D303FC1B45473900484AC8 /* UserDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataCenter.m; sourceTree = "<group>"; };
+		38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Medium.otf"; sourceTree = "<group>"; };
+		38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,8 +545,8 @@
 		38D302991B45272D00484AC8 /* Font_file */ = {
 			isa = PBXGroup;
 			children = (
-				38D3029A1B45274300484AC8 /* NotoSansHans-Medium.otf */,
-				38D3029B1B45274300484AC8 /* NotoSansHans-Regular.otf */,
+				38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */,
+				38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */,
 			);
 			path = Font_file;
 			sourceTree = "<group>";
@@ -1017,7 +1019,9 @@
 				38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */,
 				38D303191B45296000484AC8 /* NSDateTimeAgo.bundle in Resources */,
 				38D301E91B4517CC00484AC8 /* LaunchScreen.xib in Resources */,
+				38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */,
 				38D303B01B453B3400484AC8 /* MJRefresh.bundle in Resources */,
+				38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */,
 				38D301E61B4517CC00484AC8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

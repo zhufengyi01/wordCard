@@ -14,14 +14,14 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self =[super initWithFrame:frame]) {
-        
+        self.backgroundColor=VLight_GrayColor_apla;
         [self createUI];
     }
     return self;
 }
 -(void)createUI
 {
-    self.titleLable =[ZCControl createLabelWithFrame:self.bounds Font:20 Text:@"哈哈"];
+    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-30, kDeviceWidth-30) Font:20 Text:@"哈哈"];
     self.titleLable.textColor=VGray_color;
     if (IsIphone5) {
         self.titleLable.font =[UIFont fontWithName:kFontRegular size:18];

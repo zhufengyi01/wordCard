@@ -37,6 +37,7 @@
     [parameters setObject:userId forKey:@"user_id"];
     self.tabbleView =[[UITableView alloc]initWithFrame:self.view.bounds];
     self.tabbleView.delegate=self;
+    self.tabbleView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tabbleView.dataSource=self;
     [self.view addSubview: self.tabbleView];
     //请求数据
