@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "CommonModel.h"
 #import "TagModel.h"
+#import "SVProgressHUD.h"
 
 @interface BaseTableView () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -73,12 +74,16 @@
 
 -(void)requestData
 {
+    [SVProgressHUD show];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
     [parameters setObject:apitoken forKey:KURLTOKEN];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject objectForKey:@"code"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
             self.statusLable.text = @"THE-END";
             if (page==1&&self.dataAraray.count>0) {
                 [self.dataAraray removeAllObjects];
@@ -125,6 +130,7 @@
         //数据加载失败
         [self.statusLable setText:@"加载失败"];
         [self.refreshControl endRefreshing];
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

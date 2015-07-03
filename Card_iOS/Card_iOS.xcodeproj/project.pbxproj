@@ -53,6 +53,9 @@
 		3872BF3E1B4664D80004A928 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF101B4664D80004A928 /* UIViewController+MJPopupViewController.m */; };
 		3872BF3F1B4664D80004A928 /* UIViewController+RecursiveDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF121B4664D80004A928 /* UIViewController+RecursiveDescription.m */; };
 		3872BF401B4664D80004A928 /* UIViewController+Visible.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF141B4664D80004A928 /* UIViewController+Visible.m */; };
+		3872BF481B466B0C0004A928 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF431B466B0C0004A928 /* SVIndefiniteAnimatedView.m */; };
+		3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */; };
+		3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF471B466B0C0004A928 /* SVProgressHUD.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
 		38D301E11B4517CC00484AC8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301E01B4517CC00484AC8 /* ViewController.m */; };
@@ -242,6 +245,12 @@
 		3872BF121B4664D80004A928 /* UIViewController+RecursiveDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RecursiveDescription.m"; sourceTree = "<group>"; };
 		3872BF131B4664D80004A928 /* UIViewController+Visible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Visible.h"; sourceTree = "<group>"; };
 		3872BF141B4664D80004A928 /* UIViewController+Visible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Visible.m"; sourceTree = "<group>"; };
+		3872BF421B466B0C0004A928 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		3872BF431B466B0C0004A928 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		3872BF441B466B0C0004A928 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		3872BF461B466B0C0004A928 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		3872BF471B466B0C0004A928 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D301D91B4517CC00484AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38D301DA1B4517CC00484AC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -630,6 +639,19 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
+		3872BF411B466B0C0004A928 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3872BF421B466B0C0004A928 /* SVIndefiniteAnimatedView.h */,
+				3872BF431B466B0C0004A928 /* SVIndefiniteAnimatedView.m */,
+				3872BF441B466B0C0004A928 /* SVProgressHUD-Prefix.pch */,
+				3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */,
+				3872BF461B466B0C0004A928 /* SVProgressHUD.h */,
+				3872BF471B466B0C0004A928 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		38D301CC1B4517CC00484AC8 = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +722,7 @@
 		38D301FE1B451A6E00484AC8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				3872BF411B466B0C0004A928 /* SVProgressHUD */,
 				38D303BC1B453B3C00484AC8 /* SDWebImage */,
 				38D303971B453B3400484AC8 /* MJRefresh */,
 				38D3035F1B453B2A00484AC8 /* AFNetworking */,
@@ -1081,6 +1104,7 @@
 				38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */,
 				38D301E91B4517CC00484AC8 /* LaunchScreen.xib in Resources */,
 				38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */,
+				3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */,
 				38D303B01B453B3400484AC8 /* MJRefresh.bundle in Resources */,
 				3872BF1C1B4664D80004A928 /* NSDateTimeAgo.bundle in Resources */,
 				38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */,
@@ -1185,6 +1209,7 @@
 				38D303551B452FBF00484AC8 /* AddCardViewController.m in Sources */,
 				38D303E51B453B3C00484AC8 /* SDWebImageManager.m in Sources */,
 				38D303B41B453B3400484AC8 /* MJRefreshGifFooter.m in Sources */,
+				3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */,
 				38D618CB1B46359200907CE9 /* WordDetailVC.m in Sources */,
 				3872BF301B4664D80004A928 /* UIImage+Merge.m in Sources */,
 				38D3038E1B453B2A00484AC8 /* AFURLSessionManager.m in Sources */,
@@ -1203,6 +1228,7 @@
 				38D303FA1B45414B00484AC8 /* TagModel.m in Sources */,
 				3872BF391B4664D80004A928 /* UIButton+Indicator.m in Sources */,
 				38D303B81B453B3400484AC8 /* MJRefreshLegendHeader.m in Sources */,
+				3872BF481B466B0C0004A928 /* SVIndefiniteAnimatedView.m in Sources */,
 				38D303FD1B45473900484AC8 /* UserDataCenter.m in Sources */,
 				38D303E71B453B3C00484AC8 /* UIButton+WebCache.m in Sources */,
 				3872BF181B4664D80004A928 /* NSDate+Addition.m in Sources */,

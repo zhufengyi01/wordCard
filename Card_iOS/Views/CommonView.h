@@ -15,5 +15,8 @@
 
 @property(nonatomic,strong) UILabel *titleLable ;
 
+@property(nonatomic,strong) UILabel  *topRighlbl;   //右上角的标签文字
+
 -(void)configCommonView:(CommonModel *)model;
+
 @end

@@ -9,6 +9,7 @@
 #import "CommonView.h"
 #import "ZCControl.h"
 #import "Constant.h"
+#import "NSDate+Extension.h"
 @implementation CommonView
 
 -(instancetype)initWithFrame:(CGRect)frame
@@ -34,9 +35,13 @@
     {
         self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
     }
-
     self.titleLable.textAlignment=NSTextAlignmentCenter;
     [self addSubview:self.titleLable];
+    
+    self.topRighlbl =[ZCControl createLabelWithFrame:CGRectMake(self.frame.size.width-100-10,0, 100, 20) Font:12 Text:@"时间"];
+    self.topRighlbl.textColor = VGray_color;
+    self.topRighlbl.textAlignment = NSTextAlignmentRight;
+    [self addSubview:self.topRighlbl];
 }
 -(void)configCommonView:(CommonModel *)model;
 {
@@ -48,7 +53,9 @@
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     self.titleLable.attributedText = [[NSAttributedString alloc] initWithString:self.model.word attributes:attributes];
-
+    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
+    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
+    self.topRighlbl.text=da;
     
 }
 
