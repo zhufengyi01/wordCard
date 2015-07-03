@@ -23,6 +23,8 @@
 {
     self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-30, kDeviceWidth-30) Font:20 Text:@"哈哈"];
     self.titleLable.textColor=VGray_color;
+    self.titleLable.lineBreakMode=NSLineBreakByTruncatingTail;
+    self.titleLable.adjustsFontSizeToFitWidth= NO;
     if (IsIphone5) {
         self.titleLable.font =[UIFont fontWithName:kFontRegular size:18];
     }else if(IsIphone6)
@@ -32,13 +34,21 @@
     {
         self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
     }
+
     self.titleLable.textAlignment=NSTextAlignmentCenter;
     [self addSubview:self.titleLable];
 }
 -(void)configCommonView:(CommonModel *)model;
 {
     self.model= model;
-    self.titleLable.text=self.model.word;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 8;
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:self.titleLable.font,
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    self.titleLable.attributedText = [[NSAttributedString alloc] initWithString:self.model.word attributes:attributes];
+
     
 }
 

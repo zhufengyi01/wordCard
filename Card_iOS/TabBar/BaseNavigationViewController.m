@@ -38,7 +38,7 @@
         //手势的时候隐藏导航栏
        // self.hidesBarsOnSwipe=YES;
         //修改了返回按钮的样式，但是此时侧滑手势实效
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc ] initWithImage:[[UIImage imageNamed:@"back_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(popViewControllerAnimated:)];
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc ] initWithImage:[[UIImage imageNamed:@"back_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAutomatic] style:UIBarButtonItemStylePlain target:self action:@selector(popViewControllerAnimated:)];
     }
     [super pushViewController:viewController animated:YES];
 }

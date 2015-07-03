@@ -16,9 +16,24 @@
 
 
 @property(nonatomic,strong)NSString *urlString;
-//-(void)requestData;
 
 @property(nonatomic,strong)NSDictionary  *parameters;
 
+
+
+
+//子类可重写下面方法
+-(void)requestData;
+//刷新
+-(void)RefreshViewControlEventValueChanged;
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+
+//子类重写配置cell的方法
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

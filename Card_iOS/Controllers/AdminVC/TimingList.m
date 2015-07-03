@@ -1,36 +1,31 @@
 //
-//  MainViewController.m
+//  TimingList.m
 //  Card_iOS
 //
-//  Created by 朱封毅 on 02/07/15.
+//  Created by 朱封毅 on 03/07/15.
 //  Copyright (c) 2015年 card. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "TimingList.h"
 #import "ZCControl.h"
 #import "Constant.h"
 #import "MainAdmList.h"
 #import "WordMainVC.h"
-@implementation MainViewController
+@implementation TimingList
 
 -(instancetype)init
 {
     if (self =  [super init]) {
-        self.urlString = @"text/list-by-status";
-        self.parameters=@{@"status":@"4"};
+//        self.urlString = @"text/list-by-status";
+//        self.parameters=@{@"status":@"5"};
     }
     return self;
 }
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createLeftNavigationItem:nil Title:@"管理员"];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar);
+     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
     [self requestData];
-}
--(void)LeftNavigationButtonClick:(UIButton *)leftbtn
-{
-    [self.navigationController pushViewController:[MainAdmList new] animated:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -39,7 +34,7 @@
     wordmian.MainArray = self.dataAraray;
     wordmian.IndexOfItem= indexPath.row;
     [self.navigationController pushViewController:wordmian animated:YES];
-
 }
+
 
 @end

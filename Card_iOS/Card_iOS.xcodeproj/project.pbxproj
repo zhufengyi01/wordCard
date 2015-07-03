@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3872BE1F1B465E2C0004A928 /* MainAdmList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1C1B465E2C0004A928 /* MainAdmList.m */; };
+		3872BE201B465E2C0004A928 /* TimingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1E1B465E2C0004A928 /* TimingList.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
 		38D301E11B4517CC00484AC8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301E01B4517CC00484AC8 /* ViewController.m */; };
@@ -129,6 +131,13 @@
 		38D303FD1B45473900484AC8 /* UserDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303FC1B45473900484AC8 /* UserDataCenter.m */; };
 		38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */; };
 		38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */; };
+		38D618BE1B462F7C00907CE9 /* NormalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618BD1B462F7C00907CE9 /* NormalTableView.m */; };
+		38D618C81B46357600907CE9 /* WordMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618C71B46357600907CE9 /* WordMainVC.m */; };
+		38D618CB1B46359200907CE9 /* WordDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618CA1B46359200907CE9 /* WordDetailVC.m */; };
+		38D618CE1B463DA700907CE9 /* AdimToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618CD1B463DA700907CE9 /* AdimToolBar.m */; };
+		38D618D21B464F8200907CE9 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
+		38D618D31B46511500907CE9 /* SelectTimeView.h in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D01B464F8200907CE9 /* SelectTimeView.h */; };
+		38D618D41B46511500907CE9 /* SelectTimeView.m in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +151,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3872BE1B1B465E2C0004A928 /* MainAdmList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainAdmList.h; sourceTree = "<group>"; };
+		3872BE1C1B465E2C0004A928 /* MainAdmList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainAdmList.m; sourceTree = "<group>"; };
+		3872BE1D1B465E2C0004A928 /* TimingList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingList.h; sourceTree = "<group>"; };
+		3872BE1E1B465E2C0004A928 /* TimingList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingList.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D301D91B4517CC00484AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38D301DA1B4517CC00484AC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -377,6 +390,16 @@
 		38D303FC1B45473900484AC8 /* UserDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataCenter.m; sourceTree = "<group>"; };
 		38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Medium.otf"; sourceTree = "<group>"; };
 		38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Regular.otf"; sourceTree = "<group>"; };
+		38D618BC1B462F7C00907CE9 /* NormalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalTableView.h; sourceTree = "<group>"; };
+		38D618BD1B462F7C00907CE9 /* NormalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalTableView.m; sourceTree = "<group>"; };
+		38D618C61B46357600907CE9 /* WordMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordMainVC.h; sourceTree = "<group>"; };
+		38D618C71B46357600907CE9 /* WordMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordMainVC.m; sourceTree = "<group>"; };
+		38D618C91B46359200907CE9 /* WordDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDetailVC.h; sourceTree = "<group>"; };
+		38D618CA1B46359200907CE9 /* WordDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDetailVC.m; sourceTree = "<group>"; };
+		38D618CC1B463DA700907CE9 /* AdimToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdimToolBar.h; sourceTree = "<group>"; };
+		38D618CD1B463DA700907CE9 /* AdimToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdimToolBar.m; sourceTree = "<group>"; };
+		38D618D01B464F8200907CE9 /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
+		38D618D11B464F8200907CE9 /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +429,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3872BE1A1B465E2C0004A928 /* AdminVC */ = {
+			isa = PBXGroup;
+			children = (
+				3872BE1B1B465E2C0004A928 /* MainAdmList.h */,
+				3872BE1C1B465E2C0004A928 /* MainAdmList.m */,
+				3872BE1D1B465E2C0004A928 /* TimingList.h */,
+				3872BE1E1B465E2C0004A928 /* TimingList.m */,
+			);
+			path = AdminVC;
+			sourceTree = "<group>";
+		};
 		38D301CC1B4517CC00484AC8 = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +520,8 @@
 		38D302001B451A8A00484AC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3872BE1A1B465E2C0004A928 /* AdminVC */,
+				38D618C51B46354C00907CE9 /* WordDetail */,
 				38D3034B1B452BBF00484AC8 /* AddVC */,
 				38D3034A1B452BAF00484AC8 /* MainVC */,
 				38D3034C1B452EFE00484AC8 /* MyVC */,
@@ -497,10 +533,13 @@
 		38D302011B451A9B00484AC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				38D618CF1B464F8200907CE9 /* SelectTime */,
 				38D303591B45368600484AC8 /* CommonView.h */,
 				38D3035A1B45368600484AC8 /* CommonView.m */,
 				38D3035C1B45369F00484AC8 /* CommonCell.h */,
 				38D3035D1B45369F00484AC8 /* CommonCell.m */,
+				38D618CC1B463DA700907CE9 /* AdimToolBar.h */,
+				38D618CD1B463DA700907CE9 /* AdimToolBar.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -760,6 +799,8 @@
 				38D303481B452AE700484AC8 /* RootViewController.m */,
 				38D3034D1B452F6F00484AC8 /* BaseTableView.h */,
 				38D3034E1B452F6F00484AC8 /* BaseTableView.m */,
+				38D618BC1B462F7C00907CE9 /* NormalTableView.h */,
+				38D618BD1B462F7C00907CE9 /* NormalTableView.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -936,6 +977,26 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		38D618C51B46354C00907CE9 /* WordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				38D618C61B46357600907CE9 /* WordMainVC.h */,
+				38D618C71B46357600907CE9 /* WordMainVC.m */,
+				38D618C91B46359200907CE9 /* WordDetailVC.h */,
+				38D618CA1B46359200907CE9 /* WordDetailVC.m */,
+			);
+			path = WordDetail;
+			sourceTree = "<group>";
+		};
+		38D618CF1B464F8200907CE9 /* SelectTime */ = {
+			isa = PBXGroup;
+			children = (
+				38D618D01B464F8200907CE9 /* SelectTimeView.h */,
+				38D618D11B464F8200907CE9 /* SelectTimeView.m */,
+			);
+			path = SelectTime;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1016,6 +1077,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38D618D31B46511500907CE9 /* SelectTimeView.h in Resources */,
+				38D618D41B46511500907CE9 /* SelectTimeView.m in Resources */,
 				38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */,
 				38D303191B45296000484AC8 /* NSDateTimeAgo.bundle in Resources */,
 				38D301E91B4517CC00484AC8 /* LaunchScreen.xib in Resources */,
@@ -1042,6 +1105,7 @@
 			files = (
 				38D303B11B453B3400484AC8 /* MJRefreshComponent.m in Sources */,
 				38D303E01B453B3C00484AC8 /* SDImageCache.m in Sources */,
+				38D618C81B46357600907CE9 /* WordMainVC.m in Sources */,
 				38D303141B45296000484AC8 /* NSData+Gzip.m in Sources */,
 				38D301E11B4517CC00484AC8 /* ViewController.m in Sources */,
 				38D3033C1B45296000484AC8 /* UIViewController+RecursiveDescription.m in Sources */,
@@ -1076,6 +1140,7 @@
 				38D303491B452AE700484AC8 /* RootViewController.m in Sources */,
 				38D3032F1B45296000484AC8 /* UIImage+RemoteSize.m in Sources */,
 				38D303F41B453FA800484AC8 /* CommonModel.m in Sources */,
+				3872BE1F1B465E2C0004A928 /* MainAdmList.m in Sources */,
 				38D3032E1B45296000484AC8 /* UIImage+Orientation.m in Sources */,
 				38D3031B1B45296000484AC8 /* NSDateFormatter+Make.m in Sources */,
 				38D303181B45296000484AC8 /* NSDate+Utilities.m in Sources */,
@@ -1084,6 +1149,7 @@
 				38D303BB1B453B3400484AC8 /* UIView+MJExtension.m in Sources */,
 				38D303891B453B2A00484AC8 /* AFNetworkReachabilityManager.m in Sources */,
 				38D303231B45296000484AC8 /* NSString+Score.m in Sources */,
+				38D618CE1B463DA700907CE9 /* AdimToolBar.m in Sources */,
 				38D3033D1B45296000484AC8 /* UIViewController+Visible.m in Sources */,
 				38D3038F1B453B2A00484AC8 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				38D303431B4529BD00484AC8 /* BaseNavigationViewController.m in Sources */,
@@ -1106,6 +1172,7 @@
 				38D303381B45296000484AC8 /* UIScrollView+Addition.m in Sources */,
 				38D303281B45296000484AC8 /* UIImage+animatedGIF.m in Sources */,
 				38D303961B453B2A00484AC8 /* UIWebView+AFNetworking.m in Sources */,
+				38D618D21B464F8200907CE9 /* SelectTimeView.m in Sources */,
 				38D303881B453B2A00484AC8 /* AFHTTPSessionManager.m in Sources */,
 				38D303271B45296000484AC8 /* UIImage+Alpha.m in Sources */,
 				38D3031F1B45296000484AC8 /* NSString+Emoji.m in Sources */,
@@ -1114,10 +1181,12 @@
 				38D303E31B453B3C00484AC8 /* SDWebImageDownloader.m in Sources */,
 				38D303251B45296000484AC8 /* NSString+UrlEncode.m in Sources */,
 				38D3031E1B45296000484AC8 /* NSString+DictionaryValue.m in Sources */,
+				38D618BE1B462F7C00907CE9 /* NormalTableView.m in Sources */,
 				38D303E41B453B3C00484AC8 /* SDWebImageDownloaderOperation.m in Sources */,
 				38D303551B452FBF00484AC8 /* AddCardViewController.m in Sources */,
 				38D303E51B453B3C00484AC8 /* SDWebImageManager.m in Sources */,
 				38D303B41B453B3400484AC8 /* MJRefreshGifFooter.m in Sources */,
+				38D618CB1B46359200907CE9 /* WordDetailVC.m in Sources */,
 				38D3038E1B453B2A00484AC8 /* AFURLSessionManager.m in Sources */,
 				38D303E81B453B3C00484AC8 /* UIImage+GIF.m in Sources */,
 				38D303921B453B2A00484AC8 /* UIButton+AFNetworking.m in Sources */,
@@ -1125,6 +1194,7 @@
 				38D303241B45296000484AC8 /* NSString+Trims.m in Sources */,
 				38D303221B45296000484AC8 /* NSString+RemoveEmoji.m in Sources */,
 				38D303521B452F9200484AC8 /* MainViewController.m in Sources */,
+				3872BE201B465E2C0004A928 /* TimingList.m in Sources */,
 				38D303321B45296000484AC8 /* NSString+Additions.m in Sources */,
 				38D303131B45296000484AC8 /* NSData+Encrypt.m in Sources */,
 				38D3038C1B453B2A00484AC8 /* AFURLRequestSerialization.m in Sources */,

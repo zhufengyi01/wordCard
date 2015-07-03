@@ -20,9 +20,11 @@
     int page;
     int pageCount;
     int pageSize;
-
 }
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
+@property(nonatomic,strong) UIView *footView;
+
+@property(nonatomic,strong)UILabel *statusLable;
 @end
 @implementation BaseTableView
 
@@ -32,7 +34,7 @@
     parameters =[[NSMutableDictionary alloc]initWithDictionary:self.parameters];
     page=1;
     pageCount=1;
-    pageSize=10;
+    pageSize=20;
 
     NSString *userId = @"18";
     [parameters setObject:userId forKey:@"user_id"];
@@ -41,24 +43,34 @@
     self.tabbleView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tabbleView.dataSource=self;
     [self.view addSubview: self.tabbleView];
+    [self createFootView];
     
     self.refreshControl =[[UIRefreshControl alloc]init];
-    NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
-    self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
+    //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
+    //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.tabbleView addSubview:self.refreshControl];
-    //请求数据
-    [self requestData];
+}
+//刷新视图
+-(void)createFootView
+{
+    self.footView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, BUTTON_HEIGHT)];
+    self.footView.backgroundColor =[UIColor whiteColor];
+    [self.tabbleView setTableFooterView:self.footView];
+    
+    self.statusLable  = [[UILabel alloc]initWithFrame:CGRectMake((kDeviceWidth-100)/2, 0, 100,BUTTON_HEIGHT)];
+    self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
+    self.statusLable.textAlignment = NSTextAlignmentCenter;
+    self.statusLable.text = @"THE-END";
+    self.statusLable.textColor = VGray_color;
+    [self.footView addSubview:self.statusLable];
 }
 -(void)RefreshViewControlEventValueChanged
 {
     page=1;
-    if (self.dataAraray.count>0) {
-        [self.dataAraray removeAllObjects];
-    }
     [self requestData];
-    
 }
+
 -(void)requestData
 {
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
@@ -67,6 +79,10 @@
     [parameters setObject:apitoken forKey:KURLTOKEN];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject objectForKey:@"code"]) {
+            self.statusLable.text = @"THE-END";
+            if (page==1&&self.dataAraray.count>0) {
+                [self.dataAraray removeAllObjects];
+            }
             pageCount =[[responseObject objectForKey:@"pageCount"] intValue];
             NSMutableArray *array =[responseObject objectForKey:@"models"];
             if (array.count>0) {
@@ -102,17 +118,19 @@
             }else
             {
                 //数据为空
+                [self.refreshControl endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //数据加载失败
+        [self.statusLable setText:@"加载失败"];
+        [self.refreshControl endRefreshing];
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataAraray.count>indexPath.row) {
-        //CommonCell *model =[self.dataAraray objectAtIndex:indexPath.row];
-        return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
+         return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
     }
     return 0;
 }
@@ -138,6 +156,21 @@
     }
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 
-@end
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"~~~~~~~index.row ====%ld",(long)indexPath.row);
+    if (pageCount>page&&(self.dataAraray.count==indexPath.row+1)) {
+        page++;
+        [self requestData];
+    }else
+    {
+        self.statusLable.text = @"THE-EDN";
+    }
+}
+ @end

@@ -43,7 +43,7 @@
 #define kMarkWidth 22
 #define BUTTON_HEIGHT 50
 #define MARGIN_BOTTOM 30
-
+ 
 #pragma  mark  三方平台key  设置
 #define kUmengKey @"53e9e548fd98c5e4a90017c6"
 #define SSOSinRedirectURL  @"http://sns.whalecloud.com/sina2/callback"
