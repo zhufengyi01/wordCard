@@ -17,7 +17,7 @@
 {
     if (self =  [super init]) {
         self.urlString = @"text/list-by-status";
-        self.parameters=@{@"status":@"4"};
+        self.parameters=@{@"status":@"3"};
     }
     return self;
 }
