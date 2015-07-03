@@ -33,7 +33,7 @@
         [btnBlock setTitle:titleArray[i] forState:UIControlStateNormal];
         [btnBlock setTitleColor:VBlue_color forState:UIControlStateNormal];
         btnBlock.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
-        [btnBlock setBackgroundImage:[UIImage imageNamed:@"tabbar_backgroud_color"] forState:UIControlStateNormal];
+        [btnBlock setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateNormal];
         [btnBlock setBackgroundImage:ligImage forState:UIControlStateHighlighted];
         [btnBlock addTarget:self action:@selector(changeWeiboStatus:) forControlEvents:UIControlEventTouchUpInside];
         [Bgview addSubview:btnBlock];

@@ -7,11 +7,14 @@
 //
 
 #import "NormalTableView.h"
-
+#import "Constant.h"
+#import "ZCControl.h"
 @interface NormalTableView () <UITableViewDataSource,UITableViewDelegate>
 {
     
 }
+@property(nonatomic,strong) UIRefreshControl *refreshControl;
+
 @end
 @implementation NormalTableView
 
@@ -23,7 +26,16 @@
     self.tabbleView.delegate = self;
     self.tabbleView.dataSource =self;
     [self.view addSubview:self.tabbleView];
-    
+    self.refreshControl =[[UIRefreshControl alloc]init];
+    self.refreshControl.backgroundColor =View_BackGround;
+    //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
+    //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
+    [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
+    [self.tabbleView addSubview:self.refreshControl];
+}
+-(void)RefreshViewControlEventValueChanged
+{
+    [self.refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

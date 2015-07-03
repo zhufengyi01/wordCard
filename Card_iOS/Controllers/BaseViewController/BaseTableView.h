@@ -20,6 +20,8 @@
 @property(nonatomic,strong)NSDictionary  *parameters;
 
 
+//滚动到顶部
+-(void)tableViewScollerTop;
 
 
 //子类可重写下面方法

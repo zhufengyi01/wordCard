@@ -40,7 +40,7 @@
     // 如果要显示2页，NSArray中，应该有2个相应页数据。
     WordDetailVC *initialViewController =[self viewControllerAtIndex:self.IndexOfItem];// 得到第一
     //初始化的时候记录了当前的第一个viewcontroller  以后每次都在代理里面获取当前的viewcontroller
-//    CenterViewController=initialViewController;
+    //    CenterViewController=initialViewController;
     NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
     [_pageController setViewControllers:viewControllers
                               direction:UIPageViewControllerNavigationDirectionForward
@@ -71,7 +71,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     //获取当前控制器
     NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
-     if ((index == 0) || (index == NSNotFound)) {
+    if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
     index--;
@@ -83,7 +83,7 @@
 
 // 返回下一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
-     NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
+    NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
     if (index == NSNotFound) {
         return nil;
     }

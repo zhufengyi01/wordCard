@@ -55,6 +55,19 @@
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:Righttbtn];
 }
+
+-(void)createLeftSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle
+{
+    UIBarButtonItem  *bar =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:systemBarStyle target:self action:@selector(LeftSystemNavigationButtonClick)];
+    self.navigationItem.leftBarButtonItem =bar;
+}
+
+-(void)createRightSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle
+{
+    UIBarButtonItem  *bar =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:systemBarStyle target:self action:@selector(RightSystemNavigationButtonClick)];
+    self.navigationItem.rightBarButtonItem =bar;
+}
+//自定义样式
 -(void)LeftNavigationButtonClick:(UIButton*) leftbtn
 {
     
@@ -63,5 +76,21 @@
 {
     
 }
+//系统的样式
+-(void)LeftSystemNavigationButtonClick
+{
+    
+}
+-(void)RightSystemNavigationButtonClick
+{
+ 
+    
+}
+
+
+
+
+
+//系统样式
 
 @end

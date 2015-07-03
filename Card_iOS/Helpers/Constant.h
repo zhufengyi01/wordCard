@@ -123,7 +123,7 @@
 
 #define GOTO_USER_CENTER   @"goto_user"  //跳转到个人页
 
-#define Refresh_USER_LIST  @"refresh_user_list"  //刷新个人页列表
+#define Refresh_MAIN_LIST  @"refresh_main_list"  //刷新
 
 //字体相关
 //FZLTXHK--GBK1-0 Lantinghei_0

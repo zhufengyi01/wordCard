@@ -22,20 +22,23 @@
 }
 -(void)createUI
 {
-    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-30, kDeviceWidth-30) Font:20 Text:@"哈哈"];
+    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@"哈哈"];
     self.titleLable.textColor=VGray_color;
     self.titleLable.lineBreakMode=NSLineBreakByTruncatingTail;
     self.titleLable.adjustsFontSizeToFitWidth= NO;
     if (IsIphone5) {
-        self.titleLable.font =[UIFont fontWithName:kFontRegular size:18];
+        //self.titleLable.font =[UIFont fontWithName:kFontRegular size:18];
+        self.titleLable.font =[UIFont systemFontOfSize:20];
     }else if(IsIphone6)
     {
-        self.titleLable.font =[UIFont fontWithName:kFontRegular size:20];
+        //self.titleLable.font =[UIFont fontWithName:kFontRegular size:20];
+        self.titleLable.font = [UIFont systemFontOfSize:22];
     }else if(IsIphone6plus)
     {
-        self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
+       // self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
+        self.titleLable.font =[UIFont systemFontOfSize:29];
     }
-    self.titleLable.textAlignment=NSTextAlignmentCenter;
+    self.titleLable.textAlignment=NSTextAlignmentJustified;
     [self addSubview:self.titleLable];
     
     self.topRighlbl =[ZCControl createLabelWithFrame:CGRectMake(self.frame.size.width-100-10,0, 100, 20) Font:12 Text:@"时间"];

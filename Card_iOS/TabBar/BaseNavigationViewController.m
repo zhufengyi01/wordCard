@@ -18,15 +18,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationBar.translucent = NO;
     self.navigationBar.barTintColor =[UIColor whiteColor];
-   //防止手势失效的解决方案
-    self.delegate=self;
-    self.interactivePopGestureRecognizer.delegate=self;
-    [self.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor redColor]]];
     self.navigationBar.tintColor =[UIColor grayColor];
-    //[[UINavigationBar appearance] setBackgrou:[UIImage imageNamed:@"back_Icon.png"] forBarPosition:nil barMetrics:UIBarMetricsDefault];
-   // UIImage  *backimage =[[UIImage imageNamed:@"feed_tab_butten_normal@2x.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    //[[UINavigationBar appearance]  setBackIndicatorTransitionMaskImage:backimage];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+   //防止手势失效的解决方案
+   // self.delegate=self;
+    //self.interactivePopGestureRecognizer.delegate=self;
+    //设置返回的箭头自定义图片
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    UIImage  *backimage =[[UIImage imageNamed:@"back_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAutomatic];
+    [[UINavigationBar appearance]  setBackIndicatorTransitionMaskImage:backimage];
+    [[UINavigationBar appearance]setBackIndicatorImage:backimage];
+    
+    //  去掉返回按钮文字
+    UIBarButtonItem *baritem =[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil];
+    UIOffset offset;
+    offset.horizontal = -500;
+    [baritem setBackButtonTitlePositionAdjustment:offset forBarMetrics:UIBarMetricsDefault];
+    
     NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:VGray_color,NSForegroundColorAttributeName,[UIFont fontWithName:kFontRegular size:16],NSFontAttributeName, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:titleAttributes];
 }
@@ -35,20 +45,16 @@
     if (self.viewControllers.count>0) {
         ///第二层viewcontroller 隐藏tabbar
         viewController.hidesBottomBarWhenPushed=YES;
-        //手势的时候隐藏导航栏
-       // self.hidesBarsOnSwipe=YES;
-        //修改了返回按钮的样式，但是此时侧滑手势实效
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc ] initWithImage:[[UIImage imageNamed:@"back_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAutomatic] style:UIBarButtonItemStylePlain target:self action:@selector(popViewControllerAnimated:)];
     }
     [super pushViewController:viewController animated:YES];
 }
 //重写系统
--(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
-}
+//-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    }
+//}
 -(void)dealloc
 {
     self.delegate=nil;

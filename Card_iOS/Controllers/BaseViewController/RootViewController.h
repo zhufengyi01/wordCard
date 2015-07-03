@@ -21,4 +21,12 @@
 -(void)RightNavigationButtonClick:(UIButton*) rightbtn;
 
 
+#pragma mark -- 系统样式item
+//创建系统样式的左右按钮
+-(void)createLeftSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle;
+-(void)createRightSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle;
+//系统的样式
+-(void)LeftSystemNavigationButtonClick;
+-(void)RightSystemNavigationButtonClick;
+
 @end

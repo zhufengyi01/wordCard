@@ -21,7 +21,8 @@
 -(void)createCell
 {
     self.contentView.backgroundColor =[UIColor whiteColor];
-    self.comView = [[CommonView alloc]initWithFrame:CGRectMake(5, 5, kDeviceWidth-10, kDeviceWidth-10)];
+    self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
+   // self.comView.backgroundColor =[UIColor redColor];
     [self.contentView addSubview:self.comView];
 }
 -(void)configCellValue:(CommonModel *)model RowIndex:(NSInteger)rowIndex
@@ -33,6 +34,6 @@
 }
 +(float)getCellHeightWithModel:(CommonModel*)model
 {
-    return kDeviceWidth;
+    return kDeviceWidth-10;
 }
 @end

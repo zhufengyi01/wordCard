@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "CommonModel.h"
 #import "TagModel.h"
+#import "UIScrollView+Addition.h"
 #import "SVProgressHUD.h"
 
 @interface BaseTableView () <UITableViewDataSource,UITableViewDelegate>
@@ -36,21 +37,24 @@
     page=1;
     pageCount=1;
     pageSize=20;
-
     NSString *userId = @"18";
     [parameters setObject:userId forKey:@"user_id"];
     self.tabbleView =[[UITableView alloc]initWithFrame:self.view.bounds];
     self.tabbleView.delegate=self;
+    self.tabbleView.backgroundColor = [UIColor whiteColor];
     self.tabbleView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tabbleView.dataSource=self;
     [self.view addSubview: self.tabbleView];
     [self createFootView];
     
     self.refreshControl =[[UIRefreshControl alloc]init];
+    self.refreshControl.tintColor =VGray_color;
+    self.refreshControl.backgroundColor =[UIColor whiteColor];
     //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
     //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.tabbleView addSubview:self.refreshControl];
+    [SVProgressHUD show];
 }
 //刷新视图
 -(void)createFootView
@@ -58,7 +62,6 @@
     self.footView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, BUTTON_HEIGHT)];
     self.footView.backgroundColor =[UIColor whiteColor];
     [self.tabbleView setTableFooterView:self.footView];
-    
     self.statusLable  = [[UILabel alloc]initWithFrame:CGRectMake((kDeviceWidth-100)/2, 0, 100,BUTTON_HEIGHT)];
     self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
     self.statusLable.textAlignment = NSTextAlignmentCenter;
@@ -68,13 +71,17 @@
 }
 -(void)RefreshViewControlEventValueChanged
 {
+    
     page=1;
     [self requestData];
 }
+-(void)tableViewScollerTop
+{
+    [self.tabbleView scrollToTopAnimated:YES];
 
+}
 -(void)requestData
 {
-    [SVProgressHUD show];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
@@ -122,6 +129,7 @@
               [self.refreshControl endRefreshing];
             }else
             {
+                [SVProgressHUD showInfoWithStatus:@"没有数据"];
                 //数据为空
                 [self.refreshControl endRefreshing];
             }
@@ -170,7 +178,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"~~~~~~~index.row ====%ld",(long)indexPath.row);
+    //NSLog(@"~~~~~~~index.row ====%ld",(long)indexPath.row);
     if (pageCount>page&&(self.dataAraray.count==indexPath.row+1)) {
         page++;
         [self requestData];

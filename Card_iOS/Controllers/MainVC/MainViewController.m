@@ -24,14 +24,24 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createLeftNavigationItem:nil Title:@"管理员"];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
+    
+    //[self createLeftNavigationItem:nil Title:@"管理员"];
+    [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemReply];
+    [self createRightSystemNavigationItemWith:UIBarButtonSystemItemSearch];
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
 }
--(void)LeftNavigationButtonClick:(UIButton *)leftbtn
+-(void)RightSystemNavigationButtonClick
+{
+    
+}
+-(void)LeftSystemNavigationButtonClick
 {
     [self.navigationController pushViewController:[MainAdmList new] animated:YES];
+
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];

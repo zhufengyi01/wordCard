@@ -19,7 +19,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-     self.title = @"管理员功能列表";
+    self.title = @"管理员功能列表";
     self.dataArray = [NSMutableArray arrayWithObjects:@"屏蔽",@"最新",@"正常",@"发现",@"定时", nil];
     [self.tabbleView reloadData];
 }
@@ -32,19 +32,19 @@
             TVC.parameters=@{@"status":@"0"};
             TVC.title = @"屏蔽";
             break;
-            case ADM_NEW:
-             TVC.parameters=@{@"status":@"5"};
-             TVC.title = @"最新";
-             break;
-            case ADM_NOR:
+        case ADM_NEW:
+            TVC.parameters=@{@"status":@"5"};
+            TVC.title = @"最新";
+            break;
+        case ADM_NOR:
             TVC.parameters=@{@"status":@"1"};
             TVC.title =@"正常";
             break;
-            case ADM_DISCOR:
+        case ADM_DISCOR:
             TVC.parameters=@{@"status":@"2"};
             TVC.title =@"发现";
             break;
-            case ADM_TIM:
+        case ADM_TIM:
             TVC.parameters=@{@"status":@"4"};
             TVC.title =@"定时";
             break;
