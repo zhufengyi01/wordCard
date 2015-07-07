@@ -26,12 +26,14 @@
     self.tabbleView.delegate = self;
     self.tabbleView.dataSource =self;
     [self.view addSubview:self.tabbleView];
+    [self.tabbleView setTableFooterView:[[UIView alloc]init]];
     self.refreshControl =[[UIRefreshControl alloc]init];
     self.refreshControl.backgroundColor =View_BackGround;
     //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
     //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.tabbleView addSubview:self.refreshControl];
+    
 }
 -(void)RefreshViewControlEventValueChanged
 {

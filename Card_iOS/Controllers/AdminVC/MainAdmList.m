@@ -25,6 +25,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     TimingList *TVC= [TimingList new];
     TVC.urlString =  @"text/list-by-status";
     switch (indexPath.row) {

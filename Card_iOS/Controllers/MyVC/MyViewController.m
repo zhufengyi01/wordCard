@@ -7,7 +7,15 @@
 //
 
 #import "MyViewController.h"
-
+#import "SettingViewController.h"
 @implementation MyViewController
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    [self creatRightNavigationItem:nil Title:@"设置"];
+}
+-(void)RightNavigationButtonClick:(UIButton *)rightbtn
+{
+    [self.navigationController pushViewController:[SettingViewController new] animated:YES];
+}
 
 @end

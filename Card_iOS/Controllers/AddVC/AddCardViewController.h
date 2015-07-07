@@ -8,6 +8,17 @@
 
 #import "RootViewController.h"
 
-@interface AddCardViewController : RootViewController
+@interface AddCardViewController : RootViewController <UITextViewDelegate,UIScrollViewDelegate>
+{
+}
+@property(nonatomic,copy) NSString *tagString;
+
+@property (nonatomic,strong) UITextView  *myTextView;
+
+@property(nonatomic,strong)  UIScrollView *myScrollView;
+
+@property(nonatomic,strong) UIButton      *SourceButton;
+
+@property (nonatomic,strong) UILabel      *sourceLable;
 
 @end

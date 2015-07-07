@@ -24,6 +24,7 @@
     int pageSize;
 }
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
+
 @property(nonatomic,strong) UIView *footView;
 
 @property(nonatomic,strong)UILabel *statusLable;
@@ -37,7 +38,8 @@
     page=1;
     pageCount=1;
     pageSize=20;
-    NSString *userId = @"18";
+    UserDataCenter  *user = [UserDataCenter shareInstance];
+    NSString *userId = user.user_id;
     [parameters setObject:userId forKey:@"user_id"];
     self.tabbleView =[[UITableView alloc]initWithFrame:self.view.bounds];
     self.tabbleView.delegate=self;

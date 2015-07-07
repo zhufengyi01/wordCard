@@ -44,7 +44,7 @@
     self.topRighlbl =[ZCControl createLabelWithFrame:CGRectMake(self.frame.size.width-100-10,0, 100, 20) Font:12 Text:@"时间"];
     self.topRighlbl.textColor = VGray_color;
     self.topRighlbl.textAlignment = NSTextAlignmentRight;
-    [self addSubview:self.topRighlbl];
+    //[self addSubview:self.topRighlbl];
 }
 -(void)configCommonView:(CommonModel *)model;
 {

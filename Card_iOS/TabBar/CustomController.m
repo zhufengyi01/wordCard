@@ -13,7 +13,9 @@
 #import "MyViewController.h"
 #import "UIImage+Color.h"
 #import "Constant.h"
+#import "UIButton+Block.h"
 #import "ZCControl.h"
+#define  BUTTON_COUNT 3
 // 字体设置
 #define TITLE_NORMAL_COLOR   [UIColor colorWithRed:20/255.0 green:20/255.0 blue:120/255.0 alpha:1]
 #define TITLE_SELECTED_COLOR [UIColor colorWithRed:20/255.0 green:152/255.0 blue:172/255.0 alpha:1]
@@ -55,7 +57,18 @@
     //self.tabBar.selectionIndicatorImage =[UIImage imageNamed:@"back_Icon@2x.png"];
     //设置背景
     //self.tabBar.backgroundColor = [UIColor blueColor];
+    
+    //在系统的第二个按钮上加一个
+    UIButton  *Addbtn =[ZCControl createButtonWithFrame:CGRectMake(kDeviceWidth/BUTTON_COUNT, 0, kDeviceWidth/BUTTON_COUNT, kHeigthTabBar) ImageName:nil Target:self Action:nil Title:@""];
+    Addbtn.backgroundColor =[UIColor clearColor];
+    [Addbtn  addActionHandler:^(NSInteger tag) {
+        AddCardViewController *Add = [AddCardViewController new];
+        BaseNavigationViewController *na =[[BaseNavigationViewController alloc] initWithRootViewController:Add];
+        [self presentViewController:na animated:YES completion:nil];
+    }];
+    [self.tabBar addSubview:Addbtn];
 }
+//中间
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     BaseNavigationViewController *base =(BaseNavigationViewController*)viewController;
@@ -69,7 +82,6 @@
 {
     NSLog(@"self.select index ===%ld",(long)self.selectedIndex);
     if (self.pageIndex == self.selectedIndex) {
-        NSLog(@"刷新");
         [[NSNotificationCenter defaultCenter] postNotificationName:Refresh_MAIN_LIST object:nil];
     }
     self.pageIndex = self.selectedIndex;

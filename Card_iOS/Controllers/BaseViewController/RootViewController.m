@@ -17,8 +17,7 @@
 }
 -(void)viewDidLoad
 {
-    
-    self.view.backgroundColor = View_BackGround;
+    self.view.backgroundColor = View_white_Color;
     [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
 }
 -(void)createLeftNavigationItem:(UIImage*) leftImage Title:(NSString*)leftTitle
@@ -30,12 +29,10 @@
     }
     if (leftTitle) {
         [leftbtn setTitle:leftTitle forState:UIControlStateNormal];
-        leftbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:12];
+        leftbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:16];
         [leftbtn setTitleColor:VGray_color forState:UIControlStateNormal];
         [leftbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
-        
     }
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftbtn];
 }
 -(void)creatRightNavigationItem:(UIImage*) RightImage Title:(NSString*)RightTitle
@@ -43,14 +40,14 @@
     UIButton  *Righttbtn =[ZCControl createButtonWithFrame:CGRectMake(0, 0, 40, 50) ImageName:nil Target:self Action:@selector(RightNavigationButtonClick:) Title:nil];
     if (RightImage) {
         [Righttbtn setImage:RightImage forState:UIControlStateNormal];
-        [Righttbtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+        [Righttbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
         
     }
     if (RightTitle) {
         [Righttbtn setTitle:RightTitle forState:UIControlStateNormal];
-        Righttbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:12];
+        Righttbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:16];
         [Righttbtn setTitleColor:VGray_color forState:UIControlStateNormal];
-        [Righttbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+        [Righttbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
         
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:Righttbtn];

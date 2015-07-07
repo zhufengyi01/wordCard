@@ -45,11 +45,10 @@
 #define MARGIN_BOTTOM 30
  
 #pragma  mark  三方平台key  设置
-#define kUmengKey @"53e9e548fd98c5e4a90017c6"
+#define kUmengKey @"559a57b167e58e54cc0063b4"
 #define SSOSinRedirectURL  @"http://sns.whalecloud.com/sina2/callback"
-
-#define weiChatShareKey  @"wx8bbffc786bbcdfce"
-#define weiChatShareSecret @"1bd345fa522360c857c39f74030f4a92"
+#define weiChatShareKey  @"wx0691dcaa709b8cef"
+#define weiChatShareSecret @"6db5443e7da62a57581320c5ba9ac7cc"
 
 //#define   Review   1          ///上传appstore版本  1 为审核
 #define   Version       @"1.4"       //版本信息  1.0.1 审核版         1.0 正常版
@@ -59,7 +58,7 @@
 #define kAppTintColor [UIColor colorWithRed:0.0/255.0 green:146.0/255.0 blue:255.0/255.0 alpha:1]
 //项目背景颜色
 #define View_BackGround [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1]
-
+#define View_white_Color [UIColor whiteColor]
 #define View_ToolBar   [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:1]
 //tabbar 上面的一根线
 #define tabBar_line   [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
@@ -138,5 +137,6 @@
 
 #define kFontRegular @"NotoSansHans-Medium"
 #define kFontDouble @"NotoSansHans-Medium"
+#define KFontNormal14 
 
 #endif
