@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>993DCF19-8DF7-4CCF-BB82-512A2D3491BF</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Card_iOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>69D654862179454EBFB4F81787B5567A85B71CBE</key>
 		<string>https://github.com/FocusGroup/card-ios-version.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Card_iOS/Card_iOS.xcodeproj/project.xcworkspace</string>
+	<string>Card_iOS/Card_iOS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>69D654862179454EBFB4F81787B5567A85B71CBE</key>

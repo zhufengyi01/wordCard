@@ -17,6 +17,10 @@
 
 @property(nonatomic,strong) UILabel  *topRighlbl;   //右上角的标签文字
 
+@property(nonatomic,assign) BOOL     isLongWord;
+
+@property(nonatomic,strong)UILabel   *word_Soure;
+
 -(void)configCommonView:(CommonModel *)model;
 
 @end

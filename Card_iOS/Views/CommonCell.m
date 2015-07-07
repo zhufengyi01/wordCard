@@ -23,6 +23,7 @@
     self.contentView.backgroundColor =[UIColor whiteColor];
     self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
    // self.comView.backgroundColor =[UIColor redColor];
+    self.comView.isLongWord = NO;
     [self.contentView addSubview:self.comView];
 }
 -(void)configCellValue:(CommonModel *)model RowIndex:(NSInteger)rowIndex
@@ -30,7 +31,6 @@
     self.model = model;
     self.index=rowIndex;
     [self.comView configCommonView:model];
-    
 }
 +(float)getCellHeightWithModel:(CommonModel*)model
 {

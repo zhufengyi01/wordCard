@@ -12,7 +12,7 @@
 #import "AFNetworking.h"
 #import "Function.h"
 #import "AppDelegate.h"
-//#import "CustmoTabBarController.h"
+#import "CustomController.h"
 
 @interface Login2_1ViewController ()<UITextFieldDelegate>
 {
@@ -71,8 +71,6 @@
 
 -(void)createUI
 {
-    
-    
     inputView=[[UIImageView alloc]initWithFrame:CGRectMake((kDeviceWidth-250)/2, 200, 250, 79)];
     inputView.userInteractionEnabled=YES;
     inputView.image =[UIImage imageNamed:@"login_email_password.png"];
@@ -83,16 +81,11 @@
     //emailTextfield.text=@"673229963@qq.com";
     [inputView addSubview:emailTextfield];
     
-    
-    
     UIButton  *rightButton =[ZCControl createButtonWithFrame:CGRectMake(0,0, 24, 16) ImageName:nil Target:self Action:@selector(loginClick:) Title:nil];
     //[rightButton setBackgroundImage:[UIImage imageNamed:@"login_password_close.png"] forState:UIControlStateSelected];
     [rightButton setImage:[UIImage imageNamed:@"login_password_open.png"] forState:UIControlStateNormal];
     [rightButton setImage:[UIImage imageNamed:@"login_password_close.png"] forState:UIControlStateSelected];
-
     rightButton.tag=99;
- 
-    
     PassworfTextfield=[ZCControl createTextFieldWithFrame:CGRectMake(10, 39, 230,39) placeholder:@"请输入密码" passWord:YES leftImageView:nil rightImageView:nil Font:15];
     PassworfTextfield.rightView=rightButton;
     PassworfTextfield.delegate=self;
@@ -102,6 +95,7 @@
     
     loginButton =[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-230)/2, inputView.frame.origin.y+inputView.frame.size.height+20, 230, 40) ImageName:@"login_normal.png" Target:self Action:@selector(loginClick:) Title:nil];
     loginButton.tag=100;
+    loginButton.backgroundColor = View_BackGround;
     [self.view addSubview:loginButton];
     
     UIButton  *forgetButton =[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-100)/2, loginButton.frame.origin.y+loginButton.frame.size.height+20, 100, 40) ImageName:nil Target:self Action:@selector(loginClick:) Title:@"忘记密码"];
@@ -120,28 +114,27 @@
     NSString  *passstr=[NSString stringWithFormat:@"%@movienext%@",email,password];
       NSString  *pass_hash=[Function  md5:passstr];
     //NSString  *abc=[Function md5:@"abc@qq.commovienext123456"];
- 
-    NSDictionary *parameters = @{@"email":email,@"password_hash":pass_hash};
+    NSString *urlString =[NSString stringWithFormat:@"%@/user/login-with-email", kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary *parameters = @{@"email":email,@"password_hash":pass_hash,KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[NSString stringWithFormat:@"%@/user/login-with-email", kApiBaseUrl] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"esdksdhhsd=====%@",responseObject);
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
             //登陆成功
-//            window.rootViewController=[CustmoTabBarController new];
-//            NSDictionary *detail    = [responseObject objectForKey:@"model"];
-//        
-//                UserDataCenter  *userCenter=[UserDataCenter shareInstance];
-//                userCenter.user_id=[detail objectForKey:@"id"];
-//                userCenter.username=[detail objectForKey:@"username"];
-//                userCenter.logo =[detail objectForKey:@"logo"];
-//                userCenter.is_admin =[detail objectForKey:@"role_id"];
-//                userCenter.verified=[detail objectForKey:@"verified"];
-//                userCenter.sex=[detail objectForKey:@"sex"];
-//                userCenter.signature=[detail objectForKey:@"brief"];
-//                userCenter.email=[detail objectForKey:@"email"];
-//                userCenter.fake=[detail objectForKey:@"fake"];
-//                [Function saveUser:userCenter];
-            
+            window.rootViewController=[CustomController new];
+            NSDictionary *detail    = [responseObject objectForKey:@"model"];
+                UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+                userCenter.user_id=[detail objectForKey:@"id"];
+                userCenter.username=[detail objectForKey:@"username"];
+                userCenter.logo =[detail objectForKey:@"logo"];
+                userCenter.is_admin =[detail objectForKey:@"role_id"];
+                userCenter.verified=[detail objectForKey:@"verified"];
+                userCenter.sex=[detail objectForKey:@"sex"];
+                userCenter.signature=[detail objectForKey:@"brief"];
+                userCenter.email=[detail objectForKey:@"email"];
+                userCenter.fake=[detail objectForKey:@"fake"];
+                [Function saveUser:userCenter];
         }
         else
         {

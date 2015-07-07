@@ -73,7 +73,6 @@
 }
 -(void)RefreshViewControlEventValueChanged
 {
-    
     page=1;
     [self requestData];
 }
@@ -186,7 +185,7 @@
         [self requestData];
     }else
     {
-        self.statusLable.text = @"THE-EDN";
+        self.statusLable.text = @"THE-END";
     }
 }
  @end

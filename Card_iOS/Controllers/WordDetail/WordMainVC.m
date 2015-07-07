@@ -16,7 +16,12 @@
 {
     [super viewDidLoad];
     self.title = @"详细";
+    [self creatRightNavigationItem:nil Title:@"分享"];
     [self createUI];
+    
+}
+-(void)RightNavigationButtonClick:(UIButton *)rightbtn
+{
     
 }
 -(void)createUI

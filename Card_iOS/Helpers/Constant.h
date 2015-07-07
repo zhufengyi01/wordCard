@@ -14,10 +14,7 @@
 #define kApiBaseUrl  @"http://wordapi.ying233.com/"
 
 #define kUrlWeibo @"http://next-weibo.b0.upaiyun.com/"
-#define kUrlAvatar @"http://next-avatar.b0.upaiyun.com/"
-#define kUrlFeed @"http://next-feed.b0.upaiyun.com/"
-#define kUrlStage @"http://next-stage.b0.upaiyun.com/"
-#define kUrlMoviePoster @"http://next-movieposter.b0.upaiyun.com/"
+#define kUrlAvatar @"http://word-avatar.b0.upaiyun.com/"
 #define KIMAGE_BIG    @"!w640"
 #define KIMAGE_SMALL  @"!thumbwide2"
 #define KURLTOKEN    @"apitoken"

@@ -29,7 +29,7 @@
     }
     if (leftTitle) {
         [leftbtn setTitle:leftTitle forState:UIControlStateNormal];
-        leftbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:16];
+        leftbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
         [leftbtn setTitleColor:VGray_color forState:UIControlStateNormal];
         [leftbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
     }
@@ -45,7 +45,7 @@
     }
     if (RightTitle) {
         [Righttbtn setTitle:RightTitle forState:UIControlStateNormal];
-        Righttbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:16];
+        Righttbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
         [Righttbtn setTitleColor:VGray_color forState:UIControlStateNormal];
         [Righttbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
         

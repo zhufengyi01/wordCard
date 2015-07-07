@@ -57,6 +57,15 @@
 		3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */; };
 		3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF471B466B0C0004A928 /* SVProgressHUD.m */; };
 		38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DB971B4B763F00E0E7EC /* SettingViewController.m */; };
+		38D0DBA71B4B7E7600E0E7EC /* UpYun.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DB9B1B4B7E7600E0E7EC /* UpYun.m */; };
+		38D0DBA81B4B7E7600E0E7EC /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBA01B4B7E7600E0E7EC /* MF_Base64Additions.m */; };
+		38D0DBA91B4B7E7600E0E7EC /* NSData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBA31B4B7E7600E0E7EC /* NSData+Utils.m */; };
+		38D0DBAA1B4B7E7600E0E7EC /* NSData+MD5Digest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBA61B4B7E7600E0E7EC /* NSData+MD5Digest.m */; };
+		38D0DBC21B4BB4B300E0E7EC /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBC11B4BB4B300E0E7EC /* DiscoverViewController.m */; };
+		38D0DBC51B4BB4EB00E0E7EC /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBC41B4BB4EB00E0E7EC /* NoticeViewController.m */; };
+		38D0DBC81B4BC07200E0E7EC /* DetailLikeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBC71B4BC07200E0E7EC /* DetailLikeBar.m */; };
+		38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC341B4BCE0700E0E7EC /* UserButton.m */; };
+		38D0DC381B4BD7AB00E0E7EC /* LikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
 		38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D301E21B4517CC00484AC8 /* Main.storyboard */; };
@@ -279,6 +288,25 @@
 		3872BF471B466B0C0004A928 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		38D0DB961B4B763F00E0E7EC /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		38D0DB971B4B763F00E0E7EC /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		38D0DB9A1B4B7E7600E0E7EC /* UpYun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpYun.h; sourceTree = "<group>"; };
+		38D0DB9B1B4B7E7600E0E7EC /* UpYun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpYun.m; sourceTree = "<group>"; };
+		38D0DB9C1B4B7E7600E0E7EC /* UpYunSDK2.0-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UpYunSDK2.0-Prefix.pch"; sourceTree = "<group>"; };
+		38D0DB9F1B4B7E7600E0E7EC /* MF_Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MF_Base64Additions.h; sourceTree = "<group>"; };
+		38D0DBA01B4B7E7600E0E7EC /* MF_Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MF_Base64Additions.m; sourceTree = "<group>"; };
+		38D0DBA21B4B7E7600E0E7EC /* NSData+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Utils.h"; sourceTree = "<group>"; };
+		38D0DBA31B4B7E7600E0E7EC /* NSData+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Utils.m"; sourceTree = "<group>"; };
+		38D0DBA51B4B7E7600E0E7EC /* NSData+MD5Digest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MD5Digest.h"; sourceTree = "<group>"; };
+		38D0DBA61B4B7E7600E0E7EC /* NSData+MD5Digest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MD5Digest.m"; sourceTree = "<group>"; };
+		38D0DBC01B4BB4B300E0E7EC /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		38D0DBC11B4BB4B300E0E7EC /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		38D0DBC31B4BB4EB00E0E7EC /* NoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
+		38D0DBC41B4BB4EB00E0E7EC /* NoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeViewController.m; sourceTree = "<group>"; };
+		38D0DBC61B4BC07200E0E7EC /* DetailLikeBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailLikeBar.h; sourceTree = "<group>"; };
+		38D0DBC71B4BC07200E0E7EC /* DetailLikeBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailLikeBar.m; sourceTree = "<group>"; };
+		38D0DC331B4BCE0700E0E7EC /* UserButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserButton.h; sourceTree = "<group>"; };
+		38D0DC341B4BCE0700E0E7EC /* UserButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserButton.m; sourceTree = "<group>"; };
+		38D0DC361B4BD7AB00E0E7EC /* LikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeButton.h; sourceTree = "<group>"; };
+		38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeButton.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D301D91B4517CC00484AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38D301DA1B4517CC00484AC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -746,6 +774,72 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		38D0DB991B4B7E7600E0E7EC /* UPYun */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DB9A1B4B7E7600E0E7EC /* UpYun.h */,
+				38D0DB9B1B4B7E7600E0E7EC /* UpYun.m */,
+				38D0DB9C1B4B7E7600E0E7EC /* UpYunSDK2.0-Prefix.pch */,
+				38D0DB9D1B4B7E7600E0E7EC /* Utils */,
+			);
+			path = UPYun;
+			sourceTree = "<group>";
+		};
+		38D0DB9D1B4B7E7600E0E7EC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DB9E1B4B7E7600E0E7EC /* Base64 */,
+				38D0DBA11B4B7E7600E0E7EC /* Data */,
+				38D0DBA41B4B7E7600E0E7EC /* NSData+MD5Digest */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		38D0DB9E1B4B7E7600E0E7EC /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DB9F1B4B7E7600E0E7EC /* MF_Base64Additions.h */,
+				38D0DBA01B4B7E7600E0E7EC /* MF_Base64Additions.m */,
+			);
+			path = Base64;
+			sourceTree = "<group>";
+		};
+		38D0DBA11B4B7E7600E0E7EC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DBA21B4B7E7600E0E7EC /* NSData+Utils.h */,
+				38D0DBA31B4B7E7600E0E7EC /* NSData+Utils.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		38D0DBA41B4B7E7600E0E7EC /* NSData+MD5Digest */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DBA51B4B7E7600E0E7EC /* NSData+MD5Digest.h */,
+				38D0DBA61B4B7E7600E0E7EC /* NSData+MD5Digest.m */,
+			);
+			path = "NSData+MD5Digest";
+			sourceTree = "<group>";
+		};
+		38D0DBBE1B4BB43700E0E7EC /* DiscoverVC */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DBC01B4BB4B300E0E7EC /* DiscoverViewController.h */,
+				38D0DBC11B4BB4B300E0E7EC /* DiscoverViewController.m */,
+			);
+			path = DiscoverVC;
+			sourceTree = "<group>";
+		};
+		38D0DBBF1B4BB43700E0E7EC /* NoticeVC */ = {
+			isa = PBXGroup;
+			children = (
+				38D0DBC31B4BB4EB00E0E7EC /* NoticeViewController.h */,
+				38D0DBC41B4BB4EB00E0E7EC /* NoticeViewController.m */,
+			);
+			path = NoticeVC;
+			sourceTree = "<group>";
+		};
 		38D301CC1B4517CC00484AC8 = {
 			isa = PBXGroup;
 			children = (
@@ -814,6 +908,7 @@
 		38D301FE1B451A6E00484AC8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				38D0DB991B4B7E7600E0E7EC /* UPYun */,
 				38D34F8E1B4A7DDC00CBAB2C /* UMAnalytics_Sdk_3.4.8 */,
 				38D34F921B4A7DDC00CBAB2C /* UMSocial_Sdk_4.2.1 */,
 				38D34FAD1B4A7DDC00CBAB2C /* UMSocial_Sdk_Extra_Frameworks */,
@@ -828,6 +923,8 @@
 		38D302001B451A8A00484AC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				38D0DBBE1B4BB43700E0E7EC /* DiscoverVC */,
+				38D0DBBF1B4BB43700E0E7EC /* NoticeVC */,
 				38D0DB951B4B761500E0E7EC /* Setting */,
 				38D34F8D1B4A6B4E00CBAB2C /* Login */,
 				3872BE1A1B465E2C0004A928 /* AdminVC */,
@@ -852,6 +949,12 @@
 				38D618CD1B463DA700907CE9 /* AdimToolBar.m */,
 				38D34F861B4A329400CBAB2C /* BaseTable.h */,
 				38D34F871B4A329400CBAB2C /* BaseTable.m */,
+				38D0DBC61B4BC07200E0E7EC /* DetailLikeBar.h */,
+				38D0DBC71B4BC07200E0E7EC /* DetailLikeBar.m */,
+				38D0DC331B4BCE0700E0E7EC /* UserButton.h */,
+				38D0DC341B4BCE0700E0E7EC /* UserButton.m */,
+				38D0DC361B4BD7AB00E0E7EC /* LikeButton.h */,
+				38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1357,12 +1460,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				38D303B11B453B3400484AC8 /* MJRefreshComponent.m in Sources */,
+				38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */,
 				38D303E01B453B3C00484AC8 /* SDImageCache.m in Sources */,
 				3872BF261B4664D80004A928 /* NSString+Score.m in Sources */,
 				38D618C81B46357600907CE9 /* WordMainVC.m in Sources */,
 				3872BF381B4664D80004A928 /* UIButton+CountDown.m in Sources */,
+				38D0DBA71B4B7E7600E0E7EC /* UpYun.m in Sources */,
 				3872BF201B4664D80004A928 /* NSString+Base64.m in Sources */,
 				3872BF2D1B4664D80004A928 /* UIImage+Color.m in Sources */,
+				38D0DBA81B4B7E7600E0E7EC /* MF_Base64Additions.m in Sources */,
 				3872BF1D1B4664D80004A928 /* NSDate+Additions.m in Sources */,
 				38D3034F1B452F6F00484AC8 /* BaseTableView.m in Sources */,
 				38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */,
@@ -1377,6 +1483,7 @@
 				38D303441B4529BD00484AC8 /* CustomController.m in Sources */,
 				3872BF271B4664D80004A928 /* NSString+Trims.m in Sources */,
 				3872BF1F1B4664D80004A928 /* NSFileManager+Paths.m in Sources */,
+				38D0DBC81B4BC07200E0E7EC /* DetailLikeBar.m in Sources */,
 				3872BF311B4664D80004A928 /* UIImage+Orientation.m in Sources */,
 				38D303ED1B453B3C00484AC8 /* UIView+WebCacheOperation.m in Sources */,
 				38D303B91B453B3400484AC8 /* UIScrollView+MJExtension.m in Sources */,
@@ -1388,9 +1495,11 @@
 				38D303E91B453B3C00484AC8 /* UIImage+MultiFormat.m in Sources */,
 				3872BF1E1B4664D80004A928 /* NSDateFormatter+Make.m in Sources */,
 				3872BF2C1B4664D80004A928 /* UIImage+Capture.m in Sources */,
+				38D0DC381B4BD7AB00E0E7EC /* LikeButton.m in Sources */,
 				38D303B51B453B3400484AC8 /* MJRefreshGifHeader.m in Sources */,
 				3872BF151B4664D80004A928 /* NSData+Base64.m in Sources */,
 				38D303BA1B453B3400484AC8 /* UIScrollView+MJRefresh.m in Sources */,
+				38D0DBC21B4BB4B300E0E7EC /* DiscoverViewController.m in Sources */,
 				38D303B31B453B3400484AC8 /* MJRefreshFooter.m in Sources */,
 				3872BF281B4664D80004A928 /* NSString+UrlEncode.m in Sources */,
 				38D303941B453B2A00484AC8 /* UIProgressView+AFNetworking.m in Sources */,
@@ -1438,8 +1547,10 @@
 				38D303881B453B2A00484AC8 /* AFHTTPSessionManager.m in Sources */,
 				38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */,
 				3872BF221B4664D80004A928 /* NSString+Emoji.m in Sources */,
+				38D0DBA91B4B7E7600E0E7EC /* NSData+Utils.m in Sources */,
 				38D303951B453B2A00484AC8 /* UIRefreshControl+AFNetworking.m in Sources */,
 				38D303E31B453B3C00484AC8 /* SDWebImageDownloader.m in Sources */,
+				38D0DBAA1B4B7E7600E0E7EC /* NSData+MD5Digest.m in Sources */,
 				38D618BE1B462F7C00907CE9 /* NormalTableView.m in Sources */,
 				38D303E41B453B3C00484AC8 /* SDWebImageDownloaderOperation.m in Sources */,
 				38D303551B452FBF00484AC8 /* AddCardViewController.m in Sources */,
@@ -1453,6 +1564,7 @@
 				38D303921B453B2A00484AC8 /* UIButton+AFNetworking.m in Sources */,
 				3872BF351B4664D80004A928 /* NSString+Additions.m in Sources */,
 				38D303EC1B453B3C00484AC8 /* UIImageView+WebCache.m in Sources */,
+				38D0DBC51B4BB4EB00E0E7EC /* NoticeViewController.m in Sources */,
 				38D303521B452F9200484AC8 /* MainViewController.m in Sources */,
 				3872BF2F1B4664D80004A928 /* UIImage+FX.m in Sources */,
 				3872BE201B465E2C0004A928 /* TimingList.m in Sources */,

@@ -11,8 +11,13 @@
 #import "SelectTimeView.h"
 #import "Constant.h"
 #import "AFNetworking.h"
+#import "UserDataCenter.h"
 #import "Function.h"
 #import "SVProgressHUD.h"
+#import "UIImageView+WebCache.h"
+#import "UserButton.h"
+#import "LikeButton.h"
+#import "UIButton+Block.h"
 @implementation WordDetailVC
 
 -(void)viewDidLoad
@@ -25,15 +30,46 @@
     
     self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
     [self.myScrollerView addSubview:self.comView];
+    self.comView.isLongWord = YES;
     [self.comView configCommonView:self.model];
     
-    [self createToolBar];
+    
+    //UserDataCenter *user = [UserDataCenter shareInstance];
+    //if ([user.is_admin intValue]>0) {
+        [self createToolBar];
+   // }else
+    //{
+        
+    //}
+    UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 40)];
+    likeBar.userInteractionEnabled = YES;
+    [self.myScrollerView addSubview:likeBar];
+    
+    UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
+    NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
+    [userbtn addActionHandler:^(NSInteger tag) {
+        
+    }];
+    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:HeadImagePlaceholder];
+    userbtn.titleLab.text= self.model.userInfo.username;
+    [likeBar addSubview:userbtn];
+    
+    LikeButton  *likeBtn = [[LikeButton alloc]initWithFrame:CGRectMake(kDeviceWidth-110, 0,100, 30)];
+    [likeBtn addActionHandler:^(NSInteger tag) {
+        
+    }];
+    [likeBar addSubview:likeBtn];
+}
+-(void)createUserBar
+{
+    
 }
 -(void)createToolBar
 {
     AdimToolBar *tool =[[AdimToolBar alloc]initWithFrame:CGRectMake(0, kDeviceHeight-BUTTON_HEIGHT-kHeightNavigation, kDeviceWidth, BUTTON_HEIGHT)];
     tool.delegate = self;
     [self.view addSubview:tool];
+    
 }
 -(void)handOperationAtIndex:(NSInteger)index
 {

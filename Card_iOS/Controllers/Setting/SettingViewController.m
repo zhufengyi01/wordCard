@@ -13,7 +13,6 @@
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
 static const int  LOGIN_OUT = 0;
-
 @implementation SettingViewController
 
 -(void)viewDidLoad

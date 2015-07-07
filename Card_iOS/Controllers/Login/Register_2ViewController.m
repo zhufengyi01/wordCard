@@ -11,21 +11,22 @@
 #import "Constant.h"
 #import "AFNetworking.h"
 #import "Function.h"
-//#import "UpYun.h"
+#import "UpYun.h"
 #import "AppDelegate.h"
 #import "CustomController.h"
+#import "SVProgressHUD.h"
 //#import "CustmoTabBarController.h"
 @interface Register_2ViewController ()<UINavigationControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 {
     AppDelegate  *appdelegate;
     UIWindow     *window;
-
+    
     UIButton  *headImag;
     UITextField  *nameTextfield;
     NSMutableDictionary   *upyunDict;
     UIImage  *_upImage;
     UIImageView  *bgView;
-
+    
 }
 @end
 
@@ -38,14 +39,11 @@
     // Do any additional setup after loading the view.
     upyunDict= [[NSMutableDictionary alloc]init];
     self.title  = @"完善资料";
-    //[self createNavigition];
     [self createUI];
     //键盘将要显示
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     //键盘将要隐藏
     [[NSNotificationCenter defaultCenter ]addObserver:self selector:@selector(keyboardWillHiden:) name:UIKeyboardWillHideNotification object:nil];
-    
-
 }
 #pragma mark 键盘的通知事件
 -(void)keyboardWillShow:(NSNotification * )  notification
@@ -128,7 +126,7 @@
                 userCenter.fake=[detail objectForKey:@"fake"];
                 [Function saveUser:userCenter];
                 //登陆成功后把根
-                 window.rootViewController=[CustomController new];
+                window.rootViewController=[CustomController new];
             }
         }
         else
@@ -170,7 +168,23 @@
 {
     if (buttonIndex<2) {
         UIImagePickerController  *pick = [[UIImagePickerController alloc]init];
-        pick.sourceType=buttonIndex;
+        if (buttonIndex == 0) {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                pick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            else
+            {
+                [SVProgressHUD showInfoWithStatus:@"相册不可用"];
+            }
+        }else{
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                pick.sourceType = UIImagePickerControllerSourceTypeCamera;
+            }else {
+                [SVProgressHUD showInfoWithStatus:@"相机不可用"];
+                return;
+            }
+            
+        }
         pick.allowsEditing=YES;
         pick.delegate=self;
         [self presentViewController:pick animated:YES completion:nil];
@@ -184,31 +198,28 @@
     if ([type isEqualToString:@"public.image"])
     {
         //先把图片转成NSData
-         _upImage = [info objectForKey:UIImagePickerControllerEditedImage];
-       // NSData   *dataImage =UIImageJPEGRepresentation(image, 0.7);
-         [self dismissViewControllerAnimated:YES completion:^{
-             [headImag setBackgroundImage:_upImage forState:UIControlStateNormal];
-             [self uploadImageToyun];
+        _upImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        // NSData   *dataImage =UIImageJPEGRepresentation(image, 0.7);
+        [self dismissViewControllerAnimated:YES completion:^{
+            [headImag setBackgroundImage:_upImage forState:UIControlStateNormal];
+            [self uploadImageToyun];
         }];
     }
 }
 -(void)uploadImageToyun
 {
-   
-  /*  //执行上传的方法
+    [SVProgressHUD showProgress:0];
+    //执行上传的方法
     UpYun *uy = [[UpYun alloc] init];
-    uy.bucket=@"next-avatar";
-    uy.passcode=@"doQ8Atczh0OWH2uMXz6SarL5eac=";
+    uy.bucket=@"word-avatar";
+    uy.passcode=@"lqY/n8m8DoFgKVvZ7Br/9f3YbJ4=";
     uy.successBlocker = ^(id data)
     {
-        
         NSLog(@"图片上传成功%@",data);
         if (upyunDict==nil) {
             upyunDict=[[NSMutableDictionary alloc]init];
         }
         upyunDict=data;
-        //发布图片和跳转页面
-        
     };
     uy.failBlocker = ^(NSError * error)
     {
@@ -219,10 +230,11 @@
     };
     uy.progressBlocker = ^(CGFloat percent, long long requestDidSendBytes)
     {
-        //进度
-        ////[_pv setProgress:percent];
-        
-    };*/
+        [SVProgressHUD showProgress:percent status:@"正在上传头像"];
+        if (percent==1) {
+            [SVProgressHUD dismiss];
+        }
+    };
     
     /**
      *	@brief	根据 UIImage 上传
@@ -239,11 +251,11 @@
     /**
      *	@brief	根据 NSDate  上传
      */
-    /*float kCompressionQuality = 0.6;
+    float kCompressionQuality = 0.6;
     NSData *photo = UIImageJPEGRepresentation(_upImage, kCompressionQuality);
     //  NSData * fileData = [NSData dataWithContentsOfFile:filePath];
-    [uy uploadFile:photo saveKey:[self getSaveKey]];*/
-
+    [uy uploadFile:photo saveKey:[self getSaveKey]];
+    
     
 }
 -(NSString * )getSaveKey {
@@ -300,20 +312,19 @@
 {
     [nameTextfield resignFirstResponder];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

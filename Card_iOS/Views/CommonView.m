@@ -35,7 +35,7 @@
         self.titleLable.font = [UIFont systemFontOfSize:22];
     }else if(IsIphone6plus)
     {
-       // self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
+        // self.titleLable.font =[UIFont fontWithName:kFontRegular size:22];
         self.titleLable.font =[UIFont systemFontOfSize:29];
     }
     self.titleLable.textAlignment=NSTextAlignmentJustified;
@@ -45,6 +45,15 @@
     self.topRighlbl.textColor = VGray_color;
     self.topRighlbl.textAlignment = NSTextAlignmentRight;
     //[self addSubview:self.topRighlbl];
+    
+    self.word_Soure =[[UILabel alloc] initWithFrame:CGRectZero];
+    self.word_Soure.textColor = VGray_color;
+    self.word_Soure.font = [UIFont systemFontOfSize:10];
+    if (IsIphone6plus) {
+        self.word_Soure.font = [UIFont systemFontOfSize:12];
+    }
+    self.word_Soure.textAlignment = NSTextAlignmentLeft;
+    [self addSubview:self.word_Soure];
 }
 -(void)configCommonView:(CommonModel *)model;
 {
@@ -56,10 +65,24 @@
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     self.titleLable.attributedText = [[NSAttributedString alloc] initWithString:self.model.word attributes:attributes];
-    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
-    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
-    self.topRighlbl.text=da;
-    
+    CGSize  Msize  =[self.titleLable.attributedText boundingRectWithSize:CGSizeMake(kDeviceWidth-20, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil].size;
+    if (self.isLongWord ==YES) {
+        if (Msize.height<kDeviceWidth-20) {
+            self.frame= CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20,kDeviceWidth-20);
+        }else
+        {
+            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20, Msize.height+20);
+        }
+    }
+    self.word_Soure.text =[NSString stringWithFormat:@"出自:%@",model.reference];
+    //    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
+    //    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
+    //    self.topRighlbl.text=da;
+}
+-(void)layoutSubviews
+{
+    self.titleLable.frame = CGRectMake(10, 10, self.frame.size.width-20, self.frame.size.height-40);
+    self.word_Soure.frame=CGRectMake(10, self.frame.size.height-30, self.frame.size.width-20, 25);
 }
 
 @end

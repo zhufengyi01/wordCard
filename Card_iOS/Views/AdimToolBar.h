@@ -9,13 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol AdimToolBarDelegate  <NSObject>
-
 -(void)handOperationAtIndex:(NSInteger) index;
-
-
 @end
 @interface AdimToolBar : UIView
-
 
 @property(nonatomic,assign) id <AdimToolBarDelegate> delegate;
 

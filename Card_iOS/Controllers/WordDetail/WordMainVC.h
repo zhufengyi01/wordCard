@@ -12,7 +12,6 @@
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 
-
 //主要的数组
 @property (nonatomic,strong) NSMutableArray  *MainArray;
 
