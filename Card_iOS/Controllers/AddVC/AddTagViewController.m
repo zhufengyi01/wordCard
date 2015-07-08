@@ -13,7 +13,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"填写信息";
+    //self.title = @"填写信息";
     [self creatRightNavigationItem:nil Title:@"确定"];
     [self createTextView];
 }

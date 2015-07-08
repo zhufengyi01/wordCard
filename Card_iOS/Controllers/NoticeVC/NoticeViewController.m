@@ -19,7 +19,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-   // self.title = @"消息";
+    self.title = @"消息";
     [self requestData];
 }
 @end

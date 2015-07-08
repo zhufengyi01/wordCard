@@ -15,6 +15,9 @@
 //主要的数组
 @property (nonatomic,strong) NSMutableArray  *MainArray;
 
+
+@property(nonatomic,strong)NSMutableArray    *likeArray;
+
 //下标
 @property(nonatomic,assign) NSInteger IndexOfItem;
 

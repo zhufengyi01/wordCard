@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong)NSMutableArray  *dataAraray;
 
+@property(nonatomic,strong) NSMutableArray  *likeArray;
+
 
 @property(nonatomic,strong)NSString *urlString;
 

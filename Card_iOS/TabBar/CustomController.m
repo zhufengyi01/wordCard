@@ -45,6 +45,8 @@
         //vc.title=titleArray[i];
         UIImage  *normalImage =[UIImage imageNamed:normalImageArray[i]];
         UIImage  *selectImage =[UIImage imageNamed:selectImageArray[i]];
+        UIOffset  offoset = UIOffsetMake(0, 300);
+        [vc.tabBarItem setTitlePositionAdjustment:offoset];
         vc.tabBarItem.image =[normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [vc.tabBarItem setImageInsets:TABAR_IMAGE_INSET];
         vc.tabBarItem.selectedImage=[selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -78,10 +80,6 @@
         [self presentViewController:na animated:YES completion:nil];
     }];
     [self.tabBar addSubview:Addbtn];
-    
-    
-    
-    
     
 }
 //中间

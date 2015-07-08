@@ -15,6 +15,7 @@
 {
     [super loadView];
 }
+
 -(void)viewDidLoad
 {
     self.view.backgroundColor = View_white_Color;

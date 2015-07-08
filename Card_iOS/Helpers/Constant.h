@@ -29,8 +29,6 @@
 #pragma  mark    宽高设置
 #define kDeviceWidth        [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight       [UIScreen mainScreen].bounds.size.height
-#define kStageWidth         kDeviceWidth-10
-
 #define IsIphone5                [UIScreen mainScreen].bounds.size.height==568
 #define IsIphone6                [UIScreen mainScreen].bounds.size.height==667
 #define IsIphone6plus            [UIScreen mainScreen].bounds.size.height==736
@@ -80,16 +78,6 @@
 #define GetAppDelegate()   ((AppDelegate*)[[UIApplication sharedApplication] delegate])
 #define AppView  [UIApplication sharedApplication].delegate.window
 
-//动画定义
-#define  kTimeInterval  1.1   //  气泡和气泡之间动画出现的时间间隔
-#define kStaticTimeOffset  5.7  //动画的停留时间
-#define kShowTimeOffset 0.5  // 淡入时间
-#define kHidenTimeOffset 0.7  //淡出时间
-#define KappearTime    3     //最新页面的自身闪烁动画时间
-#define kdisplayTime   1.0     //滑动cell 动画延时的时间
-#define kalpaOneTime 0.6      //动画全部弹出透明度变成1的那段时间
-#define kalpaZeroTime  0.3    //动画全部弹出后然后变成透明度为0的那段时间
-
 #define kUserKey @"userinfo"  ///用户信息
 
 #define IS_FIRST_LOGIN  @"ISFIRST"
@@ -118,7 +106,6 @@
 ///通知的相关定义
 
 #define GOTO_USER_CENTER   @"goto_user"  //跳转到个人页
-
 #define Refresh_MAIN_LIST  @"refresh_main_list"  //刷新
 
 //字体相关

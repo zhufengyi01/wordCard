@@ -66,6 +66,7 @@
 		38D0DBC81B4BC07200E0E7EC /* DetailLikeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBC71B4BC07200E0E7EC /* DetailLikeBar.m */; };
 		38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC341B4BCE0700E0E7EC /* UserButton.m */; };
 		38D0DC381B4BD7AB00E0E7EC /* LikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */; };
+		38D0DC3B1B4BDF6B00E0E7EC /* LikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
 		38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D301E21B4517CC00484AC8 /* Main.storyboard */; };
@@ -307,6 +308,8 @@
 		38D0DC341B4BCE0700E0E7EC /* UserButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserButton.m; sourceTree = "<group>"; };
 		38D0DC361B4BD7AB00E0E7EC /* LikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeButton.h; sourceTree = "<group>"; };
 		38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeButton.m; sourceTree = "<group>"; };
+		38D0DC391B4BDF6B00E0E7EC /* LikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeModel.h; sourceTree = "<group>"; };
+		38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeModel.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D301D91B4517CC00484AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38D301DA1B4517CC00484AC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1200,6 +1203,8 @@
 				38D303F61B45407D00484AC8 /* UserModel.m */,
 				38D303F81B45414B00484AC8 /* TagModel.h */,
 				38D303F91B45414B00484AC8 /* TagModel.m */,
+				38D0DC391B4BDF6B00E0E7EC /* LikeModel.h */,
+				38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1469,6 +1474,7 @@
 				3872BF201B4664D80004A928 /* NSString+Base64.m in Sources */,
 				3872BF2D1B4664D80004A928 /* UIImage+Color.m in Sources */,
 				38D0DBA81B4B7E7600E0E7EC /* MF_Base64Additions.m in Sources */,
+				38D0DC3B1B4BDF6B00E0E7EC /* LikeModel.m in Sources */,
 				3872BF1D1B4664D80004A928 /* NSDate+Additions.m in Sources */,
 				38D3034F1B452F6F00484AC8 /* BaseTableView.m in Sources */,
 				38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */,

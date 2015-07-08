@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "CommonModel.h"
 #import "TagModel.h"
+#import "LikeModel.h"
 #import "UIScrollView+Addition.h"
 #import "SVProgressHUD.h"
 
@@ -33,7 +34,8 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    self.dataAraray =[NSMutableArray array];
+    self.dataAraray = [NSMutableArray array];
+    self.likeArray  = [NSMutableArray array];
     parameters =[[NSMutableDictionary alloc]initWithDictionary:self.parameters];
     page=1;
     pageCount=1;
@@ -79,7 +81,7 @@
 -(void)tableViewScollerTop
 {
     [self.tabbleView scrollToTopAnimated:YES];
-
+    
 }
 -(void)requestData
 {
@@ -125,15 +127,28 @@
                         }
                         [self.dataAraray addObject:model];
                     }
-                 }
-              [self.tabbleView reloadData];
-              [self.refreshControl endRefreshing];
+                }
+                [self.tabbleView reloadData];
+                [self.refreshControl endRefreshing];
             }else
             {
                 [SVProgressHUD showInfoWithStatus:@"没有数据"];
                 //数据为空
                 [self.refreshControl endRefreshing];
             }
+            NSMutableArray  *likearr = [responseObject objectForKey:@"ups"];
+            ///if (likearr.count>0) {
+                for (int i=0; i<likearr.count; i++) {
+                    LikeModel *likemodel = [LikeModel new];
+                    [likemodel setValuesForKeysWithDictionary:[likearr objectAtIndex:i]];
+                    if (self.likeArray==nil) {
+                        self.likeArray = [NSMutableArray array];
+                    }
+                    [self.likeArray addObject:likemodel];
+                }
+            //}
+            
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //数据加载失败
@@ -145,7 +160,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataAraray.count>indexPath.row) {
-         return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
+        return [CommonCell getCellHeightWithModel:[self.dataAraray objectAtIndex:indexPath.row]];
     }
     return 0;
 }
@@ -188,4 +203,4 @@
         self.statusLable.text = @"THE-END";
     }
 }
- @end
+@end

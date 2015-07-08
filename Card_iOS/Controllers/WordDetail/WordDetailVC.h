@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong)CommonView  *comView;
 
+@property(nonatomic,strong) NSMutableArray  *likeArray;
+
 @property(nonatomic,strong) UIScrollView *myScrollerView;
 
 @end

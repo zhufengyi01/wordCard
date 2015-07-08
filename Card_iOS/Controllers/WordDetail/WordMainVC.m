@@ -64,6 +64,7 @@
     // 创建一个新的控制器类，并且分配给相应的数据
     WordDetailVC * dataViewController =[[WordDetailVC alloc] init];
     dataViewController.model = [self.MainArray objectAtIndex:index];
+    dataViewController.likeArray = self.likeArray;
     return dataViewController;
 }
 // 根据数组元素值，得到下标值

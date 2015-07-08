@@ -24,6 +24,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"瞎扯精选";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
     [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemReply];
     [self createRightSystemNavigationItemWith:UIBarButtonSystemItemSearch];
@@ -44,6 +45,7 @@
     WordMainVC  *wordmian =[WordMainVC new];
     wordmian.MainArray = self.dataAraray;
     wordmian.IndexOfItem= indexPath.row;
+    wordmian.likeArray = self.likeArray;
     [self.navigationController pushViewController:wordmian animated:YES];
 
 }

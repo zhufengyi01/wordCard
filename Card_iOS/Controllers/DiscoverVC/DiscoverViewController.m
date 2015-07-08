@@ -12,7 +12,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"发现";
+    //self.title = @"发现";
     [self createLeftNavigationItem:nil Title:@"取消"];
 }
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn

@@ -11,7 +11,7 @@
 @implementation MyViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
-   //self.title  = @"我的";
+   self.title  = @"我的";
     [self creatRightNavigationItem:nil Title:@"设置"];
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
