@@ -22,7 +22,6 @@
 }
 -(void)createContent
 {
-    
     NSArray *titleArray = @[@"分享",@"喜欢",@"评论"];
     for ( int i=0; i<likebttonCount; i++) {
         double x = (kDeviceWidth-20)/likebttonCount;

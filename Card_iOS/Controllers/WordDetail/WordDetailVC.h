@@ -12,7 +12,7 @@
 #import "AdimToolBar.h"
 #import "SelectTimeView.h"
 
-@interface WordDetailVC : RootViewController <AdimToolBarDelegate,SelectTimeViewDelegate>
+@interface WordDetailVC : RootViewController <AdimToolBarDelegate,SelectTimeViewDelegate,UIGestureRecognizerDelegate>
 
 @property(nonatomic,strong) CommonModel   *model;
 

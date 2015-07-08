@@ -33,8 +33,6 @@
     [self.myScrollerView addSubview:self.comView];
     self.comView.isLongWord = YES;
     [self.comView configCommonView:self.model];
-    
-    
     //UserDataCenter *user = [UserDataCenter shareInstance];
     //if ([user.is_admin intValue]>0) {
     [self createToolBar];
@@ -49,7 +47,6 @@
     UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
     NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
     [userbtn addActionHandler:^(NSInteger tag) {
-        
         
     }];
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:HeadImagePlaceholder];
@@ -155,6 +152,7 @@
         [piker show];
     }
 }
+#pragma mark --requset Method
 -(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
 {
     UserDataCenter  *userCenter=[UserDataCenter shareInstance];
@@ -233,6 +231,7 @@
         [SVProgressHUD showErrorWithStatus:@"操作失败"];
     }];
 }
+
 
 #pragma mark  selected date time
 -(void)DatePickerSelectedTime:(NSString *)dateString    {

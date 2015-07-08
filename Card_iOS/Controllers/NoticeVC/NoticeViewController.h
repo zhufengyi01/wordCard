@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 card. All rights reserved.
 //
 
-#import "BaseTableView.h"
+#import "NormalTableView.h"
 
-@interface NoticeViewController : BaseTableView
+@interface NoticeViewController : NormalTableView
 
 @end

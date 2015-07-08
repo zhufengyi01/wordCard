@@ -18,6 +18,8 @@
     self.title = @"详细";
     [self creatRightNavigationItem:nil Title:@"分享"];
     [self createUI];
+    //self.pageController.gestureRecognizers;
+    //[self dealGesture];
     
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn

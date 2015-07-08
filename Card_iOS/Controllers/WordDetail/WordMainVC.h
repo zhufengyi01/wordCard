@@ -8,7 +8,7 @@
 
 #import "RootViewController.h"
 
-@interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource>
+@interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource,UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageController;
 

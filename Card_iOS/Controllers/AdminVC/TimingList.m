@@ -16,8 +16,6 @@
 -(instancetype)init
 {
     if (self =  [super init]) {
-//        self.urlString = @"text/list-by-status";
-//        self.parameters=@{@"status":@"5"};
     }
     return self;
 }
@@ -27,14 +25,4 @@
      self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
     [self requestData];
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    WordMainVC  *wordmian =[WordMainVC new];
-    wordmian.MainArray = self.dataAraray;
-    wordmian.IndexOfItem= indexPath.row;
-    [self.navigationController pushViewController:wordmian animated:YES];
-}
-
-
 @end

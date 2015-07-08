@@ -7,7 +7,24 @@
 //
 
 #import "RootViewController.h"
-
+#import "CommonView.h"
+#import "LikeModel.h"
+@class CommonModel;
+@class TagModel;
 @interface DiscoverViewController : RootViewController
+@property(nonatomic,strong) CommonModel   *model;
+
+@property(nonatomic,strong)CommonView  *comView;
+
+@property(nonatomic,assign) NSInteger  currentIndex;
+
+@property(nonatomic,strong) NSMutableArray  *likeArray;
+
+@property(nonatomic,strong) UIScrollView *myScrollerView;
+
+
+@property(nonatomic,strong) NSMutableArray *dataArray;
+
+@property(nonatomic,strong) UIView *likeBar;
 
 @end

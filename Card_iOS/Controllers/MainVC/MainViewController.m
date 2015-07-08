@@ -26,7 +26,7 @@
     [super viewDidLoad];
     self.title = @"瞎扯精选";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
-    [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemReply];
+    [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
     [self createRightSystemNavigationItemWith:UIBarButtonSystemItemSearch];
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
@@ -42,12 +42,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    WordMainVC  *wordmian =[WordMainVC new];
-    wordmian.MainArray = self.dataAraray;
-    wordmian.IndexOfItem= indexPath.row;
-    wordmian.likeArray = self.likeArray;
-    [self.navigationController pushViewController:wordmian animated:YES];
-
 }
 
 @end

@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong)NSMutableArray  *dataAraray;
 
+@property(nonatomic,strong)NSMutableArray  *temArr;
+
 @property(nonatomic,strong) NSMutableArray  *likeArray;
 
 
@@ -25,13 +27,14 @@
 //滚动到顶部
 -(void)tableViewScollerTop;
 
-
 //子类可重写下面方法
 -(void)requestData;
 //刷新
 -(void)RefreshViewControlEventValueChanged;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
@@ -40,4 +43,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 @end

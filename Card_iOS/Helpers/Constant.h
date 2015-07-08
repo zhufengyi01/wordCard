@@ -58,14 +58,14 @@
 //tabbar 上面的一根线
 #define tabBar_line   [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
 //字体浅灰色
-#define VLight_GrayColor [UIColor colorWithRed:188.0/255 green:188.0/255 blue:188.0/255 alpha:1]
+#define VLight_GrayColor [UIColor colorWithRed:155.0/255 green:155.0/255 blue:155.0/255 alpha:1]
 //背景的浅灰色
 #define VLight_GrayColor_apla [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1]
 
 #define VTagViewNormalColor [UIColor colorWithRed:216.0/255 green:216.0/255 blue:216.0/255 alpha:1]
 
 //字体深灰色
-#define VGray_color      [UIColor colorWithRed:127.0/255 green:127.0/255 blue:139.0/255 alpha:1]
+#define VGray_color      [UIColor colorWithRed:131.0/255 green:131.0/255 blue:131.0/255 alpha:1]
 //字体蓝色
 #define VBlue_color [UIColor colorWithRed:16.0/255 green:111.0/255 blue:255.0/255 alpha:1]
 #define VStageView_color [UIColor colorWithRed:23.0/255 green:23.0/255 blue:23.0/255 alpha:1]

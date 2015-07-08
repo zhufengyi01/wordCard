@@ -21,7 +21,7 @@
 -(void)createCell
 {
     self.contentView.backgroundColor =[UIColor whiteColor];
-    self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
+    self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 5, kDeviceWidth-20, kDeviceWidth-20)];
    // self.comView.backgroundColor =[UIColor redColor];
     self.comView.isLongWord = NO;
     [self.contentView addSubview:self.comView];

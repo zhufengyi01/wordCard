@@ -12,7 +12,7 @@
 -(instancetype)init
 {
     if ( self = [super init]) {
-         self.urlString = @"noti-up/list";
+        // self.urlString = @"noti-up/list";
     }
     return self;
 }
@@ -20,6 +20,6 @@
 {
     [super viewDidLoad];
     self.title = @"消息";
-    [self requestData];
+    //[self requestData];
 }
 @end

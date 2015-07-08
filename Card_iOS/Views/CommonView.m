@@ -15,6 +15,8 @@
 {
     if (self =[super initWithFrame:frame]) {
         self.backgroundColor=VLight_GrayColor_apla;
+        self.layer.cornerRadius = 4;
+        self.clipsToBounds = YES;
         [self createUI];
     }
     return self;
@@ -44,9 +46,9 @@
     
     self.word_Soure =[[UILabel alloc] initWithFrame:CGRectZero];
     self.word_Soure.textColor = VGray_color;
-    self.word_Soure.font = [UIFont systemFontOfSize:10];
+    self.word_Soure.font = [UIFont systemFontOfSize:12];
     if (IsIphone6plus) {
-        self.word_Soure.font = [UIFont systemFontOfSize:12];
+        self.word_Soure.font = [UIFont systemFontOfSize:14];
     }
     self.word_Soure.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.word_Soure];
@@ -79,6 +81,7 @@
 }
 -(void)layoutSubviews
 {
+    [super layoutSubviews];
     self.titleLable.frame = CGRectMake(20, 10, self.frame.size.width-40, self.frame.size.height-40);
     self.word_Soure.frame=CGRectMake(20, self.frame.size.height-30, self.frame.size.width-40, 25);
 }
