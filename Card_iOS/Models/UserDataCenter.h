@@ -34,9 +34,9 @@
 /** 用户签名 */
 @property (nonatomic, strong) NSString * signature;
 /** 用户的作品被喜欢的总数 */
-//@property (nonatomic, strong) NSString * like_count;
+@property (nonatomic, strong) NSString * like_count;
 /** 用户的作品数量 */
-///@property (nonatomic, strong) NSString * product_count;
+@property (nonatomic, strong) NSString * product_count;
 /** 用户绑定的类型：sina 或 qzone */
 //@property (nonatomic, strong) NSString * user_bind_type;
 

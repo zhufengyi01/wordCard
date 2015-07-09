@@ -73,7 +73,7 @@
 #define ShareLogo_color  [UIColor colorWithRed:74.0/255 green:74.0/255 blue:74.0/255 alpha:1]
 
 //头像占位图片
-#define HeadImagePlaceholder  [UIImage imageNamed:@"notice_image headloading.png"]
+#define HeadImagePlaceholder  [UIImage imageNamed:@"user_normal"]
 
 #define GetAppDelegate()   ((AppDelegate*)[[UIApplication sharedApplication] delegate])
 #define AppView  [UIApplication sharedApplication].delegate.window

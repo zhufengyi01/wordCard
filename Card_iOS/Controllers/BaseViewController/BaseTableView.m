@@ -71,6 +71,10 @@
     self.footView.backgroundColor =[UIColor whiteColor];
     [self.tabbleView setTableFooterView:self.footView];
     self.statusLable  = [[UILabel alloc]initWithFrame:CGRectMake((kDeviceWidth-100)/2, 0, 100,BUTTON_HEIGHT)];
+    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(0,0, kDeviceWidth, 0.5)];
+    [self.footView addSubview:line];
+    line.backgroundColor = VLight_GrayColor_apla;
+
     self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
     self.statusLable.textAlignment = NSTextAlignmentCenter;
     self.statusLable.text = @"THE-END";
@@ -79,6 +83,7 @@
 }
 -(void)RefreshViewControlEventValueChanged
 {
+    [self.temArr removeAllObjects];
     page=1;
     [self requestData];
 }
@@ -163,6 +168,7 @@
                                 [tagArray addObject:tagmodel];
                             }
                         }
+                        model.tagArray = tagArray;
                         if (!self.temArr) {
                             self.temArr =[NSMutableArray array];
                         }

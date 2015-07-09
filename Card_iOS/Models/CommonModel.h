@@ -39,7 +39,7 @@
 
 @property(nonatomic,strong) UserModel  *userInfo;
 
-@property(nonatomic,strong) NSMutableArray *tageArray;
+@property(nonatomic,strong) NSMutableArray *tagArray;
 
 
 @end

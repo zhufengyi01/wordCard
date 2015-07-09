@@ -14,14 +14,27 @@
 
 @property(nonatomic,strong) NSMutableArray *dataArray;
 
+
+@property(nonatomic,assign) NSInteger    pageCount;
+
+@property(nonatomic,assign) NSInteger    pageSzie;
+
+@property(nonatomic,assign) NSInteger    page;
+
+
+#pragma mark --TableViewDelegate And DataSource
+/*
+ */
+-(void)RefreshViewControlEventValueChanged;
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
-
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

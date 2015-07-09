@@ -8,6 +8,8 @@
 
 #import "NormalTableView.h"
 
+@class NotiModel;
+
 @interface NoticeViewController : NormalTableView
 
 @end
