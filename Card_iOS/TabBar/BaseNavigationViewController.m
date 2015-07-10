@@ -22,6 +22,8 @@
     self.navigationBar.barTintColor =[UIColor whiteColor];
     self.navigationBar.tintColor =[UIColor grayColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    //NSArray  *Arr = self.navigationBar.subviews;
+    [self.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
    //防止手势失效的解决方案
    // self.delegate=self;
     //self.interactivePopGestureRecognizer.delegate=self;
@@ -37,7 +39,7 @@
     offset.horizontal = -500;
     [baritem setBackButtonTitlePositionAdjustment:offset forBarMetrics:UIBarMetricsDefault];
     
-    NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:VGray_color,NSForegroundColorAttributeName,[UIFont fontWithName:kFontRegular size:16],NSFontAttributeName, nil];
+    NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:VGray_color,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:16],NSFontAttributeName, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:titleAttributes];
 }
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated

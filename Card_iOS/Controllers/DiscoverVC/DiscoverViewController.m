@@ -18,8 +18,10 @@
 #import "TagModel.h"
 #import "UserButton.h"
 #import "UserButton.h"
+#import "GCD.h"
 #import "UIImageView+WebCache.h"
 float const  LIKE_BAR_HEIGHT = 50;
+NSTimeInterval  const  NEXT_WORD_CARD = 2;
 @implementation DiscoverViewController
 -(void)viewDidLoad
 {
@@ -28,7 +30,7 @@ float const  LIKE_BAR_HEIGHT = 50;
     self.model = [CommonModel new];
     self.currentIndex = 0;
     self.dataArray = [NSMutableArray array];
-    [self createLeftNavigationItem:nil Title:@"取消"];
+    [self createLeftNavigationItem:nil Title:@"返回"];
     [self requestData];
     self.myScrollerView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation-BUTTON_HEIGHT)];
     self.myScrollerView.contentSize=CGSizeMake(kDeviceWidth, kDeviceHeight);
@@ -42,18 +44,56 @@ float const  LIKE_BAR_HEIGHT = 50;
 }
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn
 {
+    [SVProgressHUD dismiss];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark --RequestData Method
--(void)requestlikeWithOperation:(NSString *) oper
+-(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
 {
-    if ([oper isEqualToString:@"1"]) {
-        [SVProgressHUD showSuccessWithStatus:@"click like"];
-    }else{
-        [SVProgressHUD showSuccessWithStatus:@"click dislike"];
-    }
+    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@/text/up", kApiBaseUrl];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary *parameters=@{@"prod_id":self.model.Id,@"user_id":userCenter.user_id,@"author_id":autuor_id,@"operation":operation,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            NSString *status=@"喜欢";
+            self.currentIndex ++;
+            [SVProgressHUD showSuccessWithStatus:status];
+            [GCDQueue executeInMainQueue:^{
+              [self configComentView];
+            }];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [SVProgressHUD showSuccessWithStatus:@"操作失败"];
+    }];
+}
+-(void)requestDislike
+{
+    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@/text/down", kApiBaseUrl];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary *parameters=@{@"prod_id":self.model.Id,@"user_id":userCenter.user_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            NSString *status=@"没感觉";
+            self.currentIndex ++;
+            [SVProgressHUD showSuccessWithStatus:status];
+            [GCDQueue executeInMainQueue:^{
+                [self configComentView];
+            }];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [SVProgressHUD showSuccessWithStatus:@"操作失败"];
+    }];
     
 }
+
 -(void)requestData
 {
     [SVProgressHUD show];
@@ -63,10 +103,7 @@ float const  LIKE_BAR_HEIGHT = 50;
     NSString *apitoken=[Function getURLtokenWithURLString:url];
     NSDictionary  *parameters= @{@"user_id":user.user_id,KURLTOKEN:apitoken};
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject objectForKey:@"code"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-            });
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
             NSMutableArray *array =[responseObject objectForKey:@"models"];
             if (array.count>0) {
                 for (int i=0; i<array.count; i++) {
@@ -96,9 +133,11 @@ float const  LIKE_BAR_HEIGHT = 50;
                         [self.dataArray addObject:model];
                     }
                 }
+                [self configComentView];
             }else
             {
-                [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                [SVProgressHUD showInfoWithStatus:@"已经看完了"];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             NSMutableArray  *likearr = [responseObject objectForKey:@"ups"];
             ///if (likearr.count>0) {
@@ -110,9 +149,9 @@ float const  LIKE_BAR_HEIGHT = 50;
                 }
                 [self.likeArray addObject:likemodel];
             }
-            [self configComentView];
-            //}
-            
+            [GCDQueue executeInMainQueue:^{
+                [SVProgressHUD dismiss];
+            } afterDelaySecs:2];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //数据加载失败
@@ -125,8 +164,10 @@ float const  LIKE_BAR_HEIGHT = 50;
         self.model = self.dataArray[self.currentIndex];
     }
     self.comView.isLongWord = YES;
-    [self.comView configCommonView:self.model];
-    [self createUserBar];
+    [GCDQueue executeInMainQueue:^{
+        [self.comView configCommonView:self.model];
+        [self createUserBar];
+    } afterDelaySecs:NEXT_WORD_CARD];
 }
 -(void)createLikeBar
 {
@@ -139,27 +180,27 @@ float const  LIKE_BAR_HEIGHT = 50;
     [btn1 setTitle:@"喜欢" forState:UIControlStateNormal];
     [btn1 setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
+    [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateReserved];
     [btn1 setTitleColor:VGray_color forState:UIControlStateNormal];
     btn1.tag=99;
     [btn1 addActionHandler:^(NSInteger tag) {
-        if (self.dataArray.count>self.currentIndex) {
-            self.currentIndex++;
+        [GCDQueue  executeInMainQueue:^{
             if (self.dataArray.count>self.currentIndex) {
-                self.model = self.dataArray[self.currentIndex];
-                [self requestlikeWithOperation:@"1"];
-                [self configComentView];
+                if (self.dataArray.count>self.currentIndex) {
+                    self.model = self.dataArray[self.currentIndex];
+                    [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
+                }
+                else{
+                    [SVProgressHUD showInfoWithStatus:@"看完了..."];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             }
-            else{
+            else
+            {
                 [SVProgressHUD showInfoWithStatus:@"看完了..."];
                 [self dismissViewControllerAnimated:YES completion:nil];
-                
             }
-        }
-        else
-        {
-            [SVProgressHUD showInfoWithStatus:@"看完了..."];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        } afterDelaySecs:0];
         
     }];
     [btn1 setBackgroundImage:[UIImage imageNamed:@"tabbar_backgroud_color.png"] forState:UIControlStateNormal];
@@ -173,11 +214,9 @@ float const  LIKE_BAR_HEIGHT = 50;
     btn2.tag=100;
     [btn2 addActionHandler:^(NSInteger tag) {
         if (self.dataArray.count>self.currentIndex) {
-            self.currentIndex++;
             if (self.dataArray.count>self.currentIndex) {
                 self.model = self.dataArray[self.currentIndex];
-                [self requestlikeWithOperation:@"0"];
-                [self configComentView];
+                [self requestDislike];
             }else{
                 
                 [SVProgressHUD showInfoWithStatus:@"看完了..."];
@@ -219,7 +258,6 @@ float const  LIKE_BAR_HEIGHT = 50;
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:HeadImagePlaceholder];
     userbtn.titleLab.text= self.model.userInfo.username;
     [self.likeBar addSubview:userbtn];
-
     
 }
 @end

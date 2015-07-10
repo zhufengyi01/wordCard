@@ -46,8 +46,8 @@
 -(void)configcell
 {
     NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.notimodel.OuserInfo.logo]];
-    [self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder];
-    
+    //[self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder];
+    [self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder options:(SDWebImageRetryFailed|SDWebImageLowPriority)];
     int length = (int)self.notimodel.OuserInfo.username.length;
     if (self.notimodel.OuserInfo.username.length==0) {
         return;
@@ -60,7 +60,6 @@
     NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[self.notimodel.updated_at intValue]];
     NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     self.timelbl.text=da;
-
 }
 -(void)layoutSubviews
 {

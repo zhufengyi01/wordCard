@@ -8,16 +8,17 @@
 
 #import "NormalTableView.h"
 #import "Constant.h"
+#import "SVProgressHUD.h"
 #import "ZCControl.h"
 @interface NormalTableView () <UITableViewDataSource,UITableViewDelegate>
 {
     
 }
-@property(nonatomic,strong) UIRefreshControl *refreshControl;
 
 @property(nonatomic,strong) UIView *footView;
 
 @property(nonatomic,strong)UILabel *statusLable;
+
 
 @end
 @implementation NormalTableView
@@ -34,13 +35,6 @@
     self.tabbleView.dataSource =self;
     self.tabbleView.backgroundColor = View_white_Color;
     [self.view addSubview:self.tabbleView];
-    if ([self.tabbleView respondsToSelector:@selector(setSeparatorInset:)]) {
-        
-        [self.tabbleView setSeparatorInset:UIEdgeInsetsMake(0, -1100, 0, -100)];
-    }
-    if ([self.tabbleView     respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tabbleView setLayoutMargins:UIEdgeInsetsMake(0,-1100, 0, -100)];
-    }
     [self.tabbleView setTableFooterView:[[UIView alloc]init]];
     self.refreshControl =[[UIRefreshControl alloc]init];
     self.refreshControl.backgroundColor =View_white_Color;
@@ -49,6 +43,7 @@
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.tabbleView addSubview:self.refreshControl];
     [self createFootView];
+    
 
 }
 -(void)createFootView
@@ -57,7 +52,7 @@
     self.footView.backgroundColor =[UIColor whiteColor];
     [self.tabbleView setTableFooterView:self.footView];
     self.statusLable  = [[UILabel alloc]initWithFrame:CGRectMake((kDeviceWidth-100)/2, 0, 100,BUTTON_HEIGHT)];
-    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(0,0, kDeviceWidth, 0.5)];
+    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(0,0, kDeviceWidth, 1)];
     [self.footView addSubview:line];
     line.backgroundColor = VLight_GrayColor_apla;
     self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
@@ -66,10 +61,14 @@
     self.statusLable.textColor = VGray_color;
     [self.footView addSubview:self.statusLable];
 }
-
+-(void)requestData
+{
+     [self.refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
+}
 -(void)RefreshViewControlEventValueChanged
 {
-    [self.refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
+    [self.dataArray removeAllObjects];
+    [self requestData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -102,12 +101,14 @@
 }
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.tabbleView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tabbleView setSeparatorInset:UIEdgeInsetsMake(0, -1100, 0, -100)];
-    }
-    if ([self.tabbleView     respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tabbleView setLayoutMargins:UIEdgeInsetsMake(0, -1100, 0, -100)];
-    }
+//    if (self.pageCount>self.page&self.dataArray.count==indexPath.row+1) {
+//        self.page++;
+//        [self requestData];
+//    }
+    [self tableviewDisplayIndexpath:indexPath];
 }
-
+-(void)tableviewDisplayIndexpath:(NSIndexPath *) indexpath
+{
+    
+}
 @end

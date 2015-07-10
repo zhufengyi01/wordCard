@@ -109,6 +109,7 @@
     weiboButton=[UIButton buttonWithType:UIButtonTypeCustom];
     weiboButton.frame=CGRectMake((kDeviceWidth-231)/2, kDeviceHeight-170, 231, 40);
     [weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina.png"] forState:UIControlStateNormal];
+    weiboButton.hidden = YES;
     [weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina_press@2x.png"] forState:UIControlStateHighlighted];
     [weiboButton addTarget:self action:@selector(dealloginClick:) forControlEvents:UIControlEventTouchUpInside];
     weiboButton.tag=1001;
@@ -149,26 +150,6 @@
     emailregister.titleLabel.font=[UIFont boldSystemFontOfSize:16];
     emailregister.hidden=YES;
     [self.view addSubview:emailregister];
-    
-    //    if (IsInstallWechat==1) {
-    //        //已经安装了微信
-    //            weiboButton.hidden=NO;
-    //            weiChateButton.hidden=NO;
-    //             checkBtn.hidden=NO;
-    //             checkBtn2.hidden=NO;
-    //            emaillogin.hidden=YES;
-    //            emailregister.hidden=YES;
-    //
-    //    }
-    //    else if (IsInstallWechat==0)
-    //    {
-    //       weiboButton.hidden=YES;
-    //      weiChateButton.hidden=YES;
-    //        checkBtn.hidden=YES;
-    //        checkBtn2.hidden=YES;
-    //      emaillogin.hidden=NO;
-    //      emailregister.hidden=NO;
-    //    }
     //判断是否安装了微信
     if ([WXApi  isWXAppInstalled]==NO) {
         weiboButton.hidden=YES;
@@ -178,13 +159,6 @@
         emaillogin.hidden=NO;
         emailregister.hidden=NO;
     }
-    //    weiboButton.hidden = NO;
-    //    weiChateButton.hidden = NO;
-    //    checkBtn.hidden = NO;
-    //    checkBtn2.hidden= NO;
-    //    emaillogin.hidden=YES;
-    //    emailregister.hidden = YES;
-    
 }
 //服务条款按钮
 -(void)checkClick:(UIButton *) button

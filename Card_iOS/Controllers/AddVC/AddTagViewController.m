@@ -20,10 +20,10 @@
 -(void)createTextView
 {
     self.myTextfield = [[UITextField alloc]initWithFrame:CGRectMake(0, 10, kDeviceWidth , 40)];
-    self.myTextfield.textColor = VGray_color;
+    self.myTextfield.textColor = View_Black_Color;
     self.myTextfield.placeholder =@"输入出处";
-    self.myTextfield.tintColor = VGray_color;
-    self.myTextfield.backgroundColor = View_white_Color;
+    self.myTextfield.tintColor = View_Black_Color;
+    self.myTextfield.backgroundColor = VLight_GrayColor_apla;
     //self.myTextfield.selectedTextRange = NSMakeRange(1, 0);
     self.myTextfield.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 40)];
     self.myTextfield.leftViewMode = UITextFieldViewModeAlways;

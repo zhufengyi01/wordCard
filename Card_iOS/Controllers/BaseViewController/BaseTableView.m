@@ -104,7 +104,7 @@
     [array0 addObject:obj0];
     [self.dataAraray addObject:array0];
     //取出时间
-    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[obj0.updated_at intValue]];
+    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[obj0.created_at intValue]];
     NSDateFormatter *formatter =[NSDateFormatter  dateFormatterWithFormat:@"YYYY-MM-dd"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT+8000"]];
     NSString  *datestr0 = [formatter stringFromDate:comfromTimesp];
@@ -112,7 +112,7 @@
     for (int i = 1; i<dataArray.count; i++) {
         CommonModel *model =[dataArray objectAtIndex:i];
         //取出时间
-        NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
+        NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.created_at intValue]];
         NSDateFormatter *formatter =[NSDateFormatter  dateFormatterWithFormat:@"YYYY-MM-dd"];
         [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT+8000"]];
         NSString  *datestr = [formatter stringFromDate:comfromTimesp];

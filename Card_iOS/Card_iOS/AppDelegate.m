@@ -19,6 +19,9 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaHandler.h"
 #import "BaseNavigationViewController.h"
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "GiderPageViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -30,14 +33,24 @@
     // Override point for customization after application launch.
     NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
     [self initUmeng];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     if (userInfo) {  //用户已经登陆
         [Function getUserInfoWith:userInfo];
         self.window.rootViewController =[CustomController new];
     }
     else {
+        NSString      *firstlogin =[[NSUserDefaults standardUserDefaults] objectForKey:IS_FIRST_LOGIN];
+         firstlogin = @"no";
+        if (![firstlogin isEqualToString:@"YES"]) {//是第一次进入应用
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:IS_FIRST_LOGIN];
+            UINavigationController  *GNa=[[UINavigationController alloc]initWithRootViewController:[GiderPageViewController new]];
+            self.window.rootViewController=GNa;
+        }else {
+
         //用户没有登陆
         BaseNavigationViewController  *loginNa=[[BaseNavigationViewController alloc]initWithRootViewController:[LoginViewController new]];
         self.window.rootViewController=loginNa;
+        }
     }
     return YES;
 }

@@ -12,6 +12,7 @@
 		384640FB1B4E5B720079CE9D /* GCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F51B4E5B720079CE9D /* GCDSemaphore.m */; };
 		384640FC1B4E5B720079CE9D /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F71B4E5B720079CE9D /* GCDTimer.m */; };
 		384640FD1B4E5B720079CE9D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 384640F81B4E5B720079CE9D /* README.md */; };
+		3846A4FF1B4F842400ADB4F1 /* GiderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846A4FE1B4F842400ADB4F1 /* GiderPageViewController.m */; };
 		3872BE1F1B465E2C0004A928 /* MainAdmList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1C1B465E2C0004A928 /* MainAdmList.m */; };
 		3872BE201B465E2C0004A928 /* TimingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1E1B465E2C0004A928 /* TimingList.m */; };
 		3872BF151B4664D80004A928 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BEB41B4664D80004A928 /* NSData+Base64.m */; };
@@ -208,6 +209,8 @@
 		384640F61B4E5B720079CE9D /* GCDTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDTimer.h; sourceTree = "<group>"; };
 		384640F71B4E5B720079CE9D /* GCDTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDTimer.m; sourceTree = "<group>"; };
 		384640F81B4E5B720079CE9D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3846A4FD1B4F842400ADB4F1 /* GiderPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiderPageViewController.h; sourceTree = "<group>"; };
+		3846A4FE1B4F842400ADB4F1 /* GiderPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiderPageViewController.m; sourceTree = "<group>"; };
 		3872BE1B1B465E2C0004A928 /* MainAdmList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainAdmList.h; sourceTree = "<group>"; };
 		3872BE1C1B465E2C0004A928 /* MainAdmList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainAdmList.m; sourceTree = "<group>"; };
 		3872BE1D1B465E2C0004A928 /* TimingList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingList.h; sourceTree = "<group>"; };
@@ -593,6 +596,15 @@
 				384640F81B4E5B720079CE9D /* README.md */,
 			);
 			path = GCD;
+			sourceTree = "<group>";
+		};
+		3846A4FC1B4F842400ADB4F1 /* gridepage */ = {
+			isa = PBXGroup;
+			children = (
+				3846A4FD1B4F842400ADB4F1 /* GiderPageViewController.h */,
+				3846A4FE1B4F842400ADB4F1 /* GiderPageViewController.m */,
+			);
+			path = gridepage;
 			sourceTree = "<group>";
 		};
 		3872BE1A1B465E2C0004A928 /* AdminVC */ = {
@@ -1260,6 +1272,7 @@
 		38D34F8D1B4A6B4E00CBAB2C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3846A4FC1B4F842400ADB4F1 /* gridepage */,
 				38D34FD41B4A81BE00CBAB2C /* Login2_1ViewController.h */,
 				38D34FD51B4A81BE00CBAB2C /* Login2_1ViewController.m */,
 				38D34FD61B4A81BE00CBAB2C /* Register_1ViewController.h */,
@@ -1607,6 +1620,7 @@
 				38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */,
 				3872BF221B4664D80004A928 /* NSString+Emoji.m in Sources */,
 				38D0DBA91B4B7E7600E0E7EC /* NSData+Utils.m in Sources */,
+				3846A4FF1B4F842400ADB4F1 /* GiderPageViewController.m in Sources */,
 				38D303951B453B2A00484AC8 /* UIRefreshControl+AFNetworking.m in Sources */,
 				38D303E31B453B3C00484AC8 /* SDWebImageDownloader.m in Sources */,
 				384640FB1B4E5B720079CE9D /* GCDSemaphore.m in Sources */,

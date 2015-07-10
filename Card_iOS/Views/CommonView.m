@@ -23,7 +23,7 @@
 }
 -(void)createUI
 {
-    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@"哈哈"];
+    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@""];
     //self.titleLable.textColor=VGray_color;
     self.titleLable.lineBreakMode=NSLineBreakByTruncatingTail;
     self.titleLable.adjustsFontSizeToFitWidth= NO;
@@ -72,9 +72,9 @@
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20, Msize.height+20);
         }
     }
-    //if (model.reference.length>0) {
+    if (model.reference.length>0) {
         self.word_Soure.text =[NSString stringWithFormat:@"%@",model.reference];
-    //}
+    }
     //    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
     //    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     //    self.topRighlbl.text=da;

@@ -15,7 +15,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"详细";
+    //self.title = @"详细";
     [self creatRightNavigationItem:nil Title:@"分享"];
     [self createUI];
     //self.pageController.gestureRecognizers;

@@ -35,13 +35,18 @@
     //self.tabbleView.rowHeight = 70;
     [self requestData];
 }
+//-(void)RefreshViewControlEventValueChanged
+//{
+//    self.page=1;
+//    [self.dataArray removeAllObjects];
+//    [self requestData];
+//}
 -(void)requestData
 {
-    [SVProgressHUD show];
     UserDataCenter *user = [UserDataCenter shareInstance];
     NSString  *urlString  = [NSString stringWithFormat:@"%@noti-up/list",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *paremetes =@{@"user_id":user.user_id,KURLTOKEN:tokenString};
+    NSDictionary  *paremetes =@{@"user_id":@"4",KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager  POST:urlString parameters:paremetes success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
@@ -83,12 +88,14 @@
                     if (self.dataArray==nil) {
                         self.dataArray = [NSMutableArray array];
                     }
+                    [self.refreshControl endRefreshing];
                     [self.dataArray addObject:model];
                     [self.tabbleView reloadData];
                 }
             }else {
                 
                 [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                [self.refreshControl endRefreshing];
             }
             
         }
@@ -119,5 +126,13 @@
         };
     }
     return cell;
+}
+-(void)tableviewDisplayIndexpath:(NSIndexPath *)indexpath
+{
+    if (self.pageCount>self.page&&self.dataArray.count==indexpath.row+1) {
+        self.page++;
+        [self requestData];
+    }
+    
 }
 @end

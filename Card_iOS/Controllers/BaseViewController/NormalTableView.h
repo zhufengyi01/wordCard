@@ -21,6 +21,8 @@
 
 @property(nonatomic,assign) NSInteger    page;
 
+@property(nonatomic,strong) UIRefreshControl *refreshControl;
+
 
 #pragma mark --TableViewDelegate And DataSource
 /*
@@ -36,5 +38,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+//cell即将要显示的时候执行
+-(void)tableviewDisplayIndexpath:(NSIndexPath *) indexpath;
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
 
 @end

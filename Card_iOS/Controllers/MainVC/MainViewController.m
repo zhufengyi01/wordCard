@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "ZCControl.h"
+#import "UserDataCenter.h"
 #import "Constant.h"
 #import "MainAdmList.h"
 #import "WordMainVC.h"
@@ -26,7 +27,10 @@
     [super viewDidLoad];
     self.title = @"瞎扯精选";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
-    [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
+    UserDataCenter  *user = [UserDataCenter shareInstance];
+    if ([user.is_admin intValue]>0) {
+      [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
+    }
     [self createRightSystemNavigationItemWith:UIBarButtonSystemItemSearch];
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];

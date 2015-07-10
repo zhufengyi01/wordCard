@@ -33,11 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //接受通知
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(notiMyController) name:AddCardDidSucucessNotification object:nil];
     self.pageIndex=0;
     self.tabBar.backgroundImage =[UIImage imageWithColor:[UIColor whiteColor]];
     NSArray  *classNameArray =[NSArray arrayWithObjects:@"MainViewController",@"DiscoverViewController",@"AddCardViewController",@"NoticeViewController",@"MyViewController", nil];
     //NSArray *titleArray =[NSArray arrayWithObjects:@"首页",@"添加",@"我的", nil];
-    NSArray *normalImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_normal.png",@"movie_tab_butten_normal.png",@"add_tab_butten.png",@"notice_tab_butten_normal.png",@"me_tab_butten_normal.png",nil];
+    NSArray *normalImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_normal.png",@"discovery_tab_button_normal",@"add_tab_butten.png",@"notice_tab_butten_normal.png",@"me_tab_butten_normal.png",nil];
     NSArray *selectImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_press.png",@"movie_tab_butten_press.png",@"add_tab_butten.png",@"notice_tab_butten_press.png",@"me_tab_butten_press.png", nil];
     NSMutableArray  *navigationArray =[[NSMutableArray alloc]init];
     for (int i=0; i<classNameArray.count; i++) {
@@ -116,5 +118,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)notiMyController
+{
+    self.selectedIndex = 4;
+    [[NSNotificationCenter defaultCenter ] postNotificationName:AddCardwillGotoUserNotification object:nil];
+}
 
 @end

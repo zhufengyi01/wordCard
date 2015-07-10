@@ -33,13 +33,10 @@
     [self.myScrollerView addSubview:self.comView];
     self.comView.isLongWord = YES;
     [self.comView configCommonView:self.model];
-    //UserDataCenter *user = [UserDataCenter shareInstance];
-    //if ([user.is_admin intValue]>0) {
-    [self createToolBar];
-    // }else
-    //{
-    
-    //}
+    UserDataCenter *user = [UserDataCenter shareInstance];
+    if ([user.is_admin intValue]>0) {
+     [self createToolBar];
+     }
     UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 40)];
     likeBar.userInteractionEnabled = YES;
     [self.myScrollerView addSubview:likeBar];
@@ -164,20 +161,14 @@
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
             NSString *status=@"sucess";
-            //            NSString *str = [NSString stringWithFormat:@"%@",operation];
-            //            if ([str isEqualToString:@"1"]) {
-            //                status = @"点赞成功";
-            //            }else{
-            //                status  =@"取消成功";
-            //            }
             [SVProgressHUD showSuccessWithStatus:status];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [SVProgressHUD showSuccessWithStatus:@"操作失败"];
     }];
-    
 }
+
 //定时发送到热门,发送时间戳
 -(void)requesttiming:(NSString *)model_id AndTimeSp:(NSString *)timeSp
 {    UserDataCenter  *userCenter=[UserDataCenter shareInstance];

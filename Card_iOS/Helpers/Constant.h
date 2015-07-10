@@ -54,6 +54,7 @@
 //项目背景颜色
 #define View_BackGround [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1]
 #define View_white_Color [UIColor whiteColor]
+#define View_Black_Color [UIColor blackColor];
 #define View_ToolBar   [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:1]
 //tabbar 上面的一根线
 #define tabBar_line   [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
@@ -69,6 +70,8 @@
 //字体蓝色
 #define VBlue_color [UIColor colorWithRed:16.0/255 green:111.0/255 blue:255.0/255 alpha:1]
 #define VStageView_color [UIColor colorWithRed:23.0/255 green:23.0/255 blue:23.0/255 alpha:1]
+
+
 
 #define ShareLogo_color  [UIColor colorWithRed:74.0/255 green:74.0/255 blue:74.0/255 alpha:1]
 
@@ -107,6 +110,8 @@
 
 #define GOTO_USER_CENTER   @"goto_user"  //跳转到个人页
 #define Refresh_MAIN_LIST  @"refresh_main_list"  //刷新
+#define AddCardDidSucucessNotification @"AddCardDidSucucessNotification"
+#define AddCardwillGotoUserNotification @"gotouser"
 
 //字体相关
 //FZLTXHK--GBK1-0 Lantinghei_0

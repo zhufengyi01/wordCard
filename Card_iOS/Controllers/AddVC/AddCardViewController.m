@@ -18,7 +18,10 @@
 #import "AddTagViewController.h"
 #import "SVProgressHUD.h"
 #import "UserDataCenter.h"
+#import "GCD.h"
 #define TEXT_VIEW_HEIGHT  200
+
+NSTimeInterval const  dismissInterval = 1.f;
 @implementation AddCardViewController
 
 #pragma mark  --SystemMethod
@@ -109,7 +112,16 @@
         parameters = @{@"user_id":user.user_id,@"word":self.myTextView.text,KURLTOKEN:tokenString};
     }
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+           [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+          [GCDQueue  executeInMainQueue:^{
+              [self dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:AddCardDidSucucessNotification object:nil];
+              }];
+          } afterDelaySecs: dismissInterval];
+        }
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error  ===%@",error);
         [SVProgressHUD showErrorWithStatus:@"发布失败,请重试"];
@@ -125,9 +137,9 @@
     //[self.myTextView addPlaceHolder:@"输入文字"];
     [self.myTextView becomeFirstResponder];
     self.myTextView.backgroundColor = VLight_GrayColor_apla;
-    self.myTextView.tintColor = VGray_color;
+    self.myTextView.tintColor = [UIColor blackColor];
     self.myTextView.delegate = self;
-    self.myTextView.textColor = VGray_color;
+    self.myTextView.textColor = [UIColor blackColor];
     self.myTextView.font = [UIFont systemFontOfSize:18];
     [bgImageView addSubview:self.myTextView];
 }
@@ -143,6 +155,10 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self.myTextView resignFirstResponder];
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AddCardDidSucucessNotification object:nil];
 }
 
 @end
