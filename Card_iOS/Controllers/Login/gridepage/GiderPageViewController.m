@@ -80,7 +80,7 @@
             btn.clipsToBounds = YES;
             btn.frame=CGRectMake((kDeviceWidth-140)/2, kDeviceHeight-140, 140, 42);
             [btn addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
-            [btn setTitle:@"LET IT GO" forState:UIControlStateNormal];
+            [btn setTitle:@"立刻加入" forState:UIControlStateNormal];
             [btn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateNormal];
             [imageview addSubview:btn];
         }

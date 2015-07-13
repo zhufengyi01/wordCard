@@ -52,26 +52,22 @@
 #pragma  mark 颜色设置
 #define kAppTintColor [UIColor colorWithRed:0.0/255.0 green:146.0/255.0 blue:255.0/255.0 alpha:1]
 //项目背景颜色
-#define View_BackGround [UIColor colorWithRed:231.0/255 green:231.0/255 blue:231.0/255 alpha:1]
+#define View_BackGround [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1]
 #define View_white_Color [UIColor whiteColor]
-#define View_Black_Color [UIColor blackColor];
+#define View_Black_Color [UIColor colorWithRed:53.0/255 green:53.0/255 blue:53.0/255 alpha:1]
 #define View_ToolBar   [UIColor colorWithRed:250.0/255 green:250.0/255 blue:250.0/255 alpha:1]
 //tabbar 上面的一根线
 #define tabBar_line   [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
 //字体浅灰色
 #define VLight_GrayColor [UIColor colorWithRed:155.0/255 green:155.0/255 blue:155.0/255 alpha:1]
 //背景的浅灰色
-#define VLight_GrayColor_apla [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1]
-
-#define VTagViewNormalColor [UIColor colorWithRed:216.0/255 green:216.0/255 blue:216.0/255 alpha:1]
+#define VLight_GrayColor_apla [UIColor colorWithRed:248.0/255 green:248.0/255 blue:249.0/255 alpha:1]
 
 //字体深灰色
 #define VGray_color      [UIColor colorWithRed:131.0/255 green:131.0/255 blue:131.0/255 alpha:1]
 //字体蓝色
 #define VBlue_color [UIColor colorWithRed:16.0/255 green:111.0/255 blue:255.0/255 alpha:1]
 #define VStageView_color [UIColor colorWithRed:23.0/255 green:23.0/255 blue:23.0/255 alpha:1]
-
-
 
 #define ShareLogo_color  [UIColor colorWithRed:74.0/255 green:74.0/255 blue:74.0/255 alpha:1]
 

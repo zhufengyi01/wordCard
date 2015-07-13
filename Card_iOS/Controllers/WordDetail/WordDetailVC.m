@@ -33,6 +33,9 @@
     [self.myScrollerView addSubview:self.comView];
     self.comView.isLongWord = YES;
     [self.comView configCommonView:self.model];
+    if (self.comView.frame.size.height>kDeviceHeight) {
+        self.myScrollerView.contentSize = CGSizeMake(kDeviceWidth,self.comView.frame.size.height+100);
+    }
     UserDataCenter *user = [UserDataCenter shareInstance];
     if ([user.is_admin intValue]>0) {
      [self createToolBar];

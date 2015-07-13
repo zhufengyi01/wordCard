@@ -88,7 +88,7 @@ const float segmentheight = 45;
     namelbl = [ZCControl createLabelWithFrame:CGRectMake(headImage.frame.origin.x+headImage.frame.size.width+10, headImage.frame.origin.y, 120, 20) Font:16 Text:@"头像"];
     namelbl.textColor = VGray_color;
     [headView addSubview:namelbl];
-    contentlbl = [ZCControl createLabelWithFrame:CGRectMake(namelbl.frame.origin.x, namelbl.frame.origin.y+namelbl.frame.size.height+10, 180, 20) Font:14 Text:@"内容"];
+    contentlbl = [ZCControl createLabelWithFrame:CGRectMake(namelbl.frame.origin.x, namelbl.frame.origin.y+namelbl.frame.size.height, 180, 20) Font:12 Text:@"内容"];
     contentlbl.textColor = VGray_color;
     [headView addSubview:contentlbl];
     
@@ -100,7 +100,7 @@ const float segmentheight = 45;
     self.addWordbtn  = [UIButton buttonWithType:UIButtonTypeCustom];
     self.addWordbtn.frame = CGRectMake(0, headView.frame.size.height-segmentheight, kDeviceWidth/2, segmentheight);
     [self.addWordbtn setTitle:@"添加" forState:UIControlStateNormal];
-    self.addWordbtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.addWordbtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [self.addWordbtn setTitleColor:VGray_color forState:UIControlStateNormal];
     [self.addWordbtn setTitleColor:VBlue_color forState:UIControlStateSelected];
     [self.addWordbtn setTitleColor:VBlue_color forState:UIControlStateHighlighted];
@@ -124,7 +124,7 @@ const float segmentheight = 45;
     self.likeWorkbtn.frame = CGRectMake(kDeviceWidth/2, headView.frame.size.height-segmentheight, kDeviceWidth/2, segmentheight);
     self.likeWorkbtn.selected = NO;
     [self.likeWorkbtn setTitle:@"喜欢" forState:UIControlStateNormal];
-    self.likeWorkbtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.likeWorkbtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [self.likeWorkbtn setTitleColor:VGray_color forState:UIControlStateNormal];
     [self.likeWorkbtn setTitleColor:VBlue_color forState:UIControlStateHighlighted];
     [self.likeWorkbtn setTitleColor:VBlue_color forState:UIControlStateSelected];
@@ -232,12 +232,11 @@ const float segmentheight = 45;
        }
        else
        {
-           [SVProgressHUD showSuccessWithStatus:@"delete fail"];
+           [SVProgressHUD showErrorWithStatus:@"delete fail"];
        }
    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        NSLog(@"error ==%@",error);
-       [SVProgressHUD showSuccessWithStatus:@"delete fail"];
-   }];
+     [SVProgressHUD showErrorWithStatus:@"delete fail"];   }];
 }
 -(void)requestData
 {
@@ -410,10 +409,10 @@ const float segmentheight = 45;
         return cell;
     }
     else{
-        static  NSString *CellID =@"CELL2";
-        CommonCell  *cell =[tableView dequeueReusableCellWithIdentifier:CellID];
+        static  NSString *CellID2 =@"CELL2";
+        CommonCell  *cell =[tableView dequeueReusableCellWithIdentifier:CellID2];
         if (!cell) {
-            cell =[[CommonCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
+            cell =[[CommonCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID2];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         if (self.dataArray2.count>indexPath.row) {

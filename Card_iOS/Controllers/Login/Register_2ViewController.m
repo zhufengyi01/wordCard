@@ -91,7 +91,7 @@
     [bgView addSubview:nameTextfield];
     
     UIButton  *loginButton =[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-200)/2,nameTextfield.frame.origin.y+nameTextfield.frame.size.height+20, 200, 40) ImageName:@"signup_done_press.png" Target:self Action:@selector(dealregiterClick:) Title:nil];
-    loginButton.backgroundColor = View_ToolBar;
+    //loginButton.backgroundColor = View_ToolBar;
     loginButton.tag=101;
     [bgView addSubview:loginButton];
 }

@@ -16,7 +16,7 @@
 {
     [super viewDidLoad];
     //self.title = @"详细";
-    [self creatRightNavigationItem:nil Title:@"分享"];
+    //[self creatRightNavigationItem:[UIImage imageNamed:@"share"] Title:@""];
     [self createUI];
     //self.pageController.gestureRecognizers;
     //[self dealGesture];

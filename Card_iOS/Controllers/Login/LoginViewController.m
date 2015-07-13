@@ -31,6 +31,7 @@
 #import "SVProgressHUD.h"
 #import "CustomController.h"
 #import "Register_1ViewController.h"
+#import "UIImage+Color.h"
 
 #define  IsInstallWechat   0    //1表示已经安装   0是未安装
 
@@ -69,6 +70,19 @@
     [self.view addSubview:logoImageView];
     
     
+    
+    UILabel  *title = [ZCControl createLabelWithFrame:CGRectMake(0,160, kDeviceWidth, 40) Font:30 Text:@"瞎扯"];
+    title.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:title];
+    title.textColor = VGray_color;
+    
+    
+    
+    UILabel  *d_title = [ZCControl createLabelWithFrame:CGRectMake(0,220, kDeviceWidth, 40) Font:16 Text:@"文字的采集与分享"];
+    d_title.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:d_title];
+    d_title.textColor = VGray_color;
+
     checkBtn=[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-140)/2,kDeviceHeight-40, 140, 30) ImageName:nil Target:self Action:@selector(checkClick:) Title:@""];
     //   checkBtn.backgroundColor=[UIColor redColor];
     [checkBtn setImage:[UIImage imageNamed:@"unselect_icon.png"] forState:UIControlStateNormal];
@@ -76,6 +90,7 @@
     //默认勾选状态
     checkBtn.selected=YES;
     checkBtn.tag=100;
+    checkBtn.hidden = YES;
     [checkBtn setTitleColor:[UIColor colorWithRed:216.0/255 green:216.0/255 blue:216.0/255 alpha:216.0/255] forState:UIControlStateNormal];
     [checkBtn setTitle:@"登录注册成功，即接受" forState:UIControlStateNormal];
     [checkBtn setTitleEdgeInsets:UIEdgeInsetsMake(5, 5, 0, 0)];
@@ -91,7 +106,7 @@
     [checkBtn2 setTitle:@"《影弹服务使用条款》" forState:UIControlStateNormal];
     [checkBtn2 setTitleColor:[UIColor colorWithRed:216.0/255 green:216.0/255 blue:216.0/255 alpha:216.0/255] forState:UIControlStateNormal];
     checkBtn2.tag=101;
-    
+    checkBtn2.hidden = YES;
     checkBtn2.titleLabel.font=[UIFont systemFontOfSize:12];
     [self.view addSubview:checkBtn2];
     checkBtn.frame=CGRectMake((kDeviceWidth-checkBtn.frame.size.width-checkBtn2.frame.size.width)/2, checkBtn.frame.origin.y, checkBtn.frame.size.width, checkBtn.frame.size.height);
@@ -139,6 +154,7 @@
     UIButton  *emaillogin =[ZCControl createButtonWithFrame:CGRectMake(0, kDeviceHeight-50, kDeviceWidth/2, 50) ImageName:@"login_alpa_backgroundcolor.png" Target:self Action:@selector(dealloginClick:) Title:@"邮箱登陆"];
     emaillogin.tag=1003;
     emaillogin.hidden=YES;
+    [emaillogin setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [emaillogin setTitleColor:VBlue_color forState:UIControlStateNormal];
     emaillogin.titleLabel.font=[UIFont boldSystemFontOfSize:16];
     
@@ -148,6 +164,7 @@
     emailregister.tag=1004;
     [emailregister setTitleColor:VBlue_color forState:UIControlStateNormal];
     emailregister.titleLabel.font=[UIFont boldSystemFontOfSize:16];
+    [emailregister setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     emailregister.hidden=YES;
     [self.view addSubview:emailregister];
     //判断是否安装了微信

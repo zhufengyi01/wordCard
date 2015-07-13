@@ -11,6 +11,7 @@
 #import "ZCControl.h"
 #import "UIImage+Color.h"
 @implementation RootViewController
+
 -(void)loadView
 {
     [super loadView];
@@ -19,7 +20,9 @@
 -(void)viewDidLoad
 {
     self.view.backgroundColor = View_white_Color;
-    [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+   // [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+    [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
+    [self.tabBarController.tabBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
 }
 -(void)createLeftNavigationItem:(UIImage*) leftImage Title:(NSString*)leftTitle
 {
@@ -41,7 +44,7 @@
     UIButton  *Righttbtn =[ZCControl createButtonWithFrame:CGRectMake(0, 0, 40, 50) ImageName:nil Target:self Action:@selector(RightNavigationButtonClick:) Title:nil];
     if (RightImage) {
         [Righttbtn setImage:RightImage forState:UIControlStateNormal];
-        [Righttbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
+        [Righttbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
         
     }
     if (RightTitle) {

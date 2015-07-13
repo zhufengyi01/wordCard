@@ -18,8 +18,12 @@
 #import "TagModel.h"
 #import "NotifiCell.h"
 #import "UserModel.h"
-
+#import "UIImage+Color.h"
 @implementation NoticeViewController
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+}
 -(instancetype)init
 {
     if ( self = [super init]) {
@@ -46,7 +50,7 @@
     UserDataCenter *user = [UserDataCenter shareInstance];
     NSString  *urlString  = [NSString stringWithFormat:@"%@noti-up/list",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *paremetes =@{@"user_id":@"4",KURLTOKEN:tokenString};
+    NSDictionary  *paremetes =@{@"user_id":user.user_id,KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager  POST:urlString parameters:paremetes success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
@@ -59,7 +63,7 @@
                     if (dict) {
                         [model setValuesForKeysWithDictionary:dict];
                         TextModel *text = [TextModel new];
-                        if ([dict objectForKey:@"text"]) {
+                        if (![[dict objectForKey:@"text"] isKindOfClass:[NSNull class]]) {
                             [text setValuesForKeysWithDictionary:[dict objectForKey:@"text"]];
                             UserModel *user = [UserModel new];
                             if ([[dict objectForKey:@"text"] objectForKey:@"user"]) {
@@ -101,6 +105,7 @@
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.refreshControl endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }

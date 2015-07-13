@@ -25,17 +25,17 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"瞎扯精选";
+    self.title = @"瞎扯 · 精选";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
     UserDataCenter  *user = [UserDataCenter shareInstance];
     if ([user.is_admin intValue]>0) {
       [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
     }
-    [self createRightSystemNavigationItemWith:UIBarButtonSystemItemSearch];
+    //[self creatRightNavigationItem:[UIImage imageNamed:@"search"] Title:nil];
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
 }
--(void)RightSystemNavigationButtonClick
+-(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
     
 }

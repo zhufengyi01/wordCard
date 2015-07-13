@@ -23,13 +23,14 @@
     self.navigationBar.tintColor =[UIColor grayColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     //NSArray  *Arr = self.navigationBar.subviews;
-    [self.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setShadowImage:[UIImage imageWithColor:VGray_color]];
    //防止手势失效的解决方案
    // self.delegate=self;
     //self.interactivePopGestureRecognizer.delegate=self;
     //设置返回的箭头自定义图片
-    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    UIImage  *backimage =[[UIImage imageNamed:@"back_Icon.png"] imageWithRenderingMode:UIImageRenderingModeAutomatic];
+    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:VGray_color]];
+    UIImage  *backimage =[[UIImage imageNamed:@"back_icon-1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [[UINavigationBar appearance]  setBackIndicatorTransitionMaskImage:backimage];
     [[UINavigationBar appearance]setBackIndicatorImage:backimage];
     

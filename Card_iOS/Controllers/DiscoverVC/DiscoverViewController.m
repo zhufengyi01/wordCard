@@ -58,11 +58,12 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
-            NSString *status=@"喜欢";
             self.currentIndex ++;
-            [SVProgressHUD showSuccessWithStatus:status];
+            //[SVProgressHUD setSuccessImage:[UIImage imageNamed:@"detail_liked"]];
+            [SVProgressHUD showImage:[UIImage imageNamed:@"svlike"] status:@"喜欢"];
+            //[SVProgressHUD showSuccessWithStatus:status];
             [GCDQueue executeInMainQueue:^{
-              [self configComentView];
+                [self configComentView];
             }];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -80,9 +81,9 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
-            NSString *status=@"没感觉";
             self.currentIndex ++;
-            [SVProgressHUD showSuccessWithStatus:status];
+            //[SVProgressHUD showSuccessWithStatus:status];
+            [SVProgressHUD showImage:[UIImage imageNamed:@"svdislike"] status:@"没感觉"];
             [GCDQueue executeInMainQueue:^{
                 [self configComentView];
             }];
@@ -178,6 +179,7 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     UIButton  *btn1 =[UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame=CGRectMake(0, 0, kDeviceWidth/2, LIKE_BAR_HEIGHT);
     [btn1 setTitle:@"喜欢" forState:UIControlStateNormal];
+    btn1.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [btn1 setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
     [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateReserved];
@@ -212,6 +214,7 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     [btn2 setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [btn2 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
     btn2.tag=100;
+    btn2.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [btn2 addActionHandler:^(NSInteger tag) {
         if (self.dataArray.count>self.currentIndex) {
             if (self.dataArray.count>self.currentIndex) {
@@ -235,9 +238,15 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     [_toolView addSubview:btn2];
     
     //添加一个线
-    UIView  *verline =[[UIView alloc]initWithFrame:CGRectMake(kDeviceWidth/2,12, 0.5, 26)];
-    verline.backgroundColor =VLight_GrayColor;
+    UIView  *verline =[[UIView alloc]initWithFrame:CGRectMake(0,0,kDeviceWidth, 2)];
+    verline.backgroundColor =VLight_GrayColor_apla;
     [_toolView addSubview:verline];
+    
+    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth/2,15,2, 20)];
+    [_toolView addSubview:line];
+    line.backgroundColor = VLight_GrayColor_apla;
+    
+    
 }
 
 -(void)createUserBar

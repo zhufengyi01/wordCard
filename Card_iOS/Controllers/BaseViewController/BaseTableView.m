@@ -101,10 +101,10 @@
     NSMutableArray  *array0 =[[NSMutableArray alloc]init];
     CommonModel  *obj0 = [dataArray objectAtIndex:0];
     //把第一个对象加入到数组中
-    [array0 addObject:obj0];
+    [array0 insertObject:obj0 atIndex:0];
     [self.dataAraray addObject:array0];
     //取出时间
-    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[obj0.created_at intValue]];
+    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[obj0.updated_at intValue]];
     NSDateFormatter *formatter =[NSDateFormatter  dateFormatterWithFormat:@"YYYY-MM-dd"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT+8000"]];
     NSString  *datestr0 = [formatter stringFromDate:comfromTimesp];
@@ -112,7 +112,7 @@
     for (int i = 1; i<dataArray.count; i++) {
         CommonModel *model =[dataArray objectAtIndex:i];
         //取出时间
-        NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.created_at intValue]];
+        NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
         NSDateFormatter *formatter =[NSDateFormatter  dateFormatterWithFormat:@"YYYY-MM-dd"];
         [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT+8000"]];
         NSString  *datestr = [formatter stringFromDate:comfromTimesp];
@@ -174,7 +174,6 @@
                         }
                         [self.temArr addObject:model];
                         [self computeRecomendSectionView:self.temArr];
-
                     }
                 }
                 [self.tabbleView reloadData];
@@ -234,11 +233,9 @@
         cell =[[CommonCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
-    if (self.dataAraray.count>indexPath.row) {
         CommonModel *model =[[self.dataAraray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [cell configCellValue:model  RowIndex:indexPath.row];
-        
-    }
+    
     return cell;
 }
 //获取点击的下标

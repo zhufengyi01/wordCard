@@ -94,7 +94,7 @@
     [bgView addSubview:PassworfTextfield];
     //login
     UIButton  *loginButton =[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-200)/2,PassworfTextfield.frame.origin.y+PassworfTextfield.frame.size.height+20, 200, 40) ImageName:@"signup_sure_press.png" Target:self Action:@selector(dealregiterClick:) Title:nil];
-    loginButton.backgroundColor = View_ToolBar;
+    //loginButton.backgroundColor = View_ToolBar;
     loginButton.tag=101;
     [bgView addSubview:loginButton];
 }
