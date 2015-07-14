@@ -25,8 +25,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor  =[UIColor whiteColor];
-    self.myScrollerView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation-BUTTON_HEIGHT)];
-    self.myScrollerView.contentSize=CGSizeMake(kDeviceWidth, kDeviceHeight);
+    self.myScrollerView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation)];
+    UserDataCenter  *usr = [UserDataCenter shareInstance];
+    if ([usr.is_admin intValue]>0) {
+        self.myScrollerView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation-BUTTON_HEIGHT);
+    }
+    self.myScrollerView.contentSize=CGSizeMake(kDeviceWidth, kDeviceHeight+20);
     [self.view addSubview:self.myScrollerView];
     
     self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
@@ -38,8 +42,8 @@
     }
     UserDataCenter *user = [UserDataCenter shareInstance];
     if ([user.is_admin intValue]>0) {
-     [self createToolBar];
-     }
+        [self createToolBar];
+    }
     UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 40)];
     likeBar.userInteractionEnabled = YES;
     [self.myScrollerView addSubview:likeBar];
@@ -49,7 +53,7 @@
     [userbtn addActionHandler:^(NSInteger tag) {
         
     }];
-    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:HeadImagePlaceholder];
+    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
     userbtn.titleLab.text= self.model.userInfo.username;
     [likeBar addSubview:userbtn];
     
@@ -91,6 +95,11 @@
             NSInteger lcount = [self.model.liked_count integerValue];
             lcount = lcount-1;
             self.model.liked_count = [NSString stringWithFormat:@"%ld",(long)lcount];
+            if (self.model.userInfo == nil) {
+                UserModel *usr=[UserModel new];
+                usr.Id = @"4";
+                self.model.userInfo = usr;
+            }
             [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@0];
         }else
         {
@@ -110,6 +119,11 @@
             NSInteger lcount = [self.model.liked_count integerValue];
             lcount = lcount+1;
             self.model.liked_count = [NSString stringWithFormat:@"%ld",(long)lcount];
+            if (self.model.userInfo == nil) {
+                UserModel *usr=[UserModel new];
+                usr.Id = @"4";
+                self.model.userInfo = usr;
+            }
             [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
         }
         

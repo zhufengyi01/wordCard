@@ -65,6 +65,12 @@
 		38923A011B4D340500E7F092 /* NotiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A001B4D340500E7F092 /* NotiModel.m */; };
 		38923A041B4D35AD00E7F092 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A031B4D35AD00E7F092 /* TextModel.m */; };
 		38923A071B4D3D5900E7F092 /* NotifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A061B4D3D5900E7F092 /* NotifiCell.m */; };
+		38CFFA901B5365A3005115AB /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFA8F1B5365A3005115AB /* TTTAttributedLabel.m */; };
+		38CFFA931B538EAD005115AB /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFA921B538EAD005115AB /* ShareButton.m */; };
+		38CFFA961B538FA0005115AB /* UMShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFA951B538FA0005115AB /* UMShareView.m */; };
+		38CFFA9D1B53B99C005115AB /* WordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFA9C1B53B99C005115AB /* WordSearchViewController.m */; };
+		38CFFAD71B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38CFFAD61B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf */; };
+		38CFFAD81B53D92D005115AB /* 方正兰亭纤黑_GBK.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFAD61B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf */; };
 		38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DB971B4B763F00E0E7EC /* SettingViewController.m */; };
 		38D0DBA71B4B7E7600E0E7EC /* UpYun.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DB9B1B4B7E7600E0E7EC /* UpYun.m */; };
 		38D0DBA81B4B7E7600E0E7EC /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DBA01B4B7E7600E0E7EC /* MF_Base64Additions.m */; };
@@ -151,8 +157,6 @@
 		38D303F71B45407D00484AC8 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303F61B45407D00484AC8 /* UserModel.m */; };
 		38D303FA1B45414B00484AC8 /* TagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303F91B45414B00484AC8 /* TagModel.m */; };
 		38D303FD1B45473900484AC8 /* UserDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D303FC1B45473900484AC8 /* UserDataCenter.m */; };
-		38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */; };
-		38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */; };
 		38D34F881B4A329400CBAB2C /* BaseTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D34F871B4A329400CBAB2C /* BaseTable.m */; };
 		38D34F8B1B4A5AB800CBAB2C /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D34F8A1B4A5AB800CBAB2C /* AddTagViewController.m */; };
 		38D34FBC1B4A7DDC00CBAB2C /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D34F8F1B4A7DDC00CBAB2C /* libMobClickLibrary.a */; };
@@ -314,6 +318,15 @@
 		38923A031B4D35AD00E7F092 /* TextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextModel.m; sourceTree = "<group>"; };
 		38923A051B4D3D5900E7F092 /* NotifiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifiCell.h; sourceTree = "<group>"; };
 		38923A061B4D3D5900E7F092 /* NotifiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifiCell.m; sourceTree = "<group>"; };
+		38CFFA8E1B5365A3005115AB /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		38CFFA8F1B5365A3005115AB /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		38CFFA911B538EAD005115AB /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
+		38CFFA921B538EAD005115AB /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareButton.m; sourceTree = "<group>"; };
+		38CFFA941B538FA0005115AB /* UMShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMShareView.h; sourceTree = "<group>"; };
+		38CFFA951B538FA0005115AB /* UMShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMShareView.m; sourceTree = "<group>"; };
+		38CFFA9B1B53B99C005115AB /* WordSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordSearchViewController.h; sourceTree = "<group>"; };
+		38CFFA9C1B53B99C005115AB /* WordSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordSearchViewController.m; sourceTree = "<group>"; };
+		38CFFAD61B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正兰亭纤黑_GBK.ttf"; sourceTree = "<group>"; };
 		38D0DB961B4B763F00E0E7EC /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		38D0DB971B4B763F00E0E7EC /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		38D0DB9A1B4B7E7600E0E7EC /* UpYun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpYun.h; sourceTree = "<group>"; };
@@ -481,8 +494,6 @@
 		38D303F91B45414B00484AC8 /* TagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagModel.m; sourceTree = "<group>"; };
 		38D303FB1B45473900484AC8 /* UserDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataCenter.h; sourceTree = "<group>"; };
 		38D303FC1B45473900484AC8 /* UserDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataCenter.m; sourceTree = "<group>"; };
-		38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Medium.otf"; sourceTree = "<group>"; };
-		38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Regular.otf"; sourceTree = "<group>"; };
 		38D34F861B4A329400CBAB2C /* BaseTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTable.h; sourceTree = "<group>"; };
 		38D34F871B4A329400CBAB2C /* BaseTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTable.m; sourceTree = "<group>"; };
 		38D34F891B4A5AB800CBAB2C /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
@@ -821,6 +832,24 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		38CFFA8D1B5365A3005115AB /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				38CFFA8E1B5365A3005115AB /* TTTAttributedLabel.h */,
+				38CFFA8F1B5365A3005115AB /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		38CFFA971B53B928005115AB /* Word_Search */ = {
+			isa = PBXGroup;
+			children = (
+				38CFFA9B1B53B99C005115AB /* WordSearchViewController.h */,
+				38CFFA9C1B53B99C005115AB /* WordSearchViewController.m */,
+			);
+			path = Word_Search;
+			sourceTree = "<group>";
+		};
 		38D0DB951B4B761500E0E7EC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +993,7 @@
 		38D301FE1B451A6E00484AC8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				38CFFA8D1B5365A3005115AB /* TTTAttributedLabel */,
 				38D0DB991B4B7E7600E0E7EC /* UPYun */,
 				38D34F8E1B4A7DDC00CBAB2C /* UMAnalytics_Sdk_3.4.8 */,
 				38D34F921B4A7DDC00CBAB2C /* UMSocial_Sdk_4.2.1 */,
@@ -979,6 +1009,7 @@
 		38D302001B451A8A00484AC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				38CFFA971B53B928005115AB /* Word_Search */,
 				38D0DBBE1B4BB43700E0E7EC /* DiscoverVC */,
 				38D0DBBF1B4BB43700E0E7EC /* NoticeVC */,
 				38D0DB951B4B761500E0E7EC /* Setting */,
@@ -996,6 +1027,10 @@
 		38D302011B451A9B00484AC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				38CFFA941B538FA0005115AB /* UMShareView.h */,
+				38CFFA951B538FA0005115AB /* UMShareView.m */,
+				38CFFA911B538EAD005115AB /* ShareButton.h */,
+				38CFFA921B538EAD005115AB /* ShareButton.m */,
 				38D618CF1B464F8200907CE9 /* SelectTime */,
 				38D303591B45368600484AC8 /* CommonView.h */,
 				38D3035A1B45368600484AC8 /* CommonView.m */,
@@ -1059,8 +1094,7 @@
 		38D302991B45272D00484AC8 /* Font_file */ = {
 			isa = PBXGroup;
 			children = (
-				38D304021B455C1900484AC8 /* NotoSansHans-Medium.otf */,
-				38D304031B455C1900484AC8 /* NotoSansHans-Regular.otf */,
+				38CFFAD61B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf */,
 			);
 			path = Font_file;
 			sourceTree = "<group>";
@@ -1491,7 +1525,7 @@
 				38D618D41B46511500907CE9 /* SelectTimeView.m in Resources */,
 				38D301E41B4517CC00484AC8 /* Main.storyboard in Resources */,
 				38D301E91B4517CC00484AC8 /* LaunchScreen.xib in Resources */,
-				38D304041B455C1900484AC8 /* NotoSansHans-Medium.otf in Resources */,
+				38CFFAD71B53D8A0005115AB /* 方正兰亭纤黑_GBK.ttf in Resources */,
 				38D34FBF1B4A7DDC00CBAB2C /* UMSCommentDetailController.xib in Resources */,
 				38D34FC51B4A7DDC00CBAB2C /* UMSnsAccountViewController.xib in Resources */,
 				3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */,
@@ -1503,7 +1537,6 @@
 				38D34FC61B4A7DDC00CBAB2C /* UMSShareListController.xib in Resources */,
 				38D34FC71B4A7DDC00CBAB2C /* UMSocialSDKResourcesNew.bundle in Resources */,
 				3872BF1C1B4664D80004A928 /* NSDateTimeAgo.bundle in Resources */,
-				38D304051B455C1900484AC8 /* NotoSansHans-Regular.otf in Resources */,
 				38D301E61B4517CC00484AC8 /* Images.xcassets in Resources */,
 				38D34FCB1B4A7DDC00CBAB2C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				38D34FC31B4A7DDC00CBAB2C /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -1525,6 +1558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38CFFAD81B53D92D005115AB /* 方正兰亭纤黑_GBK.ttf in Sources */,
 				38D303B11B453B3400484AC8 /* MJRefreshComponent.m in Sources */,
 				38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */,
 				38D303E01B453B3C00484AC8 /* SDImageCache.m in Sources */,
@@ -1596,6 +1630,7 @@
 				38D34FD31B4A812C00CBAB2C /* SerViceViewController.m in Sources */,
 				3872BF2A1B4664D80004A928 /* UIImage+Alpha.m in Sources */,
 				38D303BB1B453B3400484AC8 /* UIView+MJExtension.m in Sources */,
+				38CFFA931B538EAD005115AB /* ShareButton.m in Sources */,
 				38D303891B453B2A00484AC8 /* AFNetworkReachabilityManager.m in Sources */,
 				38D618CE1B463DA700907CE9 /* AdimToolBar.m in Sources */,
 				38D3038F1B453B2A00484AC8 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1626,8 +1661,10 @@
 				384640FB1B4E5B720079CE9D /* GCDSemaphore.m in Sources */,
 				38D0DBAA1B4B7E7600E0E7EC /* NSData+MD5Digest.m in Sources */,
 				38D618BE1B462F7C00907CE9 /* NormalTableView.m in Sources */,
+				38CFFA901B5365A3005115AB /* TTTAttributedLabel.m in Sources */,
 				38D303E41B453B3C00484AC8 /* SDWebImageDownloaderOperation.m in Sources */,
 				38D303551B452FBF00484AC8 /* AddCardViewController.m in Sources */,
+				38CFFA961B538FA0005115AB /* UMShareView.m in Sources */,
 				38D303E51B453B3C00484AC8 /* SDWebImageManager.m in Sources */,
 				38D303B41B453B3400484AC8 /* MJRefreshGifFooter.m in Sources */,
 				3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */,
@@ -1640,6 +1677,7 @@
 				38D303EC1B453B3C00484AC8 /* UIImageView+WebCache.m in Sources */,
 				38D0DBC51B4BB4EB00E0E7EC /* NoticeViewController.m in Sources */,
 				38D303521B452F9200484AC8 /* MainViewController.m in Sources */,
+				38CFFA9D1B53B99C005115AB /* WordSearchViewController.m in Sources */,
 				3872BF2F1B4664D80004A928 /* UIImage+FX.m in Sources */,
 				3872BE201B465E2C0004A928 /* TimingList.m in Sources */,
 				3872BF1B1B4664D80004A928 /* NSDate+Utilities.m in Sources */,

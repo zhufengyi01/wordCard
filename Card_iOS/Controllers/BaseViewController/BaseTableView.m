@@ -26,7 +26,6 @@
     int pageCount;
     int pageSize;
 }
-@property(nonatomic,strong) UIRefreshControl *refreshControl;
 
 @property(nonatomic,strong) UIView *footView;
 
@@ -75,7 +74,7 @@
     [self.footView addSubview:line];
     line.backgroundColor = VLight_GrayColor_apla;
 
-    self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
+    self.statusLable.font =[UIFont fontWithName:KFontThin size:12];
     self.statusLable.textAlignment = NSTextAlignmentCenter;
     self.statusLable.text = @"THE-END";
     self.statusLable.textColor = VGray_color;
@@ -269,7 +268,7 @@
     headView.backgroundColor =[[ UIColor whiteColor] colorWithAlphaComponent:0.95];
     UILabel *hlbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
     hlbl.textColor = VLight_GrayColor;
-    hlbl.font = [UIFont systemFontOfSize:14];
+    hlbl.font = [UIFont fontWithName:KFontThin size:14];
     hlbl.textAlignment = NSTextAlignmentCenter;
     [headView addSubview:hlbl];
     if (self.dataAraray.count>section) {
@@ -294,5 +293,13 @@
     {
         self.statusLable.text = @"THE-END";
     }
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+   // self.navigationController.navigationBar.hidden = YES;
+}
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    //self.navigationController.navigationBar.hidden = YES;
 }
 @end

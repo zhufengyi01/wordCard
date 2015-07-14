@@ -20,6 +20,7 @@
 -(void)viewDidLoad
 {
     self.view.backgroundColor = View_white_Color;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
    // [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
     [self.tabBarController.tabBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
@@ -33,7 +34,7 @@
     }
     if (leftTitle) {
         [leftbtn setTitle:leftTitle forState:UIControlStateNormal];
-        leftbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
+        leftbtn.titleLabel.font =[UIFont fontWithName:KFontThin size:14];
         [leftbtn setTitleColor:VGray_color forState:UIControlStateNormal];
         [leftbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
     }
@@ -49,7 +50,7 @@
     }
     if (RightTitle) {
         [Righttbtn setTitle:RightTitle forState:UIControlStateNormal];
-        Righttbtn.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
+        Righttbtn.titleLabel.font =[UIFont fontWithName:KFontThin size:14];
         [Righttbtn setTitleColor:VGray_color forState:UIControlStateNormal];
         [Righttbtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
         

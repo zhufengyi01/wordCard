@@ -15,7 +15,11 @@
 #define ADM_TIM  4
 
 @implementation MainAdmList
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    ///self.navigationController.hidesBarsOnSwipe = NO;
+}
 -(void)viewDidLoad
 {
     [super viewDidLoad];

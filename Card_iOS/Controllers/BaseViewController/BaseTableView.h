@@ -22,7 +22,10 @@
 @property(nonatomic,strong)NSString *urlString;
 
 @property(nonatomic,strong)NSDictionary  *parameters;
+@property(nonatomic,strong) UIRefreshControl *refreshControl;
 
+
+-(void)computeRecomendSectionView:(NSMutableArray *) dataArray;
 
 //滚动到顶部
 -(void)tableViewScollerTop;

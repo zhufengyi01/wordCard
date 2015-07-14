@@ -19,10 +19,16 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //self.navigationController.hidesBarsOnSwipe = YES;
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
     [self requestData];
 }
 @end

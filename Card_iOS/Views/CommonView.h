@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonModel.h"
-
+#import "TTTAttributedLabel.h"
 @interface CommonView : UIView
 
 @property(nonatomic,strong) CommonModel  *model;
 
-@property(nonatomic,strong) UILabel *titleLable ;
+@property(nonatomic,strong) TTTAttributedLabel *titleLable ;
 
 @property(nonatomic,strong) UILabel  *topRighlbl;   //右上角的标签文字
 

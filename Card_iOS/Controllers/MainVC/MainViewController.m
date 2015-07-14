@@ -11,6 +11,8 @@
 #import "UserDataCenter.h"
 #import "Constant.h"
 #import "MainAdmList.h"
+#import "WordSearchViewController.h"
+#import "BaseNavigationViewController.h"
 #import "WordMainVC.h"
 @implementation MainViewController
 
@@ -22,6 +24,12 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //self.navigationController.hidesBarsOnSwipe = YES;
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,12 +39,16 @@
     if ([user.is_admin intValue]>0) {
       [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
     }
-    //[self creatRightNavigationItem:[UIImage imageNamed:@"search"] Title:nil];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
+    [self creatRightNavigationItem:[UIImage imageNamed:@"search"] Title:nil];
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar);
     [self requestData];
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
+   // [self.navigationController pushViewController:[WordSearchViewController new] animated:NO];
+    BaseNavigationViewController  *na = [[BaseNavigationViewController alloc] initWithRootViewController:[WordSearchViewController new]];
+    na.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:na animated:NO completion:nil];
     
 }
 -(void)LeftSystemNavigationButtonClick

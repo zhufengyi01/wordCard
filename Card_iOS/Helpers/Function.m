@@ -15,6 +15,7 @@
 //导入图片加载框架
 #import "UIImageView+WebCache.h"
 //导入常量头文件
+
 #import "Constant.h"
 
 #import <CommonCrypto/CommonDigest.h>
@@ -363,7 +364,7 @@
 +(UIImage *)getImage:(UIView *) imageview WithSize:(CGSize) size
 {
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size.width, size.height), YES, 5.0);  //NO，YES 控制是否透明
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size.width, size.height), YES, 7.0);  //NO，YES 控制是否透明
     [imageview.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

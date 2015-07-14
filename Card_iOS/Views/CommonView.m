@@ -17,24 +17,30 @@
         self.backgroundColor=VLight_GrayColor_apla;
         self.layer.cornerRadius = 4;
         self.clipsToBounds = YES;
+        self.layer.borderWidth = 0.1;
+        self.layer.borderColor=VLight_GrayColor.CGColor;
         [self createUI];
     }
     return self;
 }
 -(void)createUI
 {
-    self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@""];
+    //self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@""];
+    self.titleLable = [[TTTAttributedLabel alloc]initWithFrame:CGRectZero];
+    self.titleLable.numberOfLines = 0;
+    self.titleLable.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     self.titleLable.textColor=View_Black_Color;
+    self.titleLable.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
     self.titleLable.lineBreakMode=NSLineBreakByTruncatingTail;
     self.titleLable.adjustsFontSizeToFitWidth= NO;
     if (IsIphone5) {
-        self.titleLable.font =[UIFont systemFontOfSize:18.5];
+        self.titleLable.font = [UIFont fontWithName:KFontThin size:17];
     }else if(IsIphone6)
     {
-        self.titleLable.font = [UIFont systemFontOfSize:22];
+        self.titleLable.font = [UIFont fontWithName:KFontThin size:18];
     }else if(IsIphone6plus)
     {
-        self.titleLable.font =[UIFont systemFontOfSize:22];
+        self.titleLable.font = [UIFont fontWithName:KFontThin size:20];
     }
     self.titleLable.textAlignment=NSTextAlignmentJustified;
     [self addSubview:self.titleLable];
@@ -49,39 +55,51 @@
     }
     self.word_Soure =[[UILabel alloc] initWithFrame:CGRectZero];
     self.word_Soure.textColor = VGray_color;
-    self.word_Soure.font = [UIFont systemFontOfSize:12];
+    self.word_Soure.font = [UIFont fontWithName:KFontThin size:12];
     if (IsIphone6plus) {
-        self.word_Soure.font = [UIFont systemFontOfSize:14];
+        self.word_Soure.font = [UIFont fontWithName:KFontThin size:14];
     }
-      self.word_Soure.textAlignment = NSTextAlignmentCenter;
-      [self addSubview:self.word_Soure];
+    self.word_Soure.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.word_Soure];
     
 }
 -(void)configCommonView:(CommonModel *)model;
 {
     self.model= model;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 4;
+    paragraphStyle.lineSpacing = 5;
+    if (IsIphone6) {
+        paragraphStyle.lineSpacing = 5;
+    }else if(IsIphone6plus)
+    {
+        paragraphStyle.lineSpacing = 8;
+    }
+    NSNumber  *num= [NSNumber numberWithFloat:1.5];
+    if (IsIphone6) {
+        num = [NSNumber numberWithFloat:2];
+    }else if(IsIphone6plus)
+    {
+        num = [NSNumber numberWithFloat:2.0];
+    }
     NSDictionary *attributes = @{
                                  NSFontAttributeName:self.titleLable.font,
                                  NSParagraphStyleAttributeName:paragraphStyle
-                                 };
+                                 ,NSKernAttributeName:num};
     self.titleLable.attributedText = [[NSAttributedString alloc] initWithString:self.model.word attributes:attributes];
-    CGSize  Msize  =[self.titleLable.attributedText boundingRectWithSize:CGSizeMake(kDeviceWidth-60, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil].size;
+    CGSize Msize =  [TTTAttributedLabel sizeThatFitsAttributedString:self.titleLable.attributedText withConstraints:CGSizeMake(kDeviceWidth-60, MAXFLOAT) limitedToNumberOfLines:0];
+    self.frame= CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20,kDeviceWidth-20);
     if (self.isLongWord ==YES) {
-        if (Msize.height<kDeviceWidth-60) {
+        if (Msize.height<kDeviceWidth-80) {
             self.frame= CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20,kDeviceWidth-20);
         }else
         {
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20, Msize.height+50+50);
+            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20, Msize.height+100);
         }
     }
     if (model.reference==nil) {
         model.reference = @"";
     }
-    //if (model.reference.length>0) {
-        self.word_Soure.text =[NSString stringWithFormat:@"%@",model.reference];
-    //}
+    self.word_Soure.text =[NSString stringWithFormat:@"%@",model.reference];
     //    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.updated_at intValue]];
     //    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     //    self.topRighlbl.text=da;
@@ -89,7 +107,15 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.titleLable.frame = CGRectMake(20, 10, self.frame.size.width-40, self.frame.size.height-50);
+    self.titleLable.frame = CGRectMake(15, 40, self.frame.size.width-30,self.frame.size.height-80);
+    if(IsIphone6)
+    {
+      self.titleLable.frame = CGRectMake(16.5, 40, self.frame.size.width-33, self.frame.size.height-80);
+    }
+    else if(IsIphone6plus)
+    {
+        self.titleLable.frame = CGRectMake(20, 40, self.frame.size.width-40, self.frame.size.height-80);
+    }
     self.word_Soure.frame=CGRectMake(20, self.frame.size.height-40, self.frame.size.width-40, 25);
 }
 

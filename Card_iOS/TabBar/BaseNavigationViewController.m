@@ -40,7 +40,7 @@
     offset.horizontal = -500;
     [baritem setBackButtonTitlePositionAdjustment:offset forBarMetrics:UIBarMetricsDefault];
     
-    NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:VGray_color,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:16],NSFontAttributeName, nil];
+    NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:VGray_color,NSForegroundColorAttributeName,[UIFont fontWithName:KFontThin size:16],NSFontAttributeName, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:titleAttributes];
 }
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated

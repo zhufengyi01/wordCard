@@ -35,7 +35,7 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx0691dcaa709b8cef</string>
+				<string>wx8fa17382715d0b9b</string>
 			</array>
 		</dict>
 	</array>
@@ -45,8 +45,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NotoSansHans-Regular.otf</string>
-		<string>NotoSansHans-Medium.otf</string>
+		<string>方正兰亭纤黑_GBK.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

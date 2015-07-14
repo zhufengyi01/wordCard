@@ -22,7 +22,7 @@
         
         self.titleLab = [[UILabel alloc]initWithFrame:CGRectMake(35,2, 200, 26)];
         self.titleLab.textColor = VGray_color;
-        self.titleLab.font = [UIFont systemFontOfSize:14];
+        self.titleLab.font = [UIFont fontWithName:KFontThin size:14];
         self.titleLab.text= @"名字";
         [self addSubview:self.titleLab];
     }

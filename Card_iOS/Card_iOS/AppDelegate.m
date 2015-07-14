@@ -34,6 +34,15 @@
     NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
     [self initUmeng];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+//        for(NSString *fontfamilyname in [UIFont familyNames])
+//        {
+//            NSLog(@"family:'%@'",fontfamilyname);
+//            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+//            {
+//                NSLog(@"\tfont:'%@'",fontName);
+//            }
+//            NSLog(@"-------------");
+//        }
     if (userInfo) {  //用户已经登陆
         [Function getUserInfoWith:userInfo];
         self.window.rootViewController =[CustomController new];

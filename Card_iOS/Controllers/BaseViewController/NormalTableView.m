@@ -55,7 +55,7 @@
     UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(0,0, kDeviceWidth, 1)];
     [self.footView addSubview:line];
     line.backgroundColor = VLight_GrayColor_apla;
-    self.statusLable.font =[UIFont fontWithName:kFontRegular size:12];
+    self.statusLable.font =[UIFont fontWithName:KFontThin size:12];
     self.statusLable.textAlignment = NSTextAlignmentCenter;
     self.statusLable.text = @"THE-END";
     self.statusLable.textColor = VGray_color;

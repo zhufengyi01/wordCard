@@ -168,6 +168,9 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     [GCDQueue executeInMainQueue:^{
         [self.comView configCommonView:self.model];
         [self createUserBar];
+        if (self.comView.frame.size.height>kDeviceHeight) {
+            self.myScrollerView.contentSize = CGSizeMake(kDeviceWidth,self.comView.frame.size.height+100);
+        }
     } afterDelaySecs:NEXT_WORD_CARD];
 }
 -(void)createLikeBar
@@ -179,7 +182,7 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     UIButton  *btn1 =[UIButton buttonWithType:UIButtonTypeCustom];
     btn1.frame=CGRectMake(0, 0, kDeviceWidth/2, LIKE_BAR_HEIGHT);
     [btn1 setTitle:@"喜欢" forState:UIControlStateNormal];
-    btn1.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    btn1.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [btn1 setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
     [btn1 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateReserved];
@@ -214,7 +217,7 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     [btn2 setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [btn2 setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
     btn2.tag=100;
-    btn2.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    btn2.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [btn2 addActionHandler:^(NSInteger tag) {
         if (self.dataArray.count>self.currentIndex) {
             if (self.dataArray.count>self.currentIndex) {

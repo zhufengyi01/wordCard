@@ -10,21 +10,60 @@
 #import "WordDetailVC.h"
 #import "ZCControl.h"
 #import "Constant.h"
+#import "UMSocial.h"
+#import "UMShareView.h"
+#import "Function.h"
 @implementation WordMainVC
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+   // self.navigationController.hidesBarsOnSwipe = NO;
+}
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.CurrentIndex = 0;
     //self.title = @"详细";
-    //[self creatRightNavigationItem:[UIImage imageNamed:@"share"] Title:@""];
+    [self creatRightNavigationItem:[UIImage imageNamed:@"share"] Title:@""];
     [self createUI];
     //self.pageController.gestureRecognizers;
     //[self dealGesture];
-    
 }
+//分享
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
     
+    
+    
+    NSArray  *Arr =    [self.pageController viewControllers];
+   // NSLog(@"=============%@",Arr);
+   // NSArray  *vcarray =  [self.pageController childViewControllers];
+   // NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~%@",vcarray);
+    
+    //if ([vcarray count]==1) {
+      //      CurrentVC = (WordDetailVC *) [vcarray objectAtIndex:0];
+       // }else
+        //{
+          //  CurrentVC = (WordDetailVC*) [vcarray objectAtIndex:1];
+        //}
+    CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+    [self.pageController childViewControllers];
+    float height = CurrentVC.comView.frame.size.height;
+    UIImage *image= [Function getImage:CurrentVC.comView WithSize:CGSizeMake(kDeviceWidth-20, height)];
+    UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:self.Currentmodel andShareHeight:height];
+    __weak typeof(self) weakSelf = self;
+    share.shareBtnEvent=^(NSInteger buttonIndex)
+    {
+        NSLog(@"bu======%ld",(long)buttonIndex);
+        NSArray  *sharearray =[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline, UMShareToSina, nil];
+        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+        [[UMSocialControllerService defaultControllerService] setShareText:weakSelf.Currentmodel.word shareImage:image socialUIDelegate:weakSelf];
+        //设置分享内容和回调对象
+        [UMSocialSnsPlatformManager getSocialPlatformWithName:[sharearray  objectAtIndex:buttonIndex]].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+        
+    };
+    [share show];
 }
 -(void)createUI
 {
@@ -47,7 +86,7 @@
     // 如果要显示2页，NSArray中，应该有2个相应页数据。
     WordDetailVC *initialViewController =[self viewControllerAtIndex:self.IndexOfItem];// 得到第一
     //初始化的时候记录了当前的第一个viewcontroller  以后每次都在代理里面获取当前的viewcontroller
-    //    CenterViewController=initialViewController;
+    CurrentVC=initialViewController;
     NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
     [_pageController setViewControllers:viewControllers
                               direction:UIPageViewControllerNavigationDirectionForward
@@ -78,6 +117,7 @@
 // 返回上一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     //获取当前控制器
+     //CurrentVC =(WordDetailVC *) viewController;
     NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -91,6 +131,7 @@
 
 // 返回下一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
+    //CurrentVC =(WordDetailVC *) viewController;
     NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
     if (index == NSNotFound) {
         return nil;

@@ -42,8 +42,8 @@
 #pragma  mark  三方平台key  设置
 #define kUmengKey @"559a57b167e58e54cc0063b4"
 #define SSOSinRedirectURL  @"http://sns.whalecloud.com/sina2/callback"
-#define weiChatShareKey  @"wx0691dcaa709b8cef"
-#define weiChatShareSecret @"6db5443e7da62a57581320c5ba9ac7cc"
+#define weiChatShareKey  @"wx8fa17382715d0b9b"
+#define weiChatShareSecret @"bff7b1827b6a60cf3df583f24b3833fc"
 
 //#define   Review   1          ///上传appstore版本  1 为审核
 #define   Version       @"1.4"       //版本信息  1.0.1 审核版         1.0 正常版
@@ -119,9 +119,10 @@
 
 //#define kFontRegular @"FZLTHJW--GB1-0"
 //#define kFontDouble @"FZZZHONGJW--GB1-0"
-
-#define kFontRegular @"NotoSansHans-Medium"
+//
+#define kFontRegular @"NotoSansHans-Regular"
 #define kFontDouble @"NotoSansHans-Medium"
+#define KFontThin   @"FZLTXHK--GBK1-0"
 #define KFontNormal14 
 
 #endif
