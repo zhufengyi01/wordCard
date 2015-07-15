@@ -34,15 +34,6 @@
     NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
     [self initUmeng];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-//        for(NSString *fontfamilyname in [UIFont familyNames])
-//        {
-//            NSLog(@"family:'%@'",fontfamilyname);
-//            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-//            {
-//                NSLog(@"\tfont:'%@'",fontName);
-//            }
-//            NSLog(@"-------------");
-//        }
     if (userInfo) {  //用户已经登陆
         [Function getUserInfoWith:userInfo];
         self.window.rootViewController =[CustomController new];
@@ -62,6 +53,11 @@
         }
     }
     return YES;
+}
+//禁用横屏幕
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 /**
  *  初始化友盟组件, 配置SSO

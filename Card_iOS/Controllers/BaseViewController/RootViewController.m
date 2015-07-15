@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "ZCControl.h"
 #import "UIImage+Color.h"
+#import "SVProgressHUD.h"
 @implementation RootViewController
 
 -(void)loadView
@@ -21,9 +22,20 @@
 {
     self.view.backgroundColor = View_white_Color;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-   // [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
     [self.tabBarController.tabBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
+    //设置提示框
+    
+    [self configSVHUD];
+}
+-(void)configSVHUD
+{
+    [SVProgressHUD setSuccessImage:[UIImage imageNamed:@"success"]];
+    [SVProgressHUD setInfoImage:[UIImage imageNamed:@"info"]];
+    [SVProgressHUD setErrorImage:[UIImage imageNamed:@"error"]];
+    [SVProgressHUD setFont:[UIFont fontWithName:KFontThin size:14]];
+    [SVProgressHUD setForegroundColor:View_Black_Color];
+    
 }
 -(void)createLeftNavigationItem:(UIImage*) leftImage Title:(NSString*)leftTitle
 {
@@ -85,7 +97,7 @@
 }
 -(void)RightSystemNavigationButtonClick
 {
- 
+    
     
 }
 

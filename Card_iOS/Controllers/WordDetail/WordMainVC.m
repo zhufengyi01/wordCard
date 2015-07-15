@@ -13,6 +13,9 @@
 #import "UMSocial.h"
 #import "UMShareView.h"
 #import "Function.h"
+#import "UIImage+FX.h"
+#import "UIImage+Resize.h"
+#import "UIImage+Capture.h"
 @implementation WordMainVC
 
 -(void)viewWillAppear:(BOOL)animated
@@ -33,24 +36,14 @@
 //分享
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
-    
-    
-    
     NSArray  *Arr =    [self.pageController viewControllers];
-   // NSLog(@"=============%@",Arr);
-   // NSArray  *vcarray =  [self.pageController childViewControllers];
-   // NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~%@",vcarray);
-    
-    //if ([vcarray count]==1) {
-      //      CurrentVC = (WordDetailVC *) [vcarray objectAtIndex:0];
-       // }else
-        //{
-          //  CurrentVC = (WordDetailVC*) [vcarray objectAtIndex:1];
-        //}
     CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
     [self.pageController childViewControllers];
     float height = CurrentVC.comView.frame.size.height;
-    UIImage *image= [Function getImage:CurrentVC.comView WithSize:CGSizeMake(kDeviceWidth-20, height)];
+     UIImage  *image= [UIImage captureWithView:CurrentVC.comView];
+    NSData  *imagedata = UIImagePNGRepresentation(image);
+    image = [UIImage imageWithData:imagedata];
+    //image = [image imageScaledToSize:CGSizeMake(image.size.width*0.6, image.size.height*0.6)];
     UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:self.Currentmodel andShareHeight:height];
     __weak typeof(self) weakSelf = self;
     share.shareBtnEvent=^(NSInteger buttonIndex)
@@ -65,6 +58,7 @@
     };
     [share show];
 }
+
 -(void)createUI
 {
     // 设置UIPageViewController的配置项

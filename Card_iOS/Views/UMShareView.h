@@ -34,14 +34,13 @@ typedef NS_ENUM(NSInteger, UMShareType)
     UIButton  *qzoneBtn;
     UIButton  *weiboBtn;
     UIImageView *_ShareimageView;
-    UILabel  *_moviewName;
+    //UILabel  *_moviewName;
     //底部视图
     UIView  *buttomView;
-    UIImage   *shareImage;
+    //UIImage   *shareImage;
     UIView     *logosupView;
-    UIImage *_screenImage;
-    id <UMShareViewDelegate> _delegate;
-    float shareheight;
+    UIImage    *_screenImage;
+    float     shareheight;
 }
 
 

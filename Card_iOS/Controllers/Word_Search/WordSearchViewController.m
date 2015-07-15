@@ -31,6 +31,7 @@
     self.searchBar.placeholder = @"请输入搜索内容";
     //self.searchBar.showsCancelButton = YES;
     self.searchBar.delegate = self;
+    [self.searchBar becomeFirstResponder];
     self.navigationItem.titleView = self.searchBar;
     [self creatRightNavigationItem:nil Title:@"取消"];
 }

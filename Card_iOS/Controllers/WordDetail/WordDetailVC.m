@@ -147,8 +147,6 @@
     {
         //最新
         [self requestChangeStageStatusWithweiboId:self.model.Id StatusType:@"5"];
-        
-        
     }else if(index==2)
     {
         //正常

@@ -596,8 +596,6 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
         [[NSNotificationCenter defaultCenter] postNotificationName:SVProgressHUDDidTouchDownInsideNotification object:event];
     }
 }
-
-
 #pragma mark - Master show/dismiss methods
 
 - (void)showProgress:(float)progress status:(NSString*)string maskType:(SVProgressHUDMaskType)hudMaskType {

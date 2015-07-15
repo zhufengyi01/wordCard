@@ -21,6 +21,7 @@
 #import "TagModel.h"
 #import "CommonCell.h"
 #import "LikeModel.h"
+#import "WordMainVC.h"
 const float segmentheight = 45;
 @implementation MyViewController
 -(instancetype)init
@@ -90,6 +91,7 @@ const float segmentheight = 45;
     namelbl.font = [UIFont fontWithName:KFontThin size:16];
     [headView addSubview:namelbl];
     contentlbl = [ZCControl createLabelWithFrame:CGRectMake(namelbl.frame.origin.x, namelbl.frame.origin.y+namelbl.frame.size.height, 180, 20) Font:12 Text:@"内容"];
+    contentlbl.font = [UIFont fontWithName:KFontThin size:12];
     contentlbl.textColor = VGray_color;
     [headView addSubview:contentlbl];
     
@@ -116,7 +118,7 @@ const float segmentheight = 45;
             if (self.dataArray1.count==0) {
                 [weakself requestData];
             }else{
-            [weakself.tabbleView reloadData];
+                [weakself.tabbleView reloadData];
             }
         }
     }];
@@ -138,18 +140,18 @@ const float segmentheight = 45;
             if (self.dataArray2.count==0) {
                 [weakself requestData];
             }else {
-            [weakself.tabbleView reloadData];
+                [weakself.tabbleView reloadData];
             }
         }
     }];
     [headView addSubview:self.likeWorkbtn];
-    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth/2,headView.frame.size.height-33,0.5, 25)];
+    UIView  *line = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth/2,headView.frame.size.height-30,1, 20)];
     [headView addSubview:line];
-    line.backgroundColor = VGray_color;
-    UIView  *line2 = [[UIView alloc] initWithFrame:CGRectMake(0,headView.frame.size.height-1, kDeviceWidth, 0.5)];
+    line.backgroundColor = VLight_GrayColor_apla;
+    UIView  *line2 = [[UIView alloc] initWithFrame:CGRectMake(0,headView.frame.size.height-1, kDeviceWidth, 1)];
     [headView addSubview:line2];
     line2.backgroundColor = VLight_GrayColor_apla;
-
+    
     if (self.pageType ==MyViewControllerPageTypeDefault) {
         NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,User.logo]];
         [headImage sd_setImageWithURL:url placeholderImage:HeadImagePlaceholder];
@@ -220,7 +222,7 @@ const float segmentheight = 45;
     
 }
 
-#pragma mark --requesteData 
+#pragma mark --requesteData
 -(void)requestDeleteDataWith:(NSString *)word_id
 {
     UserDataCenter *User = [UserDataCenter shareInstance];
@@ -228,17 +230,17 @@ const float segmentheight = 45;
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
     NSDictionary  *dict = @{@"user_id":User.user_id,@"prod_id":word_id,KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
-   [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       if ([[responseObject objectForKey:@"code"] intValue]==0) {
-           [SVProgressHUD showSuccessWithStatus:@"delete sucucess"];
-       }
-       else
-       {
-           [SVProgressHUD showErrorWithStatus:@"delete fail"];
-       }
-   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       NSLog(@"error ==%@",error);
-     [SVProgressHUD showErrorWithStatus:@"delete fail"];   }];
+    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error ==%@",error);
+        [SVProgressHUD showErrorWithStatus:@"删除失败"];   }];
 }
 -(void)requestData
 {
@@ -385,7 +387,7 @@ const float segmentheight = 45;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   return kDeviceWidth-10;
+    return kDeviceWidth-10;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -455,7 +457,24 @@ const float segmentheight = 45;
         
     }else{
         [self.tabbleView setEditing:NO animated:YES];
-        [SVProgressHUD showInfoWithStatus:@"you can't delete"];
+        [SVProgressHUD showInfoWithStatus:@"不能删除"];
+    }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.addWordbtn.selected ==YES) {
+        WordMainVC  *wordmian =[WordMainVC new];
+        wordmian.MainArray = self.dataArray1;
+        wordmian.IndexOfItem= indexPath.row;
+        wordmian.likeArray = self.likeArray1;
+        [self.navigationController pushViewController:wordmian animated:YES];
+    }else {
+        WordMainVC  *wordmian =[WordMainVC new];
+        wordmian.MainArray = self.dataArray2;
+        wordmian.IndexOfItem= indexPath.row;
+        wordmian.likeArray = self.likeArray2;
+        [self.navigationController pushViewController:wordmian animated:YES];
     }
 }
 @end

@@ -40,7 +40,7 @@
       [self createLeftSystemNavigationItemWith:UIBarButtonSystemItemEdit];
     }
     [self creatRightNavigationItem:[UIImage imageNamed:@"search"] Title:nil];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar);
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn

@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "SVProgressHUD.h"
 #import "ZCControl.h"
+#import "ZFYLoading.h"
 @interface NormalTableView () <UITableViewDataSource,UITableViewDelegate>
 {
     
@@ -44,7 +45,7 @@
     [self.tabbleView addSubview:self.refreshControl];
     [self createFootView];
     
-
+    
 }
 -(void)createFootView
 {
@@ -63,7 +64,7 @@
 }
 -(void)requestData
 {
-     [self.refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
+    [self.refreshControl performSelector:@selector(endRefreshing) withObject:nil afterDelay:0.5];
 }
 -(void)RefreshViewControlEventValueChanged
 {
@@ -91,7 +92,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     if (self.dataArray.count>indexPath.row) {
-      cell.textLabel.text  = [self.dataArray objectAtIndex:indexPath.row];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont fontWithName:KFontThin size:16];
+        cell.textLabel.text  = [self.dataArray objectAtIndex:indexPath.row];
     }
     return cell;
 }
@@ -101,10 +104,10 @@
 }
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (self.pageCount>self.page&self.dataArray.count==indexPath.row+1) {
-//        self.page++;
-//        [self requestData];
-//    }
+    //    if (self.pageCount>self.page&self.dataArray.count==indexPath.row+1) {
+    //        self.page++;
+    //        [self requestData];
+    //    }
     [self tableviewDisplayIndexpath:indexPath];
 }
 -(void)tableviewDisplayIndexpath:(NSIndexPath *) indexpath

@@ -19,10 +19,10 @@
         self.likeImage.image = [UIImage imageNamed:@"detail_like.png"];
         [self addSubview:self.likeImage];
         
-        self.likeCountLbl = [[UILabel alloc]initWithFrame:CGRectMake(10,0,55, 26)];
+        self.likeCountLbl = [[UILabel alloc]initWithFrame:CGRectMake(10,0,55, 25)];
         self.likeCountLbl.textColor = VGray_color;
         self.likeCountLbl.textAlignment = NSTextAlignmentRight;
-        self.likeCountLbl.font = [UIFont systemFontOfSize:16];
+        self.likeCountLbl.font = [UIFont fontWithName:KFontThin size:12];
         self.likeCountLbl.text= @"123";
         [self addSubview:self.likeCountLbl];
     }

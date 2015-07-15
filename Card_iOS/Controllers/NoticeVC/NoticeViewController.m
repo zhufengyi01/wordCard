@@ -18,6 +18,7 @@
 #import "TagModel.h"
 #import "NotifiCell.h"
 #import "UserModel.h"
+#import "ZFYLoading.h"
 #import "UIImage+Color.h"
 @implementation NoticeViewController
 -(void)viewWillAppear:(BOOL)animated
@@ -97,16 +98,18 @@
                     [self.tabbleView reloadData];
                 }
             }else {
-                
+                [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
                 [SVProgressHUD showInfoWithStatus:@"没有数据"];
                 [self.refreshControl endRefreshing];
             }
-            
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.refreshControl endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        [ZFYLoading showFailWithstatus:@"加载失败" inView:self.tabbleView event:^(UIButton *sender) {
+            
+        }];
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

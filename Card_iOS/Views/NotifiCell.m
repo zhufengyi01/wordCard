@@ -33,10 +33,12 @@
     
     self.namelbl = [ZCControl createLabelWithFrame:CGRectMake(65, 10, 200, 30) Font:14 Text:@"姓名"];
     self.namelbl.textColor = VBlue_color;
+    self.namelbl.font = [UIFont fontWithName:KFontThin size:14];
     [self.contentView addSubview:self.namelbl];
     
     self.timelbl = [ZCControl createLabelWithFrame:CGRectMake(65, 45, 100, 20) Font:12 Text:@"时间"];
     self.timelbl.textColor = VGray_color;
+    self.timelbl.font = [UIFont fontWithName:KFontThin size:12];
     [self.contentView addSubview:self.timelbl];
 }
 -(void)btnEvent:(UIButton *) sender

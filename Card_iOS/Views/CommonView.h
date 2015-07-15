@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonModel.h"
+#import "ZfyActionSheet.h"
 #import "TTTAttributedLabel.h"
-@interface CommonView : UIView
+@interface CommonView : UIView <ZfyActionSheetDelegate>
 
 @property(nonatomic,strong) CommonModel  *model;
 

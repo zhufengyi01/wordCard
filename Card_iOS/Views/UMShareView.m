@@ -78,9 +78,9 @@ float const shareCancleH = 40;
 //点击取消需要返回
 -(void)cancleshareClick
 {
-    if (_delegate&&[_delegate respondsToSelector:@selector(UMCancleShareClick)]) {
-        [_delegate UMCancleShareClick];
-    }
+//    if (_delegate&&[_delegate respondsToSelector:@selector(UMCancleShareClick)]) {
+//        [_delegate UMCancleShareClick];
+//    }
     [UIView animateWithDuration:KShow_ShareView_Time animations:^{
         float height=(kDeviceWidth/4)+shareheight+40+30+50;
         backView.frame=CGRectMake(0, kDeviceHeight, kDeviceWidth,height);
@@ -153,12 +153,12 @@ float const shareCancleH = 40;
 {
     // [self requestShareWithMethod: [NSString stringWithFormat:@"%ld",button.tag-10000]];
     logosupView.hidden=NO;
-    shareImage=[Function getImage:shareView WithSize:CGSizeMake(kDeviceWidth-20, shareheight)];
+    //shareImage=[Function getImage:shareView WithSize:CGSizeMake(kDeviceWidth-20, shareheight)];
+    
     NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat", @"share_weibo", @"share_download", nil];
     [MobClick event:eventArray[button.tag-10000]];
-    
     if (button.tag == 10003) {
-        UIImageWriteToSavedPhotosAlbum(shareImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UIImageWriteToSavedPhotosAlbum(_screenImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         //[self removeFromSuperview];
         return;
     }
@@ -187,7 +187,6 @@ float const shareCancleH = 40;
     [UIView animateWithDuration:KShow_ShareView_Time animations:^{
         float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
         backView.frame=CGRectMake(0, kDeviceHeight-height, kDeviceWidth, height);
-        //self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0.5];
     } completion:^(BOOL finished) {
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0.4];
     }];

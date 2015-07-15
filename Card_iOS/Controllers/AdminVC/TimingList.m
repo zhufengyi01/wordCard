@@ -28,7 +28,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight);
+    self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
     [self requestData];
 }
 @end

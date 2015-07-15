@@ -138,7 +138,7 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
             }else
             {
                 [SVProgressHUD showInfoWithStatus:@"已经看完了"];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                //[self dismissViewControllerAnimated:YES completion:nil];
             }
             NSMutableArray  *likearr = [responseObject objectForKey:@"ups"];
             ///if (likearr.count>0) {
@@ -197,13 +197,13 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
                 }
                 else{
                     [SVProgressHUD showInfoWithStatus:@"看完了..."];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    //[self dismissViewControllerAnimated:YES completion:nil];
                 }
             }
             else
             {
                 [SVProgressHUD showInfoWithStatus:@"看完了..."];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                //[self dismissViewControllerAnimated:YES completion:nil];
             }
         } afterDelaySecs:0];
         
@@ -226,13 +226,13 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
             }else{
                 
                 [SVProgressHUD showInfoWithStatus:@"看完了..."];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                //[self dismissViewControllerAnimated:YES completion:nil];
             }
         }
         else
         {
             [SVProgressHUD showInfoWithStatus:@"看完了..."];
-            [self dismissViewControllerAnimated:YES completion:nil];
+           // [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
     [btn2 setTitleColor:VGray_color forState:UIControlStateNormal];

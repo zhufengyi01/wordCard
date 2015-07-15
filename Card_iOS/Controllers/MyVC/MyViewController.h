@@ -34,7 +34,6 @@ typedef NS_ENUM(NSInteger, MyViewControllerPageType)
 @property(nonatomic,strong) NSMutableArray  *likeArray1;
 @property(nonatomic,strong) NSMutableArray  *likeArray2;
 
-
 @property(nonatomic,assign)     MyViewControllerPageType  pageType;
 
 //进人他人的页面

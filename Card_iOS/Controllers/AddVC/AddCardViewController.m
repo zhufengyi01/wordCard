@@ -49,7 +49,7 @@ NSTimeInterval const  dismissInterval = 1.f;
 }
 -(void )createSourceButton{
     self.SourceButton =  [UIButton  buttonWithType:UIButtonTypeCustom];
-    self.SourceButton.frame= CGRectMake(0, TEXT_VIEW_HEIGHT+20, kDeviceWidth, 40);
+    self.SourceButton.frame= CGRectMake(10, TEXT_VIEW_HEIGHT+20, kDeviceWidth-20, 40);
     NSMutableAttributedString  *tititstr =[[NSMutableAttributedString alloc]initWithString:@"出处"];
     NSRange  rang = NSMakeRange(0, 2);
     [self.SourceButton  setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateNormal];
@@ -77,8 +77,10 @@ NSTimeInterval const  dismissInterval = 1.f;
     
     UILabel  *shlbl = [ZCControl createLabelWithFrame:CGRectMake(10,0, 40, 40) Font:16 Text:@"出处"];
     shlbl.textColor = VGray_color;
+    shlbl.font = [UIFont fontWithName:KFontThin size:14];
     [self.SourceButton addSubview:shlbl];
-    self.sourceLable = [ZCControl createLabelWithFrame:CGRectMake(50, 0,kDeviceWidth-50, 40) Font:12 Text:@"例如：连岳《发扬不要脸精神》"];
+     self.sourceLable = [ZCControl createLabelWithFrame:CGRectMake(50, 0,kDeviceWidth-50, 40) Font:12 Text:@"例如：连岳《发扬不要脸精神》"];
+    self.sourceLable.font = [UIFont fontWithName:KFontThin size:12];
     self.sourceLable.textAlignment= NSTextAlignmentLeft;
     self.sourceLable.adjustsFontSizeToFitWidth = NO;
     self.sourceLable.textColor = VLight_GrayColor;
@@ -120,8 +122,6 @@ NSTimeInterval const  dismissInterval = 1.f;
               }];
           } afterDelaySecs: dismissInterval];
         }
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error  ===%@",error);
         [SVProgressHUD showErrorWithStatus:@"发布失败,请重试"];
@@ -132,15 +132,19 @@ NSTimeInterval const  dismissInterval = 1.f;
     UIImageView *bgImageView =[[UIImageView alloc]initWithFrame:CGRectMake(10, 10,kDeviceWidth-20 , TEXT_VIEW_HEIGHT)];
     bgImageView.backgroundColor =VLight_GrayColor_apla;
     [self.myScrollView addSubview:bgImageView];
+    bgImageView.layer.cornerRadius = 4;
+    bgImageView.clipsToBounds = YES;
+    bgImageView.layer.borderWidth = 0.1;
+    bgImageView.layer.borderColor=VLight_GrayColor.CGColor;
     bgImageView.userInteractionEnabled = YES;
     self.myTextView =[[UITextView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth-20, TEXT_VIEW_HEIGHT)];
     //[self.myTextView addPlaceHolder:@"输入文字"];
     [self.myTextView becomeFirstResponder];
     self.myTextView.backgroundColor = VLight_GrayColor_apla;
-    self.myTextView.tintColor = [UIColor blackColor];
+    self.myTextView.tintColor = View_Black_Color;
     self.myTextView.delegate = self;
-    self.myTextView.textColor = [UIColor blackColor];
-    self.myTextView.font = [UIFont systemFontOfSize:18];
+    self.myTextView.font =[UIFont fontWithName:KFontThin size:18];
+    self.myTextView.textColor = View_Black_Color;
     [bgImageView addSubview:self.myTextView];
 }
 

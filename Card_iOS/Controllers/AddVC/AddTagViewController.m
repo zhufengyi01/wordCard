@@ -23,6 +23,7 @@
     self.myTextfield.textColor = View_Black_Color;
     self.myTextfield.placeholder =@"输入出处";
     self.myTextfield.tintColor = View_Black_Color;
+    self.myTextfield.font = [UIFont fontWithName:KFontThin size:14];
     self.myTextfield.backgroundColor = VLight_GrayColor_apla;
     //self.myTextfield.selectedTextRange = NSMakeRange(1, 0);
     self.myTextfield.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 40)];

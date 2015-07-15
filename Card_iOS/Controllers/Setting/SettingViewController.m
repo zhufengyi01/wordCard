@@ -20,6 +20,7 @@ static const int  LOGIN_OUT = 0;
     [super viewDidLoad];
     //self.title = @"设置";
     self.dataArray = [NSMutableArray arrayWithObjects:@"退出登陆", nil];
+    self.tabbleView.tableFooterView = [[UIView alloc] init];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
