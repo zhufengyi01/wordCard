@@ -88,12 +88,12 @@
     
     self.model= model;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 5;
+    paragraphStyle.lineSpacing = 15;
     if (IsIphone6) {
-        paragraphStyle.lineSpacing = 5;
+        paragraphStyle.lineSpacing = 15;
     }else if(IsIphone6plus)
     {
-        paragraphStyle.lineSpacing = 8;
+        paragraphStyle.lineSpacing = 18;
     }
     NSNumber  *num= [NSNumber numberWithFloat:1.5];
     if (IsIphone6) {

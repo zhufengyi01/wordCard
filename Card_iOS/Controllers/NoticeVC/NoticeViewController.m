@@ -48,6 +48,7 @@
 //}
 -(void)requestData
 {
+    [ZFYLoading showLoadViewInview:self.tabbleView];
     UserDataCenter *user = [UserDataCenter shareInstance];
     NSString  *urlString  = [NSString stringWithFormat:@"%@noti-up/list",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
@@ -55,6 +56,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager  POST:urlString parameters:paremetes success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
+        [ZFYLoading dismiss];
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
             NSArray *array = [responseObject objectForKey:@"models"];
             self.pageCount =[[responseObject objectForKey:@"pageCount"] integerValue];
@@ -103,12 +105,11 @@
                 [self.refreshControl endRefreshing];
             }
         }
-    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.refreshControl endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
         [ZFYLoading showFailWithstatus:@"加载失败" inView:self.tabbleView event:^(UIButton *sender) {
-            
+        [self requestData];
         }];
     }];
 }

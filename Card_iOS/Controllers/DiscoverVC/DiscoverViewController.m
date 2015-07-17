@@ -20,6 +20,9 @@
 #import "UserButton.h"
 #import "GCD.h"
 #import "UIImageView+WebCache.h"
+#import "Discloading.h"
+#import "GCD.h"
+#import "ZFYLoading.h"
 float const  LIKE_BAR_HEIGHT = 50;
 NSTimeInterval  const  NEXT_WORD_CARD = 2;
 @implementation DiscoverViewController
@@ -41,6 +44,9 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
     [self createLikeBar];
     //[self createUserBar];
     
+    loadView= [[Discloading alloc]init];
+    [self.view addSubview:loadView];
+//
 }
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn
 {
@@ -97,13 +103,30 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
 
 -(void)requestData
 {
-    [SVProgressHUD show];
+    NSDate* tmpStartData = [NSDate date];
+    //You code here...
     UserDataCenter  *user = [UserDataCenter shareInstance];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@text/discover",kApiBaseUrl];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
     NSDictionary  *parameters= @{@"user_id":user.user_id,KURLTOKEN:apitoken};
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
+        NSLog(@"cost time ＝＝＝＝＝= %f", deltaTime);
+        if (deltaTime<2) {
+           [GCDQueue  executeInMainQueue:^{
+               [loadView removeFromSuperview];
+               loadView=nil;
+           } afterDelaySecs:2-deltaTime];
+        }
+        else
+        {
+            [GCDQueue executeInMainQueue:^{
+                [loadView removeFromSuperview];
+                loadView = nil;
+            } afterDelaySecs:0];
+            
+        }
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
             NSMutableArray *array =[responseObject objectForKey:@"models"];
             if (array.count>0) {
@@ -137,9 +160,28 @@ NSTimeInterval  const  NEXT_WORD_CARD = 2;
                 [self configComentView];
             }else
             {
-                [SVProgressHUD showInfoWithStatus:@"已经看完了"];
-                //[self dismissViewControllerAnimated:YES completion:nil];
-            }
+                //[SVProgressHUD showInfoWithStatus:@"已经看完了"];
+                //[ZFYLoading showNullWithstatus:@"已经看完了..." inView:self.view];
+                if (deltaTime<2) {
+                    [GCDQueue  executeInMainQueue:^{
+                        UIView  *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth,kDeviceHeight-kHeightNavigation)];
+                        view.backgroundColor = View_BackGround;
+                        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake((kDeviceWidth-75)/2, (kDeviceHeight-kHeightNavigation-75-100)/2, 75, 75)];
+                        img.image = [UIImage imageNamed:@"empty"];
+                        //img.backgroundColor =VGray_color;
+                        [view addSubview:img];
+                        
+                        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0,img.frame.origin.y+img.frame.size.height+10, kDeviceWidth, 40)];
+                        lable.text = @"看完了，等会再来吧";
+                        lable.textColor = VGray_color;
+                        lable.textAlignment = NSTextAlignmentCenter;
+                        lable.font = [UIFont fontWithName:KFontThin size:14];
+                        [view addSubview:lable];
+                        [self.view addSubview:view];
+                        
+                    } afterDelaySecs:2-deltaTime];
+                }
+             }
             NSMutableArray  *likearr = [responseObject objectForKey:@"ups"];
             ///if (likearr.count>0) {
             for (int i=0; i<likearr.count; i++) {

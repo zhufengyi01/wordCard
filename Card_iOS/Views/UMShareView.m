@@ -41,8 +41,6 @@ float const shareCancleH = 40;
         backView =[[UIView alloc]initWithFrame:CGRectMake(0,kDeviceHeight, kDeviceWidth, height)];
         backView.userInteractionEnabled=YES;
         backView.backgroundColor =[UIColor whiteColor];
-        
-        
         UILabel  *sh_lbl= [ZCControl createLabelWithFrame:CGRectMake(0, 0, kDeviceWidth, 40) Font:14 Text:@"分享"];
         sh_lbl.textColor = VGray_color;
         sh_lbl.textAlignment = NSTextAlignmentCenter;
@@ -114,13 +112,13 @@ float const shareCancleH = 40;
     buttomView.userInteractionEnabled=YES;
     [backView addSubview:buttomView];
 #pragma create four button
-    NSArray  *imageArray=[NSArray arrayWithObjects:@"wechat_share.png",@"moment_share.png",@"weibo_share.png", @"download.png", nil];
-    NSArray *titleArray = [NSArray arrayWithObjects:@"微信", @"朋友圈", @"微博", @"保存", nil];
-    for (int i=0; i<4; i++) {
-        double   x=(buttomView.bounds.size.width/4)*i;
+    NSArray  *imageArray=[NSArray arrayWithObjects:@"wechat_share.png",@"moment_share.png", @"download.png", nil];
+    NSArray *titleArray = [NSArray arrayWithObjects:@"微信", @"朋友圈", @"保存", nil];
+    for (int i=0; i<3; i++) {
+        double   x=(buttomView.bounds.size.width/3)*i;
         double   y=10;
         ShareButton *btn = [ShareButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(x,y, kDeviceWidth/4, kDeviceWidth/4) ImageName:imageArray[i] Target:self Action:@selector(handShareButtonClick:) Title:titleArray[i] Font:12];
+        [btn setFrame:CGRectMake(x,y, kDeviceWidth/3, kDeviceWidth/4) ImageName:imageArray[i] Target:self Action:@selector(handShareButtonClick:) Title:titleArray[i] Font:12];
         btn.tag=10000+i;
         [btn setTitleColor:VBlue_color forState:UIControlStateNormal];
         btn.backgroundColor=[UIColor whiteColor];
@@ -157,7 +155,7 @@ float const shareCancleH = 40;
     
     NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat", @"share_weibo", @"share_download", nil];
     [MobClick event:eventArray[button.tag-10000]];
-    if (button.tag == 10003) {
+    if (button.tag == 10002) {
         UIImageWriteToSavedPhotosAlbum(_screenImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         //[self removeFromSuperview];
         return;

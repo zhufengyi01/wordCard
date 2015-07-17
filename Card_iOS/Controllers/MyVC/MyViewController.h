@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, MyViewControllerPageType)
     UILabel      *contentlbl;
     UILabel      *describelbl;
 //    UIButton     *likeWorkbtn;
-    
     NSInteger   page1;
     NSInteger   page2;
     NSInteger   pageCount1;

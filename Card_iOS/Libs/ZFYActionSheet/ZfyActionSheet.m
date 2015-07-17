@@ -86,7 +86,8 @@
 
 - (void)showInView:(UIView *)view
 {
-    [[UIApplication sharedApplication].delegate.window.rootViewController.view addSubview:self];
+   // [[UIApplication sharedApplication].delegate.window.rootViewController.view addSubview:self];
+    [[[UIApplication sharedApplication].delegate window] addSubview:self];
     
 }
 

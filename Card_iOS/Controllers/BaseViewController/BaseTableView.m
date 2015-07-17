@@ -18,6 +18,7 @@
 #import "SVProgressHUD.h"
 #import "NSDate+Extension.h"
 #import "NSDateFormatter+Make.h"
+#import "ZFYLoading.h"
 #import "WordMainVC.h"
 @interface BaseTableView () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -130,11 +131,13 @@
 
 -(void)requestData
 {
+    [ZFYLoading showLoadViewInview:self.tabbleView];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
     [parameters setObject:apitoken forKey:KURLTOKEN];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [ZFYLoading dismiss];
         if ([responseObject objectForKey:@"code"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
@@ -180,6 +183,7 @@
             }else
             {
                 [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                [ZFYLoading showNullWithstatus:@"没有数据" inView:self.tabbleView];
                 //数据为空
                 [self.refreshControl endRefreshing];
             }
@@ -200,6 +204,9 @@
         [self.statusLable setText:@"加载失败"];
         [self.refreshControl endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        [ZFYLoading showFailWithstatus:@"加载失败..." inView:self.tabbleView event:^(UIButton *sender) {
+         [self requestData];
+        }];
     }];
 }
 

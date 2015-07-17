@@ -9,7 +9,16 @@
 #import "RootViewController.h"
 #import "CommonModel.h"
 #import "WordDetailVC.h"
-@interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource,UIGestureRecognizerDelegate>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+#import "SelectTimeView.h"
+typedef NS_ENUM(NSInteger, WordDetailSourcePage)
+{
+    WordDetailSourcePageDefault,
+    WordDetailSourcePageAdmin,
+    
+};
+@interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource,UIGestureRecognizerDelegate,ZfyActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,AdimToolBarDelegate,SelectTimeViewDelegate>
 {
     WordDetailVC *CurrentVC;
 }
@@ -26,8 +35,10 @@
 @property (nonatomic,strong) NSMutableArray  *MainArray;
 
 
-
 @property(nonatomic,strong)NSMutableArray    *likeArray;
+
+
+@property(nonatomic,assign)WordDetailSourcePage  pageType;
 
 //下标
 @property(nonatomic,assign) NSInteger IndexOfItem;

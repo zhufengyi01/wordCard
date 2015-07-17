@@ -22,11 +22,11 @@
 {
     [super viewDidLoad];
     [SVProgressHUD dismiss];
-    UIBarButtonItem  *item =[[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem=item;
+    UIBarButtonItem  *item =[[UIBarButtonItem alloc]initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.leftBarButtonItem=item;
     self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
     //[self createLeftNavigationItem:nil Title:nil];
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0,kDeviceWidth-40, 30)];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 0,kDeviceWidth-40, 30)];
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchBar.placeholder = @"请输入搜索内容";
     //self.searchBar.showsCancelButton = YES;

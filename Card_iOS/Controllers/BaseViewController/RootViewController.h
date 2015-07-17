@@ -15,10 +15,16 @@
 -(void)createLeftNavigationItem:(UIImage*) leftImage Title:(NSString*)leftTitle;
 //创建导航拦左按钮
 -(void)creatRightNavigationItem:(UIImage*) RightImage Title:(NSString*)RightTitle;
+
+-(void)creatRightNavigationItems:(UIImage*) RightImage1 image2:(UIImage *) image2;
+
+
 //点击左按钮
 -(void)LeftNavigationButtonClick:(UIButton*) leftbtn;
 //点击右按钮
 -(void)RightNavigationButtonClick:(UIButton*) rightbtn;
+
+-(void)RightNavigationButtonsClick:(UIButton *) button;
 
 
 #pragma mark -- 系统样式item

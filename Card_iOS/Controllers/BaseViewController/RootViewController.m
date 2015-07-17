@@ -70,6 +70,38 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:Righttbtn];
 }
 
+-(void)creatRightNavigationItems:(UIImage*) RightImage1 image2:(UIImage *) image2
+{
+    UIButton  *Righttbtn1 =[ZCControl createButtonWithFrame:CGRectMake(0, 0, 40, 50) ImageName:nil Target:self Action:@selector(RightNavigationButtonsClick:) Title:nil];
+    if (RightImage1) {
+        [Righttbtn1 setImage:RightImage1 forState:UIControlStateNormal];
+        [Righttbtn1 setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
+        
+    }
+    Righttbtn1.tag = 100;
+    UIButton  *Righttbtn2 =[ZCControl createButtonWithFrame:CGRectMake(0, 0, 40, 50) ImageName:nil Target:self Action:@selector(RightNavigationButtonsClick:) Title:nil];
+    Righttbtn2.tag = 103;
+    if (image2) {
+        [Righttbtn2 setImage:image2 forState:UIControlStateNormal];
+        [Righttbtn2 setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
+    }
+    UIBarButtonItem  *item1 =[[UIBarButtonItem alloc]initWithCustomView:Righttbtn1];
+    UIBarButtonItem  *item2 =[[UIBarButtonItem alloc]initWithCustomView:Righttbtn2];
+    self.navigationItem.rightBarButtonItems = @[item1,item2];
+}
+
+-(void)RightNavigationButtonsClick:(UIButton *) button
+{
+    if (button.tag==100) {
+       
+    }else
+    {
+        
+    }
+}
+
+
+
 -(void)createLeftSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle
 {
     UIBarButtonItem  *bar =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:systemBarStyle target:self action:@selector(LeftSystemNavigationButtonClick)];

@@ -21,6 +21,7 @@
 #import "TagModel.h"
 #import "CommonCell.h"
 #import "LikeModel.h"
+#import "ZFYLoading.h"
 #import "WordMainVC.h"
 const float segmentheight = 45;
 @implementation MyViewController
@@ -244,6 +245,7 @@ const float segmentheight = 45;
 }
 -(void)requestData
 {
+    [ZFYLoading showLoadViewInview:self.tabbleView];
     if (!self.dataArray1) {
         self.dataArray1 =[NSMutableArray array];
     }
@@ -277,6 +279,7 @@ const float segmentheight = 45;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });
+            [ZFYLoading dismiss];
             if (self.addWordbtn.selected ==YES) {
                 pageCount1 =[[responseObject objectForKey:@"pageCount"] intValue];
                 NSMutableArray *array =[responseObject objectForKey:@"models"];
@@ -311,6 +314,7 @@ const float segmentheight = 45;
                 }else
                 {
                     [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                    [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
                     [self.tabbleView reloadData];
                     //数据为空
                     [self.refreshControl endRefreshing];
@@ -359,6 +363,7 @@ const float segmentheight = 45;
                 }else
                 {
                     [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                    [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
                     [self.tabbleView reloadData];
                     //数据为空
                     [self.refreshControl endRefreshing];
@@ -374,11 +379,20 @@ const float segmentheight = 45;
                 }
                 
             }
+        }else
+        {
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+            [self.tabbleView reloadData];
+            //[ZFYLoading showFailWithstatus:@"加载失败..." inView:<#(UIView *)#> event:<#^(UIButton *sender)fail#>]
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //数据加载失败
+        NSLog(@"======%@",error);
         [self.refreshControl endRefreshing];
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        [ZFYLoading showFailWithstatus:@"加载失败..." inView:self.tabbleView event:^(UIButton *sender) {
+            [self requestData];
+        }];
     }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

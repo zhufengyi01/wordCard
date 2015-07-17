@@ -31,4 +31,15 @@
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
     [self requestData];
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //[super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    WordMainVC  *wordmian =[WordMainVC new];
+    wordmian.MainArray = self.temArr;
+    int  index =  [self getIndexWithSection:(int)indexPath.section Row:(int)indexPath.row];
+    wordmian.IndexOfItem= index;
+    wordmian.pageType = WordDetailSourcePageAdmin;
+    wordmian.likeArray = self.likeArray;
+    [self.navigationController pushViewController:wordmian animated:YES];
+}
 @end

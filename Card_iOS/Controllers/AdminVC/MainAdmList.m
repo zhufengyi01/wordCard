@@ -13,6 +13,7 @@
 #define ADM_NOR 2
 #define ADM_DISCOR 3
 #define ADM_TIM  4
+#define ADM_HOT  5
 
 @implementation MainAdmList
 -(void)viewWillAppear:(BOOL)animated
@@ -24,7 +25,7 @@
 {
     [super viewDidLoad];
     self.title = @"管理员功能列表";
-    self.dataArray = [NSMutableArray arrayWithObjects:@"屏蔽",@"最新",@"正常",@"发现",@"定时", nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:@"屏蔽",@"最新",@"正常",@"发现",@"定时",@"精选", nil];
     [self.tabbleView reloadData];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -52,6 +53,10 @@
         case ADM_TIM:
             TVC.parameters=@{@"status":@"4"};
             TVC.title =@"定时";
+            break;
+        case ADM_HOT:
+            TVC.parameters =@{@"status":@"3"};
+            TVC.title =@"精选";
             break;
         default:
             break;

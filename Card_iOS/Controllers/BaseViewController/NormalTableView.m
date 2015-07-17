@@ -92,7 +92,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     if (self.dataArray.count>indexPath.row) {
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font = [UIFont fontWithName:KFontThin size:16];
         cell.textLabel.text  = [self.dataArray objectAtIndex:indexPath.row];
     }
@@ -104,10 +104,6 @@
 }
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if (self.pageCount>self.page&self.dataArray.count==indexPath.row+1) {
-    //        self.page++;
-    //        [self requestData];
-    //    }
     [self tableviewDisplayIndexpath:indexPath];
 }
 -(void)tableviewDisplayIndexpath:(NSIndexPath *) indexpath

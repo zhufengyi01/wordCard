@@ -9,9 +9,13 @@
 #import "RootViewController.h"
 #import "CommonView.h"
 #import "LikeModel.h"
+#import "Discloading.h"
 @class CommonModel;
 @class TagModel;
 @interface DiscoverViewController : RootViewController
+{
+    Discloading *loadView;
+}
 @property(nonatomic,strong) CommonModel   *model;
 
 @property(nonatomic,strong)CommonView  *comView;

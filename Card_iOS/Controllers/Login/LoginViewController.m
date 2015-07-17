@@ -65,22 +65,18 @@
 }
 -(void)creatUI
 {
-    UIImageView   *logoImageView=[[UIImageView alloc]initWithFrame:CGRectMake((kDeviceWidth-180)/2, 125, 180, 125)];
-    logoImageView.image=[UIImage imageNamed:@"first_screen_slogan.png"];
+    UIImageView   *logoImageView=[[UIImageView alloc]initWithFrame:CGRectMake((kDeviceWidth-200)/2, 125, 200,250)];
+    logoImageView.image=[UIImage imageNamed:@"launcher"];
     [self.view addSubview:logoImageView];
-    
-    
     
     UILabel  *title = [ZCControl createLabelWithFrame:CGRectMake(0,160, kDeviceWidth, 40) Font:30 Text:@"瞎扯"];
     title.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:title];
-    title.textColor = VGray_color;
-    
-    
+    //[self.view addSubview:title];
+    //title.textColor = VGray_color;
     
     UILabel  *d_title = [ZCControl createLabelWithFrame:CGRectMake(0,220, kDeviceWidth, 40) Font:16 Text:@"文字的采集与分享"];
     d_title.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:d_title];
+    //[self.view addSubview:d_title];
     d_title.textColor = VGray_color;
 
     checkBtn=[ZCControl createButtonWithFrame:CGRectMake((kDeviceWidth-140)/2,kDeviceHeight-40, 140, 30) ImageName:nil Target:self Action:@selector(checkClick:) Title:@""];
@@ -123,9 +119,9 @@
     //
     weiboButton=[UIButton buttonWithType:UIButtonTypeCustom];
     weiboButton.frame=CGRectMake((kDeviceWidth-231)/2, kDeviceHeight-170, 231, 40);
-    [weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina.png"] forState:UIControlStateNormal];
+    [weiboButton setBackgroundImage:[UIImage imageNamed:@"wechat_login"] forState:UIControlStateNormal];
     weiboButton.hidden = YES;
-    [weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina_press@2x.png"] forState:UIControlStateHighlighted];
+    //[weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina_press@2x.png"] forState:UIControlStateHighlighted];
     [weiboButton addTarget:self action:@selector(dealloginClick:) forControlEvents:UIControlEventTouchUpInside];
     weiboButton.tag=1001;
     // weiboButton.userInteractionEnabled=NO;
@@ -136,9 +132,9 @@
     
     
     weiChateButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    weiChateButton.frame=CGRectMake((kDeviceWidth-231)/2, kDeviceHeight-120, 231, 40);
-    [weiChateButton setBackgroundImage:[UIImage imageNamed:@"login_button_wechat.png"] forState:UIControlStateNormal];
-    [weiChateButton setBackgroundImage:[UIImage imageNamed:@"login_button_wechat_press.png"] forState:UIControlStateHighlighted];
+    weiChateButton.frame=CGRectMake((kDeviceWidth-202)/2, kDeviceHeight-120, 202, 42);
+    [weiChateButton setBackgroundImage:[UIImage imageNamed:@"wechat_login"] forState:UIControlStateNormal];
+    //[weiChateButton setBackgroundImage:[UIImage imageNamed:@"login_button_wechat_press.png"] forState:UIControlStateHighlighted];
     // weiChateButton.userInteractionEnabled=NO;
     //if (checkBtn.selected==YES) {
     weiChateButton.userInteractionEnabled=YES;
@@ -147,8 +143,6 @@
     [weiChateButton addTarget:self action:@selector(dealloginClick:) forControlEvents:UIControlEventTouchUpInside];
     weiChateButton.tag=1002;
     [self.view addSubview:weiChateButton];
-    
-    
     //在
     //emaillogin
     UIButton  *emaillogin =[ZCControl createButtonWithFrame:CGRectMake(0, kDeviceHeight-50, kDeviceWidth/2, 50) ImageName:@"login_alpa_backgroundcolor.png" Target:self Action:@selector(dealloginClick:) Title:@"邮箱登陆"];
@@ -156,14 +150,15 @@
     emaillogin.hidden=YES;
     [emaillogin setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     [emaillogin setTitleColor:VBlue_color forState:UIControlStateNormal];
-    emaillogin.titleLabel.font=[UIFont boldSystemFontOfSize:16];
-    
+    emaillogin.titleLabel.font=[UIFont fontWithName:KFontThin size:16];
+    [emaillogin setTitleColor:View_Black_Color forState:UIControlStateNormal];
     [self.view addSubview:emaillogin];
     
     UIButton  *emailregister =[ZCControl createButtonWithFrame:CGRectMake(kDeviceWidth/2, kDeviceHeight-50, kDeviceWidth/2, 50) ImageName:@"login_alpa_backgroundcolor.png" Target:self Action:@selector(dealloginClick:) Title:@"邮箱注册"];
     emailregister.tag=1004;
     [emailregister setTitleColor:VBlue_color forState:UIControlStateNormal];
-    emailregister.titleLabel.font=[UIFont boldSystemFontOfSize:16];
+    emailregister.titleLabel.font=[UIFont fontWithName:KFontThin size:16];
+    [emailregister setTitleColor:View_Black_Color forState:UIControlStateNormal];
     [emailregister setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
     emailregister.hidden=YES;
     [self.view addSubview:emailregister];
@@ -238,8 +233,6 @@
         //邮箱注册
         BaseNavigationViewController  *na =[[BaseNavigationViewController alloc]initWithRootViewController:[Register_1ViewController new]];
         [self presentViewController:na animated:YES completion:nil];
-        
-        
     }
 }
 /**

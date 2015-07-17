@@ -49,4 +49,6 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+
+-(int)getIndexWithSection:(int) section Row:(int) row;
 @end

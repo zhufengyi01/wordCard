@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		383104D01B57AB560007BD98 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383104CF1B57AB560007BD98 /* QuartzCore.framework */; };
+		383104D31B57AC9A0007BD98 /* Discloading.m in Sources */ = {isa = PBXBuildFile; fileRef = 383104D21B57AC9A0007BD98 /* Discloading.m */; };
 		384640F91B4E5B720079CE9D /* GCDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F11B4E5B720079CE9D /* GCDGroup.m */; };
 		384640FA1B4E5B720079CE9D /* GCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F31B4E5B720079CE9D /* GCDQueue.m */; };
 		384640FB1B4E5B720079CE9D /* GCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F51B4E5B720079CE9D /* GCDSemaphore.m */; };
@@ -185,6 +187,8 @@
 		38D34FDB1B4A81BE00CBAB2C /* Register_1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D34FD71B4A81BE00CBAB2C /* Register_1ViewController.m */; };
 		38D34FDC1B4A81BE00CBAB2C /* Register_2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D34FD91B4A81BE00CBAB2C /* Register_2ViewController.m */; };
 		38D34FDE1B4A85CF00CBAB2C /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 38D34FDD1B4A85CF00CBAB2C /* terms.html */; };
+		38D396C61B57530E008E4CEA /* ZFYLoad.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38D396C51B57530E008E4CEA /* ZFYLoad.bundle */; };
+		38D396C91B576079008E4CEA /* PersonSetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D396C81B576079008E4CEA /* PersonSetVC.m */; };
 		38D618BE1B462F7C00907CE9 /* NormalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618BD1B462F7C00907CE9 /* NormalTableView.m */; };
 		38D618C81B46357600907CE9 /* WordMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618C71B46357600907CE9 /* WordMainVC.m */; };
 		38D618CB1B46359200907CE9 /* WordDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618CA1B46359200907CE9 /* WordDetailVC.m */; };
@@ -205,6 +209,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		383104CF1B57AB560007BD98 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		383104D11B57AC9A0007BD98 /* Discloading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discloading.h; sourceTree = "<group>"; };
+		383104D21B57AC9A0007BD98 /* Discloading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Discloading.m; sourceTree = "<group>"; };
 		384640EF1B4E5B720079CE9D /* GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCD.h; sourceTree = "<group>"; };
 		384640F01B4E5B720079CE9D /* GCDGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDGroup.h; sourceTree = "<group>"; };
 		384640F11B4E5B720079CE9D /* GCDGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDGroup.m; sourceTree = "<group>"; };
@@ -552,6 +559,9 @@
 		38D34FD81B4A81BE00CBAB2C /* Register_2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Register_2ViewController.h; sourceTree = "<group>"; };
 		38D34FD91B4A81BE00CBAB2C /* Register_2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Register_2ViewController.m; sourceTree = "<group>"; };
 		38D34FDD1B4A85CF00CBAB2C /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
+		38D396C51B57530E008E4CEA /* ZFYLoad.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZFYLoad.bundle; sourceTree = "<group>"; };
+		38D396C71B576079008E4CEA /* PersonSetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonSetVC.h; sourceTree = "<group>"; };
+		38D396C81B576079008E4CEA /* PersonSetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonSetVC.m; sourceTree = "<group>"; };
 		38D618BC1B462F7C00907CE9 /* NormalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalTableView.h; sourceTree = "<group>"; };
 		38D618BD1B462F7C00907CE9 /* NormalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalTableView.m; sourceTree = "<group>"; };
 		38D618C61B46357600907CE9 /* WordMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordMainVC.h; sourceTree = "<group>"; };
@@ -569,6 +579,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383104D01B57AB560007BD98 /* QuartzCore.framework in Frameworks */,
 				38D302AD1B45293F00484AC8 /* libstdc++.dylib in Frameworks */,
 				38D34FCC1B4A7DDC00CBAB2C /* libSocialWechat.a in Frameworks */,
 				38D34FCD1B4A7DDC00CBAB2C /* libWeChatSDK.a in Frameworks */,
@@ -850,6 +861,7 @@
 		38CFC43A1B552D10004EF31F /* ZFYLoad */ = {
 			isa = PBXGroup;
 			children = (
+				38D396C51B57530E008E4CEA /* ZFYLoad.bundle */,
 				38CFC43B1B552D10004EF31F /* ZFYLoading.h */,
 				38CFC43C1B552D10004EF31F /* ZFYLoading.m */,
 			);
@@ -879,6 +891,8 @@
 			children = (
 				38D0DB961B4B763F00E0E7EC /* SettingViewController.h */,
 				38D0DB971B4B763F00E0E7EC /* SettingViewController.m */,
+				38D396C71B576079008E4CEA /* PersonSetVC.h */,
+				38D396C81B576079008E4CEA /* PersonSetVC.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1053,6 +1067,8 @@
 		38D302011B451A9B00484AC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				383104D11B57AC9A0007BD98 /* Discloading.h */,
+				383104D21B57AC9A0007BD98 /* Discloading.m */,
 				38CFFA941B538FA0005115AB /* UMShareView.h */,
 				38CFFA951B538FA0005115AB /* UMShareView.m */,
 				38CFFA911B538EAD005115AB /* ShareButton.h */,
@@ -1081,6 +1097,7 @@
 		38D302021B451AAB00484AC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				383104CF1B57AB560007BD98 /* QuartzCore.framework */,
 				38D302AC1B45293F00484AC8 /* libstdc++.dylib */,
 				38D302AA1B45293100484AC8 /* libz.dylib */,
 				38D302A81B45292800484AC8 /* libsqlite3.dylib */,
@@ -1513,7 +1530,7 @@
 				TargetAttributes = {
 					38D301D41B4517CC00484AC8 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = SHPTADMRF2;
+						DevelopmentTeam = 9THF4SEGPY;
 					};
 					38D301ED1B4517CC00484AC8 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1555,6 +1572,7 @@
 				38D34FBF1B4A7DDC00CBAB2C /* UMSCommentDetailController.xib in Resources */,
 				38D34FC51B4A7DDC00CBAB2C /* UMSnsAccountViewController.xib in Resources */,
 				3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */,
+				38D396C61B57530E008E4CEA /* ZFYLoad.bundle in Resources */,
 				38D34FC41B4A7DDC00CBAB2C /* UMSLoginViewController.xib in Resources */,
 				38D34FDE1B4A85CF00CBAB2C /* terms.html in Resources */,
 				38D34FC01B4A7DDC00CBAB2C /* UMSCommentInputController.xib in Resources */,
@@ -1604,6 +1622,7 @@
 				38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */,
 				38D3035B1B45368600484AC8 /* CommonView.m in Sources */,
 				3872BF3E1B4664D80004A928 /* UIViewController+MJPopupViewController.m in Sources */,
+				38D396C91B576079008E4CEA /* PersonSetVC.m in Sources */,
 				38D303B71B453B3400484AC8 /* MJRefreshLegendFooter.m in Sources */,
 				3872BF211B4664D80004A928 /* NSString+DictionaryValue.m in Sources */,
 				38D303DF1B453B3C00484AC8 /* NSData+ImageContentType.m in Sources */,
@@ -1627,6 +1646,7 @@
 				3872BF1E1B4664D80004A928 /* NSDateFormatter+Make.m in Sources */,
 				3872BF2C1B4664D80004A928 /* UIImage+Capture.m in Sources */,
 				38D0DC381B4BD7AB00E0E7EC /* LikeButton.m in Sources */,
+				383104D31B57AC9A0007BD98 /* Discloading.m in Sources */,
 				38D303B51B453B3400484AC8 /* MJRefreshGifHeader.m in Sources */,
 				3872BF151B4664D80004A928 /* NSData+Base64.m in Sources */,
 				38D303BA1B453B3400484AC8 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1867,6 +1887,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1894,6 +1915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
