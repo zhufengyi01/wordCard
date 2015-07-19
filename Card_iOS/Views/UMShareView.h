@@ -41,6 +41,7 @@ typedef NS_ENUM(NSInteger, UMShareType)
     UIView     *logosupView;
     UIImage    *_screenImage;
     float     shareheight;
+    UIScrollView  *contentScroll;
 }
 
 

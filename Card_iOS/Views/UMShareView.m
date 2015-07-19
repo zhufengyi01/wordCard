@@ -39,6 +39,9 @@ float const shareCancleH = 40;
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0];
         float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
         backView =[[UIView alloc]initWithFrame:CGRectMake(0,kDeviceHeight, kDeviceWidth, height)];
+        if (Height>kDeviceWidth-20) {
+            backView.frame = CGRectMake(0,kDeviceHeight,kDeviceWidth,height+kDeviceWidth-20-shareheight);
+        }
         backView.userInteractionEnabled=YES;
         backView.backgroundColor =[UIColor whiteColor];
         UILabel  *sh_lbl= [ZCControl createLabelWithFrame:CGRectMake(0, 0, kDeviceWidth, 40) Font:14 Text:@"分享"];
@@ -76,9 +79,6 @@ float const shareCancleH = 40;
 //点击取消需要返回
 -(void)cancleshareClick
 {
-//    if (_delegate&&[_delegate respondsToSelector:@selector(UMCancleShareClick)]) {
-//        [_delegate UMCancleShareClick];
-//    }
     [UIView animateWithDuration:KShow_ShareView_Time animations:^{
         float height=(kDeviceWidth/4)+shareheight+40+30+50;
         backView.frame=CGRectMake(0, kDeviceHeight, kDeviceWidth,height);
@@ -89,24 +89,27 @@ float const shareCancleH = 40;
 
 -(void)createShareView
 {
-    shareView =[[UIView alloc]initWithFrame:CGRectMake(10,40, kDeviceWidth-20,shareheight)];
-    shareView.userInteractionEnabled=YES;
-    shareView.backgroundColor=[UIColor whiteColor];
-    shareView.layer.cornerRadius = 4;
-    shareView.clipsToBounds = YES;
-    [backView addSubview:shareView];
     
-    _ShareimageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,shareView.frame.size.width,shareheight)];
+    contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(10,40 , kDeviceWidth-20,kDeviceWidth-20)];
+    contentScroll.backgroundColor = [UIColor whiteColor];
+    contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, kDeviceWidth-20);
+    [backView addSubview:contentScroll];
+
+    _ShareimageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,kDeviceWidth-20,shareheight)];
     _ShareimageView.backgroundColor=[UIColor whiteColor];
     _ShareimageView.image=_screenImage;
-    _ShareimageView.layer.cornerRadius = 2;
+    _ShareimageView.layer.cornerRadius = 5;
     _ShareimageView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     _ShareimageView.clipsToBounds = YES;
     _ShareimageView.contentMode=UIViewContentModeScaleAspectFit;
-    [shareView addSubview:_ShareimageView];
+    if (_ShareimageView.frame.size.height>kDeviceWidth-20) {
+        contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, shareheight);
+    }
+    [contentScroll addSubview:_ShareimageView];
 }
 -(void)createButtomView
 {
+    
     buttomView=[[UIView alloc]initWithFrame:CGRectMake(0,backView.frame.size.height-(kDeviceWidth/4)-50, kDeviceWidth, (kDeviceWidth)/4)];
     buttomView.backgroundColor=[UIColor whiteColor];
     buttomView.userInteractionEnabled=YES;
@@ -149,15 +152,11 @@ float const shareCancleH = 40;
 //点击分享
 -(void)handShareButtonClick:(UIButton *) button
 {
-    // [self requestShareWithMethod: [NSString stringWithFormat:@"%ld",button.tag-10000]];
     logosupView.hidden=NO;
-    //shareImage=[Function getImage:shareView WithSize:CGSizeMake(kDeviceWidth-20, shareheight)];
-    
     NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat", @"share_weibo", @"share_download", nil];
     [MobClick event:eventArray[button.tag-10000]];
     if (button.tag == 10002) {
         UIImageWriteToSavedPhotosAlbum(_screenImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        //[self removeFromSuperview];
         return;
     }
     self.shareBtnEvent(button.tag-10000);
@@ -184,7 +183,10 @@ float const shareCancleH = 40;
     [AppView addSubview:self];
     [UIView animateWithDuration:KShow_ShareView_Time animations:^{
         float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
-        backView.frame=CGRectMake(0, kDeviceHeight-height, kDeviceWidth, height);
+        if (shareheight>kDeviceWidth-20) {
+            height=(kDeviceWidth/4)+kDeviceWidth-20+shareheadH+30+shareCancleH;
+        }
+        backView.frame=CGRectMake(0, kDeviceHeight-height, backView.frame.size.width, backView.frame.size.height);
     } completion:^(BOOL finished) {
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0.4];
     }];
