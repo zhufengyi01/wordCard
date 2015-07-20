@@ -18,6 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "UserButton.h"
 #import "LikeButton.h"
+#import "DetailLikeBar.h"
 #import "UIButton+Block.h"
 @implementation WordDetailVC
 
@@ -122,6 +123,7 @@
     
     [likeBar addSubview:likeBtn];
 }
+
 #pragma mark --requset Method
 -(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
 {

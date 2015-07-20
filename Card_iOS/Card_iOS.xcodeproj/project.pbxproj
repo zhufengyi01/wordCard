@@ -86,6 +86,8 @@
 		38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC341B4BCE0700E0E7EC /* UserButton.m */; };
 		38D0DC381B4BD7AB00E0E7EC /* LikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */; };
 		38D0DC3B1B4BDF6B00E0E7EC /* LikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */; };
+		38D1EAB51B5C9EE500B18169 /* CommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAB41B5C9EE500B18169 /* CommentVC.m */; };
+		38D1EAB81B5CB2E900B18169 /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAB71B5CB2E900B18169 /* CommentModel.m */; };
 		38D21B1D1B58A62C00F16F21 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D21B1C1B58A62C00F16F21 /* WCAlertView.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
@@ -364,6 +366,10 @@
 		38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeButton.m; sourceTree = "<group>"; };
 		38D0DC391B4BDF6B00E0E7EC /* LikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeModel.h; sourceTree = "<group>"; };
 		38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeModel.m; sourceTree = "<group>"; };
+		38D1EAB31B5C9EE500B18169 /* CommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentVC.h; sourceTree = "<group>"; };
+		38D1EAB41B5C9EE500B18169 /* CommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentVC.m; sourceTree = "<group>"; };
+		38D1EAB61B5CB2E900B18169 /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
+		38D1EAB71B5CB2E900B18169 /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
 		38D21B1B1B58A62C00F16F21 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCAlertView.h; sourceTree = "<group>"; };
 		38D21B1C1B58A62C00F16F21 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCAlertView.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1355,6 +1361,8 @@
 				38923A001B4D340500E7F092 /* NotiModel.m */,
 				38923A021B4D35AD00E7F092 /* TextModel.h */,
 				38923A031B4D35AD00E7F092 /* TextModel.m */,
+				38D1EAB61B5CB2E900B18169 /* CommentModel.h */,
+				38D1EAB71B5CB2E900B18169 /* CommentModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1481,6 +1489,8 @@
 				38D618C71B46357600907CE9 /* WordMainVC.m */,
 				38D618C91B46359200907CE9 /* WordDetailVC.h */,
 				38D618CA1B46359200907CE9 /* WordDetailVC.m */,
+				38D1EAB31B5C9EE500B18169 /* CommentVC.h */,
+				38D1EAB41B5C9EE500B18169 /* CommentVC.m */,
 			);
 			path = WordDetail;
 			sourceTree = "<group>";
@@ -1668,6 +1678,7 @@
 				38D303B31B453B3400484AC8 /* MJRefreshFooter.m in Sources */,
 				3872BF281B4664D80004A928 /* NSString+UrlEncode.m in Sources */,
 				38D303941B453B2A00484AC8 /* UIProgressView+AFNetworking.m in Sources */,
+				38D1EAB81B5CB2E900B18169 /* CommentModel.m in Sources */,
 				38D303E61B453B3C00484AC8 /* SDWebImagePrefetcher.m in Sources */,
 				38D303EB1B453B3C00484AC8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				3872BF231B4664D80004A928 /* NSString+Encrypt.m in Sources */,
@@ -1735,6 +1746,7 @@
 				38D3038E1B453B2A00484AC8 /* AFURLSessionManager.m in Sources */,
 				38D303E81B453B3C00484AC8 /* UIImage+GIF.m in Sources */,
 				38D303921B453B2A00484AC8 /* UIButton+AFNetworking.m in Sources */,
+				38D1EAB51B5C9EE500B18169 /* CommentVC.m in Sources */,
 				3872BF351B4664D80004A928 /* NSString+Additions.m in Sources */,
 				38D303EC1B453B3C00484AC8 /* UIImageView+WebCache.m in Sources */,
 				38D0DBC51B4BB4EB00E0E7EC /* NoticeViewController.m in Sources */,

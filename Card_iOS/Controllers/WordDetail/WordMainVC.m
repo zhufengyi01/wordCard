@@ -19,6 +19,9 @@
 #import "ZfyActionSheet.h"
 #import "SVProgressHUD.h"
 #import "AFNetworking.h"
+#import "DetailLikeBar.h"
+#import "BaseNavigationViewController.h"
+#import "CommentVC.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 @implementation WordMainVC
@@ -34,11 +37,14 @@
     
     //所有的手势
     self.CurrentIndex = 0;
-    [self creatRightNavigationItems:[UIImage imageNamed:@"share"] image2:[UIImage imageNamed:@"more"]];
+    //[self creatRightNavigationItems:[UIImage imageNamed:@"share"] image2:[UIImage imageNamed:@"more"]];
+    [self creatRightNavigationItem:[UIImage imageNamed:@"more"] Title:nil];
     [self createUI];
     //只有从管理员进来才可以有
     if (self.pageType==WordDetailSourcePageAdmin) {
           [self createToolBar];
+    }else{
+    [self createLikeBarButtoms];
     }
 }
 -(void)handOperationAtIndex:(NSInteger)index
@@ -78,18 +84,11 @@
     CommonModel  *model = CurrentVC.model;
     [self requesttiming:model.Id AndTimeSp:dateString];
 }
-
--(void)RightNavigationButtonsClick:(UIButton *) button
+-(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
-    
-    if (button.tag==100) {
-        [self RightShareEvent];
-        //分享
-    }else  //更多
-    {
-        ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
-        [zfy showInView:self.view];
-    }
+    ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
+    [zfy showInView:self.view];
+   
 }
 -(void)ZfyActionSheet:(id)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -128,7 +127,8 @@
 }
 //定时发送到热门,发送时间戳
 -(void)requesttiming:(NSString *)model_id AndTimeSp:(NSString *)timeSp
-{    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+{
+    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *urlString =[NSString stringWithFormat:@"%@text/change-status", kApiBaseUrl];
     NSString *tokenString =[Function getURLtokenWithURLString:urlString];
@@ -141,8 +141,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [SVProgressHUD showErrorWithStatus:@"操作失败"];
-        
-        
     }];
 }
 //status 0 屏蔽 1 正常 2 发现/电影页 3 热门 只有到热门页的时候需要传updated_at 5 未审核
@@ -212,6 +210,40 @@
     [self addChildViewController:_pageController];
     [[self view] addSubview:[_pageController view]];
 }
+-(void)createLikeBarButtoms
+{
+    DetailLikeBar  *detail = [[DetailLikeBar alloc] initWithFrame:CGRectMake(0, kDeviceHeight-40-kHeightNavigation,kDeviceWidth, 40)];
+    detail.btnClickAtInsex = ^(NSInteger buttonIndex)
+    {
+        switch (buttonIndex) {
+            case 0:
+                [self RightShareEvent];
+                break;
+            case 1:
+            {
+                NSArray  *Arr =    [self.pageController viewControllers];
+                CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+                CommonModel  *model = CurrentVC.model;
+                CommentVC *cv =[CommentVC new];
+                cv.pro_id =model.Id;
+                cv.completeComment = ^(CommentModel *model)
+                {
+                    
+                    
+                };
+                BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
+                [self.navigationController presentViewController:na animated:YES completion:nil];
+            }
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+        
+    };
+    [self.view addSubview:detail];
+}
 
 -(void)createToolBar
 {
@@ -221,6 +253,7 @@
     
 }
 
+#pragma  mark - UIPageViewController
 //根据下标值获取上一个控制器或者下一个控制器  得到相应的VC对象
 - (WordDetailVC *)viewControllerAtIndex:(NSUInteger)index {
     if (([self.MainArray count] == 0) || (index >= [self.MainArray count])) {
@@ -267,7 +300,7 @@
     return [self viewControllerAtIndex:index];
 }
 
-
+#pragma  mark  -EmailMethod
 - (void)sendFeedBackwithmodel:(CommonModel *)model;
 
 {
