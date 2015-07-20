@@ -1,0 +1,141 @@
+//
+//  WordDetailListVC.m
+//  Card_iOS
+//
+//  Created by 朱封毅 on 20/07/15.
+//  Copyright (c) 2015年 card. All rights reserved.
+//
+
+#import "WordDetailListVC.h"
+#import "ZCControl.h"
+#import "Constant.h"
+#import "UserDataCenter.h"
+#import "Function.h"
+#import "SVProgressHUD.h"
+#import "AFNetworking.h"
+#import "CommentModel.h"
+#import "UserButton.h"
+#import "CommentDetailCell.h"
+#import "UIButton+Block.h"
+#import "UIScrollView+Addition.h"
+#import "UIImageView+WebCache.h"
+@implementation WordDetailListVC
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth)];
+    headView.userInteractionEnabled = YES;
+    //headView.backgroundColor = [UIColor redColor];
+    [self.tabbleView setTableHeaderView:headView];
+    self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth-0, kDeviceHeight-kHeightNavigation-40);
+    //self.tabbleView.showsVerticalScrollIndicator = NO;
+    self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
+    [headView addSubview:self.comView];
+    self.comView.isLongWord = YES;
+    [self.comView configCommonView:self.model];
+    
+    UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 50)];
+    likeBar.userInteractionEnabled = YES;
+    [headView addSubview:likeBar];
+    // 点击进入个人页
+    UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
+    NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
+    [userbtn addActionHandler:^(NSInteger tag) {
+        
+    }];
+    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
+    userbtn.titleLab.text= self.model.userInfo.username;
+    [likeBar addSubview:userbtn];
+    
+    UIView *seper = [[UIView alloc] initWithFrame:CGRectMake(0,likeBar.frame.size.height-5, kDeviceWidth, 5)];
+    seper.backgroundColor = VLight_GrayColor_apla;
+    [likeBar addSubview:seper];
+    headView.frame =CGRectMake(0, 0, kDeviceWidth,likeBar.frame.origin.y+likeBar.frame.size.height+0);
+    [self.tabbleView setTableHeaderView:headView];
+    [self requstCommentData];
+}
+-(void)RefreshViewControlEventValueChanged
+{
+    [self.dataArray removeAllObjects];
+    [self requstCommentData];
+}
+#pragma mark --requset Method
+-(void)requstCommentData
+{
+    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@comment/list?per-page=%ld&page=%ld", kApiBaseUrl,(long)self.pageSzie,(long)self.page];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary *parameters=@{@"prod_id":self.model.Id,@"user_id":userCenter.user_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            self.pageCount = [[responseObject objectForKey:@"pageCount"] integerValue];
+            NSArray *Arr = [responseObject objectForKey:@"models"];
+            if  (Arr.count>0) {
+                for (NSDictionary  *dict in Arr) {
+                    CommentModel *model = [CommentModel new];
+                    if (dict) {
+                        [model setValuesForKeysWithDictionary:dict];
+                        UserModel *user = [UserModel new];
+                        if (![[dict objectForKey:@"user"] isKindOfClass:[NSNull class]]) {
+                            [user setValuesForKeysWithDictionary:[dict objectForKey:@"user"]];
+                            model.userInfo = user;
+                        }
+                        if (!self.dataArray) {
+                            self.dataArray = [NSMutableArray array];
+                        }
+                        [self.dataArray addObject:model];
+                    }
+                }
+                [self.tabbleView reloadData];
+                [self.refreshControl endRefreshing];
+            }else
+            {
+                [self.tabbleView reloadData];
+                [self.refreshControl endRefreshing];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [self.refreshControl endRefreshing];
+        //[SVProgressHUD showSuccessWithStatus:@"操作失败"];
+    }];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CommentModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    return  [CommentDetailCell getCellHeightWithModel:model];
+    return 60;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"cellid";
+    CommentDetailCell *cell  = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell=  [[CommentDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    if (self.dataArray.count>indexPath.row) {
+        CommentModel  *model = [self.dataArray objectAtIndex:indexPath.row];
+        [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
+            
+        } ];
+        
+       
+    }
+    return cell;
+}
+
+//上拉刷新
+-(void)tableviewDisplayIndexpath:(NSIndexPath *)indexpath
+{
+    if (self.dataArray.count==indexpath.row+2&&self.pageCount >self.page) {
+        self.page++;
+        [self requstCommentData];
+    }
+}
+
+@end

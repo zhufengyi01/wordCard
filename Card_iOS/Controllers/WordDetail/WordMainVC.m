@@ -50,7 +50,7 @@
 -(void)handOperationAtIndex:(NSInteger)index
 {
     NSArray  *Arr =    [self.pageController viewControllers];
-    CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     CommonModel  *model = CurrentVC.model;
     if (index==0) {
         //屏蔽
@@ -80,7 +80,7 @@
 -(void)DatePickerSelectedTime:(NSString *)dateString    {
     //定时到热门，伴随时间戳
     NSArray  *Arr =    [self.pageController viewControllers];
-    CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     CommonModel  *model = CurrentVC.model;
     [self requesttiming:model.Id AndTimeSp:dateString];
 }
@@ -95,7 +95,7 @@
     if (buttonIndex==0) {
         //邮箱举报
         NSArray  *Arr =    [self.pageController viewControllers];
-        CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+        CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
         CommonModel  *model = CurrentVC.model;
         [self sendFeedBackwithmodel:model];
     }
@@ -104,7 +104,7 @@
 -(void)RightShareEvent
 {
     NSArray  *Arr =    [self.pageController viewControllers];
-    CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     [self.pageController childViewControllers];
     float height = CurrentVC.comView.frame.size.height;
      UIImage  *image= [UIImage captureWithView:CurrentVC.comView];
@@ -198,7 +198,7 @@
     // UIPageViewController对象要显示的页数据封装成为一个NSArray。
     // 因为我们定义UIPageViewController对象显示样式为显示一页（options参数指定）。
     // 如果要显示2页，NSArray中，应该有2个相应页数据。
-    WordDetailVC *initialViewController =[self viewControllerAtIndex:self.IndexOfItem];// 得到第一
+    WordDetailListVC *initialViewController =[self viewControllerAtIndex:self.IndexOfItem];// 得到第一
     //初始化的时候记录了当前的第一个viewcontroller  以后每次都在代理里面获取当前的viewcontroller
     CurrentVC=initialViewController;
     NSArray *viewControllers =[NSArray arrayWithObject:initialViewController];
@@ -222,13 +222,13 @@
             case 1:
             {
                 NSArray  *Arr =    [self.pageController viewControllers];
-                CurrentVC = (WordDetailVC *) [Arr objectAtIndex:0];
+                CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
                 CommonModel  *model = CurrentVC.model;
                 CommentVC *cv =[CommentVC new];
                 cv.pro_id =model.Id;
                 cv.completeComment = ^(CommentModel *model)
                 {
-                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"aasalhsha" object:nil];
                     
                 };
                 BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
@@ -255,27 +255,27 @@
 
 #pragma  mark - UIPageViewController
 //根据下标值获取上一个控制器或者下一个控制器  得到相应的VC对象
-- (WordDetailVC *)viewControllerAtIndex:(NSUInteger)index {
+- (WordDetailListVC *)viewControllerAtIndex:(NSUInteger)index {
     if (([self.MainArray count] == 0) || (index >= [self.MainArray count])) {
         return nil;
     }
     // 创建一个新的控制器类，并且分配给相应的数据
-    WordDetailVC * dataViewController =[[WordDetailVC alloc] init];
+    WordDetailListVC * dataViewController =[[WordDetailListVC alloc] init];
     dataViewController.model = [self.MainArray objectAtIndex:index];
     dataViewController.likeArray = self.likeArray;
     return dataViewController;
 }
 // 根据数组元素值，得到下标值
-- (NSUInteger)indexOfViewController:(WordDetailVC *)viewController {
-    WordDetailVC *dataViewController=(WordDetailVC *)viewController;
+- (NSUInteger)indexOfViewController:(WordDetailListVC *)viewController {
+    WordDetailListVC *dataViewController=(WordDetailListVC *)viewController;
     return [self.MainArray indexOfObject:dataViewController.model];
 }
 
 // 返回上一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     //获取当前控制器
-     //CurrentVC =(WordDetailVC *) viewController;
-    NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
+
+    NSUInteger index = [self indexOfViewController:(WordDetailListVC*)viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -288,8 +288,7 @@
 
 // 返回下一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
-    //CurrentVC =(WordDetailVC *) viewController;
-    NSUInteger index = [self indexOfViewController:(WordDetailVC *)viewController];
+    NSUInteger index = [self indexOfViewController:(WordDetailListVC *)viewController];
     if (index == NSNotFound) {
         return nil;
     }

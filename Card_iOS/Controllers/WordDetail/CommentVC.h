@@ -9,7 +9,7 @@
 
 #import "RootViewController.h"
 #import "CommentModel.h"
-@interface CommentVC : RootViewController
+@interface CommentVC : RootViewController <UITextViewDelegate>
 
 
 @property(nonatomic,copy) NSString *pro_id;

@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "CommonModel.h"
 #import "WordDetailVC.h"
+#import "WordDetailListVC.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SelectTimeView.h"
@@ -20,11 +21,11 @@ typedef NS_ENUM(NSInteger, WordDetailSourcePage)
 };
 @interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource,UIGestureRecognizerDelegate,ZfyActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,AdimToolBarDelegate,SelectTimeViewDelegate>
 {
-    WordDetailVC *CurrentVC;
+    //WordDetailVC *CurrentVC;
+    WordDetailListVC  *CurrentVC;
 }
 @property (strong, nonatomic) UIPageViewController *pageController;
 
-//@property(nonatomic,strong) WordDetailVC  *CurrentVC;
 
 //当前页面的model 对象
 @property(strong,nonatomic) CommonModel  *Currentmodel;

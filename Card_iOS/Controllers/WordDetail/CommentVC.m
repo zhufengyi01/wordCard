@@ -14,6 +14,7 @@
 #import "Function.h"
 #import "SVProgressHUD.h"
 #import "CommentModel.h"
+#import "GCD.h"
 @implementation CommentVC
 
 -(void)viewDidLoad
@@ -30,8 +31,15 @@
     self.textView.backgroundColor = VLight_GrayColor_apla;
     self.textView.tintColor = View_Black_Color;
     self.textView.textColor= View_Black_Color;
+    self.textView.delegate = self;
+    [self.textView becomeFirstResponder];
     self.textView.font = [UIFont fontWithName:KFontThin size:18];
     [self.view addSubview:self.textView];
+    
+    UILabel  *lbl = [ZCControl createLabelWithFrame:CGRectMake(10, self.textView.frame.origin.x+self.textView.frame.size.height+10, 200, 20) Font:12 Text:@"最多只能输入100个字符"];
+    lbl.font = [UIFont fontWithName:KFontThin size:10];
+    lbl.textColor = VLight_GrayColor;
+    [self.view addSubview:lbl];
 }
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn
 {
@@ -43,7 +51,6 @@
 }
 -(void)requestPublish
 {
-    
     //去掉两边空格
     NSString *temptext = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     //去掉换行符
@@ -55,18 +62,20 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
-          [self dismissViewControllerAnimated:YES completion:^{
-              //self.completeComment();
-              CommentModel *model =[CommentModel new]; 
-              [model setValuesForKeysWithDictionary:[responseObject objectForKey:@"model"]];
-              UserModel *user = [UserModel new];
-              user.username = userCenter.username;
-              user.Id= userCenter.user_id;
-              user.fake = userCenter.fake;
-              user.logo = userCenter.logo;
-              model.userInfo = user;
-              self.completeComment(model);
-          }];
+          [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+            [GCDQueue executeInMainQueue:^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                    CommentModel *model =[CommentModel new];
+                    [model setValuesForKeysWithDictionary:[responseObject objectForKey:@"model"]];
+                    UserModel *user = [UserModel new];
+                    user.username = userCenter.username;
+                    user.Id= userCenter.user_id;
+                    user.fake = userCenter.fake;
+                    user.logo = userCenter.logo;
+                    model.userInfo = user;
+                    self.completeComment(model);
+                }];
+            } afterDelaySecs:1];
         }
         else
         {
@@ -75,7 +84,15 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"评论失败，请重试"];
     }];
-    
-    
+}
+
+#pragma mark  --textViewDelegate
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (range.length>100) {
+        [SVProgressHUD showInfoWithStatus:@"最多输入100个字符"];
+        return NO;
+    }
+    return YES;
 }
 @end

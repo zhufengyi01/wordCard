@@ -89,6 +89,8 @@
 		38D0DC3B1B4BDF6B00E0E7EC /* LikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D0DC3A1B4BDF6B00E0E7EC /* LikeModel.m */; };
 		38D1EAB51B5C9EE500B18169 /* CommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAB41B5C9EE500B18169 /* CommentVC.m */; };
 		38D1EAB81B5CB2E900B18169 /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAB71B5CB2E900B18169 /* CommentModel.m */; };
+		38D1EAC11B5CD8D400B18169 /* WordDetailListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAC01B5CD8D400B18169 /* WordDetailListVC.m */; };
+		38D1EAC41B5CE09000B18169 /* CommentDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1EAC31B5CE09000B18169 /* CommentDetailCell.m */; };
 		38D21B1D1B58A62C00F16F21 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D21B1C1B58A62C00F16F21 /* WCAlertView.m */; };
 		38D301DB1B4517CC00484AC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DA1B4517CC00484AC8 /* main.m */; };
 		38D301DE1B4517CC00484AC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D301DD1B4517CC00484AC8 /* AppDelegate.m */; };
@@ -373,6 +375,10 @@
 		38D1EAB41B5C9EE500B18169 /* CommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentVC.m; sourceTree = "<group>"; };
 		38D1EAB61B5CB2E900B18169 /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
 		38D1EAB71B5CB2E900B18169 /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
+		38D1EABF1B5CD8D400B18169 /* WordDetailListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDetailListVC.h; sourceTree = "<group>"; };
+		38D1EAC01B5CD8D400B18169 /* WordDetailListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordDetailListVC.m; sourceTree = "<group>"; };
+		38D1EAC21B5CE09000B18169 /* CommentDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailCell.h; sourceTree = "<group>"; };
+		38D1EAC31B5CE09000B18169 /* CommentDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailCell.m; sourceTree = "<group>"; };
 		38D21B1B1B58A62C00F16F21 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCAlertView.h; sourceTree = "<group>"; };
 		38D21B1C1B58A62C00F16F21 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCAlertView.m; sourceTree = "<group>"; };
 		38D301D51B4517CC00484AC8 /* Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1124,6 +1130,8 @@
 				38D0DC371B4BD7AB00E0E7EC /* LikeButton.m */,
 				38923A051B4D3D5900E7F092 /* NotifiCell.h */,
 				38923A061B4D3D5900E7F092 /* NotifiCell.m */,
+				38D1EAC21B5CE09000B18169 /* CommentDetailCell.h */,
+				38D1EAC31B5CE09000B18169 /* CommentDetailCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1507,6 +1515,8 @@
 				38D618CA1B46359200907CE9 /* WordDetailVC.m */,
 				38D1EAB31B5C9EE500B18169 /* CommentVC.h */,
 				38D1EAB41B5C9EE500B18169 /* CommentVC.m */,
+				38D1EABF1B5CD8D400B18169 /* WordDetailListVC.h */,
+				38D1EAC01B5CD8D400B18169 /* WordDetailListVC.m */,
 			);
 			path = WordDetail;
 			sourceTree = "<group>";
@@ -1758,6 +1768,7 @@
 				38D618CE1B463DA700907CE9 /* AdimToolBar.m in Sources */,
 				38D3038F1B453B2A00484AC8 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				38D303431B4529BD00484AC8 /* BaseNavigationViewController.m in Sources */,
+				38D1EAC41B5CE09000B18169 /* CommentDetailCell.m in Sources */,
 				38D3035E1B45369F00484AC8 /* CommonCell.m in Sources */,
 				3872BF1A1B4664D80004A928 /* NSDate+TimeAgo.m in Sources */,
 				38D3038D1B453B2A00484AC8 /* AFURLResponseSerialization.m in Sources */,
@@ -1794,6 +1805,7 @@
 				3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */,
 				38D618CB1B46359200907CE9 /* WordDetailVC.m in Sources */,
 				3872BF301B4664D80004A928 /* UIImage+Merge.m in Sources */,
+				38D1EAC11B5CD8D400B18169 /* WordDetailListVC.m in Sources */,
 				38D3038E1B453B2A00484AC8 /* AFURLSessionManager.m in Sources */,
 				38D303E81B453B3C00484AC8 /* UIImage+GIF.m in Sources */,
 				38D303921B453B2A00484AC8 /* UIButton+AFNetworking.m in Sources */,

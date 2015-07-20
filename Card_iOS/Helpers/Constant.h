@@ -108,6 +108,7 @@
 #define Refresh_MAIN_LIST  @"refresh_main_list"  //刷新
 #define AddCardDidSucucessNotification @"AddCardDidSucucessNotification"
 #define AddCardwillGotoUserNotification @"gotouser"
+#define  CommentVCPushlicSucucessNotifation   @"CommentVCPushlicSucucessNotifation"
 
 //字体相关
 //FZLTXHK--GBK1-0 Lantinghei_0
