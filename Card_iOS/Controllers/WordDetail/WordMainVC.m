@@ -31,6 +31,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //所有的手势
     self.CurrentIndex = 0;
     [self creatRightNavigationItems:[UIImage imageNamed:@"share"] image2:[UIImage imageNamed:@"more"]];
     [self createUI];
@@ -193,7 +195,7 @@
     _pageController.delegate=self;
     // 定义“这本书”的尺寸
     [[_pageController view] setFrame:self.view.bounds];
-    
+    _pageController.doubleSided = YES;
     // 让UIPageViewController对象，显示相应的页数据。
     // UIPageViewController对象要显示的页数据封装成为一个NSArray。
     // 因为我们定义UIPageViewController对象显示样式为显示一页（options参数指定）。

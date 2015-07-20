@@ -16,7 +16,7 @@
 
 @property(nonatomic,strong) CommonModel   *model;
 
-@property(nonatomic,strong)CommonView  *comView;
+@property(nonatomic,strong)CommonView     *comView;
 
 @property(nonatomic,strong) NSMutableArray  *likeArray;
 
