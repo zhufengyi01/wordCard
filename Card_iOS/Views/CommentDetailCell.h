@@ -13,6 +13,7 @@
 {
     void (^m_cellClick)(NSInteger buttonIndex);
     CommentModel  *m_model;
+    UIView  *buttomLin;
 }
 @property(nonatomic,strong) UIButton  *headImage ;
 

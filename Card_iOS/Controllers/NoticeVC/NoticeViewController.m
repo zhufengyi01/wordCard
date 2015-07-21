@@ -20,6 +20,7 @@
 #import "UserModel.h"
 #import "ZFYLoading.h"
 #import "UIImage+Color.h"
+#import "MyViewController.h"
 @implementation NoticeViewController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -131,7 +132,10 @@
         [cell configcell];
         cell.handEvent=^(NSInteger index)
         {
-            
+            MyViewController *my = [MyViewController new];
+            my.author_Id = model.OuserInfo.Id;
+            my.pageType= MyViewControllerPageTypeOthers;
+            [self.navigationController pushViewController:my animated:YES];
         };
     }
     return cell;

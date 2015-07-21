@@ -109,6 +109,7 @@
 #define AddCardDidSucucessNotification @"AddCardDidSucucessNotification"
 #define AddCardwillGotoUserNotification @"gotouser"
 #define  CommentVCPushlicSucucessNotifation   @"CommentVCPushlicSucucessNotifation"
+#define  WordDetailListChangeNotifation       @"WordDetailListChangeNotifation"
 
 //字体相关
 //FZLTXHK--GBK1-0 Lantinghei_0

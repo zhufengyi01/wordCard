@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LikeButton.h"
 static const float liketoolBarheight = 40;
 
 static const int   likebttonCount = 3;
 
 @interface DetailLikeBar : UIView
 
-@property(nonatomic,strong) void (^btnClickAtInsex)(NSInteger buttonindex);
+@property(nonatomic,strong) void (^btnClickAtInsex)(LikeButton *button);
 
 @end

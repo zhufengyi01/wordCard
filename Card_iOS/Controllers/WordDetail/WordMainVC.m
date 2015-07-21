@@ -22,6 +22,8 @@
 #import "DetailLikeBar.h"
 #import "BaseNavigationViewController.h"
 #import "CommentVC.h"
+#import "LikeButton.h"
+#import "LikeModel.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 @implementation WordMainVC
@@ -34,7 +36,6 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //所有的手势
     self.CurrentIndex = 0;
     //[self creatRightNavigationItems:[UIImage imageNamed:@"share"] image2:[UIImage imageNamed:@"more"]];
@@ -125,6 +126,7 @@
     };
     [share show];
 }
+#pragma mark  - requestData
 //定时发送到热门,发送时间戳
 -(void)requesttiming:(NSString *)model_id AndTimeSp:(NSString *)timeSp
 {
@@ -177,8 +179,32 @@
         [SVProgressHUD showErrorWithStatus:@"操作失败"];
     }];
 }
+-(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
+{
+    NSArray  *Arr =    [self.pageController viewControllers];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+    CommonModel  *smodel = CurrentVC.model;
+    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@/text/up", kApiBaseUrl];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary *parameters=@{@"prod_id":smodel.Id,@"user_id":userCenter.user_id,@"author_id":autuor_id,@"operation":operation,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            NSString *status=@"sucess";
+            [SVProgressHUD showSuccessWithStatus:status];
+        }else
+        {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [SVProgressHUD showSuccessWithStatus:@"操作失败"];
+    }];
+}
 
-
+#pragma mark  - create UI
 -(void)createUI
 {
     // 设置UIPageViewController的配置项
@@ -210,18 +236,137 @@
     [self addChildViewController:_pageController];
     [[self view] addSubview:[_pageController view]];
 }
+//改变喜欢的状态
+-(void)changelikeBarStatus
+{
+    NSArray  *Arr =    [self.pageController viewControllers];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+    CommonModel  *smodel = CurrentVC.model;
+    if (detail) {
+        for (id  v  in detail.subviews) {
+            if ([v isKindOfClass:[LikeButton class]]) {
+                LikeButton *likeBtn = (LikeButton*)(v);
+                if (likeBtn.tag==2002) {
+                    likeBtn.selected =NO;
+                    likeBtn.likeImage.image = [UIImage imageNamed:@"detail_like2"];
+                    NSInteger count =[smodel.liked_count integerValue];
+                    if (count>0) {
+                        likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"%ld",(long)count];
+                    }else {
+                        likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"点赞"];
+                    }
+                    for (int i=0;i<self.likeArray.count; i++) {
+                        LikeModel *model = self.likeArray[i];
+                        if ([model.prod_id intValue]==[smodel.Id intValue]) {
+                            likeBtn.selected =YES;
+                            likeBtn.likeImage.image = [UIImage imageNamed:@"detail_liked2"];
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+-(void)changelikeBarStatusWith:(LikeButton *) likeBtn
+{
+    NSArray  *Arr =    [self.pageController viewControllers];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+    CommonModel  *smodel = CurrentVC.model;
+
+    if (likeBtn.selected ==YES) {
+        //取消点赞
+        likeBtn.selected = NO;
+        NSInteger  count = [likeBtn.likeCountLbl.text integerValue];
+        count=count-1;
+        if (count>0) {
+            likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"%ld",(long)count];
+        }else {
+            likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"点赞"];
+        }
+        likeBtn.likeImage.image = [UIImage imageNamed:@"detail_like2"];
+        for (int i=0; i<self.likeArray.count; i++) {
+            LikeModel *model = self.likeArray[i];
+            if ([model.prod_id intValue] == [smodel.Id intValue]) {
+                [self.likeArray removeObject:model];
+                break;
+            }
+        }
+        // 修改self.model 的数据
+        NSInteger lcount = [smodel.liked_count integerValue];
+        lcount = lcount-1;
+        smodel.liked_count = [NSString stringWithFormat:@"%ld",(long)lcount];
+        if (smodel.userInfo == nil) {
+            UserModel *usr=[UserModel new];
+            usr.Id = @"4";
+            smodel.userInfo = usr;
+        }
+        [self requestLikeWithAuthorId:smodel.userInfo.Id andoperation:@0];
+    }else
+    {
+        [Function BasicAnimationwithkey:@"transform.scale" Duration:0.25 repeatcont:1 autoresverses:YES fromValue:1.0 toValue:1.5 View:likeBtn.likeImage];
+        //点赞
+        likeBtn.selected =YES;
+        NSInteger  count = [likeBtn.likeCountLbl.text integerValue];
+        count=count+1;
+        likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"%ld",(long)count];
+        likeBtn.likeImage.image = [UIImage imageNamed:@"detail_liked2"];
+        LikeModel *lm = [LikeModel new];
+        lm.prod_id = smodel.Id;
+        if (!self.likeArray) {
+            self.likeArray = [NSMutableArray array];
+        }
+        [self.likeArray addObject:lm];
+        NSInteger lcount = [smodel.liked_count integerValue];
+        lcount = lcount+1;
+        smodel.liked_count = [NSString stringWithFormat:@"%ld",(long)lcount];
+        if (smodel.userInfo == nil) {
+            UserModel *usr=[UserModel new];
+            usr.Id = @"4";
+            smodel.userInfo = usr;
+        }
+        [self requestLikeWithAuthorId:smodel.userInfo.Id andoperation:@1];
+    }
+}
 -(void)createLikeBarButtoms
 {
-    DetailLikeBar  *detail = [[DetailLikeBar alloc] initWithFrame:CGRectMake(0, kDeviceHeight-40-kHeightNavigation,kDeviceWidth, 40)];
-    detail.btnClickAtInsex = ^(NSInteger buttonIndex)
+    NSArray  *Arr =    [self.pageController viewControllers];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+    CommonModel  *smodel = CurrentVC.model;
+    __weak typeof(self) weakself = self;
+    detail = [[DetailLikeBar alloc] initWithFrame:CGRectMake(0, kDeviceHeight-40-kHeightNavigation,kDeviceWidth, 40)];
+    if (detail) {
+        for (id  v  in detail.subviews) {
+            if ([v isKindOfClass:[LikeButton class]]) {
+                LikeButton *likeBtn = (LikeButton*)(v);
+                if (likeBtn.tag==2002) {
+                    NSInteger count =[smodel.liked_count integerValue];
+                    if (count>0) {
+                        likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"%ld",(long)count];
+                    }else {
+                        likeBtn.likeCountLbl.text = [NSString stringWithFormat:@"点赞"];
+                    }
+                    for (int i=0;i<self.likeArray.count; i++) {
+                        LikeModel *model = self.likeArray[i];
+                         likeBtn.selected = NO;
+                        if ([model.prod_id intValue]==[smodel.Id intValue]) {
+                            likeBtn.selected =YES;
+                            likeBtn.likeImage.image = [UIImage imageNamed:@"detail_liked2"];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    detail.btnClickAtInsex = ^(LikeButton *button)
     {
-        switch (buttonIndex) {
-            case 0:
-                [self RightShareEvent];
+        switch (button.tag) {
+            case 2000:
+                [weakself RightShareEvent];
                 break;
-            case 1:
+            case 2001:
             {
-                NSArray  *Arr =    [self.pageController viewControllers];
+                NSArray  *Arr =    [weakself.pageController viewControllers];
                 CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
                 CommonModel  *model = CurrentVC.model;
                 CommentVC *cv =[CommentVC new];
@@ -235,7 +380,12 @@
                 [self.navigationController presentViewController:na animated:YES completion:nil];
             }
                 break;
-            case 2:
+            case 2002:
+                // 点赞
+            {
+                NSLog(@"点击了点赞按钮");
+                [self changelikeBarStatusWith:button];
+            }
                 break;
             default:
                 break;
@@ -298,10 +448,14 @@
     }
     return [self viewControllerAtIndex:index];
 }
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    NSLog(@"已经跳转到下一页");
+    [self changelikeBarStatus];
 
+}
 #pragma  mark  -EmailMethod
 - (void)sendFeedBackwithmodel:(CommonModel *)model;
-
 {
     //    [self showNativeFeedbackWithAppkey:UMENT_APP_KEY];
     Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
@@ -372,8 +526,6 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
 }
 // 2. Displays an email composition interface inside the application. Populates all the Mail fields.
-
-#pragma mark - 协议的委托方法
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {

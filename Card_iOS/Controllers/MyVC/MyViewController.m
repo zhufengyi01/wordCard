@@ -44,6 +44,9 @@ const float segmentheight = 45;
     self.title  = @"我的";
     [self creatRightNavigationItem:nil Title:@"设置"];
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
+    if (self.author_Id) {
+        self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
+    }
     self.tabbleView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (self.addWordbtn.selected==YES) {
         [self.tabbleView setEditing:YES animated:YES];
@@ -175,9 +178,9 @@ const float segmentheight = 45;
     AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
     NSString *urlString  = [NSString stringWithFormat:@"%@user/info",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *dict = @{@"user_id":User.user_id,KURLTOKEN:tokenString};
+    NSDictionary  *dict = @{@"user_id":uid,KURLTOKEN:tokenString};
     [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject objectForKey:@"code"]) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
             if (!self.author_Id) {
                 NSString *pr_d = [[responseObject objectForKey:@"model"] objectForKey:@"prod_count"];
                 NSString *li_d = [[responseObject objectForKey:@"model"] objectForKey:@"liked_count"];
@@ -203,15 +206,15 @@ const float segmentheight = 45;
                     pr_d=@"0";
                 }
                 if ([li_d intValue]==0) {
-                    pr_d=@"0";
+                    li_d=@"0";
                 }
+                NSDictionary *userinfo = [responseObject objectForKey:@"model"];
                 NSString *content = [NSString stringWithFormat:@"内容 : %@  点赞 : %@",pr_d,li_d];
-                //NSMutableAttributedString  *Attribute = [[NSMutableAttributedString alloc] initWithString:content];
-                NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,User.logo]];
+                NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,[userinfo objectForKey:@"logo"]]];
                 [headImage sd_setImageWithURL:url placeholderImage:HeadImagePlaceholder];
-                namelbl.text = User.username;
+                namelbl.text = [userinfo objectForKey:@"username"];
                 contentlbl.text = content;
-                describelbl.text = User.signature;
+                describelbl.text = [userinfo objectForKey:@"brief"];
             }
         }else
         {
@@ -458,20 +461,26 @@ const float segmentheight = 45;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.addWordbtn.selected==YES)
+    if (self.pageType ==MyViewControllerPageTypeOthers)
     {
-        if (self.dataArray1.count>indexPath.row) {
-            CommonModel *m = [self.dataArray1 objectAtIndex:indexPath.row];
-            [self requestDeleteDataWith:m.Id];
-            [self.dataArray1 removeObjectAtIndex:indexPath.row];
-            [self.tabbleView beginUpdates];
-            [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            [self.tabbleView endUpdates];
-        }
-        
-    }else{
         [self.tabbleView setEditing:NO animated:YES];
         [SVProgressHUD showInfoWithStatus:@"不能删除"];
+    }else{
+        if (self.addWordbtn.selected==YES)
+        {
+            if (self.dataArray1.count>indexPath.row) {
+                CommonModel *m = [self.dataArray1 objectAtIndex:indexPath.row];
+                [self requestDeleteDataWith:m.Id];
+                [self.dataArray1 removeObjectAtIndex:indexPath.row];
+                [self.tabbleView beginUpdates];
+                [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                [self.tabbleView endUpdates];
+            }
+            
+        }else{
+            [self.tabbleView setEditing:NO animated:YES];
+            [SVProgressHUD showInfoWithStatus:@"不能删除"];
+        }
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,6 +10,7 @@
 #import "ZCControl.h"
 #import "Constant.h"
 #import "UIImage+Color.h"
+#import "LikeButton.h"
 
 @implementation DetailLikeBar
 -(instancetype)initWithFrame:(CGRect)frame
@@ -30,23 +31,17 @@
     NSArray *imageArray = @[@"detail_share",@"detail_comment",@"detail_like2"];
     for ( int i=0; i<likebttonCount; i++) {
         double x = (kDeviceWidth-0)/likebttonCount*i;
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(x, 0, (kDeviceWidth-0)/likebttonCount,liketoolBarheight)];
-        [btn setTitle:titleArray[i] forState:UIControlStateNormal];
+        LikeButton *btn = [[LikeButton alloc]initWithFrame:CGRectMake(x, 0, (kDeviceWidth-0)/likebttonCount,liketoolBarheight)];
         btn.tag = 2000+i;
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
-        //[btn setImageEdgeInsets:UIEdgeInsetsMake(<#CGFloat top#>, <#CGFloat left#>, <#CGFloat bottom#>, <#CGFloat right#>)];
-        [btn setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
-        [btn setTitleColor:VGray_color forState:UIControlStateNormal];
-        [btn setBackgroundImage: [UIImage imageWithColor:View_BackGround] forState:UIControlStateHighlighted];
-        btn.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
-        [btn setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateNormal];
+        btn.likeImage.image = [UIImage imageNamed:imageArray[i]];
+        btn.likeCountLbl.text = titleArray[i];
         [btn addTarget:self action:@selector(btnClcik:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
 }
--(void)btnClcik:(UIButton *) btn
+-(void)btnClcik:(LikeButton *) btn
 {
-    self.btnClickAtInsex(btn.tag-2000);
+    self.btnClickAtInsex(btn);
 }
 
 @end

@@ -25,7 +25,6 @@
     [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
     [self.tabBarController.tabBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
     //设置提示框
-    
     [self configSVHUD];
 }
 -(void)configSVHUD
@@ -33,6 +32,7 @@
     [SVProgressHUD setSuccessImage:[UIImage imageNamed:@"success"]];
     [SVProgressHUD setInfoImage:[UIImage imageNamed:@"info"]];
     [SVProgressHUD setErrorImage:[UIImage imageNamed:@"error"]];
+    [SVProgressHUD setBackgroundColor:VLight_GrayColor_apla];
     [SVProgressHUD setFont:[UIFont fontWithName:KFontThin size:14]];
     [SVProgressHUD setForegroundColor:View_Black_Color];
     

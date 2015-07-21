@@ -85,11 +85,10 @@
         [SVProgressHUD showErrorWithStatus:@"评论失败，请重试"];
     }];
 }
-
 #pragma mark  --textViewDelegate
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (range.length>100) {
+    if (range.location>=100) {
         [SVProgressHUD showInfoWithStatus:@"最多输入100个字符"];
         return NO;
     }

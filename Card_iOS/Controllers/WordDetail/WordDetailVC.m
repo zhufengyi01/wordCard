@@ -44,6 +44,8 @@
     UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
     NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
     [userbtn addActionHandler:^(NSInteger tag) {
+        //进入个人页
+        
         
     }];
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
@@ -92,7 +94,7 @@
                 usr.Id = @"4";
                 self.model.userInfo = usr;
             }
-            [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@0];
+            //[self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@0];
         }else
         {
             [Function BasicAnimationwithkey:@"transform.scale" Duration:0.25 repeatcont:1 autoresverses:YES fromValue:1.0 toValue:1.5 View:weakbtn.likeImage];
@@ -116,7 +118,7 @@
                 usr.Id = @"4";
                 self.model.userInfo = usr;
             }
-            [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
+            //[self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
         }
         
     }];
@@ -125,22 +127,5 @@
 }
 
 #pragma mark --requset Method
--(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
-{
-    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
-    NSString *urlString = [NSString stringWithFormat:@"%@/text/up", kApiBaseUrl];
-    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
-    NSDictionary *parameters=@{@"prod_id":self.model.Id,@"user_id":userCenter.user_id,@"author_id":autuor_id,@"operation":operation,KURLTOKEN:tokenString};
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
-            NSString *status=@"sucess";
-            [SVProgressHUD showSuccessWithStatus:status];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [SVProgressHUD showSuccessWithStatus:@"操作失败"];
-    }];
-}
+
 @end

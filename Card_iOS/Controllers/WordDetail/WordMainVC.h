@@ -13,6 +13,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SelectTimeView.h"
+#import "DetailLikeBar.h"
 typedef NS_ENUM(NSInteger, WordDetailSourcePage)
 {
     WordDetailSourcePageDefault,
@@ -23,6 +24,7 @@ typedef NS_ENUM(NSInteger, WordDetailSourcePage)
 {
     //WordDetailVC *CurrentVC;
     WordDetailListVC  *CurrentVC;
+    DetailLikeBar  *detail;
 }
 @property (strong, nonatomic) UIPageViewController *pageController;
 

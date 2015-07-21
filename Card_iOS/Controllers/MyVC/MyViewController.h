@@ -30,8 +30,8 @@ typedef NS_ENUM(NSInteger, MyViewControllerPageType)
 @property(nonatomic,strong)     UIButton     *likeWorkbtn;
 @property(nonatomic,strong)     NSMutableArray   *dataArray1;
 @property(nonatomic,strong)     NSMutableArray   *dataArray2;
-@property(nonatomic,strong) NSMutableArray  *likeArray1;
-@property(nonatomic,strong) NSMutableArray  *likeArray2;
+@property(nonatomic,strong)     NSMutableArray  *likeArray1;
+@property(nonatomic,strong)     NSMutableArray  *likeArray2;
 
 @property(nonatomic,assign)     MyViewControllerPageType  pageType;
 

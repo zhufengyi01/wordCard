@@ -18,14 +18,17 @@
 #import "CommentDetailCell.h"
 #import "UIButton+Block.h"
 #import "UIScrollView+Addition.h"
+#import "MyViewController.h"
 #import "UIImageView+WebCache.h"
 @implementation WordDetailListVC
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //评论成功，刷新表格
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
+    self.tabbleView.tableFooterView = nil;
+    self.tabbleView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth)];
     headView.userInteractionEnabled = YES;
     //headView.backgroundColor = [UIColor redColor];
@@ -44,7 +47,10 @@
     UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
     NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
     [userbtn addActionHandler:^(NSInteger tag) {
-        
+        MyViewController *my = [MyViewController new];
+        my.author_Id = self.model.userInfo.Id;
+        my.pageType= MyViewControllerPageTypeOthers;
+        [self.navigationController pushViewController:my animated:YES];
     }];
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
     userbtn.titleLab.text= self.model.userInfo.username;
@@ -105,10 +111,33 @@
         //[SVProgressHUD showSuccessWithStatus:@"操作失败"];
     }];
 }
+//删除评论
+-(void)requestDeleteCommentWithCommentId:(NSString *)comment_id
+{
+        UserDataCenter *User = [UserDataCenter shareInstance];
+        NSString *urlString  = [NSString stringWithFormat:@"%@comment/delete",kApiBaseUrl];
+        NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+        NSDictionary  *dict = @{@"user_id":User.user_id,@"comment_id":comment_id,KURLTOKEN:tokenString};
+        AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
+        [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject objectForKey:@"code"] intValue]==0) {
+                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"删除失败"];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error ==%@",error);
+         [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        }];
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.dataArray.count>indexPath.row) {
     CommentModel *model = [self.dataArray objectAtIndex:indexPath.row];
     return  [CommentDetailCell getCellHeightWithModel:model];
+    }
     return 60;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,8 +151,31 @@
         CommentModel  *model = [self.dataArray objectAtIndex:indexPath.row];
         [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
             
+            switch (buttonIndex) {
+                case 2000:
+                    //删除自己的评论
+                    //从数组中移除
+                  {
+                    [self requestDeleteCommentWithCommentId:model.Id];
+                    [self.dataArray removeObjectAtIndex:indexPath.row];
+                    [self.tabbleView beginUpdates];
+                    [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                    [self.tabbleView endUpdates];
+                  }
+                    break;
+                case 1000:
+                    //点击个人头像按钮
+                {
+                    MyViewController *my = [MyViewController new];
+                    my.author_Id = model.userInfo.Id;
+                    my.pageType= MyViewControllerPageTypeOthers;
+                    [self.navigationController pushViewController:my animated:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
         } ];
-        
        
     }
     return cell;

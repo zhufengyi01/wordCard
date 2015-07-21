@@ -23,7 +23,7 @@
 @property(nonatomic,strong) NotiModel  *notimodel;
 
 
-@property(nonatomic,assign) void (^handEvent)(NSInteger index);
+@property(nonatomic,copy) void (^handEvent)(NSInteger index);
 
 -(void)configcell;
 
