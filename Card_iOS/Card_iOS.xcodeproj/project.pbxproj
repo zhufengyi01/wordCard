@@ -65,6 +65,7 @@
 		3872BF481B466B0C0004A928 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF431B466B0C0004A928 /* SVIndefiniteAnimatedView.m */; };
 		3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */; };
 		3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF471B466B0C0004A928 /* SVProgressHUD.m */; };
+		3887AF161B5F687F0070BC6F /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */; };
 		38923A011B4D340500E7F092 /* NotiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A001B4D340500E7F092 /* NotiModel.m */; };
 		38923A041B4D35AD00E7F092 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A031B4D35AD00E7F092 /* TextModel.m */; };
 		38923A071B4D3D5900E7F092 /* NotifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A061B4D3D5900E7F092 /* NotifiCell.m */; };
@@ -202,6 +203,7 @@
 		38D618D21B464F8200907CE9 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
 		38D618D31B46511500907CE9 /* SelectTimeView.h in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D01B464F8200907CE9 /* SelectTimeView.h */; };
 		38D618D41B46511500907CE9 /* SelectTimeView.m in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
+		38EA0FB91B60A1F200B2DD8B /* AuthorToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +331,8 @@
 		3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		3872BF461B466B0C0004A928 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		3872BF471B466B0C0004A928 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		3887AF141B5F687F0070BC6F /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAvatarBrowser.h; sourceTree = "<group>"; };
+		3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAvatarBrowser.m; sourceTree = "<group>"; };
 		389239FF1B4D340500E7F092 /* NotiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiModel.h; sourceTree = "<group>"; };
 		38923A001B4D340500E7F092 /* NotiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotiModel.m; sourceTree = "<group>"; };
 		38923A021B4D35AD00E7F092 /* TextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextModel.h; sourceTree = "<group>"; };
@@ -590,6 +594,8 @@
 		38D618CD1B463DA700907CE9 /* AdimToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdimToolBar.m; sourceTree = "<group>"; };
 		38D618D01B464F8200907CE9 /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		38D618D11B464F8200907CE9 /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
+		38EA0FB71B60A1F200B2DD8B /* AuthorToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorToolBar.h; sourceTree = "<group>"; };
+		38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorToolBar.m; sourceTree = "<group>"; };
 		EFC0C12E92B544C40C4610E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -878,6 +884,15 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		3887AF131B5F687F0070BC6F /* SJAvatarBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				3887AF141B5F687F0070BC6F /* SJAvatarBrowser.h */,
+				3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */,
+			);
+			path = SJAvatarBrowser;
+			sourceTree = "<group>";
+		};
 		38CFC3CE1B54FB4A004EF31F /* ZFYActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1085,7 @@
 		38D301FE1B451A6E00484AC8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				3887AF131B5F687F0070BC6F /* SJAvatarBrowser */,
 				38D21B1A1B58A62C00F16F21 /* WCAlertView */,
 				38CFC43A1B552D10004EF31F /* ZFYLoad */,
 				38CFC3CE1B54FB4A004EF31F /* ZFYActionSheet */,
@@ -1132,6 +1148,8 @@
 				38923A061B4D3D5900E7F092 /* NotifiCell.m */,
 				38D1EAC21B5CE09000B18169 /* CommentDetailCell.h */,
 				38D1EAC31B5CE09000B18169 /* CommentDetailCell.m */,
+				38EA0FB71B60A1F200B2DD8B /* AuthorToolBar.h */,
+				38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1702,6 +1720,7 @@
 				38D0DBA81B4B7E7600E0E7EC /* MF_Base64Additions.m in Sources */,
 				38D0DC3B1B4BDF6B00E0E7EC /* LikeModel.m in Sources */,
 				3872BF1D1B4664D80004A928 /* NSDate+Additions.m in Sources */,
+				38EA0FB91B60A1F200B2DD8B /* AuthorToolBar.m in Sources */,
 				38D3034F1B452F6F00484AC8 /* BaseTableView.m in Sources */,
 				38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */,
 				38D3035B1B45368600484AC8 /* CommonView.m in Sources */,
@@ -1827,6 +1846,7 @@
 				384640FD1B4E5B720079CE9D /* README.md in Sources */,
 				3872BF391B4664D80004A928 /* UIButton+Indicator.m in Sources */,
 				38D303B81B453B3400484AC8 /* MJRefreshLegendHeader.m in Sources */,
+				3887AF161B5F687F0070BC6F /* SJAvatarBrowser.m in Sources */,
 				3872BF481B466B0C0004A928 /* SVIndefiniteAnimatedView.m in Sources */,
 				38D303FD1B45473900484AC8 /* UserDataCenter.m in Sources */,
 				38D303E71B453B3C00484AC8 /* UIButton+WebCache.m in Sources */,
@@ -1983,6 +2003,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
+					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
+					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				INFOPLIST_FILE = Card_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1997,10 +2020,16 @@
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
 					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
+					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
+					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2018,6 +2047,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
+					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
+					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				INFOPLIST_FILE = Card_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2032,10 +2064,16 @@
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
 					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
+					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
+					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

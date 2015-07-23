@@ -22,6 +22,7 @@
 #import "CommonCell.h"
 #import "LikeModel.h"
 #import "ZFYLoading.h"
+#import "SJAvatarBrowser.h"
 #import "WordMainVC.h"
 const float segmentheight = 45;
 @implementation MyViewController
@@ -88,6 +89,9 @@ const float segmentheight = 45;
     headImage.layer.cornerRadius = 20;
     headImage.image = HeadImagePlaceholder;
     headImage.clipsToBounds = YES;
+    headImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SJAvatarBrowser:) ];
+    [headImage addGestureRecognizer:tap];
     [headView addSubview:headImage];
     //名字
     namelbl = [ZCControl createLabelWithFrame:CGRectMake(headImage.frame.origin.x+headImage.frame.size.width+10, headImage.frame.origin.y, 120, 20) Font:16 Text:@"头像"];
@@ -163,7 +167,11 @@ const float segmentheight = 45;
         //NSString  *contentString = [NSString stringWithFormat:@"内容:%@ 被赞:%@",User.product_count,User.like_count];
     }
 }
-
+-(void)SJAvatarBrowser:(UITapGestureRecognizer *) tap
+{
+    [SJAvatarBrowser showImage:headImage];
+    
+}
 #pragma mark  --requestData
 //用户数据
 -(void)requestUserInfo
@@ -398,6 +406,7 @@ const float segmentheight = 45;
         }];
     }];
 }
+#pragma mark -TableViewdelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.f;

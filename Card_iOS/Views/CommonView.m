@@ -12,13 +12,16 @@
 #import "NSDate+Extension.h"
 #import "ZfyActionSheet.h"
 #import "SVProgressHUD.h"
+#import "UserDataCenter.h"
+#import "AFNetworking.h"
+#import "Function.h"
 @implementation CommonView
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self =[super initWithFrame:frame]) {
-        self.backgroundColor=VLight_GrayColor_apla;
-        self.layer.cornerRadius = 4;
-        self.clipsToBounds = YES;
+        self.backgroundColor=View_white_Color;
+        //self.layer.cornerRadius = 4;
+        //self.clipsToBounds = YES;
         self.layer.borderWidth = 0.1;
         self.layer.borderColor=VLight_GrayColor.CGColor;
         [self createUI];
@@ -174,6 +177,29 @@
         UIPasteboard *paste = [UIPasteboard generalPasteboard];
         paste.string = self.model.word;
         [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+        [self requestStatiWithType:@"3" Pro_id:self.model.Id];
     }
 }
+
+//统计 复制 保存到本地
+-(void)requestStatiWithType:(NSString *) type Pro_id :(NSString *) pro_id
+{
+    UserDataCenter *usr = [UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@counting/create", kApiBaseUrl];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary
+    *parameters=@{@"prod_id":pro_id,@"user_id":usr.user_id,@"type":type,@"platform":@"1",KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            
+        }else
+        {
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 @end

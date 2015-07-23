@@ -272,7 +272,7 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView  *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
-    headView.backgroundColor =[[ UIColor whiteColor] colorWithAlphaComponent:0.95];
+    headView.backgroundColor =[[UIColor whiteColor] colorWithAlphaComponent:0.95];
     UILabel *hlbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
     hlbl.textColor = VLight_GrayColor;
     hlbl.font = [UIFont fontWithName:KFontThin size:14];

@@ -27,6 +27,8 @@
 
 @property(nonatomic,strong) NSString *shared_count;
 
+@property(nonatomic,strong) NSString *view_count;
+
 @property(nonatomic,strong) NSString *created_by;
 
 @property(nonatomic,strong) NSString *updated_by;

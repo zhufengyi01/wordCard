@@ -21,5 +21,7 @@
 
 @property(nonatomic,strong) NSString *fake;
 
+@property(nonatomic,strong)NSString *brief;
+
 
 @end

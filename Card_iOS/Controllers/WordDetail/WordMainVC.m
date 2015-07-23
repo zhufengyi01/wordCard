@@ -31,7 +31,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-   // self.navigationController.hidesBarsOnSwipe = NO;
+    // self.navigationController.hidesBarsOnSwipe = NO;
 }
 -(void)viewDidLoad
 {
@@ -43,9 +43,11 @@
     [self createUI];
     //只有从管理员进来才可以有
     if (self.pageType==WordDetailSourcePageAdmin) {
-          [self createToolBar];
+        [self createToolBar];
+        [self createLikeBarButtoms];
+        detail.frame =  CGRectMake(0, kDeviceHeight-40-BUTTON_HEIGHT-kHeightNavigation,kDeviceWidth, 40);
     }else{
-    [self createLikeBarButtoms];
+        [self createLikeBarButtoms];
     }
 }
 -(void)handOperationAtIndex:(NSInteger)index
@@ -89,7 +91,7 @@
 {
     ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
     [zfy showInView:self.view];
-   
+    
 }
 -(void)ZfyActionSheet:(id)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -108,11 +110,11 @@
     CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     [self.pageController childViewControllers];
     float height = CurrentVC.comView.frame.size.height;
-     UIImage  *image= [UIImage captureWithView:CurrentVC.comView];
+    UIImage  *image= [UIImage captureWithView:CurrentVC.comView];
     NSData  *imagedata = UIImagePNGRepresentation(image);
     image = [UIImage imageWithData:imagedata];
     //image = [image imageScaledToSize:CGSizeMake(image.size.width*0.6, image.size.height*0.6)];
-    UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:self.Currentmodel andShareHeight:height];
+    UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:CurrentVC.model andShareHeight:height];
     __weak typeof(self) weakSelf = self;
     share.shareBtnEvent=^(NSInteger buttonIndex)
     {
@@ -179,6 +181,7 @@
         [SVProgressHUD showErrorWithStatus:@"操作失败"];
     }];
 }
+//点赞
 -(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
 {
     NSArray  *Arr =    [self.pageController viewControllers];
@@ -203,7 +206,6 @@
         [SVProgressHUD showSuccessWithStatus:@"操作失败"];
     }];
 }
-
 #pragma mark  - create UI
 -(void)createUI
 {
@@ -273,7 +275,7 @@
     NSArray  *Arr =    [self.pageController viewControllers];
     CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     CommonModel  *smodel = CurrentVC.model;
-
+    
     if (likeBtn.selected ==YES) {
         //取消点赞
         likeBtn.selected = NO;
@@ -348,7 +350,7 @@
                     }
                     for (int i=0;i<self.likeArray.count; i++) {
                         LikeModel *model = self.likeArray[i];
-                         likeBtn.selected = NO;
+                        likeBtn.selected = NO;
                         if ([model.prod_id intValue]==[smodel.Id intValue]) {
                             likeBtn.selected =YES;
                             likeBtn.likeImage.image = [UIImage imageNamed:@"detail_liked2"];
@@ -360,12 +362,14 @@
     }
     detail.btnClickAtInsex = ^(LikeButton *button)
     {
+        
         switch (button.tag) {
             case 2000:
                 [weakself RightShareEvent];
                 break;
             case 2001:
             {
+                //点击发布评论
                 NSArray  *Arr =    [weakself.pageController viewControllers];
                 CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
                 CommonModel  *model = CurrentVC.model;
@@ -424,7 +428,7 @@
 // 返回上一个ViewController对象
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     //获取当前控制器
-
+    
     NSUInteger index = [self indexOfViewController:(WordDetailListVC*)viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -452,7 +456,7 @@
 {
     NSLog(@"已经跳转到下一页");
     [self changelikeBarStatus];
-
+    
 }
 #pragma  mark  -EmailMethod
 - (void)sendFeedBackwithmodel:(CommonModel *)model;

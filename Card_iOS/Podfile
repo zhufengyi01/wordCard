@@ -1,2 +1,5 @@
 
 pod 'JSONModel', '~> 1.1'
+#platform :ios, '6.0'
+#pod 'RETableViewManager', '~> 1.6'
+#pod 'SIAlertView'

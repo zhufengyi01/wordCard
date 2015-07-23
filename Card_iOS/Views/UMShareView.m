@@ -35,6 +35,7 @@ float const shareCancleH = 40;
     if ([super init]) {
         _screenImage=screenImage;
         shareheight=Height;
+        _model = model;
         self.frame=CGRectMake(0, 0,kDeviceWidth,kDeviceHeight);
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0];
         float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
@@ -153,9 +154,16 @@ float const shareCancleH = 40;
 -(void)handShareButtonClick:(UIButton *) button
 {
     logosupView.hidden=NO;
-    NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat", @"share_weibo", @"share_download", nil];
+    NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat",@"share_download", nil];
     [MobClick event:eventArray[button.tag-10000]];
-    if (button.tag == 10002) {
+    if (button.tag==10000) {
+        [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"wechat"];
+    }else if (button.tag==10001)
+    {
+        [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"moments"];
+    }
+   else  if (button.tag == 10002) {
+       [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"save"];
         UIImageWriteToSavedPhotosAlbum(_screenImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         return;
     }
@@ -191,21 +199,28 @@ float const shareCancleH = 40;
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0.4];
     }];
 }
+//统计 复制 保存到本地
+-(void)requestStatiWithType:(NSString *) type Pro_id :(NSString *) pro_id withContent:(NSString *) content
+{
+    UserDataCenter *usr = [UserDataCenter shareInstance];
+    NSString *urlString = [NSString stringWithFormat:@"%@counting/create", kApiBaseUrl];
+    NSString *tokenString =[Function getURLtokenWithURLString:urlString];
+    NSDictionary
+    *parameters=@{@"prod_id":pro_id,@"user_id":usr.user_id,@"type":type,@"platform":@"1",@"content":content,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
+            
+        }else
+        {
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
 
-////微博分享上传到服务器
-//-(void)requestShareWithMethod:(NSString *) method;
-//{
-//    UserDataCenter  *userCenter=[UserDataCenter shareInstance];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    NSDictionary *parameters=@{@"user_id":userCenter.user_id,@"weibo_id":self.weiboInfo.Id,@"platform":@"1",@"method":method};
-//    [manager POST:[NSString stringWithFormat:@"%@/share/create", kApiBaseUrl] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
-//            NSLog(@"分享发送成功=======%@",responseObject);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-//}
-//
+    }];
+    
+}
+
 
 @end

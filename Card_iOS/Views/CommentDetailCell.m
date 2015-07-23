@@ -19,7 +19,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.backgroundColor = View_white_Color;
+        self.backgroundColor = VLight_GrayColor_apla;
         [self createUI];
     }
     return self;
@@ -28,7 +28,7 @@
 {
     if (longp.state ==UIGestureRecognizerStateBegan) {
         UserDataCenter *usr = [UserDataCenter shareInstance];
-        if ([usr.user_id intValue]==[m_model.userInfo.Id intValue]) {
+        if (([usr.user_id intValue]==[m_model.userInfo.Id intValue])||([usr.is_admin intValue]>0)) {
             ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除"]];
             ac.tag =100;
             [ac showInView:self];
@@ -47,7 +47,7 @@
     if (actionSheet.tag ==100) {
         //删除
         if (buttonIndex==0) {
-            m_cellClick(2000 );
+            m_cellClick(2000);
         }
     }else
     {
@@ -62,15 +62,15 @@
 -(void)createUI
 {
     self.headImage = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-    self.headImage.layer.cornerRadius = 15;
-    self.headImage.clipsToBounds = YES;
+   //self.headImage.layer.cornerRadius = 15;
+   // self.headImage.clipsToBounds = YES;
     self.headImage.tag = 1000;
     self.headImage.backgroundColor = [UIColor redColor];
     [self.headImage addTarget:self action:@selector(cellEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.headImage];
     
     self.nameLable =[ZCControl createLabelWithFrame:CGRectMake(self.headImage.frame.size.width+self.headImage.frame.origin.x+10,10,200, 30) Font:12 Text:@""];
-    self.nameLable.font = [UIFont fontWithName:KFontThin size:12];
+    self.nameLable.font = [UIFont fontWithName:KFontThin size:14];
     self.nameLable.textColor = VGray_color;
     [self.contentView addSubview:self.nameLable];
     
@@ -87,7 +87,7 @@
     [self.contentView addSubview:self.timeLable];
     
     buttomLin = [[UIView alloc]init];
-    buttomLin.backgroundColor = VLight_GrayColor_apla;
+    buttomLin.backgroundColor = View_BackGround;
     [self.contentView addSubview:buttomLin];
     
 }

@@ -28,11 +28,12 @@
 -(void)createContent
 {
     NSArray *titleArray = @[@"分享",@"评论",@"点赞"];
-    NSArray *imageArray = @[@"detail_share",@"detail_comment",@"detail_like2"];
+    NSArray *imageArray = @[@"detail_share",@"detail_comments",@"detail_like2"];
     for ( int i=0; i<likebttonCount; i++) {
         double x = (kDeviceWidth-0)/likebttonCount*i;
         LikeButton *btn = [[LikeButton alloc]initWithFrame:CGRectMake(x, 0, (kDeviceWidth-0)/likebttonCount,liketoolBarheight)];
         btn.tag = 2000+i;
+        [btn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
         btn.likeImage.image = [UIImage imageNamed:imageArray[i]];
         btn.likeCountLbl.text = titleArray[i];
         [btn addTarget:self action:@selector(btnClcik:) forControlEvents:UIControlEventTouchUpInside];

@@ -20,6 +20,9 @@
 #import "UIScrollView+Addition.h"
 #import "MyViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AuthorToolBar.h"
+#import "NSDate+Extension.h"
+static  float  likebarheight = 80;
 @implementation WordDetailListVC
 
 -(void)viewDidLoad
@@ -29,9 +32,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
     self.tabbleView.tableFooterView = nil;
     self.tabbleView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tabbleView.backgroundColor = VLight_GrayColor_apla;
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth)];
     headView.userInteractionEnabled = YES;
-    //headView.backgroundColor = [UIColor redColor];
+    headView.backgroundColor = VLight_GrayColor_apla;
     [self.tabbleView setTableHeaderView:headView];
     self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth-0, kDeviceHeight-kHeightNavigation-40);
     //self.tabbleView.showsVerticalScrollIndicator = NO;
@@ -40,7 +44,7 @@
     self.comView.isLongWord = YES;
     [self.comView configCommonView:self.model];
     
-    UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 50)];
+    UIView *likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, likebarheight)];
     likeBar.userInteractionEnabled = YES;
     [headView addSubview:likeBar];
     // 点击进入个人页
@@ -54,8 +58,31 @@
     }];
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
     userbtn.titleLab.text= self.model.userInfo.username;
+    userbtn.brieflbl.text = self.model.userInfo.brief;
     [likeBar addSubview:userbtn];
+    //喜欢，评论数量
+    AuthorToolBar  *Author = [[AuthorToolBar alloc] init];
+    [likeBar addSubview:Author];
+    if ([self.model.view_count intValue]>0) {
+        Author.esylbl.text =self.model.view_count;
+    }if ([self.model.liked_count intValue]>0) {
+        Author.heartlbl.text = self.model.liked_count;
+    }if ([self.model.comm_count intValue]>0) {
+        Author.commetlbl.text = self.model.comm_count;
+    }
     
+    //时间
+    UILabel  *timelbl = [ZCControl createLabelWithFrame:CGRectMake(kDeviceWidth-90, 10, 80, 20) Font:12 Text:@"时间"];
+    timelbl.font = [UIFont fontWithName:KFontThin size:10];
+    //timelbl.backgroundColor = [UIColor redColor];
+    timelbl.textAlignment=NSTextAlignmentRight;
+    timelbl.textColor = VLight_GrayColor;
+    [likeBar addSubview:timelbl];
+    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[self.model.created_at intValue]];
+    NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
+    timelbl.text=da;
+
+        //分割线
     UIView *seper = [[UIView alloc] initWithFrame:CGRectMake(0,likeBar.frame.size.height-5, kDeviceWidth, 5)];
     seper.backgroundColor = VLight_GrayColor_apla;
     [likeBar addSubview:seper];

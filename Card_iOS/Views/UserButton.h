@@ -11,4 +11,5 @@
 @interface UserButton : UIButton
 @property (nonatomic,strong) UIImageView  *headImage;
 @property (nonatomic,strong) UILabel      *titleLab;
+@property(nonatomic,strong) UILabel       *brieflbl;
 @end

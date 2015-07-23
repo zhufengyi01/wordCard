@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, UMShareType)
     UIImage    *_screenImage;
     float     shareheight;
     UIScrollView  *contentScroll;
+    CommonModel  *_model;
 }
 
 

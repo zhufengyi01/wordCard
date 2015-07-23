@@ -32,7 +32,7 @@
     [self.contentView addSubview:self.headBtn];
     
     self.namelbl = [ZCControl createLabelWithFrame:CGRectMake(65, 10, 200, 30) Font:14 Text:@"姓名"];
-    self.namelbl.textColor = VBlue_color;
+    self.namelbl.textColor = View_Black_Color;
     self.namelbl.userInteractionEnabled = YES;
     self.namelbl.font = [UIFont fontWithName:KFontThin size:14];
     [self.contentView addSubview:self.namelbl];

@@ -6,8 +6,7 @@
 //  Copyright (c) 2015年 card. All rights reserved.
 //
 
-#import "NormalTableView.h"
-
-@interface PersonSetVC : NormalTableView
+#import "RootViewController.h"
+@interface PersonSetVC : RootViewController
 
 @end

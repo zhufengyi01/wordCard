@@ -64,7 +64,7 @@ static const int  LOGIN_OUT = 1;
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     switch (indexPath.row) {
         case 0:
-            //[self.navigationController pushViewController:[PersonSetVC new] animated:YES];
+            [self.navigationController pushViewController:[PersonSetVC new] animated:YES];
             break;
         case LOGIN_OUT:
             [self ClearUserCache];

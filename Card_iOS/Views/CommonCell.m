@@ -24,7 +24,7 @@
         [self.comView removeFromSuperview];
         self.comView=nil;
     }
-    self.contentView.backgroundColor =[UIColor whiteColor];
+    self.contentView.backgroundColor =VLight_GrayColor_apla;
     self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 5, kDeviceWidth-20, kDeviceWidth-20)];
    // self.comView.backgroundColor =[UIColor redColor];
     self.comView.isLongWord = NO;

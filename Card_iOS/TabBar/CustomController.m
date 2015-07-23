@@ -39,8 +39,8 @@
     self.tabBar.backgroundImage =[UIImage imageWithColor:[UIColor whiteColor]];
     NSArray  *classNameArray =[NSArray arrayWithObjects:@"MainViewController",@"DiscoverViewController",@"AddCardViewController",@"NoticeViewController",@"MyViewController", nil];
     //NSArray *titleArray =[NSArray arrayWithObjects:@"首页",@"添加",@"我的", nil];
-    NSArray *normalImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_normal.png",@"discovery_tab_button_normal",@"add_tab_butten.png",@"notice_tab_butten_normal.png",@"me_tab_butten_normal.png",nil];
-    NSArray *selectImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_press.png",@"movie_tab_butten_press.png",@"add_tab_butten.png",@"notice_tab_butten_press.png",@"me_tab_butten_press.png", nil];
+    NSArray *normalImageArray =[NSArray arrayWithObjects:@"feed_tab_button_normal",@"discovery_tab_button_normal",@"add_tab_button_press",@"notice_tab_button_normal",@"me_tab_button_normal",nil];
+    NSArray *selectImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_press",@"movie_tab_butten_press.png",@"add_tab_button_press",@"notice_tab_button_press",@"me_tab_button_press", nil];
     NSMutableArray  *navigationArray =[[NSMutableArray alloc]init];
     for (int i=0; i<classNameArray.count; i++) {
         UIViewController  *vc =(UIViewController *)[[NSClassFromString(classNameArray[i]) alloc] init];
