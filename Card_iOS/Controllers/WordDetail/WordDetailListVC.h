@@ -9,6 +9,7 @@
 #import "NormalTableView.h"
 #import "CommonView.h"
 #import "CommentVC.h"
+#import "AuthorToolBar.h"
 @interface WordDetailListVC : NormalTableView
 
 
@@ -21,4 +22,6 @@
 //评论的数组
 @property(nonatomic,strong)NSMutableArray   *comentArray;
 
+//喜欢和点赞和评论的数量
+@property(nonatomic,strong) AuthorToolBar  *Author;
 @end

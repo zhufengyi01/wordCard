@@ -43,7 +43,7 @@
     [self createUI];
     //只有从管理员进来才可以有
     if (self.pageType==WordDetailSourcePageAdmin) {
-        [self createToolBar];
+        [self createAdminToolBar];
         [self createLikeBarButtoms];
         detail.frame =  CGRectMake(0, kDeviceHeight-40-BUTTON_HEIGHT-kHeightNavigation,kDeviceWidth, 40);
     }else{
@@ -329,6 +329,8 @@
         }
         [self requestLikeWithAuthorId:smodel.userInfo.Id andoperation:@1];
     }
+    CurrentVC.Author.heartlbl.text=likeBtn.likeCountLbl.text;
+
 }
 -(void)createLikeBarButtoms
 {
@@ -362,7 +364,6 @@
     }
     detail.btnClickAtInsex = ^(LikeButton *button)
     {
-        
         switch (button.tag) {
             case 2000:
                 [weakself RightShareEvent];
@@ -375,10 +376,10 @@
                 CommonModel  *model = CurrentVC.model;
                 CommentVC *cv =[CommentVC new];
                 cv.pro_id =model.Id;
+                cv.model = model;
                 cv.completeComment = ^(CommentModel *model)
                 {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"aasalhsha" object:nil];
-                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CommentVCPushlicSucucessNotifation object:nil];
                 };
                 BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
                 [self.navigationController presentViewController:na animated:YES completion:nil];
@@ -399,7 +400,7 @@
     [self.view addSubview:detail];
 }
 
--(void)createToolBar
+-(void)createAdminToolBar
 {
     AdimToolBar *tool =[[AdimToolBar alloc]initWithFrame:CGRectMake(0, kDeviceHeight-BUTTON_HEIGHT-kHeightNavigation, kDeviceWidth, BUTTON_HEIGHT)];
     tool.delegate = self;

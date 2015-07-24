@@ -8,6 +8,6 @@
 
 #import "BaseTableView.h"
 
-@interface MainViewController : BaseTableView
+@interface MainViewController : BaseTableView <UIAlertViewDelegate>
 
 @end

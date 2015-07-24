@@ -63,6 +63,9 @@
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
           [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+            NSInteger  comment = [self.model.comm_count integerValue];
+            comment = comment + 1;
+            self.model.comm_count =[NSString stringWithFormat:@"%ld",(long)comment];
             [GCDQueue executeInMainQueue:^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     CommentModel *model =[CommentModel new];

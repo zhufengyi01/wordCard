@@ -14,6 +14,6 @@ static const int   likebttonCount = 3;
 
 @interface DetailLikeBar : UIView
 
-@property(nonatomic,strong) void (^btnClickAtInsex)(LikeButton *button);
+@property(nonatomic,copy) void (^btnClickAtInsex)(LikeButton *button);
 
 @end

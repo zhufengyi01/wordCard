@@ -8,11 +8,14 @@
 
 
 #import "RootViewController.h"
+#import "CommonModel.h"
 #import "CommentModel.h"
 @interface CommentVC : RootViewController <UITextViewDelegate>
 
 
 @property(nonatomic,copy) NSString *pro_id;
+
+@property (nonatomic,strong) CommonModel  *model;
 
 @property (nonatomic,strong) void(^completeComment)(CommentModel * content);
 

@@ -61,16 +61,15 @@ static  float  likebarheight = 80;
     userbtn.brieflbl.text = self.model.userInfo.brief;
     [likeBar addSubview:userbtn];
     //喜欢，评论数量
-    AuthorToolBar  *Author = [[AuthorToolBar alloc] init];
-    [likeBar addSubview:Author];
+    self.Author= [[AuthorToolBar alloc] init];
+    [likeBar addSubview:self.Author];
     if ([self.model.view_count intValue]>0) {
-        Author.esylbl.text =self.model.view_count;
+        self.Author.esylbl.text =self.model.view_count;
     }if ([self.model.liked_count intValue]>0) {
-        Author.heartlbl.text = self.model.liked_count;
+        self.Author.heartlbl.text = self.model.liked_count;
     }if ([self.model.comm_count intValue]>0) {
-        Author.commetlbl.text = self.model.comm_count;
+        self.Author.commetlbl.text = self.model.comm_count;
     }
-    
     //时间
     UILabel  *timelbl = [ZCControl createLabelWithFrame:CGRectMake(kDeviceWidth-90, 10, 80, 20) Font:12 Text:@"时间"];
     timelbl.font = [UIFont fontWithName:KFontThin size:10];
@@ -81,8 +80,8 @@ static  float  likebarheight = 80;
     NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[self.model.created_at intValue]];
     NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     timelbl.text=da;
-
-        //分割线
+    
+    //分割线
     UIView *seper = [[UIView alloc] initWithFrame:CGRectMake(0,likeBar.frame.size.height-5, kDeviceWidth, 5)];
     seper.backgroundColor = VLight_GrayColor_apla;
     [likeBar addSubview:seper];
@@ -92,9 +91,17 @@ static  float  likebarheight = 80;
 }
 -(void)RefreshViewControlEventValueChanged
 {
+    //配置评论的数据
+    [self updateComment];
     [self.dataArray removeAllObjects];
     [self requstCommentData];
 }
+//重新配置评论的数据
+-(void)updateComment
+{
+    self.Author.commetlbl.text = self.model.comm_count;
+}
+
 #pragma mark --requset Method
 -(void)requstCommentData
 {
@@ -141,29 +148,29 @@ static  float  likebarheight = 80;
 //删除评论
 -(void)requestDeleteCommentWithCommentId:(NSString *)comment_id
 {
-        UserDataCenter *User = [UserDataCenter shareInstance];
-        NSString *urlString  = [NSString stringWithFormat:@"%@comment/delete",kApiBaseUrl];
-        NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-        NSDictionary  *dict = @{@"user_id":User.user_id,@"comment_id":comment_id,KURLTOKEN:tokenString};
-        AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if ([[responseObject objectForKey:@"code"] intValue]==0) {
-                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
-            }
-            else
-            {
-                [SVProgressHUD showErrorWithStatus:@"删除失败"];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"error ==%@",error);
-         [SVProgressHUD showErrorWithStatus:@"删除失败"];
-        }];
+    UserDataCenter *User = [UserDataCenter shareInstance];
+    NSString *urlString  = [NSString stringWithFormat:@"%@comment/delete",kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary  *dict = @{@"user_id":User.user_id,@"comment_id":comment_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error ==%@",error);
+        [SVProgressHUD showErrorWithStatus:@"删除失败"];
+    }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataArray.count>indexPath.row) {
-    CommentModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    return  [CommentDetailCell getCellHeightWithModel:model];
+        CommentModel *model = [self.dataArray objectAtIndex:indexPath.row];
+        return  [CommentDetailCell getCellHeightWithModel:model];
     }
     return 60;
 }
@@ -182,13 +189,17 @@ static  float  likebarheight = 80;
                 case 2000:
                     //删除自己的评论
                     //从数组中移除
-                  {
+                {
+                    NSInteger  comment = [self.model.comm_count integerValue];
+                    comment = comment -1;
+                    self.model.comm_count = [NSString stringWithFormat:@"%ld",(long)comment];
+                    [self updateComment];
                     [self requestDeleteCommentWithCommentId:model.Id];
                     [self.dataArray removeObjectAtIndex:indexPath.row];
                     [self.tabbleView beginUpdates];
                     [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
                     [self.tabbleView endUpdates];
-                  }
+                }
                     break;
                 case 1000:
                     //点击个人头像按钮
@@ -203,7 +214,7 @@ static  float  likebarheight = 80;
                     break;
             }
         } ];
-       
+        
     }
     return cell;
 }
