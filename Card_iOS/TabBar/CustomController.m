@@ -15,6 +15,7 @@
 #import "Constant.h"
 #import "UIButton+Block.h"
 #import "ZCControl.h"
+#import "AppDelegate.h"
 #import "NoticeViewController.h"
 #import "DiscoverViewController.h"
 #define  BUTTON_COUNT 5
@@ -35,6 +36,8 @@
     // Do any additional setup after loading the view.
     //接受通知
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(notiMyController) name:AddCardDidSucucessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserNewNotification:) name:AppDelegateUserCheckNotification object:nil];
+    
     self.pageIndex=0;
     self.tabBar.backgroundImage =[UIImage imageWithColor:[UIColor whiteColor]];
     NSArray  *classNameArray =[NSArray arrayWithObjects:@"MainViewController",@"DiscoverViewController",@"AddCardViewController",@"NoticeViewController",@"MyViewController", nil];
@@ -101,14 +104,20 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:Refresh_MAIN_LIST object:nil];
     }
     self.pageIndex = self.selectedIndex;
-    
+    //已经点过了的话，需要取消
+    BaseNavigationViewController *base =(BaseNavigationViewController*)viewController;
+    NSLog(@"navigation top ===%@",base.topViewController);
+    if ([base.topViewController isKindOfClass:[NoticeViewController class]]) {
+        //
+        NoticeViewController  *notiVC  = (NoticeViewController*)base.topViewController;
+        notiVC.tabBarItem.badgeValue = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 /*
 #pragma mark - Navigation
 
@@ -123,5 +132,15 @@
     self.selectedIndex = 4;
     [[NSNotificationCenter defaultCenter ] postNotificationName:AddCardwillGotoUserNotification object:nil];
 }
-
+//每次启动检测是否有更新
+-(void)checkUserNewNotification:(NSNotification*) noti
+{
+    NSDictionary  *dict = noti.object;
+    NSString *badge = [dict objectForKey:AppDelegateUserCheckNotificationKey];
+    //self.viewControllers
+    NoticeViewController *notice = [self.viewControllers objectAtIndex:3];
+    if ([badge intValue]>0) {
+        notice.tabBarItem.badgeValue = badge;
+    }
+}
 @end

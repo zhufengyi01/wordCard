@@ -20,11 +20,18 @@
 
 @property(nonatomic,strong) UILabel   *timelbl;
 
+@property(nonatomic,strong) UIView    *badgeparentView;
+
+/*
+区别于是赞还是评论
+  YES 赞
+  NO  评论
+*/
+@property(nonatomic,assign)BOOL       islike;
+
 @property(nonatomic,strong) NotiModel  *notimodel;
 
 
 @property(nonatomic,copy) void (^handEvent)(NSInteger index);
-
--(void)configcell;
 
 @end

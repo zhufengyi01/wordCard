@@ -11,6 +11,7 @@
 #import "ZCControl.h"
 #import "UIImage+Color.h"
 #import "SVProgressHUD.h"
+#import "JSBadgeView.h"
 @implementation RootViewController
 
 -(void)loadView
@@ -26,7 +27,9 @@
     [self.tabBarController.tabBar setShadowImage:[UIImage imageWithColor:VLight_GrayColor_apla]];
     //设置提示框
     [self configSVHUD];
+    [self configJSbadgeView];
 }
+#pragma mark   Appearance
 -(void)configSVHUD
 {
     [SVProgressHUD setSuccessImage:[UIImage imageNamed:@"success"]];
@@ -35,6 +38,12 @@
     [SVProgressHUD setBackgroundColor:VLight_GrayColor_apla];
     [SVProgressHUD setFont:[UIFont fontWithName:KFontThin size:14]];
     [SVProgressHUD setForegroundColor:View_Black_Color];
+}
+-(void)configJSbadgeView
+{
+     [[JSBadgeView appearance]  setBadgeStrokeWidth:0.5];
+    //[[JSBadgeView appearance] setBadgeTextFont:[UIFont fontWithName:KFontThin size:12]];
+    //[[JSBadgeView appearance] setBackgroundColor:[UIColor blueColor]];
     
 }
 -(void)createLeftNavigationItem:(UIImage*) leftImage Title:(NSString*)leftTitle
@@ -99,8 +108,6 @@
         
     }
 }
-
-
 
 -(void)createLeftSystemNavigationItemWith:(UIBarButtonSystemItem )systemBarStyle
 {

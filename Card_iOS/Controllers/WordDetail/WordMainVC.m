@@ -329,7 +329,7 @@
         }
         [self requestLikeWithAuthorId:smodel.userInfo.Id andoperation:@1];
     }
-    CurrentVC.Author.heartlbl.text=likeBtn.likeCountLbl.text;
+    CurrentVC.Author.heartlbl.text=[likeBtn.likeCountLbl.text integerValue]==0?@"0":likeBtn.likeCountLbl.text;
 
 }
 -(void)createLikeBarButtoms

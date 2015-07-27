@@ -52,6 +52,7 @@
 -(void)requestPublish
 {
     //去掉两边空格
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSString *temptext = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     //去掉换行符
     temptext= [temptext stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet ]];
@@ -62,7 +63,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
-          [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+          [SVProgressHUD showSuccessWithStatus:@"评论成功"];
             NSInteger  comment = [self.model.comm_count integerValue];
             comment = comment + 1;
             self.model.comm_count =[NSString stringWithFormat:@"%ld",(long)comment];

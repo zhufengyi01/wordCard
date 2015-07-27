@@ -25,6 +25,7 @@
     UIBarButtonItem  *item =[[UIBarButtonItem alloc]initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.leftBarButtonItem=item;
     self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
+    self.tabbleView.tableFooterView  =[[UIView alloc]init];
     //[self createLeftNavigationItem:nil Title:nil];
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 0,kDeviceWidth-40, 30)];
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;

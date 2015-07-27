@@ -22,6 +22,9 @@
 #import "AFNetworking.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "GiderPageViewController.h"
+NSString  *const AppDelegateUserCheckNotification = @"AppDelegateUserCheckNotification";
+NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNotificationKey";
+
 @interface AppDelegate ()
 
 @end
@@ -46,12 +49,13 @@
             UINavigationController  *GNa=[[UINavigationController alloc]initWithRootViewController:[GiderPageViewController new]];
             self.window.rootViewController=GNa;
         }else {
-
         //用户没有登陆
         BaseNavigationViewController  *loginNa=[[BaseNavigationViewController alloc]initWithRootViewController:[LoginViewController new]];
         self.window.rootViewController=loginNa;
         }
     }
+    //检查是否有更新
+    [self checkIsNewNoti];
     return YES;
 }
 //禁用横屏幕
@@ -111,7 +115,23 @@
      */
     return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
 }
-
+-(void)checkIsNewNoti
+{
+    UserDataCenter *User = [UserDataCenter shareInstance];
+    NSString *urlString  = [NSString stringWithFormat:@"%@user/exists-new-noti",kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary  *dict = @{@"user_id":User.user_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+            NSLog(@"有更新");
+            NSDictionary *noti = @{AppDelegateUserCheckNotificationKey:[responseObject objectForKey:@"exists_new"]};
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUserCheckNotification object:noti];
+        }        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error ==%@",error);
+    }];
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -128,6 +148,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self checkIsNewNoti];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -11,11 +11,12 @@
 #import "ZCControl.h"
 #import "UserModel.h"
 #import "NSDate+Extension.h"
+#import "JSBadgeView.h"
 #import "UIButton+WebCache.h"
 @implementation NotifiCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-     
+        
         //self.contentView.backgroundColor = [UIColor grayColor];
         
         [self createUI];
@@ -50,23 +51,41 @@
 }
 -(void)btnEvent:(UIButton *) sender
 {
+    self.notimodel.status = @"0";
     NSInteger inter = sender.tag - 200;
     self.handEvent(inter);
 }
--(void)configcell
+-(void)setNotimodel:(NotiModel *)notimodel
 {
+    _notimodel= notimodel;
     NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.notimodel.OuserInfo.logo]];
-    //[self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder];
     [self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder options:(SDWebImageRetryFailed|SDWebImageLowPriority)];
     int length = (int)self.notimodel.OuserInfo.username.length;
+    //未读的时候添加标志
+    if (self.badgeparentView) {
+        [self.badgeparentView removeFromSuperview];
+        self.badgeparentView = nil;
+    }
+    if ([self.notimodel.status intValue]==1) {
+        self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
+        [self.contentView addSubview:self.badgeparentView];
+        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
+        badgeView.badgeText = @"1";
+    }
     if (self.notimodel.OuserInfo.username.length==0) {
         return;
     }
-    NSString *str = [NSString stringWithFormat:@"%@ 赞了你",self.notimodel.OuserInfo.username];
+    NSString *mark ;
+    if (self.islike==YES) {
+        mark =@"赞了你";
+    }else
+    {
+        mark =@"评论了你";
+    }
+    NSString *str = [NSString stringWithFormat:@"%@  %@",self.notimodel.OuserInfo.username,mark];
     NSMutableAttributedString  *attr = [[NSMutableAttributedString alloc]initWithString:str];
     [attr setAttributes:@{NSForegroundColorAttributeName:VGray_color} range:NSMakeRange(0, length)];
     [self.namelbl setAttributedText:attr];
-
     NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[self.notimodel.updated_at intValue]];
     NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     self.timelbl.text=da;

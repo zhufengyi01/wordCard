@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/*
+ 用户消息通知
+*/
+UIKIT_EXTERN NSString *const  AppDelegateUserCheckNotification;
+UIKIT_EXTERN NSString *const  AppDelegateUserCheckNotificationKey;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
