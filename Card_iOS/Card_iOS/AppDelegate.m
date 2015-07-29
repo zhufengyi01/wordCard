@@ -20,12 +20,24 @@
 #import "UMSocialSinaHandler.h"
 #import "BaseNavigationViewController.h"
 #import "AFNetworking.h"
+#import "WCAlertView.h"
+#import "GCD.h"
+#import <FIR/FIR.h>
 #import "AFNetworkActivityIndicatorManager.h"
 #import "GiderPageViewController.h"
+
+//fir内部测试 奔溃分析
+#define InGeneralKey @"fc5106be3953564feb4a05480438b783"
+//内部测试apitoken
+#define InFirApiToken @"be698651c132041e0b6b632a88a48a0b"
+#define InFirId       @"559a6460692d394a5e000029"
+//fir 企业分发测试
+#define ComFirApiToken @"5972a7c00f75dad3e5d3b817b9be0ffe"
+#define ComFirId       @"559fa773f61ceb5a0e00012e"
 NSString  *const AppDelegateUserCheckNotification = @"AppDelegateUserCheckNotification";
 NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNotificationKey";
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIAlertViewDelegate>
 
 @end
 
@@ -34,6 +46,13 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //奔溃日志
+    //[FIR handleCrashWithKey:InGeneralKey];
+    //版本更新
+    //[FIR checkForUpdateInFIR:^(id result, NSError *error) {
+
+    //} apiToken:InFirApiToken];
+    
     NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
     [self initUmeng];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -43,19 +62,26 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
     }
     else {
         NSString      *firstlogin =[[NSUserDefaults standardUserDefaults] objectForKey:IS_FIRST_LOGIN];
-         firstlogin = @"no";
+        firstlogin = @"no";
         if (![firstlogin isEqualToString:@"YES"]) {//是第一次进入应用
             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:IS_FIRST_LOGIN];
             UINavigationController  *GNa=[[UINavigationController alloc]initWithRootViewController:[GiderPageViewController new]];
             self.window.rootViewController=GNa;
         }else {
-        //用户没有登陆
-        BaseNavigationViewController  *loginNa=[[BaseNavigationViewController alloc]initWithRootViewController:[LoginViewController new]];
-        self.window.rootViewController=loginNa;
+            //用户没有登陆
+            BaseNavigationViewController  *loginNa=[[BaseNavigationViewController alloc]initWithRootViewController:[LoginViewController new]];
+            self.window.rootViewController=loginNa;
         }
     }
-    //检查是否有更新
+    //检查是否有新的消息
     [self checkIsNewNoti];
+    //检测版本更新
+    [GCDQueue executeInGlobalQueue:^{
+        
+        [GCDQueue executeInMainQueue:^{
+            [self checkNewUpdate];
+        }];
+    } afterDelaySecs:10];
     return YES;
 }
 //禁用横屏幕
@@ -95,7 +121,7 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
     
     //    QQ100551660 的16进制是 05FE4BEC
     //    1103486275 41C5DD43
-   // [UMSocialQQHandler setQQWithAppId:@"1103486275" appKey:@"htGJ2JFqtS2GTmM2" url:@"http://www.redianying.com"];
+    // [UMSocialQQHandler setQQWithAppId:@"1103486275" appKey:@"htGJ2JFqtS2GTmM2" url:@"http://www.redianying.com"];
     [UMSocialSinaHandler openSSOWithRedirectURL:SSOSinRedirectURL];
 }
 
@@ -127,11 +153,37 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
             NSLog(@"有更新");
             NSDictionary *noti = @{AppDelegateUserCheckNotificationKey:[responseObject objectForKey:@"exists_new"]};
             [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUserCheckNotification object:noti];
-        }        
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error ==%@",error);
     }];
 }
+#pragma mark --VersionUpdate
+//检测版本更新
+-(void)checkNewUpdate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[NSString stringWithFormat:@"http://api.fir.im/apps/latest/%@?api_token=%@",ComFirId,ComFirApiToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString * versionShort=responseObject[@"versionShort"]; //对应 CFBundleShortVersionString, 对应Xcode项目配置"General"中的 Version
+        NSString *buildVerSion = [responseObject objectForKey:@"version"];
+        //本地的version
+        NSString * localVersionShort=[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+        NSString * localbuild=[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+        
+        if (![versionShort isEqualToString:localVersionShort]||![localbuild isEqualToString:buildVerSion]) {
+            NSString *upDateUrl =  [responseObject objectForKey:@"update_url"];
+            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"增加了详细页评论\n增加了个人信息修改" customizationBlock:^(WCAlertView *alertView) {
+            } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+                if (buttonIndex==1) {
+                    [[UIApplication  sharedApplication] openURL:[NSURL URLWithString:upDateUrl]];
+                }
+                
+            } cancelButtonTitle:@"知道了" otherButtonTitles:@"去下载", nil];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -148,7 +200,10 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //请求新的消息
     [self checkIsNewNoti];
+    //请求版本更新
+    //[self checkNewUpdate];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

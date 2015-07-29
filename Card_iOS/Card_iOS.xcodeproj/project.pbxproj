@@ -203,6 +203,7 @@
 		38D618D21B464F8200907CE9 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
 		38D618D31B46511500907CE9 /* SelectTimeView.h in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D01B464F8200907CE9 /* SelectTimeView.h */; };
 		38D618D41B46511500907CE9 /* SelectTimeView.m in Resources */ = {isa = PBXBuildFile; fileRef = 38D618D11B464F8200907CE9 /* SelectTimeView.m */; };
+		38E4F5801B6877AF00777A18 /* FIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E4F57F1B6877AF00777A18 /* FIR.framework */; };
 		38E81CA51B65F14A00DE36F5 /* UIView+ICExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E81CA41B65F14A00DE36F5 /* UIView+ICExtension.m */; };
 		38E81CA91B66343000DE36F5 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E81CA81B66343000DE36F5 /* JSBadgeView.m */; };
 		38EA0FB91B60A1F200B2DD8B /* AuthorToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */; };
@@ -596,6 +597,7 @@
 		38D618CD1B463DA700907CE9 /* AdimToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdimToolBar.m; sourceTree = "<group>"; };
 		38D618D01B464F8200907CE9 /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		38D618D11B464F8200907CE9 /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
+		38E4F57F1B6877AF00777A18 /* FIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIR.framework; sourceTree = "<group>"; };
 		38E81CA31B65F14A00DE36F5 /* UIView+ICExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ICExtension.h"; sourceTree = "<group>"; };
 		38E81CA41B65F14A00DE36F5 /* UIView+ICExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ICExtension.m"; sourceTree = "<group>"; };
 		38E81CA71B66343000DE36F5 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				38D34FBE1B4A7DDC00CBAB2C /* libUMSocial_Sdk_4.2.1.a in Frameworks */,
 				38D302A31B45290900484AC8 /* CoreGraphics.framework in Frameworks */,
 				38D302A11B4528FF00484AC8 /* Foundation.framework in Frameworks */,
+				38E4F5801B6877AF00777A18 /* FIR.framework in Frameworks */,
 				38D3029F1B4528F800484AC8 /* Security.framework in Frameworks */,
 				38D3029D1B4528ED00484AC8 /* UIKit.framework in Frameworks */,
 				38D34FBC1B4A7DDC00CBAB2C /* libMobClickLibrary.a in Frameworks */,
@@ -1091,6 +1094,7 @@
 		38D301FE1B451A6E00484AC8 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				38E4F57F1B6877AF00777A18 /* FIR.framework */,
 				38E81CA61B66343000DE36F5 /* JSBadgeView */,
 				3887AF131B5F687F0070BC6F /* SJAvatarBrowser */,
 				38D21B1A1B58A62C00F16F21 /* WCAlertView */,
@@ -2031,9 +2035,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
-					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
-					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
+					"$(PROJECT_DIR)/Libs",
 				);
 				INFOPLIST_FILE = Card_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2048,9 +2050,6 @@
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
-					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
-					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2075,9 +2074,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
-					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
-					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
+					"$(PROJECT_DIR)/Libs",
 				);
 				INFOPLIST_FILE = Card_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2092,9 +2089,6 @@
 					"$(PROJECT_DIR)/Libs/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"\"${PODS_ROOT}/Headers/Public/JSONModel\"",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/RETableViewManager\"",
-					"\"${PODS_ROOT}/Headers/Public/REValidation\"",
-					"\"${PODS_ROOT}/Headers/Public/REFormattedNumberField\"",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;

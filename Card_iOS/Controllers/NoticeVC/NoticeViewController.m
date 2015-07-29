@@ -192,7 +192,7 @@ const float  NavViewHeight =  45;
         urlString = [NSString stringWithFormat:@"%@noti-comm/list?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSzie,(long)self.page2];
     }
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *paremetes =@{@"user_id":@"4",KURLTOKEN:tokenString};
+    NSDictionary  *paremetes =@{@"user_id":user.user_id,KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager  POST:urlString parameters:paremetes success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
