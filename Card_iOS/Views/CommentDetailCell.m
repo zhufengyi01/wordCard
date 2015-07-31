@@ -29,12 +29,12 @@
     if (longp.state ==UIGestureRecognizerStateBegan) {
         UserDataCenter *usr = [UserDataCenter shareInstance];
         if (([usr.user_id intValue]==[m_model.userInfo.Id intValue])||([usr.is_admin intValue]>0)) {
-            ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除"]];
+            ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除",@"回复"]];
             ac.tag =100;
             [ac showInView:self];
         }else
         {
-            ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"复制"]];
+            ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"复制",@"回复"]];
             ac.tag=101;
             [ac showInView:self];
             
@@ -48,6 +48,9 @@
         //删除
         if (buttonIndex==0) {
             m_cellClick(2000);
+        }else if(buttonIndex==1)
+        {
+            m_cellClick(2001);
         }
     }else
     {
@@ -56,6 +59,10 @@
             UIPasteboard *paste = [UIPasteboard generalPasteboard];
             paste.string = m_model.content;
             [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+        }else if(buttonIndex==1)
+        {
+            //回复
+            m_cellClick(2001);
         }
     }
 }

@@ -35,7 +35,9 @@
     [self.textView becomeFirstResponder];
     self.textView.font = [UIFont fontWithName:KFontThin size:18];
     [self.view addSubview:self.textView];
-    
+    if (self.commentmodel) {
+        self.textView.text = [NSString stringWithFormat:@"回复%@ : ",self.commentmodel.userInfo.username];
+    }
     UILabel  *lbl = [ZCControl createLabelWithFrame:CGRectMake(10, self.textView.frame.origin.x+self.textView.frame.size.height+10, 200, 20) Font:12 Text:@"最多只能输入100个字符"];
     lbl.font = [UIFont fontWithName:KFontThin size:10];
     lbl.textColor = VLight_GrayColor;
@@ -59,11 +61,19 @@
     UserDataCenter  *userCenter=[UserDataCenter shareInstance];
     NSString *urlString =[NSString stringWithFormat:@"%@comment/create", kApiBaseUrl];
     NSString *tokenString =[Function getURLtokenWithURLString:urlString];
-    NSDictionary *parameters=@{@"user_id":userCenter.user_id,@"prod_id":self.pro_id,@"content":temptext,KURLTOKEN:tokenString};
+    NSDictionary *parameters=@{@"user_id":userCenter.user_id,@"prod_id":self.model.Id,@"content":temptext,KURLTOKEN:tokenString};
+    if (self.pageType == CommentVCPageTypeReply) {
+        parameters =@{@"user_id":userCenter.user_id,@"prod_id":self.model.Id,@"comm_user_id":self.commentmodel.userInfo.Id,@"content":temptext,KURLTOKEN:tokenString};
+    }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
-          [SVProgressHUD showSuccessWithStatus:@"评论成功"];
+            if (self.pageType == CommentVCPageTypeDefault) {
+                [SVProgressHUD showSuccessWithStatus:@"评论成功"];
+            }else
+            {
+                [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+            }
             NSInteger  comment = [self.model.comm_count integerValue];
             comment = comment + 1;
             self.model.comm_count =[NSString stringWithFormat:@"%ld",(long)comment];

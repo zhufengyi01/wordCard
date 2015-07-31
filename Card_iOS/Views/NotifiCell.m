@@ -58,7 +58,7 @@
 -(void)setNotimodel:(NotiModel *)notimodel
 {
     _notimodel= notimodel;
-    NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.notimodel.OuserInfo.logo]];
+    NSURL  *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,_notimodel.OuserInfo.logo]];
     [self.headBtn sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:HeadImagePlaceholder options:(SDWebImageRetryFailed|SDWebImageLowPriority)];
     int length = (int)self.notimodel.OuserInfo.username.length;
     //未读的时候添加标志
@@ -66,13 +66,13 @@
         [self.badgeparentView removeFromSuperview];
         self.badgeparentView = nil;
     }
-    if ([self.notimodel.status intValue]==1) {
+    if ([notimodel.status intValue]==1) {
         self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
         [self.contentView addSubview:self.badgeparentView];
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
         badgeView.badgeText = @"1";
     }
-    if (self.notimodel.OuserInfo.username.length==0) {
+    if (_notimodel.OuserInfo.username.length==0) {
         return;
     }
     NSString *mark ;
@@ -82,11 +82,16 @@
     {
         mark =@"评论了你";
     }
-    NSString *str = [NSString stringWithFormat:@"%@  %@",self.notimodel.OuserInfo.username,mark];
+    if ([_notimodel.type isEqualToString:@"1"]) {
+        mark = @"评论了你";
+    }else if([_notimodel.type isEqualToString:@"2"]){
+        mark = @"回复了你的评论";
+    }
+    NSString *str = [NSString stringWithFormat:@"%@  %@",_notimodel.OuserInfo.username,mark];
     NSMutableAttributedString  *attr = [[NSMutableAttributedString alloc]initWithString:str];
     [attr setAttributes:@{NSForegroundColorAttributeName:VGray_color} range:NSMakeRange(0, length)];
     [self.namelbl setAttributedText:attr];
-    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[self.notimodel.updated_at intValue]];
+    NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[_notimodel.updated_at intValue]];
     NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     self.timelbl.text=da;
 }

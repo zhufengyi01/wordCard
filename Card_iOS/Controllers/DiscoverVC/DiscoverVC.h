@@ -10,6 +10,7 @@
 #import "CommonCell.h"
 #import "CommentModel.h"
 #import "CommonView.h"
+#import "AuthorToolBar.h"
 @interface DiscoverVC : NormalTableView
 
 @property(nonatomic,strong)CommonModel  *model;
@@ -21,5 +22,8 @@
 @property(nonatomic,strong)NSMutableArray  *commentlistArray;
 
 @property(nonatomic,strong) NSMutableArray *likeArray;
+
+//喜欢和点赞和评论的数量
+@property(nonatomic,strong) AuthorToolBar  *Author;
 
 @end

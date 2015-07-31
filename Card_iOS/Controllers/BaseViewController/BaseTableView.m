@@ -20,6 +20,7 @@
 #import "NSDateFormatter+Make.h"
 #import "ZFYLoading.h"
 #import "WordMainVC.h"
+#import "AppDelegate.h"
 @interface BaseTableView () <UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableDictionary  *parameters;
@@ -85,6 +86,8 @@
     [self.temArr removeAllObjects];
     page=1;
     [self requestData];
+    //检查是否有新消息
+    [self checkIsNewNoti];
 }
 -(void)tableViewScollerTop
 {
@@ -308,4 +311,22 @@
 {
     //self.navigationController.navigationBar.hidden = YES;
 }
+-(void)checkIsNewNoti
+{
+    UserDataCenter *User = [UserDataCenter shareInstance];
+    NSString *urlString  = [NSString stringWithFormat:@"%@user/exists-new-noti",kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary  *dict = @{@"user_id":User.user_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+            NSLog(@"有更新");
+            NSDictionary *noti = @{AppDelegateUserCheckNotificationKey:[responseObject objectForKey:@"exists_new"]};
+            [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUserCheckNotification object:noti];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error ==%@",error);
+    }];
+}
+
 @end

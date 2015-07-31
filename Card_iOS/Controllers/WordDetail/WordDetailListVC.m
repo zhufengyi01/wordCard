@@ -22,6 +22,8 @@
 #import "UIImageView+WebCache.h"
 #import "AuthorToolBar.h"
 #import "NSDate+Extension.h"
+#import "BaseNavigationViewController.h"
+#import "CommentVC.h"
 static  float  likebarheight = 80;
 @implementation WordDetailListVC
 
@@ -199,6 +201,23 @@ static  float  likebarheight = 80;
                     [self.tabbleView beginUpdates];
                     [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
                     [self.tabbleView endUpdates];
+                }
+                    break;
+                case 2001:
+                {
+                    //评论回复
+                    //点击发布评论
+                    CommentVC *cv =[CommentVC new];
+                    cv.pro_id =model.Id;
+                    cv.model = self.model;
+                    cv.commentmodel = model;
+                    cv.pageType = CommentVCPageTypeReply;
+                    cv.completeComment = ^(CommentModel *model)
+                    {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:CommentVCPushlicSucucessNotifation object:nil];
+                    };
+                    BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
+                    [self.navigationController presentViewController:na animated:YES completion:nil];
                 }
                     break;
                 case 1000:

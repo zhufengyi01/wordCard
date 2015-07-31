@@ -70,6 +70,7 @@
 		38923A011B4D340500E7F092 /* NotiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A001B4D340500E7F092 /* NotiModel.m */; };
 		38923A041B4D35AD00E7F092 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A031B4D35AD00E7F092 /* TextModel.m */; };
 		38923A071B4D3D5900E7F092 /* NotifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A061B4D3D5900E7F092 /* NotifiCell.m */; };
+		38AD91111B6B5CED009BFD1B /* MYTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AD91101B6B5CED009BFD1B /* MYTabbar.m */; };
 		38CFC3D11B54FB4A004EF31F /* ZfyActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFC3D01B54FB4A004EF31F /* ZfyActionSheet.m */; };
 		38CFC43D1B552D10004EF31F /* ZFYLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFC43C1B552D10004EF31F /* ZFYLoading.m */; };
 		38CFFA901B5365A3005115AB /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFFA8F1B5365A3005115AB /* TTTAttributedLabel.m */; };
@@ -345,6 +346,8 @@
 		38923A031B4D35AD00E7F092 /* TextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextModel.m; sourceTree = "<group>"; };
 		38923A051B4D3D5900E7F092 /* NotifiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifiCell.h; sourceTree = "<group>"; };
 		38923A061B4D3D5900E7F092 /* NotifiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifiCell.m; sourceTree = "<group>"; };
+		38AD910F1B6B5CED009BFD1B /* MYTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYTabbar.h; sourceTree = "<group>"; };
+		38AD91101B6B5CED009BFD1B /* MYTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYTabbar.m; sourceTree = "<group>"; };
 		38CFC3CF1B54FB4A004EF31F /* ZfyActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZfyActionSheet.h; sourceTree = "<group>"; };
 		38CFC3D01B54FB4A004EF31F /* ZfyActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZfyActionSheet.m; sourceTree = "<group>"; };
 		38CFC43B1B552D10004EF31F /* ZFYLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFYLoading.h; sourceTree = "<group>"; };
@@ -1166,6 +1169,8 @@
 				38D1EAC31B5CE09000B18169 /* CommentDetailCell.m */,
 				38EA0FB71B60A1F200B2DD8B /* AuthorToolBar.h */,
 				38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */,
+				38AD910F1B6B5CED009BFD1B /* MYTabbar.h */,
+				38AD91101B6B5CED009BFD1B /* MYTabbar.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1826,6 +1831,7 @@
 				38D303431B4529BD00484AC8 /* BaseNavigationViewController.m in Sources */,
 				38D1EAC41B5CE09000B18169 /* CommentDetailCell.m in Sources */,
 				38D3035E1B45369F00484AC8 /* CommonCell.m in Sources */,
+				38AD91111B6B5CED009BFD1B /* MYTabbar.m in Sources */,
 				3872BF1A1B4664D80004A928 /* NSDate+TimeAgo.m in Sources */,
 				38D3038D1B453B2A00484AC8 /* AFURLResponseSerialization.m in Sources */,
 				3872BF321B4664D80004A928 /* UIImage+RemoteSize.m in Sources */,

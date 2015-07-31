@@ -10,6 +10,11 @@
 #import "RootViewController.h"
 #import "CommonModel.h"
 #import "CommentModel.h"
+typedef NS_ENUM(NSInteger, CommentVCPageType)
+{
+    CommentVCPageTypeDefault,
+    CommentVCPageTypeReply  //评论回复
+};
 @interface CommentVC : RootViewController <UITextViewDelegate>
 
 
@@ -17,7 +22,12 @@
 
 @property (nonatomic,strong) CommonModel  *model;
 
+@property(nonatomic,strong) CommentModel *commentmodel;
+
 @property (nonatomic,strong) void(^completeComment)(CommentModel * content);
 
 @property(nonatomic,strong) UITextView  *textView;
+
+//判断是从评论页还是回复评论页面进去
+@property(nonatomic,assign) CommentVCPageType  pageType;
 @end

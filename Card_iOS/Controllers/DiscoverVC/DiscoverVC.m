@@ -20,11 +20,18 @@
 #import "MyViewController.h"
 #import "CommentDetailCell.h"
 #import "DiscoverViewController.h"
+#import "CommentVC.h"
+#import "UserButton.h"
+#import "BaseNavigationViewController.h"
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
 //float const LIKE_BAR_HEIGH2 = 50;
 #define like_barheight  50
-@interface DiscoverVC ()
+@interface DiscoverVC ()<ZfyActionSheetDelegate>
 {
     Discloading  *loadView;
+    UIView *headView;
+    UIView *likeBar;
 }
 @end
 @implementation DiscoverVC
@@ -32,18 +39,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
     self.currentIndex = 1;
     [self createLikeBar];
     [self createLeftNavigationItem:nil Title:@"返回"];
+    [self creatRightNavigationItem:[UIImage imageNamed:@"more"] Title:nil];
     [self requestData];
     loadView= [[Discloading alloc]init];
     [self.view addSubview:loadView];
     self.tabbleView.tableFooterView = [UIView new];
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth)];
+    self.tabbleView.backgroundColor = VLight_GrayColor_apla;
+    headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceWidth)];
     headView.userInteractionEnabled = YES;
     headView.backgroundColor = VLight_GrayColor_apla;
-    [self.tabbleView setTableHeaderView:headView];
-    self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth-0, kDeviceHeight-kHeightNavigation-40);
+    self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth-0, kDeviceHeight-kHeightNavigation-50);
     self.comView = [[CommonView alloc]initWithFrame:CGRectMake(10, 10, kDeviceWidth-20, kDeviceWidth-20)];
     [headView addSubview:self.comView];
     self.comView.isLongWord = YES;
@@ -51,11 +60,68 @@
 -(void)configComView
 {
     [self.comView configCommonView:self.model];
+    if (likeBar) {
+        [likeBar removeFromSuperview];
+    }
+    likeBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.comView.frame.origin.y+self.comView.frame.size.height+10, kDeviceWidth, 80)];
+    likeBar.userInteractionEnabled = YES;
+    [headView addSubview:likeBar];
+    // 点击进入个人页
+    UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
+    NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
+    [userbtn addActionHandler:^(NSInteger tag) {
+        MyViewController *my = [MyViewController new];
+        my.author_Id = self.model.userInfo.Id;
+        my.pageType= MyViewControllerPageTypeOthers;
+        [self.navigationController pushViewController:my animated:YES];
+    }];
+    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
+    userbtn.titleLab.text= self.model.userInfo.username;
+    userbtn.brieflbl.text = self.model.userInfo.brief;
+    [likeBar addSubview:userbtn];
+    headView.frame =CGRectMake(0, 0, kDeviceWidth,likeBar.frame.origin.y+likeBar.frame.size.height+0);
+    [self.tabbleView setTableHeaderView:headView];
+    
+    //配置喜欢等
+    //喜欢，评论数量
+    self.Author= [[AuthorToolBar alloc] init];
+    [likeBar addSubview:self.Author];
+    if ([self.model.view_count intValue]>0) {
+        self.Author.esylbl.text =self.model.view_count;
+    }if ([self.model.liked_count intValue]>0) {
+        self.Author.heartlbl.text = self.model.liked_count;
+    }if ([self.model.comm_count intValue]>0) {
+        self.Author.commetlbl.text = self.model.comm_count;
+    }
 }
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn
 {
     [SVProgressHUD dismiss];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)RightNavigationButtonClick:(UIButton *)rightbtn
+{
+    ZfyActionSheet  *al = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"评论"]];
+    al.tag =100;
+    [al showInView:self.view];
+}
+-(void)ZfyActionSheet:(ZfyActionSheet*)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag==100) {
+        if (buttonIndex==0) {
+            //评论
+            CommentVC *cv =[CommentVC new];
+            cv.pro_id =self.model.Id;
+            cv.model = self.model;
+            cv.completeComment = ^(CommentModel *model)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:CommentVCPushlicSucucessNotifation object:nil];
+            };
+            BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
+            [self.navigationController presentViewController:na animated:YES completion:nil];
+        }
+    }
+    
 }
 -(void)RefreshViewControlEventValueChanged
 {
@@ -128,7 +194,6 @@
         [SVProgressHUD showErrorWithStatus:@"删除失败"];
     }];
 }
-
 -(void)requestData
 {
     NSDate* tmpStartData = [NSDate date];
@@ -185,26 +250,11 @@
                     }
                 }
                 [self requstCommentData];
-               
             }else
             {
                 if (deltaTime<2) {
                     [GCDQueue  executeInMainQueue:^{
-                        UIView  *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth,kDeviceHeight-kHeightNavigation)];
-                        view.backgroundColor = View_BackGround;
-                        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake((kDeviceWidth-75)/2, (kDeviceHeight-kHeightNavigation-75-100)/2, 75, 75)];
-                        img.image = [UIImage imageNamed:@"empty"];
-                        //img.backgroundColor =VGray_color;
-                        [view addSubview:img];
-                        
-                        UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0,img.frame.origin.y+img.frame.size.height+10, kDeviceWidth, 40)];
-                        lable.text = @"看完了，等会再来吧";
-                        lable.textColor = VGray_color;
-                        lable.textAlignment = NSTextAlignmentCenter;
-                        lable.font = [UIFont fontWithName:KFontThin size:14];
-                        [view addSubview:lable];
-                        [self.view addSubview:view];
-                        
+                        [self showNullData];
                     } afterDelaySecs:2-deltaTime];
                 }
             }
@@ -231,6 +281,7 @@
 {
     if (self.dataArray.count<=self.currentIndex) {
         [SVProgressHUD showInfoWithStatus:@"看完了"];
+        [self showNullData];
         return;
     }
     self.model= [self.dataArray objectAtIndex:self.currentIndex];
@@ -293,10 +344,12 @@
     btn1.tag=99;
     [btn1 addActionHandler:^(NSInteger tag) {
         [GCDQueue  executeInMainQueue:^{
-        //喜欢
+            //喜欢
+            [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
             self.currentIndex ++;
+            [self.commentlistArray removeAllObjects];
             [self requstCommentData];
-    }];
+        }];
     }];
     [btn1 setBackgroundImage:[UIImage imageNamed:@"tabbar_backgroud_color.png"] forState:UIControlStateNormal];
     btn1.backgroundColor=[UIColor whiteColor];
@@ -309,7 +362,9 @@
     btn2.tag=100;
     btn2.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [btn2 addActionHandler:^(NSInteger tag) {
+        [self requestDislike];
         self.currentIndex++;
+        [self.commentlistArray removeAllObjects];
         [self requstCommentData];
     }];
     [btn2 setTitleColor:VGray_color forState:UIControlStateNormal];
@@ -366,6 +421,23 @@
                     [self.tabbleView endUpdates];
                 }
                     break;
+                case 2001:
+                {
+                    //评论回复
+                    //点击发布评论
+                    CommentVC *cv =[CommentVC new];
+                    cv.pro_id =model.Id;
+                    cv.model = self.model;
+                    cv.commentmodel = model;
+                    cv.pageType = CommentVCPageTypeReply;
+                    cv.completeComment = ^(CommentModel *model)
+                    {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:CommentVCPushlicSucucessNotifation object:nil];
+                    };
+                    BaseNavigationViewController *na = [[BaseNavigationViewController alloc] initWithRootViewController:cv];
+                    [self.navigationController presentViewController:na animated:YES completion:nil];
+                }
+                    break;
                 case 1000:
                     //点击个人头像按钮
                 {
@@ -383,7 +455,24 @@
     }
     return cell;
 }
-
+//显示没有数据
+-(void)showNullData
+{
+    UIView  *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth,kDeviceHeight-kHeightNavigation)];
+    view.backgroundColor = View_BackGround;
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake((kDeviceWidth-75)/2, (kDeviceHeight-kHeightNavigation-75-100)/2, 75, 75)];
+    img.image = [UIImage imageNamed:@"empty"];
+    //img.backgroundColor =VGray_color;
+    [view addSubview:img];
+    
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0,img.frame.origin.y+img.frame.size.height+10, kDeviceWidth, 40)];
+    lable.text = @"看完了，等会再来吧";
+    lable.textColor = VGray_color;
+    lable.textAlignment = NSTextAlignmentCenter;
+    lable.font = [UIFont fontWithName:KFontThin size:14];
+    [view addSubview:lable];
+    [self.view addSubview:view];
+}
 //上拉刷新
 -(void)tableviewDisplayIndexpath:(NSIndexPath *)indexpath
 {
@@ -392,20 +481,19 @@
         [self requstCommentData];
     }
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
