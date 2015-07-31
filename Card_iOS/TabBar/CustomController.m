@@ -19,7 +19,6 @@
 #import "NoticeViewController.h"
 #import "DiscoverViewController.h"
 #import "DiscoverVC.h"
-#import "MYTabbar.h"
 #define  BUTTON_COUNT 5
 // 字体设置
 #define TITLE_NORMAL_COLOR   [UIColor colorWithRed:20/255.0 green:20/255.0 blue:120/255.0 alpha:1]

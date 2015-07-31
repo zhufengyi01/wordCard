@@ -22,8 +22,8 @@
         self.backgroundColor=View_white_Color;
         //self.layer.cornerRadius = 4;
         //self.clipsToBounds = YES;
-        self.layer.borderWidth = 0.1;
-        self.layer.borderColor=VLight_GrayColor.CGColor;
+        //self.layer.borderWidth = 0.1;
+        //self.layer.borderColor=VLight_GrayColor.CGColor;
         [self createUI];
         UILongPressGestureRecognizer  *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copylongpress:)];
         [self addGestureRecognizer:longpress];

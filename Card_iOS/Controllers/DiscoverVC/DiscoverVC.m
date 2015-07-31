@@ -280,7 +280,7 @@
 -(void)requstCommentData
 {
     if (self.dataArray.count<=self.currentIndex) {
-        [SVProgressHUD showInfoWithStatus:@"看完了"];
+        //[SVProgressHUD showInfoWithStatus:@"看完了"];
         [self showNullData];
         return;
     }
@@ -415,6 +415,9 @@
                     self.model.comm_count = [NSString stringWithFormat:@"%ld",(long)comment];
                     //[self updateComment];
                     [self requestDeleteCommentWithCommentId:model.Id];
+                    if (self.commentlistArray.count <= indexPath.row) {
+                        return ;
+                    }
                     [self.commentlistArray removeObjectAtIndex:indexPath.row];
                     [self.tabbleView beginUpdates];
                     [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];

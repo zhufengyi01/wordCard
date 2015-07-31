@@ -17,6 +17,8 @@
 
 @property(nonatomic,strong)  UIScrollView *myScrollView;
 
+
+@property(nonatomic,strong) UITextField   *textField;
 @property(nonatomic,strong) UIButton      *SourceButton;
 
 @property (nonatomic,strong) UILabel      *sourceLable;

@@ -24,9 +24,8 @@
     }
     return self;
 }
--(void)deleteUserselfComment:(UILongPressGestureRecognizer *) longp
+-(void)deleteUserselfComment:(UITapGestureRecognizer *) longp
 {
-    if (longp.state ==UIGestureRecognizerStateBegan) {
         UserDataCenter *usr = [UserDataCenter shareInstance];
         if (([usr.user_id intValue]==[m_model.userInfo.Id intValue])||([usr.is_admin intValue]>0)) {
             ZfyActionSheet *ac = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除",@"回复"]];
@@ -39,7 +38,6 @@
             [ac showInView:self];
             
         }
-    }
 }
 
 #pragma mark   --ZFYActionSheet
@@ -111,8 +109,8 @@
     NSDate  *comfromTimesp =[NSDate dateWithTimeIntervalSince1970:[model.created_at intValue]];
     NSString  *da = [NSDate timeInfoWithDate:comfromTimesp];
     self.timeLable.text=da;
-    UILongPressGestureRecognizer  *longp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteUserselfComment:)];
-    [self addGestureRecognizer:longp];
+    UITapGestureRecognizer  *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteUserselfComment:)];
+    [self addGestureRecognizer:tap];
 
 }
 -(void)cellEvent:(UIButton *) button

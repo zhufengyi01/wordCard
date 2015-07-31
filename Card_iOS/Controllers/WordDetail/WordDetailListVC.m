@@ -197,6 +197,9 @@ static  float  likebarheight = 80;
                     self.model.comm_count = [NSString stringWithFormat:@"%ld",(long)comment];
                     [self updateComment];
                     [self requestDeleteCommentWithCommentId:model.Id];
+                    if (self.dataArray.count <=indexPath.row) {
+                        return ;
+                    }
                     [self.dataArray removeObjectAtIndex:indexPath.row];
                     [self.tabbleView beginUpdates];
                     [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];

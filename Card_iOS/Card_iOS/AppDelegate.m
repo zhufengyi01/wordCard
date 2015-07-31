@@ -165,10 +165,9 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
         //本地的version
         NSString * localVersionShort=[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
         NSString * localbuild=[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
-        
         if (![versionShort isEqualToString:localVersionShort]||![localbuild isEqualToString:buildVerSion]) {
             NSString *upDateUrl =  [responseObject objectForKey:@"update_url"];
-            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"1.用户删除放在详细页\n2.发现页重新调整\n" customizationBlock:^(WCAlertView *alertView) {
+            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"1.发现页和详细页增加回复评论\n2.更新提示变成小圆点\n" customizationBlock:^(WCAlertView *alertView) {
             } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
                 if (buttonIndex==1) {
                     [[UIApplication  sharedApplication] openURL:[NSURL URLWithString:upDateUrl]];

@@ -66,11 +66,13 @@
         [self.badgeparentView removeFromSuperview];
         self.badgeparentView = nil;
     }
+    self.backgroundColor = View_white_Color;
     if ([notimodel.status intValue]==1) {
-        self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
-        [self.contentView addSubview:self.badgeparentView];
-        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
-        badgeView.badgeText = @"1";
+//        self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
+//        [self.contentView addSubview:self.badgeparentView];
+//        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
+//        badgeView.badgeText = @"1";
+        self.backgroundColor= VLight_GrayColor_apla;
     }
     if (_notimodel.OuserInfo.username.length==0) {
         return;

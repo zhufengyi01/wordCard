@@ -46,6 +46,7 @@ const float segmentheight = 45;
     self.title  = @"我的";
     [self creatRightNavigationItem:nil Title:@"设置"];
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
+    self.refreshControl.backgroundColor = View_white_Color;
     if (self.author_Id) {
         self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
     }
