@@ -47,7 +47,7 @@
 -(void)createUI
 {
     self.myScorllerView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, -20,kDeviceWidth, kDeviceHeight+20)];
-    self.myScorllerView.contentSize=CGSizeMake(kDeviceWidth*3, kDeviceHeight);
+    self.myScorllerView.contentSize=CGSizeMake(kDeviceWidth*2, kDeviceHeight);
     self.myScorllerView.pagingEnabled=YES;
     self.myScorllerView.bounces=NO;
     self.myScorllerView.showsHorizontalScrollIndicator=NO;
@@ -60,20 +60,18 @@
     //self.pageControl.tintColor=VBlue_color;
     self.pageControl.pageIndicatorTintColor=VLight_GrayColor;
     self.pageControl.currentPageIndicatorTintColor=VBlue_color;
-    self.pageControl.numberOfPages=3;
+    self.pageControl.numberOfPages=2;
     self.pageControl.currentPage=0;
     [self.view addSubview:self.pageControl];
     
-    
-    NSArray  *imageArr =@[@"first",@"secend.png",@"third.png"];
-    for (int i=0; i<3; i++) {
+    NSArray  *imageArr =@[@"first",@"secend.png"];
+    for (int i=0; i<2; i++) {
         double x=i*kDeviceWidth;
         UIImageView  *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(x, 0, kDeviceWidth, kDeviceHeight-0)];
         imageview.backgroundColor =[UIColor blueColor];
         imageview.image =[UIImage imageNamed:imageArr[i]];
         [self.myScorllerView addSubview:imageview];
-        
-        if (i==2) {
+        if (i==1) {
             imageview.userInteractionEnabled=YES;
             UIButton  *btn =[UIButton buttonWithType:UIButtonTypeCustom];
             btn.layer.cornerRadius = 6;
@@ -89,16 +87,13 @@
 -(void)goLogin
 {
     [self.navigationController pushViewController:[LoginViewController new] animated:YES];
-    
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    
     NSInteger   index =scrollView.contentOffset.x/kDeviceWidth;
     dispatch_async(dispatch_get_main_queue(), ^{
         self.pageControl.currentPage=index;
     });
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

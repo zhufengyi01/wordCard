@@ -30,7 +30,6 @@
 
 @property(nonatomic,strong) UIView *footView;
 
-@property(nonatomic,strong)UILabel *statusLable;
 @end
 @implementation BaseTableView
 

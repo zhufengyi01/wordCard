@@ -25,8 +25,8 @@
     UIBarButtonItem  *item =[[UIBarButtonItem alloc]initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.leftBarButtonItem=item;
     self.tabbleView.frame = CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation);
-    self.tabbleView.tableFooterView  =[[UIView alloc]init];
     //[self createLeftNavigationItem:nil Title:nil];
+    self.statusLable.text =@"";
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 0,kDeviceWidth-40, 30)];
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchBar.placeholder = @"请输入搜索内容";
@@ -54,6 +54,7 @@
             [SVProgressHUD dismiss];
             NSMutableArray *array =[responseObject objectForKey:@"models"];
             if (array.count>0) {
+                self.statusLable.text = @"THE - END";
                 for (int i=0; i<array.count; i++) {
                     NSDictionary  *commondict =[array objectAtIndex:i];
                     if (![commondict isKindOfClass:[NSNull class]]) {
@@ -87,6 +88,7 @@
                 [self.refreshControl endRefreshing];
             }else
             {
+                self.statusLable.text = @"没有数据";
                 [GCDQueue  executeInMainQueue:^{
                     [SVProgressHUD showInfoWithStatus:@"没有数据"];
                     [self.temArr removeAllObjects];

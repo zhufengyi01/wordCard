@@ -104,10 +104,11 @@
 
 ///通知的相关定义
 
-#define GOTO_USER_CENTER   @"goto_user"  //跳转到个人页
-#define Refresh_MAIN_LIST  @"refresh_main_list"  //刷新
-#define AddCardDidSucucessNotification @"AddCardDidSucucessNotification"
-#define AddCardwillGotoUserNotification @"gotouser"
+#define GOTO_USER_CENTER                      @"goto_user"  //跳转到个人页
+#define Refresh_MAIN_LIST                     @"refresh_main_list"  //刷新
+#define AddCardDidSucucessNotification        @"AddCardDidSucucessNotification"
+#define AddCardwillGotoUserNotification       @"gotouser"
+#define UserDeleteRefreshNotification         @"deleteNotifation"
 #define  CommentVCPushlicSucucessNotifation   @"CommentVCPushlicSucucessNotifation"
 #define  WordDetailListChangeNotifation       @"WordDetailListChangeNotifation"
 

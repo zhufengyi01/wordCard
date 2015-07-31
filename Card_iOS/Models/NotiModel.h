@@ -19,6 +19,7 @@
 @property(nonatomic,strong) NSString *updated_by;
 @property(nonatomic,strong) NSString *created_at;
 @property(nonatomic,strong) NSString *updated_at;
+@property(nonatomic,strong) NSString *type;
 @property(nonatomic,strong) NSString *status;
 @property(nonatomic,strong) UserModel *OuserInfo;
 @property(nonatomic,strong) TextModel  *textInfo;

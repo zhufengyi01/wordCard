@@ -27,13 +27,13 @@
 #import "GiderPageViewController.h"
 
 //fir内部测试 奔溃分析
-#define InGeneralKey @"fc5106be3953564feb4a05480438b783"
+#define InGeneralKey    @"fc5106be3953564feb4a05480438b783"
 //内部测试apitoken
-#define InFirApiToken @"be698651c132041e0b6b632a88a48a0b"
-#define InFirId       @"559a6460692d394a5e000029"
+#define InFirApiToken   @"be698651c132041e0b6b632a88a48a0b"
+#define InFirId         @"559a6460692d394a5e000029"
 //fir 企业分发测试
-#define ComFirApiToken @"5972a7c00f75dad3e5d3b817b9be0ffe"
-#define ComFirId       @"559fa773f61ceb5a0e00012e"
+#define ComFirApiToken  @"5972a7c00f75dad3e5d3b817b9be0ffe"
+#define ComFirId        @"559fa773f61ceb5a0e00012e"
 NSString  *const AppDelegateUserCheckNotification = @"AppDelegateUserCheckNotification";
 NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNotificationKey";
 
@@ -50,14 +50,13 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
     //[FIR handleCrashWithKey:InGeneralKey];
     //版本更新
     //[FIR checkForUpdateInFIR:^(id result, NSError *error) {
-
     //} apiToken:InFirApiToken];
-    
     NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
     [self initUmeng];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     if (userInfo) {  //用户已经登陆
         [Function getUserInfoWith:userInfo];
+        [self checkIsNewNoti];
         self.window.rootViewController =[CustomController new];
     }
     else {
@@ -73,11 +72,8 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
             self.window.rootViewController=loginNa;
         }
     }
-    //检查是否有新的消息
-    [self checkIsNewNoti];
     //检测版本更新
     [GCDQueue executeInGlobalQueue:^{
-        
         [GCDQueue executeInMainQueue:^{
             [self checkNewUpdate];
         }];
@@ -163,7 +159,7 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
 -(void)checkNewUpdate
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://api.fir.im/apps/latest/%@?api_token=%@",ComFirId,ComFirApiToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"http://api.fir.im/apps/latest/%@?api_token=%@",InFirId,InFirApiToken] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString * versionShort=responseObject[@"versionShort"]; //对应 CFBundleShortVersionString, 对应Xcode项目配置"General"中的 Version
         NSString *buildVerSion = [responseObject objectForKey:@"version"];
         //本地的version
@@ -172,7 +168,7 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
         
         if (![versionShort isEqualToString:localVersionShort]||![localbuild isEqualToString:buildVerSion]) {
             NSString *upDateUrl =  [responseObject objectForKey:@"update_url"];
-            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"增加了详细页评论\n增加了个人信息修改" customizationBlock:^(WCAlertView *alertView) {
+            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"1.用户删除放在详细页\n2.发现页重新调整\n" customizationBlock:^(WCAlertView *alertView) {
             } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
                 if (buttonIndex==1) {
                     [[UIApplication  sharedApplication] openURL:[NSURL URLWithString:upDateUrl]];
@@ -201,9 +197,11 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //请求新的消息
-    [self checkIsNewNoti];
-    //请求版本更新
-    //[self checkNewUpdate];
+    NSDictionary  *userInfo=[[NSUserDefaults  standardUserDefaults] objectForKey:kUserKey];
+    if (userInfo) {  //用户已经登陆
+        [Function getUserInfoWith:userInfo];
+        [self checkIsNewNoti];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

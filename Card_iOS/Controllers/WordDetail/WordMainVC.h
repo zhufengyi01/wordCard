@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, WordDetailSourcePage)
 {
     WordDetailSourcePageDefault,
     WordDetailSourcePageAdmin,
+    WordDetailListVCUserSelf,
     
 };
 @interface WordMainVC : RootViewController <UIPageViewControllerDelegate,UIPageViewControllerDataSource,UIGestureRecognizerDelegate,ZfyActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,AdimToolBarDelegate,SelectTimeViewDelegate>

@@ -16,6 +16,7 @@
 		384640FC1B4E5B720079CE9D /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 384640F71B4E5B720079CE9D /* GCDTimer.m */; };
 		384640FD1B4E5B720079CE9D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 384640F81B4E5B720079CE9D /* README.md */; };
 		3846A4FF1B4F842400ADB4F1 /* GiderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846A4FE1B4F842400ADB4F1 /* GiderPageViewController.m */; };
+		385DA5591B6A39CA00919410 /* DiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 385DA5581B6A39CA00919410 /* DiscoverVC.m */; };
 		3872BE1F1B465E2C0004A928 /* MainAdmList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1C1B465E2C0004A928 /* MainAdmList.m */; };
 		3872BE201B465E2C0004A928 /* TimingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BE1E1B465E2C0004A928 /* TimingList.m */; };
 		3872BF151B4664D80004A928 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BEB41B4664D80004A928 /* NSData+Base64.m */; };
@@ -237,6 +238,8 @@
 		384640F81B4E5B720079CE9D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3846A4FD1B4F842400ADB4F1 /* GiderPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiderPageViewController.h; sourceTree = "<group>"; };
 		3846A4FE1B4F842400ADB4F1 /* GiderPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiderPageViewController.m; sourceTree = "<group>"; };
+		385DA5571B6A39CA00919410 /* DiscoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverVC.h; sourceTree = "<group>"; };
+		385DA5581B6A39CA00919410 /* DiscoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverVC.m; sourceTree = "<group>"; };
 		3872BE1B1B465E2C0004A928 /* MainAdmList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainAdmList.h; sourceTree = "<group>"; };
 		3872BE1C1B465E2C0004A928 /* MainAdmList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainAdmList.m; sourceTree = "<group>"; };
 		3872BE1D1B465E2C0004A928 /* TimingList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingList.h; sourceTree = "<group>"; };
@@ -1003,6 +1006,8 @@
 			children = (
 				38D0DBC01B4BB4B300E0E7EC /* DiscoverViewController.h */,
 				38D0DBC11B4BB4B300E0E7EC /* DiscoverViewController.m */,
+				385DA5571B6A39CA00919410 /* DiscoverVC.h */,
+				385DA5581B6A39CA00919410 /* DiscoverVC.m */,
 			);
 			path = DiscoverVC;
 			sourceTree = "<group>";
@@ -1754,6 +1759,7 @@
 				38D3034F1B452F6F00484AC8 /* BaseTableView.m in Sources */,
 				38D0DB981B4B763F00E0E7EC /* SettingViewController.m in Sources */,
 				38D3035B1B45368600484AC8 /* CommonView.m in Sources */,
+				385DA5591B6A39CA00919410 /* DiscoverVC.m in Sources */,
 				3872BF3E1B4664D80004A928 /* UIViewController+MJPopupViewController.m in Sources */,
 				38D396C91B576079008E4CEA /* PersonSetVC.m in Sources */,
 				38D303B71B453B3400484AC8 /* MJRefreshLegendFooter.m in Sources */,

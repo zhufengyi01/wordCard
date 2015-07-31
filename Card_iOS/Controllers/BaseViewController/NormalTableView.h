@@ -23,6 +23,9 @@
 
 @property(nonatomic,strong) UIRefreshControl *refreshControl;
 
+@property(nonatomic,strong)UILabel *statusLable;
+
+
 
 #pragma mark --TableViewDelegate And DataSource
 /*

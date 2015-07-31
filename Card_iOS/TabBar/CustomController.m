@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "NoticeViewController.h"
 #import "DiscoverViewController.h"
+#import "DiscoverVC.h"
 #define  BUTTON_COUNT 5
 // 字体设置
 #define TITLE_NORMAL_COLOR   [UIColor colorWithRed:20/255.0 green:20/255.0 blue:120/255.0 alpha:1]
@@ -71,7 +72,7 @@
     UIButton  *discbtn =[ZCControl createButtonWithFrame:CGRectMake(kDeviceWidth/BUTTON_COUNT, 0, kDeviceWidth/BUTTON_COUNT, kHeigthTabBar) ImageName:nil Target:self Action:nil Title:@""];
     discbtn.backgroundColor =[UIColor clearColor];
     [discbtn  addActionHandler:^(NSInteger tag) {
-        DiscoverViewController *dis = [DiscoverViewController new];
+        DiscoverViewController *dis = [DiscoverVC new];
         BaseNavigationViewController *na =[[BaseNavigationViewController alloc] initWithRootViewController:dis];
         [self presentViewController:na animated:YES completion:nil];
     }];

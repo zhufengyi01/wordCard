@@ -102,6 +102,7 @@ NSTimeInterval const  dismissInterval = 1.f;
         [SVProgressHUD showInfoWithStatus:@"您还没有输入"];
         return;
     }
+    [SVProgressHUD showInfoWithStatus:@"正在发布" maskType:SVProgressHUDMaskTypeBlack];
     AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
     NSString  *url = [NSString stringWithFormat:@"%@text/create",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:url];

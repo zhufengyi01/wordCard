@@ -24,6 +24,7 @@
 #import "CommentVC.h"
 #import "LikeButton.h"
 #import "LikeModel.h"
+#import "WCAlertView.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 @implementation WordMainVC
@@ -89,18 +90,43 @@
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
-    ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
-    [zfy showInView:self.view];
-    
+    //用户个人页
+    if (self.pageType ==WordDetailListVCUserSelf) {
+        ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除"]];
+        zfy.tag = 100;
+        [zfy showInView:self.view];
+       
+    }else {
+        ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
+        zfy.tag = 101;
+        [zfy showInView:self.view];
+    }
 }
--(void)ZfyActionSheet:(id)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)ZfyActionSheet:(ZfyActionSheet*)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex==0) {
-        //邮箱举报
-        NSArray  *Arr =    [self.pageController viewControllers];
-        CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
-        CommonModel  *model = CurrentVC.model;
-        [self sendFeedBackwithmodel:model];
+    if (actionSheet.tag==100) {
+        if (actionSheet.tag==100) {
+            
+            [WCAlertView showAlertWithTitle:@"确定删除" message:nil customizationBlock:^(WCAlertView *alertView) {
+                
+            } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+                if (buttonIndex==1) {
+                    //删除
+                    NSArray  *Arr =    [self.pageController viewControllers];
+                    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+                    CommonModel  *model = CurrentVC.model;
+                    [self requestDeleteDataWith:model.Id];
+                }
+            } cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+        }
+    }else {
+        if (buttonIndex==0) {
+            //邮箱举报
+            NSArray  *Arr =    [self.pageController viewControllers];
+            CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+            CommonModel  *model = CurrentVC.model;
+            [self sendFeedBackwithmodel:model];
+        }
     }
 }
 //分享
@@ -129,6 +155,29 @@
     [share show];
 }
 #pragma mark  - requestData
+//删除个人
+-(void)requestDeleteDataWith:(NSString *)word_id
+{
+    UserDataCenter *User = [UserDataCenter shareInstance];
+    NSString *urlString  = [NSString stringWithFormat:@"%@text/delete",kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary  *dict = @{@"user_id":User.user_id,@"prod_id":word_id,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+            //通知更新
+            [[NSNotificationCenter defaultCenter] postNotificationName:AddCardwillGotoUserNotification object:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error ==%@",error);
+        [SVProgressHUD showErrorWithStatus:@"删除失败"];   }];
+}
 //定时发送到热门,发送时间戳
 -(void)requesttiming:(NSString *)model_id AndTimeSp:(NSString *)timeSp
 {
@@ -330,7 +379,7 @@
         [self requestLikeWithAuthorId:smodel.userInfo.Id andoperation:@1];
     }
     CurrentVC.Author.heartlbl.text=[likeBtn.likeCountLbl.text integerValue]==0?@"0":likeBtn.likeCountLbl.text;
-
+    
 }
 -(void)createLikeBarButtoms
 {

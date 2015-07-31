@@ -24,6 +24,7 @@
 #import "ZFYLoading.h"
 #import "SJAvatarBrowser.h"
 #import "WordMainVC.h"
+#import "WCAlertView.h"
 const float segmentheight = 45;
 @implementation MyViewController
 -(instancetype)init
@@ -59,11 +60,11 @@ const float segmentheight = 45;
     [self requestUserInfo];
     [self requestData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:AddCardwillGotoUserNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:UserDeleteRefreshNotification object:nil];
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
     [self.navigationController pushViewController:[SettingViewController new] animated:YES];
-    
 }
 -(void)RefreshViewControlEventValueChanged
 {
@@ -235,25 +236,6 @@ const float segmentheight = 45;
 }
 
 #pragma mark --requesteData
--(void)requestDeleteDataWith:(NSString *)word_id
-{
-    UserDataCenter *User = [UserDataCenter shareInstance];
-    NSString *urlString  = [NSString stringWithFormat:@"%@text/delete",kApiBaseUrl];
-    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *dict = @{@"user_id":User.user_id,@"prod_id":word_id,KURLTOKEN:tokenString};
-    AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject objectForKey:@"code"] intValue]==0) {
-            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"删除失败"];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error ==%@",error);
-        [SVProgressHUD showErrorWithStatus:@"删除失败"];   }];
-}
 -(void)requestData
 {
     [ZFYLoading showLoadViewInview:self.tabbleView];
@@ -468,35 +450,12 @@ const float segmentheight = 45;
         }
     }
 }
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.pageType ==MyViewControllerPageTypeOthers)
-    {
-        [self.tabbleView setEditing:NO animated:YES];
-        [SVProgressHUD showInfoWithStatus:@"不能删除"];
-    }else{
-        if (self.addWordbtn.selected==YES)
-        {
-            if (self.dataArray1.count>indexPath.row) {
-                CommonModel *m = [self.dataArray1 objectAtIndex:indexPath.row];
-                [self requestDeleteDataWith:m.Id];
-                [self.dataArray1 removeObjectAtIndex:indexPath.row];
-                [self.tabbleView beginUpdates];
-                [self.tabbleView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                [self.tabbleView endUpdates];
-            }
-            
-        }else{
-            [self.tabbleView setEditing:NO animated:YES];
-            [SVProgressHUD showInfoWithStatus:@"不能删除"];
-        }
-    }
-}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.addWordbtn.selected ==YES) {
         WordMainVC  *wordmian =[WordMainVC new];
+        wordmian.pageType = WordDetailListVCUserSelf;
         wordmian.MainArray = self.dataArray1;
         wordmian.IndexOfItem= indexPath.row;
         wordmian.likeArray = self.likeArray1;

@@ -14,7 +14,6 @@
 {
     NSMutableString *description = [NSMutableString stringWithFormat:@"\n"];
     [self addDescriptionToString:description indentLevel:0];
-    
 //    NSString *info = [NSString stringWithFormat:@"%s [Line %d] \r\r %@ \r\r %@ \r %@",
 //                      __PRETTY_FUNCTION__, __LINE__,
 //                      [self performSelector:@selector(recursiveDescription)],
