@@ -143,9 +143,8 @@
             self.currentIndex ++;
             [SVProgressHUD showImage:[UIImage imageNamed:@"svlike"] status:@"喜欢"];
             //[SVProgressHUD showSuccessWithStatus:status];
-            [GCDQueue executeInMainQueue:^{
-                //[self configComentView];
-            }];
+            [self.commentlistArray removeAllObjects];
+            [self requstCommentData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -164,9 +163,8 @@
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
             self.currentIndex ++;
             [SVProgressHUD showImage:[UIImage imageNamed:@"svdislike"] status:@"没感觉"];
-            [GCDQueue executeInMainQueue:^{
-                //[self configComentView];
-            }];
+            [self.commentlistArray removeAllObjects];
+            [self requstCommentData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -284,7 +282,6 @@
         return;
     }
     self.model= [self.dataArray objectAtIndex:self.currentIndex];
-    [self configComView];
     UserDataCenter  *userCenter=[UserDataCenter shareInstance];
     NSString *urlString = [NSString stringWithFormat:@"%@comment/list?per-page=%ld&page=%ld", kApiBaseUrl,(long)self.pageSzie,(long)self.page];
     NSString *tokenString =[Function getURLtokenWithURLString:urlString];
@@ -311,11 +308,17 @@
                         [self.commentlistArray addObject:model];
                     }
                 }
-                [self.tabbleView reloadData];
+                [GCDQueue executeInMainQueue:^{
+                     [self configComView];
+                    [self.tabbleView reloadData];
+                } afterDelaySecs:1];
                 [self.refreshControl endRefreshing];
             }else
             {
-                [self.tabbleView reloadData];
+                [GCDQueue executeInMainQueue:^{
+                    [self configComView];
+                    [self.tabbleView reloadData];
+                } afterDelaySecs:1];
                 [self.refreshControl endRefreshing];
             }
         }
@@ -345,9 +348,9 @@
         [GCDQueue  executeInMainQueue:^{
             //喜欢
             [self requestLikeWithAuthorId:self.model.userInfo.Id andoperation:@1];
-            self.currentIndex ++;
-            [self.commentlistArray removeAllObjects];
-            [self requstCommentData];
+            //            self.currentIndex ++;
+            //            [self.commentlistArray removeAllObjects];
+            //            [self requstCommentData];
         }];
     }];
     [btn1 setBackgroundImage:[UIImage imageNamed:@"tabbar_backgroud_color.png"] forState:UIControlStateNormal];
@@ -362,9 +365,9 @@
     btn2.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [btn2 addActionHandler:^(NSInteger tag) {
         [self requestDislike];
-        self.currentIndex++;
-        [self.commentlistArray removeAllObjects];
-        [self requstCommentData];
+        //        self.currentIndex++;
+        //        [self.commentlistArray removeAllObjects];
+        //        [self requstCommentData];
     }];
     [btn2 setTitleColor:VGray_color forState:UIControlStateNormal];
     btn2.backgroundColor=[UIColor whiteColor];

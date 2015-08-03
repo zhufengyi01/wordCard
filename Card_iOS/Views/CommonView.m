@@ -124,7 +124,15 @@
         [mutableString addAttributes:@{NSKernAttributeName:[NSNumber numberWithInt:0]} range:res.range];
     }
     self.titleLable.attributedText = mutableString;
+    //long int a = self.titleLable.numberOfLines;
+    //NSLog(@"多少行数====%ld",a);
     CGSize Msize =  [TTTAttributedLabel sizeThatFitsAttributedString:self.titleLable.attributedText withConstraints:CGSizeMake(kDeviceWidth-60, MAXFLOAT) limitedToNumberOfLines:0];
+    /**
+     *  当只有一行的时候文字剧中显示
+     */
+    if (Msize.height<30) {
+        self.titleLable.textAlignment = NSTextAlignmentCenter;
+    }
     self.frame= CGRectMake(self.frame.origin.x, self.frame.origin.y, kDeviceWidth-20,kDeviceWidth-20);
     if (self.isLongWord ==YES) {
         if (Msize.height<kDeviceWidth-80) {
@@ -152,7 +160,6 @@
 }
 -(void)layoutSubviews
 {
-    [super layoutSubviews];
     self.titleLable.frame = CGRectMake(15, 40, self.frame.size.width-30,self.frame.size.height-80);
     if(IsIphone6)
     {
@@ -163,6 +170,7 @@
         self.titleLable.frame = CGRectMake(20, 40, self.frame.size.width-40, self.frame.size.height-80);
     }
     self.word_Soure.frame=CGRectMake(20, self.frame.size.height-40, self.frame.size.width-40, 30);
+    [super layoutSubviews];
 }
 -(void)copylongpress:(UILongPressGestureRecognizer *) longpress
 {
