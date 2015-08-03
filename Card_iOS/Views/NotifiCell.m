@@ -35,11 +35,11 @@
     self.namelbl = [ZCControl createLabelWithFrame:CGRectMake(65, 10, 200, 30) Font:14 Text:@"姓名"];
     self.namelbl.textColor = View_Black_Color;
     self.namelbl.userInteractionEnabled = YES;
+    //self.namelbl.backgroundColor = [UIColor redColor];
     self.namelbl.font = [UIFont fontWithName:KFontThin size:14];
     [self.contentView addSubview:self.namelbl];
     
-    
-    UIButton  *namebtn = [ZCControl createButtonWithFrame:CGRectMake(0, 0,200, 30) ImageName:nil Target:self Action:@selector(btnEvent:) Title:nil];
+    UIButton  *namebtn = [ZCControl createButtonWithFrame:CGRectMake(0, 0,120, 30) ImageName:nil Target:self Action:@selector(btnEvent:) Title:nil];
     namebtn.tag =201;
     [self.namelbl addSubview:namebtn];
     

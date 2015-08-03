@@ -20,6 +20,8 @@
 #import "UserModel.h"
 #import "ZFYLoading.h"
 #import "UIImage+Color.h"
+#import "WordMainVC.h"
+#import "CommonModel.h"
 #import "UIView+ICExtension.h"
 #import "MyViewController.h"
 #import "UIButton+Block.h"
@@ -49,7 +51,7 @@ const float  NavViewHeight =  45;
 @property(nonatomic,strong)NSMutableArray *dataArray2;
 
 /*
-  评论总页数
+ 评论总页数
  */
 
 @property(nonatomic,assign)NSInteger       pageCount2;
@@ -91,7 +93,6 @@ const float  NavViewHeight =  45;
         [_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
         [_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateSelected];
         [_likedBtn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
-        
     }
     return _likedBtn;
 }
@@ -214,7 +215,7 @@ const float  NavViewHeight =  45;
         }else {
             
         }
-
+        
     }];
 }
 #pragma mark  -override parents method
@@ -269,7 +270,7 @@ const float  NavViewHeight =  45;
                     NotiModel  *model = [NotiModel new];
                     if (dict) {
                         [model setValuesForKeysWithDictionary:dict];
-                        TextModel *text = [TextModel new];
+                        CommonModel *text = [CommonModel new];
                         if (![[dict objectForKey:@"text"] isKindOfClass:[NSNull class]]) {
                             [text setValuesForKeysWithDictionary:[dict objectForKey:@"text"]];
                             UserModel *user = [UserModel new];
@@ -287,7 +288,7 @@ const float  NavViewHeight =  45;
                                     [tagArray addObject:tagmodel];
                                 }
                             }
-                            text.TagArray= tagArray;
+                            text.tagArray= tagArray;
                             model.textInfo = text;
                         }
                         UserModel  *ouser  = [UserModel new];
@@ -370,7 +371,7 @@ const float  NavViewHeight =  45;
     }else if(self.commentBtn.selected == YES)
     {   cell.islike = NO;
         if (self.dataArray2.count>indexPath.row) {
-        model =self.dataArray2[indexPath.row];
+            model =self.dataArray2[indexPath.row];
         }
     }else
     {
@@ -385,6 +386,7 @@ const float  NavViewHeight =  45;
             cell.namelbl.text=@"大恭喜，你的内容入选“热门” ";
         }
     }
+    NSLog(@" model textinfo == %@",model.textInfo);
     cell.notimodel = model;
     cell.handEvent=^(NSInteger index)
     {
@@ -396,6 +398,51 @@ const float  NavViewHeight =  45;
     };
     //}
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //[self tableView:tableView didSelectRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSMutableArray *Arr = [NSMutableArray array];
+    NotiModel *model;
+    if (self.likedBtn.selected==YES) {
+        {
+            model= [self.dataArray objectAtIndex:indexPath.row];
+            [self.dataArray enumerateObjectsUsingBlock:^(NotiModel *obj, NSUInteger idx, BOOL *stop){
+                if (!obj.textInfo) {
+                    return ;
+                }
+                [Arr addObject:obj.textInfo];
+            }];
+        }
+    }else if(self.commentBtn.selected==YES)
+    {
+        model = [self.dataArray2 objectAtIndex:indexPath.row];
+        [self.dataArray2 enumerateObjectsUsingBlock:^(NotiModel *obj, NSUInteger idx, BOOL *stop) {
+            if (!obj.textInfo) {
+                return ;
+            }
+            [Arr addObject:obj.textInfo];
+        }];
+    }else{
+        model = [self.dataArray3 objectAtIndex:indexPath.row];
+        [self.dataArray3 enumerateObjectsUsingBlock:^(NotiModel *obj, NSUInteger idx, BOOL *stop) {
+            if (!obj.textInfo) {
+                return ;
+            }
+            [Arr addObject:obj.textInfo];
+        }];
+    }
+    if (!model.textInfo) {
+        return;
+    }
+    model.status = @"0";
+    [self.tabbleView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    WordMainVC  *wordmian =[WordMainVC new];
+    wordmian.MainArray = Arr;
+    NSInteger  index = indexPath.row;
+    wordmian.IndexOfItem = index;
+    [self.navigationController pushViewController:wordmian animated:YES];
 }
 -(void)tableviewDisplayIndexpath:(NSIndexPath *)indexpath
 {

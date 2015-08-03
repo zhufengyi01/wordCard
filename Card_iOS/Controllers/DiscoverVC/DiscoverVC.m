@@ -280,7 +280,6 @@
 -(void)requstCommentData
 {
     if (self.dataArray.count<=self.currentIndex) {
-        //[SVProgressHUD showInfoWithStatus:@"看完了"];
         [self showNullData];
         return;
     }

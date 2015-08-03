@@ -70,7 +70,7 @@
    //self.headImage.layer.cornerRadius = 15;
    // self.headImage.clipsToBounds = YES;
     self.headImage.tag = 1000;
-    self.headImage.backgroundColor = [UIColor redColor];
+    //self.headImage.backgroundColor = [UIColor redColor];
     [self.headImage addTarget:self action:@selector(cellEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.headImage];
     

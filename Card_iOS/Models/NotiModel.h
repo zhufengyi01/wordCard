@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CommonModel.h"
 #import "UserModel.h"
 @class  TextModel;
 @interface NotiModel : NSObject
@@ -20,7 +20,7 @@
 @property(nonatomic,strong) NSString *created_at;
 @property(nonatomic,strong) NSString *updated_at;
 @property(nonatomic,strong) NSString *type;
-@property(nonatomic,strong) NSString *status;
-@property(nonatomic,strong) UserModel *OuserInfo;
-@property(nonatomic,strong) TextModel  *textInfo;
+@property(nonatomic,strong) NSString   *status;
+@property(nonatomic,strong) UserModel  *OuserInfo;
+@property(nonatomic,strong) CommonModel  *textInfo;
 @end

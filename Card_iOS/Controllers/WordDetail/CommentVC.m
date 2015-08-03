@@ -15,6 +15,7 @@
 #import "SVProgressHUD.h"
 #import "CommentModel.h"
 #import "GCD.h"
+#import "UITextView+PlaceHolder.h"
 @implementation CommentVC
 
 -(void)viewDidLoad
@@ -32,11 +33,12 @@
     self.textView.tintColor = View_Black_Color;
     self.textView.textColor= View_Black_Color;
     self.textView.delegate = self;
-    [self.textView becomeFirstResponder];
+    //[self.textView becomeFirstResponder];
     self.textView.font = [UIFont fontWithName:KFontThin size:18];
     [self.view addSubview:self.textView];
     if (self.commentmodel) {
-        self.textView.text = [NSString stringWithFormat:@"回复%@ : ",self.commentmodel.userInfo.username];
+        self.title = [NSString stringWithFormat:@"@%@",self.commentmodel.userInfo.username];
+        [self.textView addPlaceHolder:[NSString stringWithFormat:@"回复%@ : ",self.commentmodel.userInfo.username]];
     }
     UILabel  *lbl = [ZCControl createLabelWithFrame:CGRectMake(10, self.textView.frame.origin.x+self.textView.frame.size.height+10, 200, 20) Font:12 Text:@"最多只能输入100个字符"];
     lbl.font = [UIFont fontWithName:KFontThin size:10];
@@ -63,6 +65,7 @@
     NSString *tokenString =[Function getURLtokenWithURLString:urlString];
     NSDictionary *parameters=@{@"user_id":userCenter.user_id,@"prod_id":self.model.Id,@"content":temptext,KURLTOKEN:tokenString};
     if (self.pageType == CommentVCPageTypeReply) {
+        temptext = [NSString stringWithFormat:@"回复%@: %@",self.commentmodel.userInfo.username,temptext];
         parameters =@{@"user_id":userCenter.user_id,@"prod_id":self.model.Id,@"comm_user_id":self.commentmodel.userInfo.Id,@"content":temptext,KURLTOKEN:tokenString};
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

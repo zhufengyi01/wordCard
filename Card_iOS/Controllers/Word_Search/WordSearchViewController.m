@@ -88,6 +88,7 @@
                 [self.refreshControl endRefreshing];
             }else
             {
+                [self.dataAraray removeAllObjects];
                 self.statusLable.text = @"没有数据";
                 [GCDQueue  executeInMainQueue:^{
                     [SVProgressHUD showInfoWithStatus:@"没有数据"];
@@ -124,7 +125,6 @@
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 -(BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
     return YES;
 }
 
