@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-
+#import "UIScrollView+EmptyDataSet.h"
 @interface NormalTableView : RootViewController
 
 @property(nonatomic,strong) UITableView *tabbleView;
@@ -26,9 +26,9 @@
 @property(nonatomic,strong)UILabel *statusLable;
 
 
-
 #pragma mark --TableViewDelegate And DataSource
-/*
+/**
+ *  刷新数据
  */
 -(void)RefreshViewControlEventValueChanged;
 
@@ -47,5 +47,21 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  空数据的代理方法
+ *
+ *  @param CGPoint 返回空的view 距离左右上下的距离
+ *
+ *  @return
+ */
+#pragma mark - DZNEmptyDataSetSource Methods
+-(CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView;
+
+/**
+ *    空数据的 点击屏幕代理，子类实现这个方法，重新加载
+ *
+ *  @param scrollView
+ */
+-(void)emptyDataSetDidTapView:(UIScrollView *)scrollView;
 
 @end

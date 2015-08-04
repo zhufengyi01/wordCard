@@ -8,9 +8,17 @@
 
 #import "NormalTableView.h"
 @class  UserModel;
-typedef NS_ENUM(NSInteger, MyViewControllerPageType)
-{
+/**
+ *  判断个人页的页面进入方式
+ */
+typedef NS_ENUM(NSInteger, MyViewControllerPageType){
+    /**
+     *  默认使用个人页
+     */
     MyViewControllerPageTypeDefault,
+    /**
+     *  他人页面进入
+     */
     MyViewControllerPageTypeOthers
 };
 
@@ -33,6 +41,9 @@ typedef NS_ENUM(NSInteger, MyViewControllerPageType)
 @property(nonatomic,strong)     NSMutableArray  *likeArray1;
 @property(nonatomic,strong)     NSMutableArray  *likeArray2;
 
+/**
+ *  页面进入属性
+ */
 @property(nonatomic,assign)     MyViewControllerPageType  pageType;
 
 //进人他人的页面

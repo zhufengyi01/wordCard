@@ -21,7 +21,8 @@
 #import "ZFYLoading.h"
 #import "WordMainVC.h"
 #import "AppDelegate.h"
-@interface BaseTableView () <UITableViewDataSource,UITableViewDelegate>
+#import "UIImage+Color.h"
+@interface BaseTableView () <UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     NSMutableDictionary  *parameters;
     int page;
@@ -62,7 +63,14 @@
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.tabbleView addSubview:self.refreshControl];
     [SVProgressHUD show];
+    [self setupDZEmptyData];
 }
+-(void)setupDZEmptyData
+{
+    self.tabbleView.emptyDataSetSource = self;
+    self.tabbleView.emptyDataSetDelegate = self;
+}
+
 #pragma mark  --UserMethod
 //刷新视图
 -(void)createFootView
@@ -329,4 +337,73 @@
     }];
 }
 
+//
+//#pragma mark - DZNEmptyDataSetSource Methods
+//-(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSMutableDictionary *attributes = [NSMutableDictionary new];
+//    [attributes setObject:[UIFont fontWithName:KFontThin size:12] forKey:NSFontAttributeName];
+//    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"没有数据"];
+//    return nil;
+//}
+//-(NSAttributedString*)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    //[UIImage imageNamed:@"empty"];
+//    NSMutableDictionary *attributes = [NSMutableDictionary new];
+//    [attributes setObject:[UIFont fontWithName:KFontThin size:14] forKey:NSFontAttributeName];
+//    [attributes setObject:VLight_GrayColor forKey:NSForegroundColorAttributeName];
+//    return [[NSAttributedString alloc] initWithString:@"没有数据,请点击重试" attributes:attributes];
+//}
+//-(UIImage*)imageForEmptyDataSet:(UIScrollView *)scrollView{
+//    return  [UIImage imageNamed:@"empty"];
+//}
+//-(NSAttributedString*)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+//{
+//    NSMutableDictionary *attributes = [NSMutableDictionary new];
+//    [attributes setObject:[UIFont systemFontOfSize:10] forKey:NSFontAttributeName];
+//    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"重试"];
+//    return text;
+//}
+////-(UIImage*)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+////{
+////    return [UIImage imageWithColor:VGray_color];
+////}
+//-(CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return   CGPointMake(0, -50);
+//}
+//-(UIImage*)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
+//    return [UIImage imageWithColor:VGray_color];
+//}
+////行之间的间距
+//-(CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return 20;
+//}
+//
+//
+//
+//#pragma mark - DZNEmptyDataSetDelegate Methods
+//-(BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//-(BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
+//-(BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView{
+//    return YES;
+//}
+//
+//-(void)emptyDataSetDidTapView:(UIScrollView *)scrollView
+//{
+//    NSLog(@"=====%s",__FUNCTION__);
+//}
+//-(void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
+//{
+//    NSLog(@"======%s",__FUNCTION__);
+//}/
+//
+//
 @end

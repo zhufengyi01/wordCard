@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BaseModel.h"
 #import "UserModel.h"
-@interface CommentModel : NSObject
+@interface CommentModel : BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 
@@ -21,13 +21,11 @@
 
 
 @property(nonatomic,strong) NSString *created_at;
-
-
+/***  创建时间
+ */
 @property(nonatomic,strong) NSString *created_by;
-
-
+/*** 用户模型对象*/
 @property(nonatomic,strong) UserModel *userInfo;
-
 
 
 @end

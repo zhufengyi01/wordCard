@@ -39,7 +39,7 @@ static const int  LOGIN_OUT = 1;
         img = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 40, 40)];
         img.contentMode = UIViewContentModeScaleAspectFit;
         //img.layer.cornerRadius = 20;
-        img.clipsToBounds = YES;
+        //img.clipsToBounds = YES;
         [cell.contentView addSubview:img];
     }
     UserDataCenter *usr = [UserDataCenter shareInstance];

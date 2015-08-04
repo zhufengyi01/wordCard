@@ -38,10 +38,8 @@
     if (self.commentmodel) {
         self.title = [NSString stringWithFormat:@"@%@",self.commentmodel.userInfo.username];
         [self.textView addPlaceHolder:[NSString stringWithFormat:@"回复%@ : ",self.commentmodel.userInfo.username]];
-    }else
-    {
-        [self.textView becomeFirstResponder];
     }
+    [self.textView becomeFirstResponder];
     UILabel  *lbl = [ZCControl createLabelWithFrame:CGRectMake(10, self.textView.frame.origin.x+self.textView.frame.size.height+10, 200, 20) Font:12 Text:@"最多只能输入100个字符"];
     lbl.font = [UIFont fontWithName:KFontThin size:10];
     lbl.textColor = VLight_GrayColor;
@@ -96,8 +94,7 @@
                 }];
             } afterDelaySecs:1];
         }
-        else
-        {
+        else{
             [SVProgressHUD showErrorWithStatus:@"评论失败，请重试"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -319,18 +319,18 @@ const float  NavViewHeight =  45;
                     [self.tabbleView reloadData];
                 }
             }else {
-                [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
-                [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                //[ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
+                //[SVProgressHUD showInfoWithStatus:@"没有数据"];
                 [self.tabbleView reloadData];
                 [self.refreshControl endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.refreshControl endRefreshing];
-        [SVProgressHUD showErrorWithStatus:@"加载失败"];
-        [ZFYLoading showFailWithstatus:@"加载失败" inView:self.tabbleView event:^(UIButton *sender) {
+        //[SVProgressHUD showErrorWithStatus:@"加载失败"];
+        /*[ZFYLoading showFailWithstatus:@"加载失败" inView:self.tabbleView event:^(UIButton *sender) {
             [self requestData];
-        }];
+        }];*/
     }];
 }
 #pragma mark   -tableViewDelegate
@@ -464,6 +464,10 @@ const float  NavViewHeight =  45;
             [self requestData];
         }
     }
-    
+}
+#pragma mark   DZNempty DataSoure
+-(void)emptyDataSetDidTapView:(UIScrollView *)scrollView
+{
+    [self requestData];
 }
 @end

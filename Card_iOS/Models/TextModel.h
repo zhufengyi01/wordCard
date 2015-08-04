@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 //#import "UserModel.h"
+#import "BaseModel.h"
 @class UserModel;
-@interface TextModel : NSObject
+@interface TextModel : BaseModel
 @property(nonatomic,strong) NSString *Id;
 
 @property(nonatomic,strong) NSString *liked_count;

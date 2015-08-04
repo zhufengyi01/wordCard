@@ -1,10 +1,16 @@
 PODS:
+  - DZNEmptyDataSet (1.6.1)
   - JSONModel (1.1.0)
+  - MJExtension (2.5.5)
 
 DEPENDENCIES:
+  - DZNEmptyDataSet
   - JSONModel (~> 1.1)
+  - MJExtension
 
 SPEC CHECKSUMS:
+  DZNEmptyDataSet: 3d31c27758230f03c71199f8c522bcfa99fba16c
   JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
+  MJExtension: fa526531d00a7c88771bf72e626bb49fb9292b9c
 
 COCOAPODS: 0.37.2

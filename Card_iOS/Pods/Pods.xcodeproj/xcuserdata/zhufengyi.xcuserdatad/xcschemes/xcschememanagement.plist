@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-JSONModel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>406BD5BFF8ACA0590D828842</key>
+		<key>33C1B2C3E4F03AD30D270F07</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B18B22D7280A5269D87ECD91</key>
+		<key>5A5E7CD9D6524130FB030741</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81FF2001C01B587405E7927C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF134611194917577942C83B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

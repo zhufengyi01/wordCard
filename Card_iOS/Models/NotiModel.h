@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseModel.h"
 #import "CommonModel.h"
 #import "UserModel.h"
 @class  TextModel;
-@interface NotiModel : NSObject
+@interface NotiModel : BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 @property(nonatomic,strong) NSString *author_id;

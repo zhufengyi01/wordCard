@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "UserModel.h"
-
-@interface CommonModel : NSObject
+#import "BaseModel.h"
+@interface CommonModel : BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 

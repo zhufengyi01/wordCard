@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface  LikeModel: NSObject
+#import "BaseModel.h"
+@interface  LikeModel: BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 

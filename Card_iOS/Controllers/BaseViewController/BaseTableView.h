@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 @interface BaseTableView : RootViewController
 

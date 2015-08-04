@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BaseModel.h"
 //外层tag
-@interface TagModel : NSObject
+@interface TagModel : BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 

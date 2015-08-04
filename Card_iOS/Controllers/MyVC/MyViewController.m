@@ -314,8 +314,8 @@ const float segmentheight = 45;
                     [self.refreshControl endRefreshing];
                 }else
                 {
-                    [SVProgressHUD showInfoWithStatus:@"没有数据"];
-                    [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
+                    //[SVProgressHUD showInfoWithStatus:@"没有数据"];
+                    //[ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
                     [self.tabbleView reloadData];
                     //数据为空
                     [self.refreshControl endRefreshing];
@@ -363,8 +363,8 @@ const float segmentheight = 45;
                     [self.refreshControl endRefreshing];
                 }else
                 {
-                    [SVProgressHUD showInfoWithStatus:@"没有数据"];
-                    [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
+                   // [SVProgressHUD showInfoWithStatus:@"没有数据"];
+                   // [ZFYLoading showNullWithstatus:@"没有数据..." inView:self.tabbleView];
                     [self.tabbleView reloadData];
                     //数据为空
                     [self.refreshControl endRefreshing];
@@ -480,5 +480,14 @@ const float segmentheight = 45;
         wordmian.likeArray = self.likeArray2;
         [self.navigationController pushViewController:wordmian animated:YES];
     }
+}
+#pragma mark - overide  Method
+-(CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView{
+    return CGPointMake(0, 100);
+}
+
+-(void)emptyDataSetDidTapView:(UIScrollView *)scrollView
+{
+    [self requestData];
 }
 @end

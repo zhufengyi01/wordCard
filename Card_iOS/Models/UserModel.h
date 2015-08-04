@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface UserModel : NSObject
+#import "BaseModel.h"
+@interface UserModel : BaseModel
 
 @property(nonatomic,strong) NSString *Id;
 

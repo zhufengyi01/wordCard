@@ -67,6 +67,9 @@
 		3872BF491B466B0C0004A928 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3872BF451B466B0C0004A928 /* SVProgressHUD.bundle */; };
 		3872BF4A1B466B0C0004A928 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3872BF471B466B0C0004A928 /* SVProgressHUD.m */; };
 		3887AF161B5F687F0070BC6F /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */; };
+		388AF4A01B7090170052E5E6 /* UIColor+Hexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 388AF49F1B7090170052E5E6 /* UIColor+Hexadecimal.m */; };
+		388AF4A31B709ECF0052E5E6 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 388AF4A21B709ECF0052E5E6 /* BaseModel.m */; };
+		388AF4A61B70A00A0052E5E6 /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 388AF4A51B70A00A0052E5E6 /* MJExtensionConfig.m */; };
 		38923A011B4D340500E7F092 /* NotiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A001B4D340500E7F092 /* NotiModel.m */; };
 		38923A041B4D35AD00E7F092 /* TextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A031B4D35AD00E7F092 /* TextModel.m */; };
 		38923A071B4D3D5900E7F092 /* NotifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38923A061B4D3D5900E7F092 /* NotifiCell.m */; };
@@ -340,6 +343,12 @@
 		3872BF471B466B0C0004A928 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		3887AF141B5F687F0070BC6F /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAvatarBrowser.h; sourceTree = "<group>"; };
 		3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAvatarBrowser.m; sourceTree = "<group>"; };
+		388AF49E1B7090170052E5E6 /* UIColor+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hexadecimal.h"; sourceTree = "<group>"; };
+		388AF49F1B7090170052E5E6 /* UIColor+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hexadecimal.m"; sourceTree = "<group>"; };
+		388AF4A11B709ECF0052E5E6 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		388AF4A21B709ECF0052E5E6 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		388AF4A41B70A00A0052E5E6 /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConfig.h; sourceTree = "<group>"; };
+		388AF4A51B70A00A0052E5E6 /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConfig.m; sourceTree = "<group>"; };
 		389239FF1B4D340500E7F092 /* NotiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotiModel.h; sourceTree = "<group>"; };
 		38923A001B4D340500E7F092 /* NotiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotiModel.m; sourceTree = "<group>"; };
 		38923A021B4D35AD00E7F092 /* TextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextModel.h; sourceTree = "<group>"; };
@@ -699,6 +708,7 @@
 		3872BEB11B4664D80004A928 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				388AF49D1B7090170052E5E6 /* UIColor */,
 				3872BEB21B4664D80004A928 /* NSData */,
 				3872BEB91B4664D80004A928 /* NSDate */,
 				3872BEC31B4664D80004A928 /* NSDate+Additions.h */,
@@ -906,6 +916,15 @@
 				3887AF151B5F687F0070BC6F /* SJAvatarBrowser.m */,
 			);
 			path = SJAvatarBrowser;
+			sourceTree = "<group>";
+		};
+		388AF49D1B7090170052E5E6 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				388AF49E1B7090170052E5E6 /* UIColor+Hexadecimal.h */,
+				388AF49F1B7090170052E5E6 /* UIColor+Hexadecimal.m */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		38CFC3CE1B54FB4A004EF31F /* ZFYActionSheet */ = {
@@ -1427,6 +1446,10 @@
 				38923A031B4D35AD00E7F092 /* TextModel.m */,
 				38D1EAB61B5CB2E900B18169 /* CommentModel.h */,
 				38D1EAB71B5CB2E900B18169 /* CommentModel.m */,
+				388AF4A11B709ECF0052E5E6 /* BaseModel.h */,
+				388AF4A21B709ECF0052E5E6 /* BaseModel.m */,
+				388AF4A41B70A00A0052E5E6 /* MJExtensionConfig.h */,
+				388AF4A51B70A00A0052E5E6 /* MJExtensionConfig.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1744,6 +1767,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				388AF4A31B709ECF0052E5E6 /* BaseModel.m in Sources */,
 				38CFFAD81B53D92D005115AB /* 方正兰亭纤黑_GBK.ttf in Sources */,
 				38D303B11B453B3400484AC8 /* MJRefreshComponent.m in Sources */,
 				38D0DC351B4BCE0700E0E7EC /* UserButton.m in Sources */,
@@ -1811,6 +1835,7 @@
 				38D303901B453B2A00484AC8 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				38923A041B4D35AD00E7F092 /* TextModel.m in Sources */,
 				3872BF2E1B4664D80004A928 /* UIImage+FileName.m in Sources */,
+				388AF4A01B7090170052E5E6 /* UIColor+Hexadecimal.m in Sources */,
 				38D34F8B1B4A5AB800CBAB2C /* AddTagViewController.m in Sources */,
 				38D303491B452AE700484AC8 /* RootViewController.m in Sources */,
 				38D34FDC1B4A81BE00CBAB2C /* Register_2ViewController.m in Sources */,
@@ -1844,6 +1869,7 @@
 				38D303961B453B2A00484AC8 /* UIWebView+AFNetworking.m in Sources */,
 				3872BF171B4664D80004A928 /* NSData+Gzip.m in Sources */,
 				3872BF3C1B4664D80004A928 /* UIScrollView+Pages.m in Sources */,
+				388AF4A61B70A00A0052E5E6 /* MJExtensionConfig.m in Sources */,
 				38D618D21B464F8200907CE9 /* SelectTimeView.m in Sources */,
 				3872BF241B4664D80004A928 /* NSString+Hash.m in Sources */,
 				384640FC1B4E5B720079CE9D /* GCDTimer.m in Sources */,
