@@ -393,6 +393,7 @@ const float  NavViewHeight =  45;
         [self.tabbleView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         MyViewController *my = [MyViewController new];
         my.author_Id = model.OuserInfo.Id;
+        my.OuserInfo = model.OuserInfo;
         my.pageType= MyViewControllerPageTypeOthers;
         [self.navigationController pushViewController:my animated:YES];
     };

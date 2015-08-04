@@ -58,7 +58,7 @@ static  float  likebarheight = 80;
         my.pageType= MyViewControllerPageTypeOthers;
         [self.navigationController pushViewController:my animated:YES];
     }];
-    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
+    [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:HeadImagePlaceholder];
     userbtn.titleLab.text= self.model.userInfo.username;
     userbtn.brieflbl.text = self.model.userInfo.brief;
     [likeBar addSubview:userbtn];
@@ -103,7 +103,6 @@ static  float  likebarheight = 80;
 {
     self.Author.commetlbl.text = self.model.comm_count;
 }
-
 #pragma mark --requset Method
 -(void)requstCommentData
 {
@@ -186,7 +185,6 @@ static  float  likebarheight = 80;
     if (self.dataArray.count>indexPath.row) {
         CommentModel  *model = [self.dataArray objectAtIndex:indexPath.row];
         [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
-            
             switch (buttonIndex) {
                 case 2000:
                     //删除自己的评论
@@ -228,6 +226,7 @@ static  float  likebarheight = 80;
                 {
                     MyViewController *my = [MyViewController new];
                     my.author_Id = model.userInfo.Id;
+                    my.OuserInfo = model.userInfo;
                     my.pageType= MyViewControllerPageTypeOthers;
                     [self.navigationController pushViewController:my animated:YES];
                 }

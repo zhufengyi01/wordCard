@@ -16,9 +16,6 @@
 @implementation NotifiCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
-        //self.contentView.backgroundColor = [UIColor grayColor];
-        
         [self createUI];
     }
     return self;
@@ -26,7 +23,7 @@
 -(void)createUI
 {
     self.headBtn = [ZCControl createButtonWithFrame:CGRectMake(15, 15,40, 40) ImageName:nil Target:self Action:@selector(btnEvent:) Title:nil];
-    self.headBtn.layer.cornerRadius= 20;
+    //self.headBtn.layer.cornerRadius= 20;
     self.headBtn.clipsToBounds = YES;
     self.headBtn.tag =201;
     //self.headBtn.backgroundColor = [UIColor redColor];
@@ -41,7 +38,7 @@
     
     UIButton  *namebtn = [ZCControl createButtonWithFrame:CGRectMake(0, 0,120, 30) ImageName:nil Target:self Action:@selector(btnEvent:) Title:nil];
     namebtn.tag =201;
-    [self.namelbl addSubview:namebtn];
+    //[self.namelbl addSubview:namebtn];
     
     self.timelbl = [ZCControl createLabelWithFrame:CGRectMake(65, 45, 100, 20) Font:12 Text:@"时间"];
     self.timelbl.textColor = VGray_color;

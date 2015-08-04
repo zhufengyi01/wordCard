@@ -44,7 +44,16 @@ const float segmentheight = 45;
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.title  = @"我的";
-    [self creatRightNavigationItem:nil Title:@"设置"];
+    UserDataCenter *user= [UserDataCenter shareInstance];
+    /**
+     *  从他人的页面进入到的个人页
+     */
+    if (self.OuserInfo&&[user.user_id intValue]!=[self.OuserInfo.Id intValue]) {
+        self.title = self.OuserInfo.username;
+    }else{
+        //从自己页面进入
+        [self creatRightNavigationItem:nil Title:@"设置"];
+    }
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     self.refreshControl.backgroundColor = View_white_Color;
     if (self.author_Id) {
@@ -88,7 +97,7 @@ const float segmentheight = 45;
     [self.tabbleView setTableHeaderView:headView];
     //头像
     headImage = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, 40, 40)];
-    headImage.layer.cornerRadius = 20;
+    //headImage.layer.cornerRadius = 20;
     headImage.image = HeadImagePlaceholder;
     headImage.clipsToBounds = YES;
     headImage.userInteractionEnabled = YES;
@@ -116,8 +125,8 @@ const float segmentheight = 45;
     [self.addWordbtn setTitle:@"添加" forState:UIControlStateNormal];
     self.addWordbtn.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [self.addWordbtn setTitleColor:VGray_color forState:UIControlStateNormal];
-    [self.addWordbtn setTitleColor:VBlue_color forState:UIControlStateSelected];
-    [self.addWordbtn setTitleColor:VBlue_color forState:UIControlStateHighlighted];
+    [self.addWordbtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [self.addWordbtn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     self.addWordbtn.selected = YES;
     [self.addWordbtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
     __weak typeof(self) weakself = self;
@@ -140,8 +149,8 @@ const float segmentheight = 45;
     [self.likeWorkbtn setTitle:@"喜欢" forState:UIControlStateNormal];
     self.likeWorkbtn.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     [self.likeWorkbtn setTitleColor:VGray_color forState:UIControlStateNormal];
-    [self.likeWorkbtn setTitleColor:VBlue_color forState:UIControlStateHighlighted];
-    [self.likeWorkbtn setTitleColor:VBlue_color forState:UIControlStateSelected];
+    [self.likeWorkbtn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.likeWorkbtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [self.likeWorkbtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
     [self.likeWorkbtn addActionHandler:^(NSInteger tag) {
         if (weakself.likeWorkbtn.selected ==NO) {
@@ -233,9 +242,7 @@ const float segmentheight = 45;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"request fail"];
     }];
-    
 }
-
 #pragma mark --requesteData
 -(void)requestData
 {
@@ -456,7 +463,12 @@ const float segmentheight = 45;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.addWordbtn.selected ==YES) {
         WordMainVC  *wordmian =[WordMainVC new];
-        wordmian.pageType = WordDetailListVCUserSelf;
+        UserDataCenter  *user = [UserDataCenter shareInstance];
+        if ([user.user_id intValue] ==[self.author_Id intValue]) {
+            wordmian.pageType = WordDetailListVCUserSelf;
+        }else{
+            wordmian.pageType = WordDetailSourcePageDefault;
+        }
         wordmian.MainArray = self.dataArray1;
         wordmian.IndexOfItem= indexPath.row;
         wordmian.likeArray = self.likeArray1;

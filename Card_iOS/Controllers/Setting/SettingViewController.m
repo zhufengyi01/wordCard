@@ -38,7 +38,7 @@ static const int  LOGIN_OUT = 1;
         cell.textLabel.font = [UIFont fontWithName:KFontThin size:14];
         img = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 40, 40)];
         img.contentMode = UIViewContentModeScaleAspectFit;
-        img.layer.cornerRadius = 20;
+        //img.layer.cornerRadius = 20;
         img.clipsToBounds = YES;
         [cell.contentView addSubview:img];
     }

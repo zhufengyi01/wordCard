@@ -7,7 +7,7 @@
 //
 
 #import "NormalTableView.h"
-
+@class  UserModel;
 typedef NS_ENUM(NSInteger, MyViewControllerPageType)
 {
     MyViewControllerPageTypeDefault,
@@ -37,5 +37,9 @@ typedef NS_ENUM(NSInteger, MyViewControllerPageType)
 
 //进人他人的页面
 @property(nonatomic,copy) NSString *author_Id;
+/**
+ *  从消息和评论页跳转到个人页的整个模型
+ */
+@property(nonatomic,strong) UserModel  *OuserInfo;
 
 @end

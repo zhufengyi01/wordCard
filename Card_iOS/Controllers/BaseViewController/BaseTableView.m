@@ -133,7 +133,7 @@
 
 -(void)requestData
 {
-    [ZFYLoading showLoadViewInview:self.tabbleView];
+    //[ZFYLoading showLoadViewInview:self.tabbleView];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];

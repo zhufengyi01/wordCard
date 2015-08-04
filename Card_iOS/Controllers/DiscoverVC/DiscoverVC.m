@@ -448,6 +448,7 @@
                 {
                     MyViewController *my = [MyViewController new];
                     my.author_Id = model.userInfo.Id;
+                    my.OuserInfo = model.userInfo;
                     my.pageType= MyViewControllerPageTypeOthers;
                     [self.navigationController pushViewController:my animated:YES];
                 }

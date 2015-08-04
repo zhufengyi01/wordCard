@@ -69,7 +69,7 @@
     self.headImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 40, 40)];
     self.headImage.clipsToBounds = YES;
     self.headImage.contentMode = UIViewContentModeScaleAspectFit;
-    self.headImage.layer.cornerRadius = 20;
+    //self.headImage.layer.cornerRadius = 20;
     UserDataCenter *usr= [UserDataCenter shareInstance];
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,usr.logo]] placeholderImage:HeadImagePlaceholder];
     [bg addSubview:self.headImage];
@@ -156,6 +156,8 @@
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
             [SVProgressHUD showSuccessWithStatus:@"头像修改成功" maskType:SVProgressHUDMaskTypeNone];
             userCenter.logo = [[responseObject objectForKey:@"model"] objectForKey:@"logo"];
+           //更新本地
+            [Function saveUser:userCenter];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -173,7 +175,8 @@
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
             [SVProgressHUD showSuccessWithStatus:@"昵称修改成功" maskType:SVProgressHUDMaskTypeNone];
-            userCenter.user_id = [[responseObject objectForKey:@"model"] objectForKey:@"username"];
+            userCenter.username = [[responseObject objectForKey:@"model"] objectForKey:@"username"];
+            [Function saveUser:userCenter];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

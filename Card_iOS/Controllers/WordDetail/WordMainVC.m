@@ -95,7 +95,6 @@
         ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除"]];
         zfy.tag = 100;
         [zfy showInView:self.view];
-       
     }else {
         ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
         zfy.tag = 101;

@@ -130,6 +130,7 @@
     /**
      *  当只有一行的时候文字剧中显示
      */
+    self.titleLable.textAlignment=NSTextAlignmentJustified;
     if (Msize.height<30) {
         self.titleLable.textAlignment = NSTextAlignmentCenter;
     }

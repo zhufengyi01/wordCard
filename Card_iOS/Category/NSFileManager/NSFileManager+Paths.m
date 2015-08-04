@@ -12,7 +12,7 @@
 @implementation NSFileManager (Paths)
 + (NSURL *)URLForDirectory:(NSSearchPathDirectory)directory
 {
-    return [self.defaultManager URLsForDirectory:directory inDomains:NSUserDomainMask].lastObject;
+    return [self.defaultManager URLsForDirectory:directory inDomains:NSUserDomainMask].lastObject;          
 }
 
 + (NSString *)pathForDirectory:(NSSearchPathDirectory)directory
