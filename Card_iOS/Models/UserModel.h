@@ -10,7 +10,7 @@
 #import "BaseModel.h"
 @interface UserModel : BaseModel
 
-@property(nonatomic,strong) NSString *Id;
+//@property(nonatomic,strong) NSString *Id;
 
 @property(nonatomic,strong) NSString *username;
 

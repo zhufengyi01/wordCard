@@ -9,8 +9,4 @@
 #import "LikeModel.h"
 
 @implementation LikeModel
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
 @end

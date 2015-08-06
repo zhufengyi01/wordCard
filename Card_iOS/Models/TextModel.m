@@ -9,9 +9,4 @@
 #import "TextModel.h"
 
 @implementation TextModel
-
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
 @end

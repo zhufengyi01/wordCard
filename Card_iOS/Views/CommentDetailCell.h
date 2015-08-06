@@ -15,7 +15,7 @@
     CommentModel  *m_model;
     UIView  *buttomLin;
 }
-@property(nonatomic,strong) UIButton  *headImage ;
+@property(nonatomic,strong) UIButton     *headImage ;
 
 @property(nonatomic,strong) UILabel      *nameLable;
 
@@ -23,8 +23,14 @@
 
 @property(nonatomic,strong) UILabel      *timeLable;
 
+@property(nonatomic,strong) UIImageView  *likeIcon;
+/**
+ *  喜欢数量
+ */
+@property(nonatomic,strong) UILabel      *likeCount;
+
 
 //计算cell 的高度
-+(float)getCellHeightWithModel:(CommentModel*)model;
--(void)configCellWithmodel:(CommentModel*)model :(void (^)(NSInteger buttonIndex)) cellClick;
++ (float)getCellHeightWithModel:(CommentModel*)model;
+- (void)configCellWithmodel:(CommentModel*)model :(void (^)(NSInteger buttonIndex)) cellClick;
 @end

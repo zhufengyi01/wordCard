@@ -9,9 +9,4 @@
 #import "TagModel.h"
 
 @implementation TagModel
-
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
 @end

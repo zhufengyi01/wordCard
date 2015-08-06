@@ -11,6 +11,11 @@
 @interface NSString (Additions)
 
 - (BOOL)isNotEmpty;
+/**
+ *  去掉换行
+ *
+ *  @return
+ */
 - (NSString*)trim;
 - (NSString*)trimBegin:(NSString*)strBegin;
 - (NSString*)trimEnd:(NSString*)strEnd;

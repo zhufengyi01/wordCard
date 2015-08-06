@@ -45,6 +45,7 @@
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
 }
+
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
    // [self.navigationController pushViewController:[WordSearchViewController new] animated:NO];

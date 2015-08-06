@@ -13,7 +13,8 @@
 #import "LikeModel.h"
 #import "NotiModel.h"
 #import "TextModel.h"
-#import "CommonModel.h"
+#import "CommentModel.h"
+#import "BaseModel.h"
 @interface MJExtensionConfig : NSObject
 
 @end

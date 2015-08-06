@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MJExtension.h"
 
 @interface BaseModel : NSObject
+
+@property(nonatomic,strong) NSString *Id;
 
 @end

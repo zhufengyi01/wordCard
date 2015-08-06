@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Shadow)
-
+/**
+ *  给view 添加渐变色
+ */
 -(void)setShadow;
 
 @end

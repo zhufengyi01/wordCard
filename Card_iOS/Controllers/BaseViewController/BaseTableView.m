@@ -21,6 +21,7 @@
 #import "ZFYLoading.h"
 #import "WordMainVC.h"
 #import "AppDelegate.h"
+#import "MJExtension.h"
 #import "UIImage+Color.h"
 @interface BaseTableView () <UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
@@ -92,6 +93,7 @@
 -(void)RefreshViewControlEventValueChanged
 {
     [self.temArr removeAllObjects];
+    [self.likeArray removeAllObjects];
     page=1;
     [self requestData];
     //检查是否有新消息
@@ -141,7 +143,8 @@
 
 -(void)requestData
 {
-    //[ZFYLoading showLoadViewInview:self.tabbleView];
+#warning 测试使用mjextion解析数据
+    //[self requestData2];
     AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
     NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
     NSString *apitoken=[Function getURLtokenWithURLString:url];
@@ -198,7 +201,6 @@
                 [self.refreshControl endRefreshing];
             }
             NSMutableArray  *likearr = [responseObject objectForKey:@"ups"];
-            ///if (likearr.count>0) {
                 for (int i=0; i<likearr.count; i++) {
                     LikeModel *likemodel = [LikeModel new];
                     [likemodel setValuesForKeysWithDictionary:[likearr objectAtIndex:i]];
@@ -207,7 +209,6 @@
                     }
                     [self.likeArray addObject:likemodel];
                 }
-            //}
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //数据加载失败
@@ -219,6 +220,29 @@
         }];
     }];
 }
+-(void)requestData2
+{
+    AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
+    NSString *url =[NSString stringWithFormat:@"%@%@?per-page=%d&page=%d",kApiBaseUrl,self.urlString,pageSize,page];
+    NSString *apitoken=[Function getURLtokenWithURLString:url];
+    [parameters setObject:apitoken forKey:KURLTOKEN];
+    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject objectForKey:@"code"]) {
+            NSMutableArray *array =[responseObject objectForKey:@"models"];
+            NSMutableArray *Arr = [NSMutableArray array];
+            Arr = [CommonModel objectArrayWithKeyValuesArray:array];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //数据加载失败
+        [self.statusLable setText:@"加载失败"];
+        [self.refreshControl endRefreshing];
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        [ZFYLoading showFailWithstatus:@"加载失败..." inView:self.tabbleView event:^(UIButton *sender) {
+            [self requestData];
+        }];
+    }];
+}
+//测试使用mjextion解析数据
 
 #pragma  mark --TableViewDelegate dataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -282,7 +306,7 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView  *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
-    headView.backgroundColor =[[UIColor whiteColor] colorWithAlphaComponent:0.95];
+    headView.backgroundColor =[VLight_GrayColor_apla colorWithAlphaComponent:0.95];//[[UIColor whiteColor] colorWithAlphaComponent:0.95];
     UILabel *hlbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kDeviceWidth, 40)];
     hlbl.textColor = VLight_GrayColor;
     hlbl.font = [UIFont fontWithName:KFontThin size:14];
@@ -336,74 +360,4 @@
         NSLog(@"error ==%@",error);
     }];
 }
-
-//
-//#pragma mark - DZNEmptyDataSetSource Methods
-//-(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    NSMutableDictionary *attributes = [NSMutableDictionary new];
-//    [attributes setObject:[UIFont fontWithName:KFontThin size:12] forKey:NSFontAttributeName];
-//    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"没有数据"];
-//    return nil;
-//}
-//-(NSAttributedString*)descriptionForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    //[UIImage imageNamed:@"empty"];
-//    NSMutableDictionary *attributes = [NSMutableDictionary new];
-//    [attributes setObject:[UIFont fontWithName:KFontThin size:14] forKey:NSFontAttributeName];
-//    [attributes setObject:VLight_GrayColor forKey:NSForegroundColorAttributeName];
-//    return [[NSAttributedString alloc] initWithString:@"没有数据,请点击重试" attributes:attributes];
-//}
-//-(UIImage*)imageForEmptyDataSet:(UIScrollView *)scrollView{
-//    return  [UIImage imageNamed:@"empty"];
-//}
-//-(NSAttributedString*)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
-//{
-//    NSMutableDictionary *attributes = [NSMutableDictionary new];
-//    [attributes setObject:[UIFont systemFontOfSize:10] forKey:NSFontAttributeName];
-//    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"重试"];
-//    return text;
-//}
-////-(UIImage*)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
-////{
-////    return [UIImage imageWithColor:VGray_color];
-////}
-//-(CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return   CGPointMake(0, -50);
-//}
-//-(UIImage*)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state{
-//    return [UIImage imageWithColor:VGray_color];
-//}
-////行之间的间距
-//-(CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return 20;
-//}
-//
-//
-//
-//#pragma mark - DZNEmptyDataSetDelegate Methods
-//-(BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
-//-(BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
-//-(BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView{
-//    return YES;
-//}
-//
-//-(void)emptyDataSetDidTapView:(UIScrollView *)scrollView
-//{
-//    NSLog(@"=====%s",__FUNCTION__);
-//}
-//-(void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
-//{
-//    NSLog(@"======%s",__FUNCTION__);
-//}/
-//
-//
 @end

@@ -124,9 +124,9 @@ const float segmentheight = 45;
     self.addWordbtn.frame = CGRectMake(0, headView.frame.size.height-segmentheight, kDeviceWidth/2, segmentheight);
     [self.addWordbtn setTitle:@"添加" forState:UIControlStateNormal];
     self.addWordbtn.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
-    [self.addWordbtn setTitleColor:VGray_color forState:UIControlStateNormal];
-    [self.addWordbtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    [self.addWordbtn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.addWordbtn setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
+    [self.addWordbtn setTitleColor:View_Black_Color forState:UIControlStateSelected];
+    [self.addWordbtn setTitleColor:View_Black_Color forState:UIControlStateHighlighted];
     self.addWordbtn.selected = YES;
     [self.addWordbtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
     __weak typeof(self) weakself = self;
@@ -148,9 +148,9 @@ const float segmentheight = 45;
     self.likeWorkbtn.selected = NO;
     [self.likeWorkbtn setTitle:@"喜欢" forState:UIControlStateNormal];
     self.likeWorkbtn.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
-    [self.likeWorkbtn setTitleColor:VGray_color forState:UIControlStateNormal];
-    [self.likeWorkbtn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [self.likeWorkbtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [self.likeWorkbtn setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
+    [self.likeWorkbtn setTitleColor:View_Black_Color forState:UIControlStateHighlighted];
+    [self.likeWorkbtn setTitleColor:View_Black_Color forState:UIControlStateSelected];
     [self.likeWorkbtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
     [self.likeWorkbtn addActionHandler:^(NSInteger tag) {
         if (weakself.likeWorkbtn.selected ==NO) {

@@ -11,13 +11,15 @@
 #import "UserModel.h"
 @interface CommentModel : BaseModel
 
-@property(nonatomic,strong) NSString *Id;
+//@property(nonatomic,strong) NSString *Id;
 
 
 @property(nonatomic,strong) NSString *prod_id;
 
 
 @property(nonatomic,strong) NSString *content;
+
+@property(nonatomic,strong) NSString *up_count;
 
 
 @property(nonatomic,strong) NSString *created_at;

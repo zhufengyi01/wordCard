@@ -131,8 +131,13 @@ float getHeightByWidthAndHeight(float width, float height){
 
 //弹出框的动画形式
 +(CAKeyframeAnimation *)getKeyframeAni;
-
-//验证输入的是否是邮箱
+/**
+ *  验证输入的是否是邮箱
+ *
+ *  @param candidate
+ *
+ *  @return
+ */
 +(BOOL) validateEmail: (NSString *) candidate;
 
 +(NSString *)htmlString:(NSString *) htmlstring;

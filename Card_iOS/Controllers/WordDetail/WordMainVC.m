@@ -232,7 +232,13 @@
 //点赞
 -(void)requestLikeWithAuthorId:(NSString *)autuor_id andoperation:(NSNumber *) operation
 {
-    NSArray  *Arr =    [self.pageController viewControllers];
+    NSString *status;
+    if ([operation isEqual:@0])  {
+        status = @"取消赞";
+    }else{
+        status = @"点赞";
+    }
+    NSArray  *Arr =  [self.pageController viewControllers];
     CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     CommonModel  *smodel = CurrentVC.model;
     UserDataCenter  *userCenter=[UserDataCenter shareInstance];
@@ -243,7 +249,6 @@
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject  objectForKey:@"code"]  intValue]==0) {
-            NSString *status=@"sucess";
             [SVProgressHUD showSuccessWithStatus:status];
         }else
         {

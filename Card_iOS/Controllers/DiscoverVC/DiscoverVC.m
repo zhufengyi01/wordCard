@@ -43,7 +43,6 @@
     self.currentIndex = 1;
     [self createLikeBar];
     [self createLeftNavigationItem:nil Title:@"返回"];
-    [self creatRightNavigationItem:[UIImage imageNamed:@"more"] Title:nil];
     [self requestData];
     loadView= [[Discloading alloc]init];
     [self.view addSubview:loadView];
@@ -70,10 +69,10 @@
     UserButton *userbtn = [[UserButton alloc]initWithFrame:CGRectMake(10,0, 200, 30)];
     NSURL  *usrl =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kUrlAvatar,self.model.userInfo.logo]];
     [userbtn addActionHandler:^(NSInteger tag) {
-        MyViewController *my = [MyViewController new];
-        my.author_Id = self.model.userInfo.Id;
-        my.pageType= MyViewControllerPageTypeOthers;
-        [self.navigationController pushViewController:my animated:YES];
+//        MyViewController *my = [MyViewController new];
+//        my.author_Id = self.model.userInfo.Id;
+//        my.pageType= MyViewControllerPageTypeOthers;
+//        [self.navigationController pushViewController:my animated:YES];
     }];
     [userbtn.headImage sd_setImageWithURL:usrl placeholderImage:nil];
     userbtn.titleLab.text= self.model.userInfo.username;
@@ -208,6 +207,7 @@
             [GCDQueue  executeInMainQueue:^{
                 [loadView removeFromSuperview];
                 loadView=nil;
+                [self creatRightNavigationItem:[UIImage imageNamed:@"more"] Title:nil];
             } afterDelaySecs:2-deltaTime];
         }
         else
@@ -215,6 +215,7 @@
             [GCDQueue executeInMainQueue:^{
                 [loadView removeFromSuperview];
                 loadView = nil;
+                [self creatRightNavigationItem:[UIImage imageNamed:@"more"] Title:nil];
             } afterDelaySecs:0];
         }
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
@@ -446,11 +447,11 @@
                 case 1000:
                     //点击个人头像按钮
                 {
-                    MyViewController *my = [MyViewController new];
-                    my.author_Id = model.userInfo.Id;
-                    my.OuserInfo = model.userInfo;
-                    my.pageType= MyViewControllerPageTypeOthers;
-                    [self.navigationController pushViewController:my animated:YES];
+//                    MyViewController *my = [MyViewController new];
+//                    my.author_Id = model.userInfo.Id;
+//                    my.OuserInfo = model.userInfo;
+//                    my.pageType= MyViewControllerPageTypeOthers;
+//                    [self.navigationController pushViewController:my animated:YES];
                 }
                     break;
                 default:
@@ -464,6 +465,7 @@
 //显示没有数据
 -(void)showNullData
 {
+    self.navigationItem.rightBarButtonItem = nil;
     UIView  *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth,kDeviceHeight-kHeightNavigation)];
     view.backgroundColor = View_BackGround;
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake((kDeviceWidth-75)/2, (kDeviceHeight-kHeightNavigation-75-100)/2, 75, 75)];

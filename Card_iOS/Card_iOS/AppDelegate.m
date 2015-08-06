@@ -167,7 +167,7 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
         NSString * localbuild=[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
         if (![versionShort isEqualToString:localVersionShort]||![localbuild isEqualToString:buildVerSion]) {
             NSString *upDateUrl =  [responseObject objectForKey:@"update_url"];
-            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"1.增加发布预览\n 2.长安评论回复变成单击" customizationBlock:^(WCAlertView *alertView) {
+            [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@版本更新提示",versionShort] message:@"1.点赞功能基本实现" customizationBlock:^(WCAlertView *alertView) {
             } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
                 if (buttonIndex==1) {
                     [[UIApplication  sharedApplication] openURL:[NSURL URLWithString:upDateUrl]];

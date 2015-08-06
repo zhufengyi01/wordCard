@@ -21,6 +21,7 @@
 //评论的数组
 @property(nonatomic,strong)NSMutableArray   *comentArray;
 
+@property(nonatomic,strong) NSMutableArray  *commentLike;
 //喜欢和点赞和评论的数量
 @property(nonatomic,strong) AuthorToolBar  *Author;
 @end

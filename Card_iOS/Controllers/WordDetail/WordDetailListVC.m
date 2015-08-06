@@ -24,12 +24,15 @@
 #import "NSDate+Extension.h"
 #import "BaseNavigationViewController.h"
 #import "CommentVC.h"
+#import "LikeModel.h"
+#import "MJExtension.h"
 static  float  likebarheight = 80;
 @implementation WordDetailListVC
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.commentLike = [NSMutableArray array];
     //评论成功，刷新表格
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
     self.tabbleView.tableFooterView = nil;
@@ -139,11 +142,12 @@ static  float  likebarheight = 80;
                 [self.tabbleView reloadData];
                 [self.refreshControl endRefreshing];
             }
+            NSArray *commetarr = [LikeModel objectArrayWithKeyValuesArray:[responseObject objectForKey:@"ups"]];
+            [self.commentLike addObjectsFromArray:commetarr];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [self.refreshControl endRefreshing];
-        //[SVProgressHUD showSuccessWithStatus:@"操作失败"];
     }];
 }
 //删除评论

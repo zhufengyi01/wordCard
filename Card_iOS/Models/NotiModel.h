@@ -13,7 +13,7 @@
 @class  TextModel;
 @interface NotiModel : BaseModel
 
-@property(nonatomic,strong) NSString *Id;
+//@property(nonatomic,strong) NSString *Id;
 @property(nonatomic,strong) NSString *author_id;
 @property(nonatomic,strong) NSString *prod_id;
 @property(nonatomic,strong) NSString *created_by;

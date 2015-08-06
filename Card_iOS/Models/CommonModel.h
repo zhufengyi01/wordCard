@@ -11,7 +11,7 @@
 #import "BaseModel.h"
 @interface CommonModel : BaseModel
 
-@property(nonatomic,strong) NSString *Id;
+//@property(nonatomic,strong) NSString *Id;
 
 @property(nonatomic,strong) NSString *word;
 

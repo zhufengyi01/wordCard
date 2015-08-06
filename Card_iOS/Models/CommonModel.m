@@ -8,9 +8,15 @@
 
 #import "CommonModel.h"
 @implementation CommonModel
-
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
+//+(NSDictionary*)replacedKeyFromPropertyName{
+//    return @{@"ID":@"id"};
+//}
+//+(NSDictionary *)objectClassInArray
+//{
+//    return @{@"tagArray":@"tags"};
+//}
+//+(NSDictionary*)replacedKeyFromPropertyName
+//{
+//    return @{@"ID":@"id"};
+//}
 @end
