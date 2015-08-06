@@ -39,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.commentLike = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:CommentVCPushlicSucucessNotifation object:nil];
     self.currentIndex = 1;
     [self createLikeBar];
@@ -322,6 +323,9 @@
                 } afterDelaySecs:1];
                 [self.refreshControl endRefreshing];
             }
+            NSArray *commetarr = [LikeModel objectArrayWithKeyValuesArray:[responseObject objectForKey:@"ups"]];
+            [self.commentLike removeAllObjects];
+            [self.commentLike addObjectsFromArray:commetarr];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -406,6 +410,7 @@
     }
     if (self.commentlistArray.count>indexPath.row) {
         CommentModel  *model = [self.commentlistArray objectAtIndex:indexPath.row];
+        cell.ConmmentLike = self.commentLike;
         [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
             
             switch (buttonIndex) {

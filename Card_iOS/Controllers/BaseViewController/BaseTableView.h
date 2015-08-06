@@ -19,7 +19,6 @@
 
 @property(nonatomic,strong) NSMutableArray  *likeArray;
 
-
 @property(nonatomic,strong)NSString *urlString;
 
 @property(nonatomic,strong)NSDictionary  *parameters;

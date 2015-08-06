@@ -117,20 +117,19 @@
 }
 
 #pragma mark - DZNEmptyDataSetSource Methods
--(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSMutableDictionary *attributes = [NSMutableDictionary new];
-    [attributes setObject:[UIFont fontWithName:KFontThin size:12] forKey:NSFontAttributeName];
-    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"没有数据"];
-    return nil;
-}
+//-(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSMutableDictionary *attributes = [NSMutableDictionary new];
+//    [attributes setObject:[UIFont fontWithName:KFontThin size:12] forKey:NSFontAttributeName];
+//    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"没有数据"];
+//    return nil;
+//}
 -(NSAttributedString*)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    //[UIImage imageNamed:@"empty"];
     NSMutableDictionary *attributes = [NSMutableDictionary new];
     [attributes setObject:[UIFont fontWithName:KFontThin size:14] forKey:NSFontAttributeName];
     [attributes setObject:VLight_GrayColor forKey:NSForegroundColorAttributeName];
-    return [[NSAttributedString alloc] initWithString:@"没有数据,请点击重试" attributes:attributes];
+    return [[NSAttributedString alloc] initWithString:@"没有消息" attributes:attributes];
 }
 -(UIImage*)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return  [UIImage imageNamed:@"empty"];

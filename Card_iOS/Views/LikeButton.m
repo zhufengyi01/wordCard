@@ -21,13 +21,20 @@
         self.likeImage= [[UIImageView alloc]initWithFrame:CGRectMake(45,10, 20, 20)];
         self.likeImage.image = [UIImage imageNamed:@"detail_like.png"];
         [self addSubview:self.likeImage];
-        
         self.likeCountLbl = [[UILabel alloc]initWithFrame:CGRectMake(70,0,40, 40)];
         self.likeCountLbl.textColor = VGray_color;
         self.likeCountLbl.textAlignment = NSTextAlignmentLeft;
         self.likeCountLbl.font = [UIFont fontWithName:KFontThin size:12];
         self.likeCountLbl.text= @"123";
         [self addSubview:self.likeCountLbl];
+        if (IsIphone5) {
+            self.likeImage.frame = CGRectMake(35, 10, 20, 20);
+            self.likeCountLbl.frame = CGRectMake(60, 0, 40, 40);
+        }else if(IsIphone6plus){
+            self.likeImage.frame = CGRectMake(50, 10, 20, 20);
+            self.likeCountLbl.frame = CGRectMake(75, 0, 40, 40);
+        }
+
     }
     return self;
 }

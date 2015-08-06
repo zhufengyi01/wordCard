@@ -23,6 +23,7 @@
     [self setTitle:title forState:UIControlStateNormal];
     //设置背景图片，可以使文字与图片共存
     [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    //self setBackgroundImage:[UIImage im] forState:<#(UIControlState)#>
     [self addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [self.titleLabel setFont:[UIFont fontWithName:kFontRegular size:font]];
     self.titleLabel.font = [UIFont fontWithName:KFontThin size:14];

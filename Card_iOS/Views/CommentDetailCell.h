@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CommentModel.h"
 #import "ZfyActionSheet.h"
+#import "CommonCell.h"
+//typedef NS_ENUM(NSInteger, c) <#name#>
 @interface CommentDetailCell : UITableViewCell <ZfyActionSheetDelegate>
 {
     void (^m_cellClick)(NSInteger buttonIndex);
@@ -25,11 +27,17 @@
 
 @property(nonatomic,strong) UIImageView  *likeIcon;
 /**
+ *  内容的model
+ */
+@property(nonatomic,strong) CommonModel  *model;
+/**
  *  喜欢数量
  */
 @property(nonatomic,strong) UILabel      *likeCount;
-
-
+/**
+ *  评论数组
+ */
+@property(nonatomic,strong) NSMutableArray  *ConmmentLike;
 //计算cell 的高度
 + (float)getCellHeightWithModel:(CommentModel*)model;
 - (void)configCellWithmodel:(CommentModel*)model :(void (^)(NSInteger buttonIndex)) cellClick;

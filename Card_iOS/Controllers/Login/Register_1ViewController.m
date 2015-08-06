@@ -156,14 +156,12 @@
             
         }
         if (PassworfTextfield.text.length<6||PassworfTextfield.text.length>18) {
-            
-            UIAlertView  *Al=[[UIAlertView alloc]initWithTitle:nil message:@"密码长度为8～16位字符" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            UIAlertView  *Al=[[UIAlertView alloc]initWithTitle:nil message:@"密码长度为6～18位字符" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [Al show];
             return;
             
         }
         if ([Function validateEmail:emailTextfield.text]==NO) {
-            
             UIAlertView  *Al=[[UIAlertView alloc]initWithTitle:nil message:@"对不起，请输入正确的邮箱" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [Al show];
             return;

@@ -69,8 +69,16 @@ const float segmentheight = 45;
     [self createHeaderView];
     [self requestUserInfo];
     [self requestData];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:AddCardwillGotoUserNotification object:nil];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshViewControlEventValueChanged) name:UserDeleteRefreshNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addcardRefresh) name:AddCardwillGotoUserNotification object:nil];
+}
+/**
+ *  添加完成刷新，确保选择第一个按钮
+ */
+- (void)addcardRefresh
+{
+    self.addWordbtn.selected = YES;
+    self.likeWorkbtn.selected = NO;
+    [self RefreshViewControlEventValueChanged];
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
@@ -464,7 +472,7 @@ const float segmentheight = 45;
     if (self.addWordbtn.selected ==YES) {
         WordMainVC  *wordmian =[WordMainVC new];
         UserDataCenter  *user = [UserDataCenter shareInstance];
-        if ([user.user_id intValue] ==[self.author_Id intValue]) {
+        if ([user.user_id intValue] ==[self.author_Id intValue]||self.author_Id==nil) {
             wordmian.pageType = WordDetailListVCUserSelf;
         }else{
             wordmian.pageType = WordDetailSourcePageDefault;
@@ -490,4 +498,18 @@ const float segmentheight = 45;
 {
     [self requestData];
 }
+-(NSAttributedString*)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *addstr ;
+    if (self.addWordbtn.selected==YES) {
+       addstr = @"没有添加";
+    }else{
+        addstr =@"没有点赞";
+    }
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    [attributes setObject:[UIFont fontWithName:KFontThin size:14] forKey:NSFontAttributeName];
+    [attributes setObject:VLight_GrayColor forKey:NSForegroundColorAttributeName];
+    return [[NSAttributedString alloc] initWithString:addstr attributes:attributes];
+}
+
 @end

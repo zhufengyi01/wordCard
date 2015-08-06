@@ -138,7 +138,6 @@
     UIImage  *image= [UIImage captureWithView:CurrentVC.comView];
     NSData  *imagedata = UIImagePNGRepresentation(image);
     image = [UIImage imageWithData:imagedata];
-    //image = [image imageScaledToSize:CGSizeMake(image.size.width*0.6, image.size.height*0.6)];
     UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:CurrentVC.model andShareHeight:height];
     __weak typeof(self) weakSelf = self;
     share.shareBtnEvent=^(NSInteger buttonIndex)

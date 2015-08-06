@@ -91,6 +91,10 @@
            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
        } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
            if (buttonIndex==1) {
+               if ([[alertView textFieldAtIndex:0] text].length>15) {
+                   [SVProgressHUD showInfoWithStatus:@"用户名过长" maskType:SVProgressHUDMaskTypeBlack];
+                   return ;
+               }
                self.namelbl.text = [[alertView textFieldAtIndex:0] text];
                [self requestUpdateUserName:self.namelbl.text];
            }

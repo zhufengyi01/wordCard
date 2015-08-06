@@ -44,7 +44,7 @@ float const shareCancleH = 40;
             backView.frame = CGRectMake(0,kDeviceHeight,kDeviceWidth,height+kDeviceWidth-20-shareheight);
         }
         backView.userInteractionEnabled=YES;
-        backView.backgroundColor =[UIColor whiteColor];
+        backView.backgroundColor = VLight_GrayColor_apla;
         UILabel  *sh_lbl= [ZCControl createLabelWithFrame:CGRectMake(0, 0, kDeviceWidth, 40) Font:14 Text:@"分享"];
         sh_lbl.textColor = VGray_color;
         sh_lbl.textAlignment = NSTextAlignmentCenter;
@@ -87,10 +87,8 @@ float const shareCancleH = 40;
         [self removeFromSuperview];
     }];
 }
-
 -(void)createShareView
 {
-    
     contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(10,40 , kDeviceWidth-20,kDeviceWidth-20)];
     contentScroll.backgroundColor = [UIColor whiteColor];
     contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, kDeviceWidth-20);
@@ -134,7 +132,6 @@ float const shareCancleH = 40;
     [button setTitleColor:View_white_Color forState:UIControlStateHighlighted];
     button.frame=CGRectMake(20, backView.frame.size.height-50, kDeviceWidth-40, 40);
     button.titleLabel.font =[UIFont fontWithName:kFontRegular size:14];
-    //button.backgroundColor = VLight_GrayColor_apla;
     button.layer.cornerRadius = 4;
     button.clipsToBounds = YES;
     button.layer.borderColor =VLight_GrayColor.CGColor;
@@ -144,12 +141,7 @@ float const shareCancleH = 40;
     button.layer.cornerRadius = 3;
     [button addTarget:self action:@selector(cancleshareClick) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:button];
-    UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(0, backView.frame.size.height-(kDeviceWidth/4)-60, kDeviceWidth, 1)];
-    lineV.backgroundColor = VLight_GrayColor_apla;
-    [backView addSubview:lineV];
-    
 }
-
 //点击分享
 -(void)handShareButtonClick:(UIButton *) button
 {
@@ -169,9 +161,7 @@ float const shareCancleH = 40;
     }
     self.shareBtnEvent(button.tag-10000);
     [self CancleShareClick];
-    
 }
-
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
   contextInfo:(void *)contextInfo
 {

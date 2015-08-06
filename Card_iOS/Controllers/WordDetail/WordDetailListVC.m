@@ -99,6 +99,7 @@ static  float  likebarheight = 80;
     //配置评论的数据
     [self updateComment];
     [self.dataArray removeAllObjects];
+    [self.commentLike removeAllObjects];
     [self requstCommentData];
 }
 //重新配置评论的数据
@@ -188,6 +189,8 @@ static  float  likebarheight = 80;
     }
     if (self.dataArray.count>indexPath.row) {
         CommentModel  *model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.ConmmentLike = self.commentLike;
+        cell.model = self.model;
         [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
             switch (buttonIndex) {
                 case 2000:

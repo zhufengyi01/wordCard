@@ -15,12 +15,16 @@
 @property(nonatomic,strong) CommonModel   *model;
 
 @property(nonatomic,strong) CommonView     *comView;
-
+/**
+ *  文字的点赞数组
+ */
 @property(nonatomic,strong) NSMutableArray  *likeArray;
 
 //评论的数组
 @property(nonatomic,strong)NSMutableArray   *comentArray;
-
+/**
+ *  评论的点赞数组
+ */
 @property(nonatomic,strong) NSMutableArray  *commentLike;
 //喜欢和点赞和评论的数量
 @property(nonatomic,strong) AuthorToolBar  *Author;

@@ -471,4 +471,11 @@ const float  NavViewHeight =  45;
 {
     [self requestData];
 }
+-(NSAttributedString*)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    [attributes setObject:[UIFont fontWithName:KFontThin size:14] forKey:NSFontAttributeName];
+    [attributes setObject:VLight_GrayColor forKey:NSForegroundColorAttributeName];
+    return [[NSAttributedString alloc] initWithString:@"没有通知" attributes:attributes];
+}
 @end
