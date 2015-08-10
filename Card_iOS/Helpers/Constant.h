@@ -40,14 +40,13 @@
 #define MARGIN_BOTTOM 30
  
 #pragma  mark  三方平台key  设置
-#define kUmengKey @"559a57b167e58e54cc0063b4"
+#define kUmengKey          @"559a57b167e58e54cc0063b4"
 #define SSOSinRedirectURL  @"http://sns.whalecloud.com/sina2/callback"
-#define weiChatShareKey  @"wx8fa17382715d0b9b"
+#define weiChatShareKey    @"wx8fa17382715d0b9b"
 #define weiChatShareSecret @"bff7b1827b6a60cf3df583f24b3833fc"
 
-//#define   Review   1          ///上传appstore版本  1 为审核
 #define   Version       @"1.4"       //版本信息  1.0.1 审核版         1.0 正常版
-#define   UMShareStyle  0      //分享1使用controller方式分享    0 使用view 方式分享
+#define   UMShareStyle  0            //分享1使用controller方式分享    0 使用view 方式分享
 
 #pragma  mark 颜色设置
 #define kAppTintColor [UIColor colorWithRed:0.0/255.0 green:146.0/255.0 blue:255.0/255.0 alpha:1]
@@ -80,10 +79,8 @@
 #define kUserKey @"userinfo"  ///用户信息
 
 #define IS_FIRST_LOGIN  @"ISFIRST"
-
 //weibo  MarkView大小控制
 //坐标图片的大小控制
-
 //右边字体的大小控制
 #define MarkTextFont14  14
 #define MarkTextFont16  16
@@ -103,14 +100,13 @@
 
 
 ///通知的相关定义
-
-#define GOTO_USER_CENTER                      @"goto_user"  //跳转到个人页
-#define Refresh_MAIN_LIST                     @"refresh_main_list"  //刷新
-#define AddCardDidSucucessNotification        @"AddCardDidSucucessNotification"
-#define AddCardwillGotoUserNotification       @"gotouser"
-#define UserDeleteRefreshNotification         @"deleteNotifation"
-#define  CommentVCPushlicSucucessNotifation   @"CommentVCPushlicSucucessNotifation"
-#define  WordDetailListChangeNotifation       @"WordDetailListChangeNotifation"
+#define  GOTO_USER_CENTER                      @"goto_user"  //跳转到个人页
+#define  Refresh_MAIN_LIST                     @"refresh_main_list"  //刷新
+#define  AddCardDidSucucessNotification        @"AddCardDidSucucessNotification"
+#define  AddCardwillGotoUserNotification       @"gotouser"
+#define  UserDeleteRefreshNotification         @"deleteNotifation"
+#define  CommentVCPushlicSucucessNotifation    @"CommentVCPushlicSucucessNotifation"
+#define  WordDetailListChangeNotifation        @"WordDetailListChangeNotifation"
 
 //字体相关
 //FZLTXHK--GBK1-0 Lantinghei_0

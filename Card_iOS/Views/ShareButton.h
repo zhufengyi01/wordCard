@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ShareButton.h"
 @interface  ShareButton: UIButton
+//-(void)setFrame:(CGRect)frame ImageName:(NSString*)imageName Target:(id)target Action:(SEL)action Title:(NSString*)title Font:(CGFloat)font;
 
--(void)setFrame:(CGRect)frame ImageName:(NSString*)imageName Target:(id)target Action:(SEL)action Title:(NSString*)title Font:(CGFloat)font;
+@property (nonatomic,strong) UIImageView  *btnimage;
+@property(nonatomic,strong)  UILabel      *btnlbl;
 
 @end

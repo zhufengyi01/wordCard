@@ -58,7 +58,7 @@
     
     self.refreshControl =[[UIRefreshControl alloc]init];
     self.refreshControl.tintColor =VGray_color;
-    self.refreshControl.backgroundColor =[UIColor whiteColor];
+    self.refreshControl.backgroundColor =VLight_GrayColor_apla;
     //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
     //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
     [self.refreshControl addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];

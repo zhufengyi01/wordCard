@@ -55,11 +55,16 @@
 }
 -(void)requestPublish
 {
+    
     //去掉两边空格
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSString *temptext = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     //去掉换行符
     temptext= [temptext stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet ]];
+    if (temptext.length==0) {
+        [SVProgressHUD showInfoWithStatus:@"不能输入空内容"];
+        return ;
+    }
     UserDataCenter  *userCenter=[UserDataCenter shareInstance];
     NSString *urlString =[NSString stringWithFormat:@"%@comment/create", kApiBaseUrl];
     NSString *tokenString =[Function getURLtokenWithURLString:urlString];

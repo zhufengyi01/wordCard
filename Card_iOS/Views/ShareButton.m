@@ -8,50 +8,35 @@
 
 #import "ShareButton.h"
 #import "Constant.h"
-
+#import "UIImage+Color.h"
 @interface ShareButton ()
 {
     CGRect boundingRect;
+    CGRect m_frame;
 }
 @end
 
 @implementation ShareButton
 
--(void)setFrame:(CGRect)frame ImageName:(NSString*)imageName Target:(id)target Action:(SEL)action Title:(NSString*)title Font:(CGFloat)font
+-(instancetype)initWithFrame:(CGRect)frame
 {
-    self.frame = frame;
-    [self setTitle:title forState:UIControlStateNormal];
-    //设置背景图片，可以使文字与图片共存
-    [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    //self setBackgroundImage:[UIImage im] forState:<#(UIControlState)#>
-    [self addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    [self.titleLabel setFont:[UIFont fontWithName:kFontRegular size:font]];
-    self.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
-    boundingRect=[self.titleLabel.text boundingRectWithSize:CGSizeMake(frame.size.width, font) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:KFontThin size:14]} context:nil];
+    if (self = [super initWithFrame:frame]) {
+        m_frame = frame;
+        self.frame = CGRectMake(frame.origin.x, frame.origin.y, (kDeviceWidth-20)/3,(kDeviceWidth-20)/4);
+        [self setupUI];
+    }
+    return self;
 }
-
-- (CGRect)imageRectForContentRect:(CGRect)contentRect {
-    CGFloat width = IsIphone6plus || IsIphone6 ? 40 : 30;
-    CGFloat imageX=(self.frame.size.width-width)/2;
-    CGFloat imageY=0;
-    CGFloat height=width;
-    return CGRectMake(imageX, imageY, width, height);
+-(void)setupUI{
+    self.btnimage = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width-30)/2, 10, 30, 30)];
+    [self addSubview:self.btnimage];
+    
+    [self setBackgroundImage:[UIImage imageWithColor:View_ToolBar] forState:UIControlStateHighlighted];
+    [self setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateNormal];
+    self.btnlbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 50,self.frame.size.width, 15)];
+    self.btnlbl.font = [UIFont fontWithName:KFontThin size:14];
+    self.btnlbl.textAlignment = NSTextAlignmentCenter;
+    self.btnlbl.textColor = VGray_color;
+    [self addSubview:self.btnlbl];
 }
-
-- (CGRect)titleRectForContentRect:(CGRect)contentRect {
-    CGFloat imageX=(self.frame.size.width-boundingRect.size.width)/2;
-    CGFloat imageY=contentRect.origin.y+self.imageView.bounds.size.height;
-    CGFloat width=self.frame.size.width;
-    CGFloat height=25;
-    return CGRectMake(imageX, imageY, width, height);
-}
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
-
 @end

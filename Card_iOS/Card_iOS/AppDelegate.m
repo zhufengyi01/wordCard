@@ -72,12 +72,12 @@ NSString  *const AppDelegateUserCheckNotificationKey = @"AppDelegateUserCheckNot
             self.window.rootViewController=loginNa;
         }
     }
-    //检测版本更新
-    [GCDQueue executeInGlobalQueue:^{
-        [GCDQueue executeInMainQueue:^{
-            [self checkNewUpdate];
-        }];
-    } afterDelaySecs:10];
+//    //检测版本更新
+//    [GCDQueue executeInGlobalQueue:^{
+//        [GCDQueue executeInMainQueue:^{
+//            [self checkNewUpdate];
+//        }];
+//    } afterDelaySecs:10];
     return YES;
 }
 //禁用横屏幕

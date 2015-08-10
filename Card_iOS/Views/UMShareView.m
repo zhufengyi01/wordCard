@@ -15,19 +15,12 @@
 #import "AFNetworking.h"
 #import "UIImage+Color.h"
 #import "SVProgressHUD.h"
-float const shareheadH=40;
-float const shareCancleH = 40;
+#import "UIImage+Capture.h"
+static CGFloat const shareheadH=40;
+static CGFloat const shareCancleH = 40;
+static CGFloat const logoHeight   = 20;
 
 @implementation UMShareView
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
-
 
 -(instancetype)initwithScreenImage:(UIImage *) screenImage model:(CommonModel *) model andShareHeight:(float) Height;
 
@@ -38,7 +31,7 @@ float const shareCancleH = 40;
         _model = model;
         self.frame=CGRectMake(0, 0,kDeviceWidth,kDeviceHeight);
         self.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0];
-        float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
+        float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH+0;
         backView =[[UIView alloc]initWithFrame:CGRectMake(0,kDeviceHeight, kDeviceWidth, height)];
         if (Height>kDeviceWidth-20) {
             backView.frame = CGRectMake(0,kDeviceHeight,kDeviceWidth,height+kDeviceWidth-20-shareheight);
@@ -77,55 +70,60 @@ float const shareCancleH = 40;
         [self removeFromSuperview];
     }];
 }
-//点击取消需要返回
--(void)cancleshareClick
-{
-    [UIView animateWithDuration:KShow_ShareView_Time animations:^{
-        float height=(kDeviceWidth/4)+shareheight+40+30+50;
-        backView.frame=CGRectMake(0, kDeviceHeight, kDeviceWidth,height);
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
-}
 -(void)createShareView
 {
     contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(10,40 , kDeviceWidth-20,kDeviceWidth-20)];
     contentScroll.backgroundColor = [UIColor whiteColor];
     contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, kDeviceWidth-20);
     [backView addSubview:contentScroll];
-
-    _ShareimageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,kDeviceWidth-20,shareheight)];
-    _ShareimageView.backgroundColor=[UIColor whiteColor];
+    
+    shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,contentScroll.frame.size.width, shareheight+20)];
+    shareView.backgroundColor = [UIColor whiteColor];
+    if (shareView.frame.size.height>kDeviceWidth-20) {
+        contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, shareheight+20);
+    }
+    [contentScroll addSubview:shareView];
+    
+    //放置截图
+    _ShareimageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,kDeviceWidth-20,shareheight+0)];
+    _ShareimageView.backgroundColor=[UIColor redColor];
     _ShareimageView.image=_screenImage;
     _ShareimageView.layer.cornerRadius = 5;
     _ShareimageView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     _ShareimageView.clipsToBounds = YES;
     _ShareimageView.contentMode=UIViewContentModeScaleAspectFit;
-    if (_ShareimageView.frame.size.height>kDeviceWidth-20) {
-        contentScroll.contentSize = CGSizeMake(kDeviceWidth-20, shareheight);
-    }
-    [contentScroll addSubview:_ShareimageView];
+    [shareView addSubview:_ShareimageView];
+    
+    //放置logo
+    UILabel  *logolbl = [[UILabel alloc] initWithFrame:CGRectMake(0,shareView.frame.size.height-30 , shareView.frame.size.width, 32)];
+    logolbl.text = @"瞎扯App";
+    logolbl.textColor = [UIColor colorWithRed:190.0/255 green:190.0/255 blue:190.0/255 alpha:1];
+    logolbl.font = [UIFont fontWithName:KFontThin size:10];
+    logolbl.backgroundColor = View_white_Color;
+    logolbl.textAlignment = NSTextAlignmentCenter;
+    [shareView addSubview:logolbl];
+
 }
 -(void)createButtomView
 {
-    
-    buttomView=[[UIView alloc]initWithFrame:CGRectMake(0,backView.frame.size.height-(kDeviceWidth/4)-50, kDeviceWidth, (kDeviceWidth)/4)];
-    buttomView.backgroundColor=[UIColor whiteColor];
+    buttomView=[[UIView alloc]initWithFrame:CGRectMake(10,backView.frame.size.height-(kDeviceWidth/4)-50, kDeviceWidth-20, (kDeviceWidth-20)/4)];
+    buttomView.backgroundColor= View_white_Color;
     buttomView.userInteractionEnabled=YES;
     [backView addSubview:buttomView];
 #pragma create four button
     NSArray  *imageArray=[NSArray arrayWithObjects:@"wechat_share.png",@"moment_share.png", @"download.png", nil];
     NSArray *titleArray = [NSArray arrayWithObjects:@"微信", @"朋友圈", @"保存", nil];
     for (int i=0; i<3; i++) {
-        double   x=(buttomView.bounds.size.width/3)*i;
-        double   y=10;
-        ShareButton *btn = [ShareButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(x,y, kDeviceWidth/3, kDeviceWidth/4) ImageName:imageArray[i] Target:self Action:@selector(handShareButtonClick:) Title:titleArray[i] Font:12];
-        btn.tag=10000+i;
-        [btn setTitleColor:VBlue_color forState:UIControlStateNormal];
-        btn.backgroundColor=[UIColor whiteColor];
+        double   x=((kDeviceWidth-20)/3)*i;
+        double   y=0;
+        ShareButton  *btn = [[ShareButton alloc] initWithFrame:CGRectMake(x, y, (kDeviceWidth-20)/2, (kDeviceWidth-20)/4)];
+        btn.btnimage.image = [UIImage imageNamed:imageArray[i]];
+        btn.btnlbl.text    = titleArray[i];
+        btn.tag = 10000 +i;
         [buttomView addSubview:btn];
+        [btn addTarget:self action:@selector(handShareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
+//取消按钮
     UIButton  *button=[UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"取消" forState:UIControlStateNormal];
     [button setTitleColor:VGray_color forState:UIControlStateNormal];
@@ -139,13 +137,16 @@ float const shareCancleH = 40;
     [button setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor] forState:UIControlStateHighlighted];
     button.layer.cornerRadius = 3;
-    [button addTarget:self action:@selector(cancleshareClick) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(CancleShareClick) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:button];
 }
 //点击分享
 -(void)handShareButtonClick:(UIButton *) button
 {
     logosupView.hidden=NO;
+    UIImage  *image =[UIImage captureWithView:shareView];
+    NSData  *imagedata = UIImagePNGRepresentation(image);
+    image = [UIImage imageWithData:imagedata];
     NSArray *eventArray = [NSArray arrayWithObjects:@"share_moment", @"share_wechat",@"share_download", nil];
     [MobClick event:eventArray[button.tag-10000]];
     if (button.tag==10000) {
@@ -154,12 +155,12 @@ float const shareCancleH = 40;
     {
         [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"moments"];
     }
-   else  if (button.tag == 10002) {
-       [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"save"];
-        UIImageWriteToSavedPhotosAlbum(_screenImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    else  if (button.tag == 10002) {
+        [self requestStatiWithType:@"2" Pro_id:_model.Id withContent:@"save"];
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         return;
     }
-    self.shareBtnEvent(button.tag-10000);
+    self.shareBtnEvent(button.tag-10000,image);
     [self CancleShareClick];
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
@@ -180,9 +181,9 @@ float const shareCancleH = 40;
     //添加分享视图到window
     [AppView addSubview:self];
     [UIView animateWithDuration:KShow_ShareView_Time animations:^{
-        float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH;
+        float height=(kDeviceWidth/4)+shareheight+shareheadH+30+shareCancleH+0;
         if (shareheight>kDeviceWidth-20) {
-            height=(kDeviceWidth/4)+kDeviceWidth-20+shareheadH+30+shareCancleH;
+            height=(kDeviceWidth/4)+kDeviceWidth-20+shareheadH+30+shareCancleH+0;
         }
         backView.frame=CGRectMake(0, kDeviceHeight-height, backView.frame.size.width, backView.frame.size.height);
     } completion:^(BOOL finished) {
@@ -207,10 +208,7 @@ float const shareCancleH = 40;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-
+        
     }];
-    
 }
-
-
 @end

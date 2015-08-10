@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong) NSString *prod_id;
 
+@property(nonatomic,strong) NSString *comm_id;
+
 @property(nonatomic,strong) NSString *created_by;
 
 @property(nonatomic,strong) NSString *updated_by;

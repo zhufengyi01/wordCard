@@ -28,7 +28,6 @@
 @property(nonatomic,strong) UIPageControl  *pageControl;
 @end
 
-
 @implementation GiderPageViewController
 -(void)viewWillAppear:(BOOL)animated
 {

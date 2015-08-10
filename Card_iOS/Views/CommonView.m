@@ -20,10 +20,6 @@
 {
     if (self =[super initWithFrame:frame]) {
         self.backgroundColor=View_white_Color;
-        //self.layer.cornerRadius = 4;
-        //self.clipsToBounds = YES;
-        //self.layer.borderWidth = 0.1;
-        //self.layer.borderColor=VLight_GrayColor.CGColor;
         [self createUI];
         UILongPressGestureRecognizer  *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copylongpress:)];
         [self addGestureRecognizer:longpress];
@@ -33,7 +29,7 @@
 
 -(void)createUI
 {
-    //self.titleLable =[ZCControl createLabelWithFrame:CGRectMake(10, 10,kDeviceWidth-40, kDeviceWidth-30) Font:20 Text:@""];
+
     self.titleLable = [[TTTAttributedLabel alloc]initWithFrame:CGRectZero];
     self.titleLable.numberOfLines = 0;
     self.titleLable.textInsets = UIEdgeInsetsMake(0, 0, 0, 0);

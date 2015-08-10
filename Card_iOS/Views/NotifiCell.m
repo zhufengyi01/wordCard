@@ -65,26 +65,25 @@
     }
     self.backgroundColor = View_white_Color;
     if ([notimodel.status intValue]==1) {
-//        self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
-//        [self.contentView addSubview:self.badgeparentView];
-//        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
-//        badgeView.badgeText = @"1";
+        //        self.badgeparentView = [[UIView alloc] initWithFrame:CGRectMake(kDeviceWidth-40,20, 20, 20)];
+        //        [self.contentView addSubview:self.badgeparentView];
+        //        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.badgeparentView alignment:JSBadgeViewAlignmentCenterRight];
+        //        badgeView.badgeText = @"1";
         self.backgroundColor= VLight_GrayColor_apla;
     }
     if (_notimodel.OuserInfo.username.length==0) {
         return;
     }
-    NSString *mark ;
+    NSString *mark;
     if (self.islike==YES) {
         mark =@"赞了你";
-    }else
-    {
-        mark =@"评论了你";
     }
-    if ([_notimodel.type isEqualToString:@"1"]) {
-        mark = @"评论了你";
-    }else if([_notimodel.type isEqualToString:@"2"]){
-        mark = @"回复了你的评论";
+    if (mark.length==0) {
+        if ([_notimodel.type isEqualToString:@"1"]) {
+            mark = @"评论了你";
+        }else if([_notimodel.type isEqualToString:@"2"]){
+            mark = @"回复了你的评论";
+        }
     }
     NSString *str = [NSString stringWithFormat:@"%@  %@",_notimodel.OuserInfo.username,mark];
     NSMutableAttributedString  *attr = [[NSMutableAttributedString alloc]initWithString:str];

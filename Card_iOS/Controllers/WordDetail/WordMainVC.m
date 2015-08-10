@@ -140,12 +140,12 @@
     image = [UIImage imageWithData:imagedata];
     UMShareView  *share =  [[UMShareView alloc]initwithScreenImage:image model:CurrentVC.model andShareHeight:height];
     __weak typeof(self) weakSelf = self;
-    share.shareBtnEvent=^(NSInteger buttonIndex)
+    share.shareBtnEvent=^(NSInteger buttonIndex,UIImage *capimage)
     {
         NSLog(@"bu======%ld",(long)buttonIndex);
         NSArray  *sharearray =[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline, nil];
         [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
-        [[UMSocialControllerService defaultControllerService] setShareText:weakSelf.Currentmodel.word shareImage:image socialUIDelegate:weakSelf];
+        [[UMSocialControllerService defaultControllerService] setShareText:weakSelf.Currentmodel.word shareImage:capimage socialUIDelegate:weakSelf];
         //设置分享内容和回调对象
         [UMSocialSnsPlatformManager getSocialPlatformWithName:[sharearray  objectAtIndex:buttonIndex]].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
         

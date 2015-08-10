@@ -411,6 +411,7 @@
     if (self.commentlistArray.count>indexPath.row) {
         CommentModel  *model = [self.commentlistArray objectAtIndex:indexPath.row];
         cell.ConmmentLike = self.commentLike;
+        cell.model = self.model;
         [cell configCellWithmodel:model :^(NSInteger buttonIndex) {
             
             switch (buttonIndex) {

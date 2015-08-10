@@ -118,10 +118,19 @@
     //    //[self.view addSubview:qqButton];
     //
     weiboButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    weiboButton.frame=CGRectMake((kDeviceWidth-231)/2, kDeviceHeight-170, 231, 40);
-    [weiboButton setBackgroundImage:[UIImage imageNamed:@"wechat_login"] forState:UIControlStateNormal];
-    weiboButton.hidden = YES;
-    //[weiboButton setBackgroundImage:[UIImage imageNamed:@"login_button_sina_press@2x.png"] forState:UIControlStateHighlighted];
+    weiboButton.frame=CGRectMake((kDeviceWidth-202)/2, kDeviceHeight-170, 202, 40);
+    [weiboButton setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
+     [weiboButton setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
+    [weiboButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, -6)];
+    [weiboButton setImage:[UIImage imageNamed:@"login_sina"] forState:UIControlStateNormal];
+    [weiboButton setTitleColor:View_Black_Color forState:UIControlStateNormal];
+    [weiboButton setTitle:@"微博登陆" forState:UIControlStateNormal];
+    weiboButton.layer.cornerRadius = 4;
+    weiboButton.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
+    weiboButton.layer.borderColor = VLight_GrayColor.CGColor;
+    weiboButton.layer.borderWidth = 0.5;
+    weiboButton.clipsToBounds = YES;
+
     [weiboButton addTarget:self action:@selector(dealloginClick:) forControlEvents:UIControlEventTouchUpInside];
     weiboButton.tag=1001;
     // weiboButton.userInteractionEnabled=NO;
@@ -130,12 +139,19 @@
     //}
     [self.view addSubview:weiboButton];
     
-    
     weiChateButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    weiChateButton.frame=CGRectMake((kDeviceWidth-202)/2, kDeviceHeight-120, 202, 42);
-    [weiChateButton setBackgroundImage:[UIImage imageNamed:@"wechat_login"] forState:UIControlStateNormal];
-    //[weiChateButton setBackgroundImage:[UIImage imageNamed:@"login_button_wechat_press.png"] forState:UIControlStateHighlighted];
-    // weiChateButton.userInteractionEnabled=NO;
+    weiChateButton.frame=CGRectMake((kDeviceWidth-202)/2, kDeviceHeight-120, 202, 40);
+    [weiChateButton setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
+      [weiChateButton setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
+    [weiChateButton setImage:[UIImage imageNamed:@"login_wechat"] forState:UIControlStateNormal];
+    [weiChateButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, -6)];
+    [weiChateButton setTitleColor:View_Black_Color forState:UIControlStateNormal];
+    [weiChateButton setTitle:@"微信登陆" forState:UIControlStateNormal];
+    weiChateButton.layer.cornerRadius = 4;
+    weiChateButton.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
+    weiChateButton.layer.borderColor = VLight_GrayColor.CGColor;
+    weiChateButton.layer.borderWidth = 0.5;
+    weiChateButton.clipsToBounds = YES;
     //if (checkBtn.selected==YES) {
     weiChateButton.userInteractionEnabled=YES;
     //}

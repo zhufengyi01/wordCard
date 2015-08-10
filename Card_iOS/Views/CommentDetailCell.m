@@ -195,7 +195,7 @@ static CGFloat  headwidth  = 30;
 {
     __block BOOL isliked = NO;
     [self.ConmmentLike enumerateObjectsUsingBlock:^(LikeModel *model, NSUInteger idx, BOOL *stop) {
-        if ([model.prod_id isEqualToString:m_model.Id]) {
+        if ([model.comm_id isEqualToString:m_model.Id]) {
             isliked = YES;
         }
     }];
@@ -208,7 +208,7 @@ static CGFloat  headwidth  = 30;
 {
     //移除赞数组的当前字段
     [self.ConmmentLike enumerateObjectsUsingBlock:^(LikeModel *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.prod_id isEqualToString:m_model.Id]) {
+        if ([obj.comm_id isEqualToString:m_model.Id]) {
             //把当前的obj从喜欢数组中移除
             [self.ConmmentLike removeObject:obj];
         }
@@ -222,7 +222,7 @@ static CGFloat  headwidth  = 30;
 {
     //当前的添加进赞数组中
     LikeModel *like = [LikeModel new];
-    like.prod_id = m_model.Id;
+    like.comm_id = m_model.Id;
     [self.ConmmentLike addObject:like];
     [self changemodelwith:1];
 }
@@ -252,7 +252,6 @@ static CGFloat  headwidth  = 30;
 {
     m_cellClick(button.tag);
 }
-
 //获取每个cell 的高度
 +(float)getCellHeightWithModel:(CommentModel*)model
 {
@@ -265,11 +264,11 @@ static CGFloat  headwidth  = 30;
     UserDataCenter *User = [UserDataCenter shareInstance];
     NSString *urlString  = [NSString stringWithFormat:@"%@comm-up/up",kApiBaseUrl];
     NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-    NSDictionary  *dict = @{@"user_id":User.user_id,@"prod_id":m_model.Id,@"author_id":m_model.userInfo.Id,KURLTOKEN:tokenString};
+    NSDictionary  *dict = @{@"user_id":User.user_id,@"comm_id":m_model.Id,@"prod_id":m_model.prod_id,@"author_id":m_model.userInfo.Id,KURLTOKEN:tokenString};
     AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:urlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
-            [SVProgressHUD showSuccessWithStatus:@"Success"];
+             //[SVProgressHUD showSuccessWithStatus:@"Success"];
             if ([self haveLiked]==YES) {
                 //已经点赞，移除掉已经ups 的其中一个字段，同时把 赞－ 1
                 [self removecontentUps];
@@ -280,11 +279,11 @@ static CGFloat  headwidth  = 30;
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:@"Success"];
+           // [SVProgressHUD showErrorWithStatus:@"Success"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error ==%@",error);
-        [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        //[SVProgressHUD showErrorWithStatus:@"删除失败"];
     }];
 }
 -(void)layoutSubviews

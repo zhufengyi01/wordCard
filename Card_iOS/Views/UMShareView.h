@@ -26,28 +26,24 @@ typedef NS_ENUM(NSInteger, UMShareType)
 @interface UMShareView : UIView
 {
 
-    UIView  *backView;
-    UIView  *shareView;  //分享的view
-    UILabel  *logoLable;
-    UIButton  *wechatSessionBtn;
-    UIButton  *wechatTimelineBtn;
-    UIButton  *qzoneBtn;
-    UIButton  *weiboBtn;
-    UIImageView *_ShareimageView;
-    //UILabel  *_moviewName;
-    //底部视图
-    UIView  *buttomView;
-    //UIImage   *shareImage;
-    UIView     *logosupView;
-    UIImage    *_screenImage;
-    float     shareheight;
+    UIView       *backView;
+    UIView       *shareView;  //分享的view
+    UILabel      *logoLable;
+    UIButton     *wechatSessionBtn;
+    UIButton     *wechatTimelineBtn;
+    UIButton     *qzoneBtn;
+    UIButton     *weiboBtn;
+    UIImageView  *_ShareimageView;
+    UIView       *buttomView;
+    UIView       *logosupView;
+    UIImage      *_screenImage;
+    float        shareheight;
     UIScrollView  *contentScroll;
     CommonModel  *_model;
 }
 
 
-@property(nonatomic,strong) void(^shareBtnEvent)(NSInteger buttonIndex);
-
+@property(nonatomic,strong) void(^shareBtnEvent)(NSInteger buttonIndex,UIImage *shareImage);
 
 -(instancetype)initwithScreenImage:(UIImage *) screenImage model:(CommonModel *) model andShareHeight:(float) Height;
 
