@@ -264,12 +264,12 @@
                 } else {
                     // [self dealErrorCase];
                     //强行登陆
-                    [SVProgressHUD showErrorWithStatus:@"登陆失败"];
+                    [SVProgressHUD showErrorWithStatus:@"登陆失败,请重试!"];
                 }
             }];
         } else {
             //[self dealErrorCase];
-            [SVProgressHUD showErrorWithStatus:@"登陆失败"];
+            [SVProgressHUD showErrorWithStatus:@"登陆失败,请重试"];
         }
     });
 }

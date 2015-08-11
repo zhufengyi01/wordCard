@@ -90,9 +90,9 @@ const float  NavViewHeight =  45;
         [_likedBtn setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
         [_likedBtn setTitleColor:View_Black_Color forState:UIControlStateSelected];
         _likedBtn.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
-        [_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
-        [_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateSelected];
-        [_likedBtn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
+        //[_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
+        //[_likedBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateSelected];
+       // [_likedBtn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
     }
     return _likedBtn;
 }
@@ -104,10 +104,7 @@ const float  NavViewHeight =  45;
         [_commentBtn setTitle:@"评论" forState:UIControlStateNormal];
         [_commentBtn setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
         [_commentBtn setTitleColor:View_Black_Color forState:UIControlStateSelected];
-        [_commentBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
-        [_commentBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateSelected];
         _commentBtn.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
-        [_commentBtn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
     }
     return _commentBtn;
 }
@@ -119,10 +116,8 @@ const float  NavViewHeight =  45;
         [_systemBtn setTitle:@"系统" forState:UIControlStateNormal];
         [_systemBtn setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
         [_systemBtn setTitleColor:View_Black_Color forState:UIControlStateSelected];
-        [_systemBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateNormal];
-        [_systemBtn setBackgroundImage:[UIImage imageWithColor:View_white_Color] forState:UIControlStateSelected];
         _systemBtn.titleLabel.font = [UIFont fontWithName:KFontThin size:14];
-        [_systemBtn setBackgroundImage:[UIImage imageWithColor:VLight_GrayColor_apla] forState:UIControlStateHighlighted];
+
     }
     return _systemBtn;
 }
@@ -148,7 +143,7 @@ const float  NavViewHeight =  45;
 {
     UIView *notiView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, NavViewHeight)];
     notiView.userInteractionEnabled = YES;
-    notiView.backgroundColor = [UIColor redColor];
+    notiView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:notiView];
     [notiView addSubview:self.likedBtn];
     [notiView addSubview:self.commentBtn];

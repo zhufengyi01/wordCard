@@ -343,7 +343,6 @@
     NSArray  *Arr =    [self.pageController viewControllers];
     CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
     CommonModel  *smodel = CurrentVC.model;
-    
     if (likeBtn.selected ==YES) {
         //取消点赞
         likeBtn.selected = NO;
@@ -392,6 +391,7 @@
         smodel.liked_count = [NSString stringWithFormat:@"%ld",(long)lcount];
         if (smodel.userInfo == nil) {
             UserModel *usr=[UserModel new];
+#warning  此处写 4的原因是防止用户信息为空导致的奔溃的问题
             usr.Id = @"4";
             smodel.userInfo = usr;
         }

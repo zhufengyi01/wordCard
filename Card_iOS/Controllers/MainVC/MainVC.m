@@ -24,6 +24,8 @@
 #import "NSDate+Addition.h"
 #import "NSDateFormatter+Make.h"
 #import "NSDate+Extension.h"
+#import "WordMainVC.h"
+#import "LikeModel.h"
 const CGFloat  Main_NavHeigth  = 45;
 const CGFloat  Main_NavWidth   = 200;
 @interface MainVC () <UITableViewDelegate,UITableViewDataSource>
@@ -44,6 +46,20 @@ const CGFloat  Main_NavWidth   = 200;
 @property(nonatomic,assign)NSInteger  pageSize;
 @property(nonatomic,strong)NSMutableArray *temArr1;
 @property(nonatomic,strong)NSMutableArray *temArr2;
+//给两个tabbleview 添加刷新
+@property(nonatomic,strong) UIRefreshControl *refreshControl1;
+@property(nonatomic,strong) UIRefreshControl *refreshControl2;
+
+@property(nonatomic,strong) UITableView  *tableView1;
+
+@property(nonatomic,strong) UITableView  *tableView2;
+
+@property(nonatomic,strong)NSMutableArray *dataArray1;
+
+@property(nonatomic,strong)NSMutableArray *dataArray2;
+//喜欢的数组
+@property(nonatomic,strong) NSMutableArray  *likeArr1;
+@property(nonatomic,strong)NSMutableArray   *likeArr2;
 @end
 @interface MainVC ()
 
@@ -64,6 +80,8 @@ const CGFloat  Main_NavWidth   = 200;
     [self scrollerView];
     [self.scrollerView addSubview:self.tableView1];
     [self.scrollerView addSubview:self.tableView2];
+    [self refreshControl1];
+    [self refreshControl2];
     [self requestData];
 }
 -(instancetype)init{
@@ -77,6 +95,8 @@ const CGFloat  Main_NavWidth   = 200;
         self.dataArray2  = [NSMutableArray array];
         self.temArr1 = [NSMutableArray array];
         self.temArr2 = [NSMutableArray array];
+        self.likeArr1 = [NSMutableArray array];
+        self.likeArr2 = [NSMutableArray array];
     }
     return self;
 }
@@ -95,7 +115,7 @@ const CGFloat  Main_NavWidth   = 200;
 -(UIView *)IndicatorView
 {
     if (_IndicatorView==nil) {
-        _IndicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_NavHeigth-2, Main_NavWidth/2, 2)];
+        _IndicatorView = [[UIView alloc] initWithFrame:CGRectMake(15, Main_NavHeigth-2, Main_NavWidth/2-30, 2)];
         _IndicatorView.userInteractionEnabled = YES;
         _IndicatorView.backgroundColor = VLight_GrayColor;
     }
@@ -109,7 +129,7 @@ const CGFloat  Main_NavWidth   = 200;
         _scrollerView.delegate = self;
         _scrollerView.pagingEnabled = YES;
         _scrollerView.showsHorizontalScrollIndicator  = NO;
-        _scrollerView.backgroundColor = [UIColor redColor];
+        //_scrollerView.backgroundColor = [UIColor redColor];
         [self.view addSubview:_scrollerView];
     }
     return _scrollerView;
@@ -119,6 +139,7 @@ const CGFloat  Main_NavWidth   = 200;
         _tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation-kHeigthTabBar)];
         //_tableView1.backgroundColor = [UIColor blueColor];
         _tableView1.delegate =self;
+        _tableView1.sectionHeaderHeight = 40;
         _tableView1.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView1.dataSource = self;
     }
@@ -129,10 +150,46 @@ const CGFloat  Main_NavWidth   = 200;
         _tableView2 = [[UITableView alloc] initWithFrame:CGRectMake(kDeviceWidth, 0, kDeviceWidth, kDeviceHeight-kHeightNavigation-kHeigthTabBar)];
         //_tableView2.backgroundColor = [UIColor yellowColor];
         _tableView2.delegate =self;
+        _tableView2.sectionHeaderHeight = 40;
         _tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView2.dataSource = self;
     }
     return _tableView2;
+}
+-(UIRefreshControl *)refreshControl1
+{
+    if (_refreshControl1==nil) {
+        _refreshControl1 =[[UIRefreshControl alloc]init];
+        _refreshControl1.tintColor =VGray_color;
+        _refreshControl1.backgroundColor =VLight_GrayColor_apla;
+        //NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:12],NSFontAttributeName,nil];
+        //self.refreshControl.attributedTitle =[[NSAttributedString alloc]initWithString:@"下拉刷新" attributes:dict]; //
+        [_refreshControl1 addTarget:self action:@selector(RefreshViewControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.tableView1 addSubview:_refreshControl1];
+    }
+    return _refreshControl1;
+}
+-(UIRefreshControl *)refreshControl2{
+    if (_refreshControl2==nil) {
+        _refreshControl2 =[[UIRefreshControl alloc]init];
+        _refreshControl2.tintColor =VGray_color;
+        _refreshControl2.backgroundColor =VLight_GrayColor_apla;
+        [self.refreshControl2 addTarget:self action:@selector(RefreshViewControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.tableView2 addSubview:_refreshControl2];
+    }
+    return _refreshControl2;
+}
+-(void)RefreshViewControlEventValueChanged:(UIRefreshControl*)refreshControl
+{
+    if (refreshControl == self.refreshControl1) {
+        [self.temArr1 removeAllObjects];
+        self.page1 = 1;
+        [self requestData];
+    }else{
+        [self.temArr2 removeAllObjects];
+        self.page2 = 1;
+        [self requestData];
+    }
 }
 -(void)setUpNav
 {
@@ -144,7 +201,7 @@ const CGFloat  Main_NavWidth   = 200;
     [hot setTitle:@"精选" forState:UIControlStateNormal];
     [hot setTitleColor:View_Black_Color forState:UIControlStateSelected];
     [hot setTitleColor:VLight_GrayColor forState:UIControlStateNormal];
-     hot.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
+    hot.titleLabel.font = [UIFont fontWithName:KFontThin size:16];
     hot.selected = YES;
     [naview addSubview:hot];
     [hot addActionHandler:^(NSInteger tag) {
@@ -183,6 +240,61 @@ const CGFloat  Main_NavWidth   = 200;
     self.newbtn = new;
     [naview addSubview:self.IndicatorView];
 }
+//请求精选数据
+-(void)requestData1
+{
+    UserDataCenter *user = [UserDataCenter shareInstance];
+    AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
+    NSString *url;
+    NSDictionary  *parameters;
+    //精选
+    url =[NSString stringWithFormat:@"%@text/list-by-status?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSize,(long)self.page1];
+    NSString *apitoken=[Function getURLtokenWithURLString:url];
+    parameters = @{@"user_id":user.user_id,@"status":@"3",KURLTOKEN:apitoken};
+    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue]==0) {
+                self.pageCount1 = [[responseObject objectForKey:@"pageCount"] integerValue];
+                NSMutableArray *array =[responseObject objectForKey:@"models"];
+                [self.temArr1 addObjectsFromArray:[CommonModel objectArrayWithKeyValuesArray:array]];
+                NSMutableArray *likearr = [responseObject objectForKey:@"ups"];
+                [self.likeArr1 addObjectsFromArray:[LikeModel objectArrayWithKeyValuesArray:likearr]];
+                [self computeRecomendSectionView:self.temArr1];
+                [self.tableView1 reloadData];
+                [self.refreshControl1 endRefreshing];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+}
+//请求最新数据
+-(void)requestData2
+{
+    UserDataCenter *user = [UserDataCenter shareInstance];
+    AFHTTPRequestOperationManager  *manager =[AFHTTPRequestOperationManager manager];
+    NSString *url;
+    NSDictionary  *parameters;
+    url =[NSString stringWithFormat:@"%@text/list-recently?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSize,(long)self.page2];
+    NSString *apitoken=[Function getURLtokenWithURLString:url];
+    parameters = @{@"user_id":user.user_id,KURLTOKEN:apitoken};
+    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"code"] intValue ]==0) {
+                self.pageCount2 = [[responseObject objectForKey:@"pageCount"]integerValue];
+                NSMutableArray *array =[responseObject objectForKey:@"models"];
+                [self.temArr2 addObjectsFromArray:[CommonModel objectArrayWithKeyValuesArray:array]];
+                NSMutableArray *likearr = [responseObject objectForKey:@"ups"];
+                [self.likeArr2 addObjectsFromArray:[LikeModel objectArrayWithKeyValuesArray:likearr]];
+                [self computeRecomendSectionView:self.temArr2];
+                [self.tableView2 reloadData];
+                [self.refreshControl2 endRefreshing];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+}
 -(void)requestData
 {
     UserDataCenter *user = [UserDataCenter shareInstance];
@@ -192,30 +304,35 @@ const CGFloat  Main_NavWidth   = 200;
     if (self.hotbtn.selected==YES) {
         //精选
         url =[NSString stringWithFormat:@"%@text/list-by-status?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSize,(long)self.page1];
-            NSString *apitoken=[Function getURLtokenWithURLString:url];
+        NSString *apitoken=[Function getURLtokenWithURLString:url];
         parameters = @{@"user_id":user.user_id,@"status":@"3",KURLTOKEN:apitoken};
         
     }else{
         //最新
-         url =[NSString stringWithFormat:@"%@text/list-recently?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSize,(long)self.page2];
-            NSString *apitoken=[Function getURLtokenWithURLString:url];
+        url =[NSString stringWithFormat:@"%@text/list-recently?per-page=%ld&page=%ld",kApiBaseUrl,(long)self.pageSize,(long)self.page2];
+        NSString *apitoken=[Function getURLtokenWithURLString:url];
         parameters = @{@"user_id":user.user_id,KURLTOKEN:apitoken};
     }
-  
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject objectForKey:@"code"]) {
             if (self.hotbtn.selected == YES) {
                 self.pageCount1 = [[responseObject objectForKey:@"pageCount"] integerValue];
                 NSMutableArray *array =[responseObject objectForKey:@"models"];
-                self.temArr1 = [CommonModel objectArrayWithKeyValuesArray:array];
+                [self.temArr1 addObjectsFromArray:[CommonModel objectArrayWithKeyValuesArray:array]];
+                NSMutableArray *likearr = [responseObject objectForKey:@"ups"];
+                [self.likeArr1 addObjectsFromArray:[LikeModel objectArrayWithKeyValuesArray:likearr]];
                 [self computeRecomendSectionView:self.temArr1];
                 [self.tableView1 reloadData];
+                [self.refreshControl1 endRefreshing];
             }else{
                 self.pageCount2 = [[responseObject objectForKey:@"pageCount"]integerValue];
                 NSMutableArray *array =[responseObject objectForKey:@"models"];
-                self.temArr2 = [CommonModel objectArrayWithKeyValuesArray:array];
+                [self.temArr2 addObjectsFromArray:[CommonModel objectArrayWithKeyValuesArray:array]];
+                NSMutableArray *likearr = [responseObject objectForKey:@"ups"];
+                [self.likeArr2 addObjectsFromArray:[LikeModel objectArrayWithKeyValuesArray:likearr]];
                 [self computeRecomendSectionView:self.temArr2];
                 [self.tableView2 reloadData];
+                [self.refreshControl2 endRefreshing];
             }
             
         }else{
@@ -326,8 +443,10 @@ const CGFloat  Main_NavWidth   = 200;
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         if (self.dataArray1.count >indexPath.section) {
-        CommonModel *model =[[self.dataArray1 objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        [cell configCellValue:model  RowIndex:indexPath.row];
+            if ([[self.dataArray1 objectAtIndex:indexPath.section] count]>indexPath.row) {
+                CommonModel *model =[[self.dataArray1 objectAtIndex:indexPath.section] objectAtIndex:indexPath .row];
+                [cell configCellValue:model  RowIndex:indexPath.row];
+            }
         }
         return cell;
     }else{
@@ -337,9 +456,11 @@ const CGFloat  Main_NavWidth   = 200;
             cell =[[CommonCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
-        if (self.dataArray2.count>indexPath.row) {
-        CommonModel *model =[[self.dataArray2 objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        [cell configCellValue:model  RowIndex:indexPath.row];
+        if (self.dataArray2.count>indexPath.section) {
+            if ([[self.dataArray2 objectAtIndex:indexPath.section] count]>indexPath.row) {
+                CommonModel *model =[[self.dataArray2 objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+                [cell configCellValue:model  RowIndex:indexPath.row];
+            }
         }
         return cell;
     }
@@ -373,22 +494,96 @@ const CGFloat  Main_NavWidth   = 200;
     }
     return headView;
 }
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.hotbtn.selected == YES) {
+        long  int index= [self getIndexWithSection:(int)indexPath.section Row:(int)indexPath.row];
+        if (self.pageCount1>self.page1&&(self.temArr1.count==index+1)) {
+            self.page1++;
+            [self requestData];
+        }
+    }else if(self.newbtn.selected ==YES){
+        long  int index= [self getIndexWithSection:(int)indexPath.section Row:(int)indexPath.row];
+        if (self.pageCount2>self.page2&&(self.temArr2.count==index+1)) {
+            self.page2++;
+            [self requestData];
+        }
+    }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.hotbtn.selected ==YES) {
+        WordMainVC  *wordmian =[WordMainVC new];
+        wordmian.MainArray = self.temArr1;
+        int  index =  [self getIndexWithSection:(int)indexPath.section Row:(int)indexPath.row];
+        wordmian.IndexOfItem= index;
+         wordmian.likeArray = self.likeArr1;
+        [self.navigationController pushViewController:wordmian animated:YES];
+    }else if(self.newbtn.selected ==YES)
+    {
+        WordMainVC  *wordmian =[WordMainVC new];
+        wordmian.MainArray = self.temArr2;
+        int  index =  [self getIndexWithSection:(int)indexPath.section Row:(int)indexPath.row];
+        wordmian.IndexOfItem= index;
+         wordmian.likeArray = self.likeArr2;
+        [self.navigationController pushViewController:wordmian animated:YES];
+    }
+}
 
-
+//获取点击的下标
+-(int)getIndexWithSection:(int) section Row:(int) row
+{
+    if (self.hotbtn.selected ==YES) {
+        int num=0;
+        for (int i=0; i<section; i++) {
+            if (self.dataArray1.count>i) {
+                NSArray *arr =[self.dataArray1 objectAtIndex:i];
+                int a= (int)[arr count];
+                num =num+a;
+            }
+        }
+        return num+row;
+    }
+    else if (self.newbtn.selected ==YES) {
+        int num=0;
+        for (int i=0; i<section; i++) {
+            if (self.dataArray2.count>i) {
+                NSArray *arr =[self.dataArray2 objectAtIndex:i];
+                int a= (int)[arr count];
+                num =num+a;
+            }
+        }
+        return num+row;
+    }
+    return 0;
+}
 #pragma mark  - scrollerViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //改变_indicortview 得位置
     if (scrollView == self.scrollerView) {
-    CGPoint  point = scrollView.contentOffset;
+        CGPoint  point = scrollView.contentOffset;
         NSLog(@"========point - x ===%f",point.x);
-     // self.IndicatorView.centerX_ic = (Main_NavWidth/kDeviceWidth)*point.x/2;
     }
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     //结束滚动
     if (scrollView == self.scrollerView) {
         CGPoint  point = scrollView.contentOffset;
+        if (point.x==0) {
+            self.IndicatorView.centerX_ic = self.hotbtn.centerX_ic;
+            self.newbtn.selected = NO;
+            self.hotbtn.selected = YES;
+        }else if(point.x==kDeviceWidth){
+            self.IndicatorView.centerX_ic = self.newbtn.centerX_ic;
+            self.newbtn.selected = YES;
+            self.hotbtn.selected = NO;
+            if (self.temArr2.count==0) {
+                self.page2 = 1;
+                [self requestData];
+            }
+        }
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -397,13 +592,13 @@ const CGFloat  Main_NavWidth   = 200;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

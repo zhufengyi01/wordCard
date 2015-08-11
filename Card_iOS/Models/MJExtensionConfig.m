@@ -33,13 +33,6 @@
     [CommonModel setupObjectClassInArray:^NSDictionary *{
         return @{@"tagArray":[TagModel class]};
     }];
-    
-//    [TagModel setupReplacedKeyFromPropertyName:^NSDictionary *{
-//        return @{@"Id":@"id"};
-//    }];
-//    [UserModel setupReplacedKeyFromPropertyName:^NSDictionary *{
-//        return @{@"Id":@"id"};
-//    }];
     [CommentModel  setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{@"userInfo":@"user"};
     }];

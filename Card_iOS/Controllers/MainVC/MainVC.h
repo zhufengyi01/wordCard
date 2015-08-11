@@ -10,13 +10,5 @@
 
 @interface MainVC : RootViewController
 
-@property(nonatomic,strong) UITableView  *tableView1;
-
-@property(nonatomic,strong) UITableView  *tableView2;
-
-@property(nonatomic,strong)NSMutableArray *dataArray1;
-
-@property(nonatomic,strong)NSMutableArray *dataArray2;
-
 
 @end

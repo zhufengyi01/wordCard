@@ -10,8 +10,6 @@
 #import "BaseModel.h"
 @interface  LikeModel: BaseModel
 
-//@property(nonatomic,strong) NSString *Id;
-
 @property(nonatomic,strong) NSString *prod_id;
 
 @property(nonatomic,strong) NSString *comm_id;
