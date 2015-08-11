@@ -22,6 +22,7 @@
 #import "DetailLikeBar.h"
 #import "BaseNavigationViewController.h"
 #import "CommentVC.h"
+#import "AddCardViewController.h"
 #import "LikeButton.h"
 #import "LikeModel.h"
 #import "WCAlertView.h"
@@ -96,13 +97,26 @@
         zfy.tag = 100;
         [zfy showInView:self.view];
     }else {
+        //非个人页
+        UserDataCenter  *user = [UserDataCenter shareInstance];
+        if ([user.is_admin intValue]>0) {
+            //管理员，编辑功能
+            ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"编辑"]];
+            zfy.tag = 102;
+            [zfy showInView:self.view];
+        }else{
+            //举报功能
         ZfyActionSheet  *zfy = [[ZfyActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"举报"]];
         zfy.tag = 101;
         [zfy showInView:self.view];
+        }
     }
 }
 -(void)ZfyActionSheet:(ZfyActionSheet*)actionSheet ClickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSArray  *Arr =    [self.pageController viewControllers];
+    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
+    CommonModel  *model = CurrentVC.model;
     if (actionSheet.tag==100) {
         if (actionSheet.tag==100) {
             
@@ -111,20 +125,22 @@
             } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
                 if (buttonIndex==1) {
                     //删除
-                    NSArray  *Arr =    [self.pageController viewControllers];
-                    CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
-                    CommonModel  *model = CurrentVC.model;
                     [self requestDeleteDataWith:model.Id];
                 }
             } cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
         }
-    }else {
+    }else if(actionSheet.tag ==101){
         if (buttonIndex==0) {
             //邮箱举报
-            NSArray  *Arr =    [self.pageController viewControllers];
-            CurrentVC = (WordDetailListVC *) [Arr objectAtIndex:0];
-            CommonModel  *model = CurrentVC.model;
             [self sendFeedBackwithmodel:model];
+        }
+    }else
+    {
+        if (buttonIndex == 0) {
+            //进入添加页
+            AddCardViewController  *add = [AddCardViewController new];
+            add.model = CurrentVC.model;
+            [self.navigationController pushViewController:add animated:YES];
         }
     }
 }
@@ -414,6 +430,7 @@
             }
         }
     }
+    //__weak __block
     detail.btnClickAtInsex = ^(LikeButton *button)
     {
         switch (button.tag) {

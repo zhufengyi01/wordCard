@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-
+#import "CommonModel.h"
 typedef NS_ENUM(NSInteger, addCardVCType)
 {
     addCardVCTypeAddCard,  //添加文字
@@ -16,16 +16,15 @@ typedef NS_ENUM(NSInteger, addCardVCType)
 @interface AddCardViewController : RootViewController <UITextViewDelegate,UIScrollViewDelegate>
 {
 }
-@property(nonatomic,copy) NSString *tagString;
-
-@property (nonatomic,strong) UITextView  *myTextView;
-
-@property(nonatomic,strong)  UIScrollView *myScrollView;
-
-@property(nonatomic,strong) UITextField   *textField;
-@property(nonatomic,strong) UIButton      *SourceButton;
-
-@property (nonatomic,strong) UILabel      *sourceLable;
-
-
+@property(nonatomic,copy)     NSString *tagString;
+@property (nonatomic,strong)  UITextView  *myTextView;
+@property(nonatomic,strong)   UIScrollView *myScrollView;
+@property(nonatomic,strong)   UITextField   *textField;
+@property(nonatomic,strong)   UIButton      *SourceButton;
+@property (nonatomic,strong)  UILabel      *sourceLable;
+@property(nonatomic,assign)   addCardVCType  pageType;
+/**
+ *  管理员编辑入口
+ */
+@property(nonatomic,strong) CommonModel  *model;
 @end

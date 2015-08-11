@@ -22,11 +22,10 @@
 @property(nonatomic,strong)UIScrollView *scrollView;
 
 @property(nonatomic,strong)CommonView     *comView;
-
+//添加进入
 @property(nonatomic,strong)CommonModel    *model;
 
 @end
-
 @implementation AddpreviewVC
 
 - (void)viewDidLoad {
@@ -86,14 +85,24 @@
     [SVProgressHUD showInfoWithStatus:@"正在发布" maskType:SVProgressHUDMaskTypeBlack];
     AFHTTPRequestOperationManager  *manager = [AFHTTPRequestOperationManager manager];
     NSString  *url = [NSString stringWithFormat:@"%@text/create",kApiBaseUrl];
+    if (self.pageType == addCardVCTypeEditCard) {
+        url = [NSString stringWithFormat:@"%@text/update-word",kApiBaseUrl];
+    }
     NSString *tokenString = [Function getURLtokenWithURLString:url];
     NSDictionary  *parameters;
     UserDataCenter *user =[UserDataCenter shareInstance];
-    if (self.model.reference.length>0) {
-        parameters = @{@"user_id":user.user_id,@"word":self.model.word,@"reference":self.model.reference,KURLTOKEN:tokenString};
-    }else
-    {
-        parameters = @{@"user_id":user.user_id,@"word":self.model.word,KURLTOKEN:tokenString};
+    if (self.pageType ==addCardVCTypeEditCard) {
+        //编辑
+        parameters = @{@"user_id":user.user_id,@"prod_id":self.editmodel.Id,@"word":self.editmodel.word,@"reference":self.editmodel.reference,KURLTOKEN:tokenString};
+        
+    }else{
+        //全新发布
+        if (self.model.reference.length>0) {
+            parameters = @{@"user_id":user.user_id,@"word":self.model.word,@"reference":self.model.reference,KURLTOKEN:tokenString};
+        }else
+        {
+            parameters = @{@"user_id":user.user_id,@"word":self.model.word,KURLTOKEN:tokenString};
+        }
     }
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"code"] intValue]==0) {
@@ -109,20 +118,19 @@
         [SVProgressHUD showErrorWithStatus:@"发布失败,请重试"];
     }];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

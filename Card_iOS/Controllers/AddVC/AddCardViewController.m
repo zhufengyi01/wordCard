@@ -29,6 +29,9 @@ NSTimeInterval const  dismissInterval = 1.f;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.model) {
+        self.pageType = addCardVCTypeEditCard;
+    }
     self.title = @"发布文字";
     [self createmyScrollView];
     [self createLeftNavigationItem:nil Title:@"取消"];
@@ -67,7 +70,11 @@ NSTimeInterval const  dismissInterval = 1.f;
 #pragma mark  --Naviation Overwrite
 -(void)LeftNavigationButtonClick:(UIButton *)leftbtn
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.pageType == addCardVCTypeEditCard) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
@@ -77,9 +84,16 @@ NSTimeInterval const  dismissInterval = 1.f;
     }
     AddpreviewVC *prevc = [AddpreviewVC new];
     prevc.content  = self.myTextView.text;
+    prevc.pageType = self.pageType;
     prevc.reference = self.textField.text;
+    if (self.pageType ==addCardVCTypeEditCard) {
+        CommonModel  *model = [CommonModel new];
+        model.Id = self.model.Id;
+        model.word =  self.myTextView.text;
+        model.reference = self.textField.text;
+        prevc.editmodel = model;
+    }
     [self.navigationController pushViewController:prevc animated:YES];
-
 }
 -(void)createWordView
 {
@@ -100,6 +114,9 @@ NSTimeInterval const  dismissInterval = 1.f;
     self.myTextView.font =[UIFont fontWithName:KFontThin size:18];
     self.myTextView.textColor = View_Black_Color;
     [bgImageView addSubview:self.myTextView];
+    if (self.pageType == addCardVCTypeEditCard) {
+        self.myTextView.text = self.model.word;
+    }
 }
 #pragma mark  --UITextViewDelegate
 -(void)textViewDidBeginEditing:(UITextView *)textView

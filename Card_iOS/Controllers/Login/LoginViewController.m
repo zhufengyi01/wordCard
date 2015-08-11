@@ -32,9 +32,7 @@
 #import "CustomController.h"
 #import "Register_1ViewController.h"
 #import "UIImage+Color.h"
-
 #define  IsInstallWechat   0    //1表示已经安装   0是未安装
-
 @interface LoginViewController ()<UMSocialUIDelegate>
 {
     AppDelegate  *appdelegate;
@@ -209,15 +207,10 @@
         
         [self.navigationController pushViewController:[SerViceViewController new] animated:YES];
     }
-    
 }
 //登陆按钮
 -(void)dealloginClick:(UIButton *) btn
 {
-    //    weiboButton.hidden=YES;
-    //    weiChateButton.hidden=YES;
-    //    checkBtn.hidden=YES;
-    //    checkBtn2.hidden=YES;
     if (btn.tag==1000) {
         //qq  登陆
         //window.rootViewController=[CustmoTabBarController new];
@@ -267,57 +260,7 @@
                     checkBtn.hidden=YES;
                     checkBtn2.hidden=YES;
                     NSDictionary *data = [response valueForKey:@"data"];
-                    //openid
-                    NSString  *openid;
-                    if ([ssoName isEqualToString:UMShareToSina]) {
-                        openid   = [data valueForKey:@"uid"];
-                    }
-                    else{
-                        openid =[data valueForKey:@"openid"];
-                    }
-                    //token
-                    NSString *access_token   = [data valueForKey:@"access_token"];
-                    //username
-                    NSString *screen_name    = [data valueForKey:@"screen_name"];
-                    //brief
-                    NSString *brief=@" ";
-                    if ([ssoName isEqualToString:UMShareToSina]) {
-                        brief= [data valueForKey:@"description"];
-                    }
-                    //sex
-                    NSString  *sex=[data objectForKey:@"gender"];
-                    NSString  *verified=@"0";
-                    NSString *bingdtype=ssoName;
-                    //logo
-                    NSString  *logo=[data objectForKey:@"profile_image_url"];
-                    NSString *urlString = [NSString stringWithFormat:@"%@/user/login", kApiBaseUrl];
-                    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
-                    NSDictionary  *parameters=@{@"openid":openid,@"token":access_token,@"username":screen_name,@"brief":brief,@"sex":sex,@"verified":verified,@"bindtype":bingdtype,@"logo":logo,KURLTOKEN:tokenString};
-                    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"登陆完成后的     JSON: %@", responseObject);
-                        
-                        UserDataCenter  *userCenter=[UserDataCenter shareInstance];
-                        userCenter.first_login=[responseObject objectForKey:@"first_login"];
-                        NSDictionary *detail    = [responseObject objectForKey:@"model"];
-                        if (detail) {
-                            userCenter.user_id=[detail objectForKey:@"id"];
-                            userCenter.username=[detail objectForKey:@"username"];
-                            userCenter.logo =[detail objectForKey:@"logo"];
-                            userCenter.is_admin =[detail objectForKey:@"role_id"];
-                            userCenter.verified=[detail objectForKey:@"verified"];
-                            userCenter.sex=[detail objectForKey:@"sex"];
-                            userCenter.signature=[detail objectForKey:@"brief"];
-                            userCenter.fake=@"1";
-                            if ([detail objectForKey:@"fake"]) {
-                                userCenter.fake=[detail objectForKey:@"fake"];
-                            }
-                            [Function saveUser:userCenter];
-                            window.rootViewController=[CustomController new];
-                        }
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"Error: %@", error);
-                    }];
+                    [self requestLoginSerVerWithData:data];
                 } else {
                     // [self dealErrorCase];
                     //强行登陆
@@ -329,6 +272,64 @@
             [SVProgressHUD showErrorWithStatus:@"登陆失败"];
         }
     });
+}
+/**
+ *  请求服务器
+ *
+ *  @param data  友盟返回的参数字典
+ */
+-(void)requestLoginSerVerWithData:(NSDictionary *) data
+{
+    //openid
+    NSString  *openid;
+    if ([ssoName isEqualToString:UMShareToSina]) {
+        openid   = [data valueForKey:@"uid"];
+    }
+    else{
+        openid =[data valueForKey:@"openid"];
+    }
+    //token
+    NSString *access_token   = [data valueForKey:@"access_token"];
+    //username
+    NSString *screen_name    = [data valueForKey:@"screen_name"];
+    //brief
+    NSString *brief=@" ";
+    if ([ssoName isEqualToString:UMShareToSina]) {
+        brief= [data valueForKey:@"description"];
+    }
+    //sex
+    NSString  *sex=[data objectForKey:@"gender"];
+    NSString  *verified=@"0";
+    NSString *bingdtype=ssoName;
+    //logo
+    NSString  *logo=[data objectForKey:@"profile_image_url"];
+    NSString *urlString = [NSString stringWithFormat:@"%@/user/login", kApiBaseUrl];
+    NSString *tokenString = [Function getURLtokenWithURLString:urlString];
+    NSDictionary  *parameters=@{@"openid":openid,@"token":access_token,@"username":screen_name,@"brief":brief,@"sex":sex,@"verified":verified,@"bindtype":bingdtype,@"logo":logo,KURLTOKEN:tokenString};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"登陆完成后的     JSON: %@", responseObject);
+        UserDataCenter  *userCenter=[UserDataCenter shareInstance];
+        userCenter.first_login=[responseObject objectForKey:@"first_login"];
+        NSDictionary *detail    = [responseObject objectForKey:@"model"];
+        if (detail) {
+            userCenter.user_id=[detail objectForKey:@"id"];
+            userCenter.username=[detail objectForKey:@"username"];
+            userCenter.logo =[detail objectForKey:@"logo"];
+            userCenter.is_admin =[detail objectForKey:@"role_id"];
+            userCenter.verified=[detail objectForKey:@"verified"];
+            userCenter.sex=[detail objectForKey:@"sex"];
+            userCenter.signature=[detail objectForKey:@"brief"];
+            userCenter.fake=@"1";
+            if ([detail objectForKey:@"fake"]) {
+                userCenter.fake=[detail objectForKey:@"fake"];
+            }
+            [Function saveUser:userCenter];
+            window.rootViewController=[CustomController new];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

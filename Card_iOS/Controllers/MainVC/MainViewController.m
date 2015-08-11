@@ -14,7 +14,15 @@
 #import "WordSearchViewController.h"
 #import "BaseNavigationViewController.h"
 #import "WordMainVC.h"
+#import "UIButton+Block.h"
 #import <FIR/FIR.h>
+const CGFloat  NavHeigth  = 45;
+
+@interface MainViewController ()
+
+@property(nonatomic,strong)UIButton  *hotbtn;
+@property(nonatomic,strong)UIButton  *newbtn;
+@end
 @implementation MainViewController
 
 -(instancetype)init
@@ -34,6 +42,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    //[self setUpNav];
     self.title = @"瞎扯 · 精选";
     //[self requestVersionUpdate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewScollerTop) name:Refresh_MAIN_LIST object:nil];
@@ -45,10 +54,16 @@
     self.tabbleView.frame=CGRectMake(0, 0, kDeviceWidth, kDeviceHeight-kHeigthTabBar-kHeightNavigation);
     [self requestData];
 }
+-(void)setUpNav
+{
+    UIView  *naview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, NavHeigth)];
+    naview.userInteractionEnabled = YES;
+    self.navigationItem.titleView = naview;
+}
 
 -(void)RightNavigationButtonClick:(UIButton *)rightbtn
 {
-   // [self.navigationController pushViewController:[WordSearchViewController new] animated:NO];
+
     BaseNavigationViewController  *na = [[BaseNavigationViewController alloc] initWithRootViewController:[WordSearchViewController new]];
     na.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:na animated:NO completion:nil];

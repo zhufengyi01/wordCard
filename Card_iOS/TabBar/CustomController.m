@@ -19,6 +19,7 @@
 #import "NoticeViewController.h"
 #import "DiscoverViewController.h"
 #import "DiscoverVC.h"
+#import "MainVC.h"
 #define  BUTTON_COUNT 5
 // 字体设置
 #define TITLE_NORMAL_COLOR   [UIColor colorWithRed:20/255.0 green:20/255.0 blue:120/255.0 alpha:1]
@@ -40,7 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserNewNotification:) name:AppDelegateUserCheckNotification object:nil];
     self.pageIndex=0;
     self.tabBar.backgroundImage =[UIImage imageWithColor:[UIColor whiteColor]];
-    NSArray  *classNameArray =[NSArray arrayWithObjects:@"MainViewController",@"DiscoverViewController",@"AddCardViewController",@"NoticeViewController",@"MyViewController", nil];
+    NSArray  *classNameArray =[NSArray arrayWithObjects:@"MainVC",@"DiscoverViewController",@"AddCardViewController",@"NoticeViewController",@"MyViewController", nil];
     //NSArray *titleArray =[NSArray arrayWithObjects:@"首页",@"添加",@"我的", nil];
     NSArray *normalImageArray =[NSArray arrayWithObjects:@"feed_tab_button_normal",@"discovery_tab_button_normal",@"add_tab_button_press",@"notice_tab_button_normal",@"me_tab_button_normal",nil];
     NSArray *selectImageArray =[NSArray arrayWithObjects:@"feed_tab_butten_press",@"movie_tab_butten_press.png",@"add_tab_button_press",@"notice_tab_button_press",@"me_tab_button_press", nil];

@@ -212,6 +212,7 @@
 		38E81CA51B65F14A00DE36F5 /* UIView+ICExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E81CA41B65F14A00DE36F5 /* UIView+ICExtension.m */; };
 		38E81CA91B66343000DE36F5 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E81CA81B66343000DE36F5 /* JSBadgeView.m */; };
 		38EA0FB91B60A1F200B2DD8B /* AuthorToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */; };
+		38EECEFE1B78A11100D66224 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EECEFD1B78A11100D66224 /* MainVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -619,6 +620,8 @@
 		38E81CA81B66343000DE36F5 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		38EA0FB71B60A1F200B2DD8B /* AuthorToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorToolBar.h; sourceTree = "<group>"; };
 		38EA0FB81B60A1F200B2DD8B /* AuthorToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorToolBar.m; sourceTree = "<group>"; };
+		38EECEFC1B78A11100D66224 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		38EECEFD1B78A11100D66224 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
 		EFC0C12E92B544C40C4610E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1271,6 +1274,8 @@
 			children = (
 				38D303501B452F9200484AC8 /* MainViewController.h */,
 				38D303511B452F9200484AC8 /* MainViewController.m */,
+				38EECEFC1B78A11100D66224 /* MainVC.h */,
+				38EECEFD1B78A11100D66224 /* MainVC.m */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -1662,7 +1667,7 @@
 				TargetAttributes = {
 					38D301D41B4517CC00484AC8 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 9THF4SEGPY;
+						DevelopmentTeam = SHPTADMRF2;
 					};
 					38D301ED1B4517CC00484AC8 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1900,6 +1905,7 @@
 				38D1EAB51B5C9EE500B18169 /* CommentVC.m in Sources */,
 				3872BF351B4664D80004A928 /* NSString+Additions.m in Sources */,
 				38D303EC1B453B3C00484AC8 /* UIImageView+WebCache.m in Sources */,
+				38EECEFE1B78A11100D66224 /* MainVC.m in Sources */,
 				38D0DBC51B4BB4EB00E0E7EC /* NoticeViewController.m in Sources */,
 				38D303521B452F9200484AC8 /* MainViewController.m in Sources */,
 				388AF4C11B70C1C10052E5E6 /* UIImage+Color.m in Sources */,

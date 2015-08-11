@@ -9,7 +9,7 @@
 #import "UserDataCenter.h"
 static UserDataCenter  *manager=nil;
 @implementation UserDataCenter
-+(id)shareInstance
++(instancetype)shareInstance
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken,^{
